@@ -51,8 +51,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\PlayerCastSpell.cs" />
-     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\Enums\ItemEffect.cs" />
+     <Compile Include="Assets\Scripts\Enums\ItemName.cs" />
+     <Compile Include="Assets\Scripts\Enums\SpellEffect.cs" />
+     <Compile Include="Assets\Scripts\Enums\SpellName.cs" />
+     <Compile Include="Assets\Scripts\Item.cs" />
+     <Compile Include="Assets\Scripts\Managers\UIManager.cs" />
+     <Compile Include="Assets\Scripts\Menu\InventoryMenu.cs" />
+     <Compile Include="Assets\Scripts\Menu\MapMenu.cs" />
+     <Compile Include="Assets\Scripts\Menu\Menu.cs" />
+     <Compile Include="Assets\Scripts\Player\Inventory\PlayerInventory.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerCastSpell.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\Spell.cs" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>/Users/Jacques/Desktop/Concordia/Concordia Notes/Session Fall 2017/COMP376/Assignments/GroupProject/GitHub_Repository/NewWiz/BasicMechanicsDemo/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>

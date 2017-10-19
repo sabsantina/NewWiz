@@ -102,8 +102,15 @@
 -define:UNITY_EDITOR_OSX
 -define:ENABLE_NATIVE_ARRAY_CHECKS
 -define:UNITY_TEAM_LICENSE
-'Assets/Scripts/PlayerCastSpell.cs'
-'Assets/Scripts/PlayerMovement.cs'
+'Assets/Scripts/Enums/SpellEffect.cs'
+'Assets/Scripts/Enums/SpellName.cs'
+'Assets/Scripts/Managers/UIManager.cs'
+'Assets/Scripts/Menu/InventoryMenu.cs'
+'Assets/Scripts/Menu/MapMenu.cs'
+'Assets/Scripts/Menu/Menu.cs'
+'Assets/Scripts/Player/PlayerCastSpell.cs'
+'Assets/Scripts/Player/PlayerMovement.cs'
+'Assets/Scripts/Spell.cs'
 -r:'/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/System.Runtime.Serialization.dll'
 -r:'/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/System.Xml.Linq.dll'
 -r:'/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/UnityScript.dll'
