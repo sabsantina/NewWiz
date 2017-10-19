@@ -47,4 +47,4 @@ Temporary Items
 .apdisk
 
 #Ignore unity files
-BasicMechanicsDemo/Library/
+dir_to_exclude/BasicMechanicsDemo/Library/
