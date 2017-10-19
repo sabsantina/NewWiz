@@ -46,5 +46,30 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-#Ignore unity files
-Library/
+
+ # ---------------[ Unity generated ]------------------ #
+ **/[Ll]ibrary/*
+ **/[Tt]emp/*
+ **/[Oo]bj/*
+ **/[Bb]uild/*
+ **/[Bb]uilds/*
+ **/UnityGenerated/*
+ **/Assets/AssetStoreTools*
+ 
+ # ----[ Visual Studio / MonoDevelop generated ]------- #
+ ExportedObj/
+ .consulo/
+ *.csproj
+ *.unityproj
+ *.sln
+ *.suo
+ *.tmp
+ *.user
+ *.userprefs
+ *.pidb
+ *.pidb.meta
+ *.booproj
+ *.svd
+ 
+ # Unity3D Crash Reports
+ sysinfo.txt
