@@ -45,3 +45,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.csproj
+*.userprefs
+BasicMechanicsDemo/BasicMechanicsDemo.userprefs
+BasicMechanicsDemo/Assembly-CSharp.csproj
