@@ -8,7 +8,7 @@ public class MobileCharacter : MonoBehaviour {
 	/**The maximum speed at which the character can move, normally.*/
 	public float m_MaximalVelocity;
 	/**The direction the character is facing (we need this because there won't ever be rotation of the gameobjects, so this is the only quick way to see which way characters are facing).*/
-	public Vector3 m_Direction{ public get; protected set; }
+	public Vector3 m_Direction{ get; protected set; }
 
 	/**A reference to the mobile character's animator.*/
 	private Animator m_Animator; 

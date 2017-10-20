@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\Menu\InventoryMenu.cs" />
      <Compile Include="Assets\Scripts\Menu\MapMenu.cs" />
      <Compile Include="Assets\Scripts\Menu\Menu.cs" />
+     <Compile Include="Assets\Scripts\MovingTarget.cs" />
      <Compile Include="Assets\Scripts\Spell.cs" />
      <Compile Include="Assets\Scripts\Spell\SpellMovement.cs" />
  <Reference Include="Facebook.Unity.Settings">

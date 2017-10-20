@@ -5,7 +5,8 @@
 * direction gets changed again.
 */
 
-#define TESTING_DETECTION
+//#define TESTING_DETECTION
+//#define STAY_STILL
 
 using System.Collections;
 using System.Collections.Generic;
@@ -41,7 +42,8 @@ public class EnemyMovement : MobileCharacter {
 			Debug.Log (message);
 		}
 		#endif
-
+		#if STAY_STILL
+		#else
 		Vector3 current_position = this.transform.position;
 		//Scale up the direction
 		this.m_Direction *= this.m_MaximalVelocity;
@@ -55,13 +57,14 @@ public class EnemyMovement : MobileCharacter {
 		if (this.isLeavingDetectionArea ()) {
 			this.RedirectIntoDetectionArea ();
 		}
-
+		#endif
 		this.SetAnimatorParameters ();
 
 		this.UpdateAnimatorParameters ();
 	}//end f'n void Update
 
-	/**A function to change the direction of the enemy to keep it in the detection area.*/
+	/**A function to change the direction of the enemy to keep it in the detection area.
+	*Note that the resulting [m_Direction] is only applied to THIS gameobject in the Update() function, where Time.deltaTime is applied to it. Thus, we have no need of Time.deltaTime here.*/
 	public void RedirectIntoDetectionArea()
 	{
 		float initial_y = this.transform.position.y;

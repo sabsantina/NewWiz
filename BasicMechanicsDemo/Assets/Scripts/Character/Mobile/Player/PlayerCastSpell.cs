@@ -4,7 +4,9 @@
 * a spell should be cast at that spot.
 */
 //A macro for testing; comment out to remove testing functionalities
-#define TESTING_SPELLCAST
+//#define TESTING_SPELLCAST
+#define TESTING_SPELLMOVEMENT
+
 
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +17,10 @@ public class PlayerCastSpell : MonoBehaviour {
 
 	#if TESTING_SPELLCAST
 	[SerializeField] private GameObject m_MagicCubePrefab;
+	#endif
+	#if TESTING_SPELLMOVEMENT
+	[SerializeField] private GameObject m_SpellCube;
+	private GameObject m_SpellCubeInstance;
 	#endif
 
 	/**A reference to our main camera.*/
@@ -30,6 +36,9 @@ public class PlayerCastSpell : MonoBehaviour {
 	private Animator m_Animator;
 
 	private SpellMovement m_SpellMovement;
+
+	/**The number of seconds until we destroy the spell gameobject.*/
+	private readonly float TIME_UNTIL_DESTROY = 2.0f;
 
 	void Start()
 	{
@@ -56,6 +65,15 @@ public class PlayerCastSpell : MonoBehaviour {
 				float cube_height = this.m_MagicCubePrefab.transform.lossyScale.z;
 				this.m_MagicCubePrefab.transform.position = new Vector3(target_hit.point.x, target_hit.point.y + cube_height / 2.0f, target_hit.point.z);
 				#endif
+				#if TESTING_SPELLMOVEMENT
+				this.m_SpellCubeInstance = GameObject.Instantiate(this.m_SpellCube);
+				this.m_SpellCubeInstance.transform.position = this.transform.position;
+				SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement>();
+//				Debug.Log("PlayerCastSpell::Update()\tTarget: " + target_hit.collider.gameObject.name);
+				spell_movement.SetTarget(target_hit);
+				GameObject.Destroy(this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
+				#endif
+
 			}//end if
 		}//end if
 		//else if the player doesn't click (doesn't fire a spell)...
@@ -63,6 +81,7 @@ public class PlayerCastSpell : MonoBehaviour {
 			//Update [this.m_isCastingSpell] for the animator
 			this.m_isCastingSpell = false;
 		}
+
 
 		this.UpdateAnimatorParameters ();
 	}//end f'n void Update()
