@@ -1,16 +1,13 @@
-﻿using System.Collections;
+﻿/**
+* Unlike the Player class, it's very likely that the Enemy class will only wind up becoming a superclass.
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	public float m_Health;
+
 }

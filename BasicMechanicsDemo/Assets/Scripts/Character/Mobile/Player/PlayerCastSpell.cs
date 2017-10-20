@@ -24,10 +24,12 @@ public class PlayerCastSpell : MonoBehaviour {
 	private readonly string STRINGKEY_INPUT_CASTSPELL = "Cast Spell";
 	/**A string variable containing the string name of the isCastingSpell parameter in the player animator.*/
 	private readonly string STRINGKEY_PARAM_CASTSPELL = "isCastingSpell";
-
+	/**A bool variable to let us know whether or not the player's in the process of casting a spell.*/
 	private bool m_isCastingSpell;
-
+	/**The player animator, including the bit about casting spells.*/
 	private Animator m_Animator;
+
+	private SpellMovement m_SpellMovement;
 
 	void Start()
 	{

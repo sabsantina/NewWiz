@@ -1,14 +1,31 @@
-﻿using System.Collections;
+﻿//#define TESTING
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CapsuleCollider))]
 public class EnemyDetectionArea : MonoBehaviour {
 
-	/**The enemy whose detection area this belongs to.*/
-	[SerializeField] private Enemy m_Enemy;
+	/**A reference to the script where we defined the enemy movement functions.*/
+	[SerializeField] private EnemyMovement m_EnemyMovement;
 
-	void OnTriggerExit(Collider other)
+	void Start()
 	{
+		this.GetComponent<CapsuleCollider> ().isTrigger = true;
+	}
 
+	void OnTriggerStay(Collider other)
+	{
+		#if TESTING
+		string message = "OnTriggerStay::";
+		#endif
+		if (other.gameObject.GetComponent<Player> () != null) {
+			this.m_EnemyMovement.SetEnemyDirection (other.transform.position - this.m_EnemyMovement.gameObject.transform.position);
+
+		}
+		#if TESTING
+		Debug.Log (message);
+		#endif
 	}
 }

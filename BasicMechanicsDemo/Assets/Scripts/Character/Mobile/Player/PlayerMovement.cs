@@ -11,6 +11,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//At least one of the participants of a collision (something like OnTriggerEnter, OnTriggerStay, or OnTriggerExit) must have a Rigidbody.
+//It makes more sense to just make the player have one and disable gravity and all adjustments to position made from the rigidbody, rather
+//than make one for every other object that might ever collider with the player.
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MobileCharacter {
 
 	/**A string variable containing the string name of the Input Manager variable responsible for player leftward movement.*/
@@ -28,7 +32,17 @@ public class PlayerMovement : MobileCharacter {
 	{
 		this.m_MaximalVelocity = 20.0f;
 		this.SetAnimator (this.GetComponent<Animator> ());
-	}
+
+		Rigidbody player_rigidbody = this.GetComponent<Rigidbody> ();
+		//Disable gravity
+		player_rigidbody.useGravity = false;
+		//Freeze effects of physics on rotation and position
+		player_rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+		//Ensure we can use collisions properly.
+		player_rigidbody.detectCollisions = true;
+
+		this.m_Direction = Vector3.right;
+	}//end f'n void Start()
 
 	// Update is called once per frame
 	void Update () {
@@ -85,6 +99,8 @@ public class PlayerMovement : MobileCharacter {
 			Vector3 translation = new Vector3 (horizontal_movement_input * this.m_MaximalVelocity, 0.0f, vertical_movement_input * this.m_MaximalVelocity);
 			translation = Vector3.ClampMagnitude (translation, this.m_MaximalVelocity);
 			this.transform.position = player_current_position + (translation * Time.deltaTime);
+			//Update direction
+			this.m_Direction = translation;
 		}//end if
 
 		//Update the animator parameters

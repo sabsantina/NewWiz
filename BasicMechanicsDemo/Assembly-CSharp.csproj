@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\Character\Mobile\Enemy\EnemyMovement.cs" />
      <Compile Include="Assets\Scripts\Character\Mobile\MobileCharacter.cs" />
      <Compile Include="Assets\Scripts\Character\Mobile\Player\Inventory\PlayerInventory.cs" />
+     <Compile Include="Assets\Scripts\Character\Mobile\Player\Player.cs" />
      <Compile Include="Assets\Scripts\Character\Mobile\Player\PlayerCastSpell.cs" />
      <Compile Include="Assets\Scripts\Character\Mobile\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Enums\ItemEffect.cs" />
@@ -68,6 +69,7 @@
      <Compile Include="Assets\Scripts\Menu\MapMenu.cs" />
      <Compile Include="Assets\Scripts\Menu\Menu.cs" />
      <Compile Include="Assets\Scripts\Spell.cs" />
+     <Compile Include="Assets\Scripts\Spell\SpellMovement.cs" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>/Users/Jacques/Desktop/Concordia/Concordia Notes/Session Fall 2017/COMP376/Assignments/GroupProject/GitHub_Repository/NewWiz/BasicMechanicsDemo/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>

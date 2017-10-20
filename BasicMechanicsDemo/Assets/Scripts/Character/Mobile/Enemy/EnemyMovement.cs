@@ -1,5 +1,8 @@
 ﻿/*
-* A function to govern enemy movement.
+* A script to govern enemy movement.
+* Note: The entirety of the enemy's movement is governed by a Vector3 [this.m_Direction], which gets consistently added to the
+* transform.position. If you alter this variable's value anywhere at all, then the enemy will move in that direction until the 
+* direction gets changed again.
 */
 
 #define TESTING_DETECTION
@@ -12,7 +15,7 @@ using UnityEngine;
 public class EnemyMovement : MobileCharacter {
 
 	/**The direction in which the enemy is moving.*/
-	private Vector3 m_Direction = Vector3.forward;
+//	public Vector3 m_Direction = Vector3.forward;
 	/**The prefab that defines the area (or volume, rather) of the enemy's detection capabilities.
 	*Note that this object shouldn't move in the scene if the enemy is patrolling a fixed region.*/
 	private Transform m_DetectionArea;
@@ -23,6 +26,7 @@ public class EnemyMovement : MobileCharacter {
 	void Start () {
 		this.m_DetectionArea = this.transform.parent;
 		this.SetAnimator (this.GetComponent<Animator> ());
+		this.m_Direction = Vector3.right;
 	}
 	
 	// Update is called once per frame
@@ -31,10 +35,6 @@ public class EnemyMovement : MobileCharacter {
 		#if TESTING_DETECTION
 		if (Input.GetKeyDown (KeyCode.C)) {
 			string message = "Detection area radius length: ";
-//			Vector3 XZ = new Vector3 (this.m_DetectionArea.transform.localScale.x, 0.0f, this.m_DetectionArea.transform.localScale.z);
-//			float scale_magnitude = Vector3.Magnitude (XZ);
-//			float initial_radius = this.m_DetectionArea.gameObject.GetComponent<CapsuleCollider> ().radius;
-//			float result = scale_magnitude * initial_radius;
 			float result = this.m_DetectionArea.gameObject.GetComponent<CapsuleCollider>().radius;
 			message += result;
 			message += "\nEnemy left radius? " + this.isLeavingDetectionArea();
@@ -64,6 +64,7 @@ public class EnemyMovement : MobileCharacter {
 	/**A function to change the direction of the enemy to keep it in the detection area.*/
 	public void RedirectIntoDetectionArea()
 	{
+		float initial_y = this.transform.position.y;
 		float detection_area_radius = this.m_DetectionArea.gameObject.GetComponent<CapsuleCollider> ().radius;
 		//Get a random x value within the detection area
 		float random_x = Random.Range (this.m_DetectionArea.transform.position.x - detection_area_radius,
@@ -72,7 +73,7 @@ public class EnemyMovement : MobileCharacter {
 		float random_z = Random.Range (this.m_DetectionArea.transform.position.z - detection_area_radius,
 			this.m_DetectionArea.transform.position.z + detection_area_radius);
 		//make a new vector representing the vector from where the enemy is to this new position
-		Vector3 new_vector = new Vector3 (random_x, 0.0f, random_z) - this.transform.position;
+		Vector3 new_vector = new Vector3 (random_x, initial_y, random_z) - this.transform.position;
 
 		this.m_Direction = Vector3.ClampMagnitude (new_vector, this.m_MaximalVelocity);
 	}//end f'n void RedirectIntoDetectionArea()
