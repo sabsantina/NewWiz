@@ -4,7 +4,7 @@
 * and UIManager::OpenInventoryMenu or UIManager::OpenMapMenu). Dunno why.
 */
 
-#define TESTING_MENU_OPEN
+//#define TESTING_MENU_OPEN
 
 using System.Collections;
 using System.Collections.Generic;
