@@ -51,6 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Character\Mobile\Enemy\Enemy.cs" />
+     <Compile Include="Assets\Scripts\Character\Mobile\Enemy\EnemyDetectionArea.cs" />
      <Compile Include="Assets\Scripts\Character\Mobile\Enemy\EnemyMovement.cs" />
      <Compile Include="Assets\Scripts\Character\Mobile\MobileCharacter.cs" />
      <Compile Include="Assets\Scripts\Character\Mobile\Player\Inventory\PlayerInventory.cs" />

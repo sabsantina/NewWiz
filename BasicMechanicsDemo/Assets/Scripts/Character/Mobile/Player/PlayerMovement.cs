@@ -27,6 +27,7 @@ public class PlayerMovement : MobileCharacter {
 	void Start()
 	{
 		this.m_MaximalVelocity = 20.0f;
+		this.SetAnimator (this.GetComponent<Animator> ());
 	}
 
 	// Update is called once per frame
@@ -41,8 +42,6 @@ public class PlayerMovement : MobileCharacter {
 		float horizontal_movement_input = 0.0f;
 		//All vertical inputs
 		float vertical_movement_input = 0.0f;
-
-//		Vector3 translation = new Vector3 ();
 
 		//If any leftward or rightward input was detected...
 		if (leftward_input != 0 || rightward_input != 0) {

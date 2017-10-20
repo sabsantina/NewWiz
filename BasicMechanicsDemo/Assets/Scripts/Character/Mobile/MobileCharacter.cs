@@ -11,7 +11,7 @@ public class MobileCharacter : MonoBehaviour {
 //	public Vector3 m_Direction;
 
 	/**A reference to the mobile character's animator.*/
-	public Animator m_Animator; 
+	private Animator m_Animator; 
 
 	/**A string variable containing the string name of the isMovingLeft parameter in the character animator.*/
 	private readonly string STRINGKEY_PARAM_ISMOVINGLEFT = "isMovingLeft";
@@ -23,18 +23,20 @@ public class MobileCharacter : MonoBehaviour {
 	private readonly string STRINGKEY_PARAM_ISMOVINGDOWN = "isMovingDown";
 
 	/**A private bool to help us keep track of whether the character's moving leftward, and send the result to the character animator.*/
-	public bool m_IsMovingLeft = false;
+	protected bool m_IsMovingLeft = false;
 	/**A private bool to help us keep track of whether the character's moving rightward, and send the result to the character animator.*/
-	public bool m_IsMovingRight = false;
+	protected bool m_IsMovingRight = false;
 	/**A private bool to help us keep track of whether the character's moving upward, and send the result to the character animator.*/
-	public bool m_IsMovingUp = false;
+	protected bool m_IsMovingUp = false;
 	/**A private bool to help us keep track of whether the character's moving downward, and send the result to the character animator.*/
-	public bool m_IsMovingDown = false;
+	protected bool m_IsMovingDown = false;
 
-	// Use this for initialization
-	void Start () {
-		this.m_Animator = this.GetComponent<Animator> ();
-	}
+	/**A function to set the character's animator.*/
+	public void SetAnimator(Animator animator)
+	{
+		//Update animator
+		this.m_Animator = animator;
+	}//end f'n void SetAnimator(Animator)
 
 	/**A function to update the animator parameters, with regard to motion.*/
 	public void UpdateAnimatorParameters()
