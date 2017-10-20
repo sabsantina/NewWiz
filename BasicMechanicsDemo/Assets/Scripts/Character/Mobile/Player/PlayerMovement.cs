@@ -11,11 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
-public class PlayerMovement : MonoBehaviour {
-
-	/**The maximum speed at which the player can move, normally.*/
-	public float m_MaximalVelocity = 20.0f;
+public class PlayerMovement : MobileCharacter {
 
 	/**A string variable containing the string name of the Input Manager variable responsible for player leftward movement.*/
 	private readonly string STRINGKEY_INPUT_LEFT = "Left";
@@ -28,32 +24,11 @@ public class PlayerMovement : MonoBehaviour {
 	*Note: Here, "downward" denotes motion out of the scene, toward the camera.*/
 	private readonly string STRINGKEY_INPUT_DOWN = "Down";
 
-	/**A string variable containing the string name of the isMovingLeft parameter in the player animator.*/
-	private readonly string STRINGKEY_PARAM_ISMOVINGLEFT = "isMovingLeft";
-	/**A string variable containing the string name of the isMovingRight parameter in the player animator.*/
-	private readonly string STRINGKEY_PARAM_ISMOVINGRIGHT = "isMovingRight";
-	/**A string variable containing the string name of the isMovingUp parameter in the player animator.*/
-	private readonly string STRINGKEY_PARAM_ISMOVINGUP = "isMovingUp";
-	/**A string variable containing the string name of the isMovingDown parameter in the player animator.*/
-	private readonly string STRINGKEY_PARAM_ISMOVINGDOWN = "isMovingDown";
-
-	/**A reference to the player animator.*/
-	private Animator m_PlayerAnimator;
-
-	/**A private bool to help us keep track of whether the player's moving leftward, and send the result to the player animator.*/
-	private bool m_IsMovingLeft = false;
-	/**A private bool to help us keep track of whether the player's moving rightward, and send the result to the player animator.*/
-	private bool m_IsMovingRight = false;
-	/**A private bool to help us keep track of whether the player's moving upward, and send the result to the player animator.*/
-	private bool m_IsMovingUp = false;
-	/**A private bool to help us keep track of whether the player's moving downward, and send the result to the player animator.*/
-	private bool m_IsMovingDown = false;
-
-
-	void Awake () {
-		this.m_PlayerAnimator = this.GetComponent<Animator> ();
+	void Start()
+	{
+		this.m_MaximalVelocity = 20.0f;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		float leftward_input = -(Input.GetAxisRaw (STRINGKEY_INPUT_LEFT));
@@ -66,6 +41,8 @@ public class PlayerMovement : MonoBehaviour {
 		float horizontal_movement_input = 0.0f;
 		//All vertical inputs
 		float vertical_movement_input = 0.0f;
+
+//		Vector3 translation = new Vector3 ();
 
 		//If any leftward or rightward input was detected...
 		if (leftward_input != 0 || rightward_input != 0) {
@@ -110,18 +87,9 @@ public class PlayerMovement : MonoBehaviour {
 			translation = Vector3.ClampMagnitude (translation, this.m_MaximalVelocity);
 			this.transform.position = player_current_position + (translation * Time.deltaTime);
 		}//end if
-	
+
 		//Update the animator parameters
-		this.UpdateAnimatorParameters ();
+		this.UpdateAnimatorParameters();
 	}//end f'n void Update
 
-	/**A function to update the player animator's parameters.*/
-	private void UpdateAnimatorParameters()
-	{
-		//Update each animator parameter having to do with player movement
-		this.m_PlayerAnimator.SetBool (STRINGKEY_PARAM_ISMOVINGLEFT, this.m_IsMovingLeft);
-		this.m_PlayerAnimator.SetBool (STRINGKEY_PARAM_ISMOVINGRIGHT, this.m_IsMovingRight);
-		this.m_PlayerAnimator.SetBool (STRINGKEY_PARAM_ISMOVINGUP, this.m_IsMovingUp);
-		this.m_PlayerAnimator.SetBool (STRINGKEY_PARAM_ISMOVINGDOWN, this.m_IsMovingDown);
-	}//end f'n void UpdateAnimatorParameters()
 }//end class PlayerMovement
