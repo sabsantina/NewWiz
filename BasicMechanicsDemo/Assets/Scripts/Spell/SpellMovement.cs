@@ -14,6 +14,8 @@ public class SpellMovement : MonoBehaviour {
 	private GameObject m_TargetedObj;
 	/**The direction in which the spell is moving.*/
 	private Vector3 m_Direction = new Vector3();
+	/**A bool to let us know whether the target is a mobile character*/
+	public bool m_IsMobileCharacter { get; set;}
 	/**A bool to let us know whether or not the spell made it to the target.*/
 	public bool m_TargetReached { get; private set; }
 	/**A bool to notify the script that it's time to start moving the spell.*/
@@ -49,9 +51,9 @@ public class SpellMovement : MonoBehaviour {
 			this.transform.position = current_position;
 
 			this.UpdateTargetReached ();
-			if (this.m_TargetReached) {
-				GameObject.Destroy (this.gameObject);
-			}
+//			if (this.m_TargetReached) {
+//				GameObject.Destroy (this.gameObject);
+//			}
 		}//end if
 	}//end f'n void Update()
 
@@ -63,9 +65,37 @@ public class SpellMovement : MonoBehaviour {
 
 		//Set the target's gameobject, to be able to follow it around if it's moving
 		this.m_TargetedObj = this.m_Target.collider.gameObject;
+		//Check for Mobile Character
+//		if (this.m_TargetedObj.GetComponent<MobileCharacter> () == null) {
+//			//Check children
+//			this.m_TargetedObj = this.FindMobileCharacter ();
+//		}//end if
 
 		this.m_TargetFound = true;
+
+		this.m_TargetFound = (this.m_TargetedObj == null) ? false : true;
 	}//end f'n void SetTarget(GameObject)
+
+	/**A function to find the mobile character in the event that the player's target has colliders blocking the spell's line of fire.
+	*Assumes the gameobject the player clicked doesn't have a MobileCharacter component, and searches among that gameobject's children. 
+	*Returns the GameObject the player was aiming at, if that object has a MobileCharacter and is sufficiently near to where the player clicked.
+	*Else returns null.*/
+	private GameObject FindMobileCharacter()
+	{
+		//...and if the current targeted object has any children
+		if (this.m_TargetedObj.transform.childCount >= 1) {
+			//...then for each child...
+			for (int index = 0; index < this.m_TargetedObj.transform.childCount; index++) {
+				Transform child = this.m_TargetedObj.transform.GetChild (index);
+				//if the child has a mobile character component...
+				if (child.GetComponent<MobileCharacter> () != null) {
+					//...then return the child
+					return child.gameObject;
+				}//end if
+			}//end for
+		}//end if	
+		return null;
+	}//end f'n GameObject FindMobileCharacter()
 
 	/**A private function to set the direction to the given target [this.m_Target].*/
 	private void SetDirection()

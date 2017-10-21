@@ -38,7 +38,7 @@ public class PlayerCastSpell : MonoBehaviour {
 	private SpellMovement m_SpellMovement;
 
 	/**The number of seconds until we destroy the spell gameobject.*/
-	private readonly float TIME_UNTIL_DESTROY = 2.0f;
+	private readonly float TIME_UNTIL_DESTROY = 1.25f;
 
 	void Start()
 	{
@@ -53,28 +53,27 @@ public class PlayerCastSpell : MonoBehaviour {
 			//Update [this.m_isCastingSpell] for the animator
 			this.m_isCastingSpell = true;
 
-			//...then cast a ray to wherever the player clicked on...
-			Ray ray_to_target = this.m_MainCamera.ScreenPointToRay (Input.mousePosition);
-			RaycastHit target_hit;
-			//if the ray hits something...
-			if (Physics.Raycast (ray_to_target, out target_hit)) {
-				#if TESTING_SPELLCAST
-				//and if we're testing the spellcast and instantiating a cube...
-				//...then instantiate the cube...
-				this.m_MagicCubePrefab = GameObject.Instantiate(this.m_MagicCubePrefab);
-				//...and move it over to where we clicked
-				float cube_height = this.m_MagicCubePrefab.transform.lossyScale.z;
-				this.m_MagicCubePrefab.transform.position = new Vector3(target_hit.point.x, target_hit.point.y + cube_height / 2.0f, target_hit.point.z);
-				#endif
-				#if TESTING_SPELLMOVEMENT
-				this.m_SpellCubeInstance = GameObject.Instantiate(this.m_SpellCube);
-				this.m_SpellCubeInstance.transform.position = this.transform.position;
-				SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement>();
-				spell_movement.SetTarget(target_hit);
-//				GameObject.Destroy(this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
-				#endif
+			Ray ray = this.m_MainCamera.ScreenPointToRay (Input.mousePosition);
+			RaycastHit[] targets_hit = Physics.RaycastAll(ray);
+			bool any_mobile_characters = false;
+			foreach (RaycastHit hit in targets_hit) {
+				if (hit.collider.gameObject.GetComponent<MobileCharacter> () != null) {
+					#if TESTING_SPELLMOVEMENT
+					this.m_SpellCubeInstance = GameObject.Instantiate(this.m_SpellCube);
+					this.m_SpellCubeInstance.transform.position = this.transform.position;
+					SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement>();
+					spell_movement.SetTarget(hit);
+					spell_movement.m_IsMobileCharacter = true;
+					any_mobile_characters = true;
+					GameObject.Destroy(this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
+					#endif
+				}
+			}
+			//if none of the gameobjects found in the raycastall were mobile characters...
+			if (!any_mobile_characters) {
 
-			}//end if
+			}
+//			
 		}//end if
 		//else if the player doesn't click (doesn't fire a spell)...
 		else {
