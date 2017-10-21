@@ -1,4 +1,4 @@
-﻿//#define TESTING_SPELLMOVEMENT
+﻿#define TESTING_SPELLMOVEMENT
 #define TESTING_SPELLCOLLISION
 
 using System.Collections;
@@ -16,21 +16,18 @@ public class SpellMovement : MonoBehaviour {
 	private Vector3 m_Direction = new Vector3();
 	/**A bool to let us know whether the target is a mobile character.*/
 	public bool m_IsMobileCharacter { get; set;}
-	/**A bool to let us know whether or not the spell made it to the target.*/
-	public bool m_TargetReached { get; private set; }
-	/**A bool to notify the script that it's time to start moving the spell.*/
-	public bool m_TargetFound {get; private set;}
 
 	void Awake()
 	{
-		this.m_TargetReached = false;
-		this.m_TargetFound = false;
+		
 	}
 
 	// Update is called once per frame
 	void Update () {
-		//Update direction
-		this.SetDirection ();
+		if (this.m_IsMobileCharacter) {
+			//Update direction
+			this.SetDirection ();
+		}
 
 		#if TESTING_SPELLMOVEMENT
 		string message = "SpellMovement::Update::Direction of spell:\tx:" + this.m_Direction.x + "\ty:" + this.m_Direction.y +
@@ -52,46 +49,41 @@ public class SpellMovement : MonoBehaviour {
 		//Set the target
 		this.m_Target = spell_target;
 
-		//Set the target's gameobject, to be able to follow it around if it's moving
-		this.m_TargetedObj = this.m_Target.collider.gameObject;
-
-		this.m_TargetFound = true;
+		if (this.m_IsMobileCharacter) {
+			//Set the target's gameobject, to be able to follow it around if it's moving
+			this.m_TargetedObj = this.m_Target.collider.gameObject;
+		} else {
+			this.m_TargetedObj = null;
+			//...then send the spell in the direction of wherever the cursor was clicked
+			this.m_Direction = Vector3.Normalize(this.m_Target.point - this.transform.position) * this.m_MaximalVelocity;
+			this.m_Direction.y = 0.0f;
+		}
 	}//end f'n void SetTarget(GameObject)
 
 	/**A private function to set the direction to the given target [this.m_Target].*/
 	private void SetDirection()
 	{
-		float y_coordinate = this.transform.position.y;
-		Vector3 target_position = new Vector3 ();
 		//if the target is a mobile character...
-		if (m_TargetedObj.GetComponent<MobileCharacter> () != null) {
+		if (this.m_IsMobileCharacter) {
 			//...then lock onto the mobile character's position
-			target_position = this.m_TargetedObj.transform.position;
+			Vector3 target_position = this.m_TargetedObj.transform.position;
+			this.m_Direction = Vector3.Normalize(target_position - this.transform.position) * this.m_MaximalVelocity;
 		}//end if 
 		//else if the target is not a mobile character...
-		else {
-			//...then send the spell to wherever the cursor was clicked
-			target_position = this.m_Target.point;
-		}//end else
-		this.m_Direction = Vector3.Normalize(target_position - this.transform.position) * this.m_MaximalVelocity;
-		#if TESTING_SPELLMOVEMENT
-		string message = "SpellMovement::SetDirection::Direction of spell:\tx:" + this.m_Direction.x + "\ty:" + this.m_Direction.y +
-			"\tz:" + this.m_Direction.z;
-		Debug.Log(message);
-		#endif
+			//...then make no change to the direction
 	}//end f'n void SetDirection()
 
-
+	/**A function to be called whenever something enters a spellmovement collider; in terms of functionality, we'll use this function to destroy the spell object prefab after it strikes with something's collider.*/
 	void OnTriggerEnter(Collider other)
 	{
 		//if we hit the target...
 		if (other.gameObject == this.m_TargetedObj) {
-			this.m_TargetReached = true;
 			#if TESTING_SPELLCOLLISION
 			Debug.Log("SpellMovement::OnTriggerEnter(Collider)\tTarget " + this.m_Target.collider.gameObject.name + " hit!\n" +
 				"Destroying gameobject");
 			GameObject.Destroy(this.gameObject);
 			#endif
 		}
-	}
+
+	}//end f'n void OnTriggerEnter(Collider)
 }

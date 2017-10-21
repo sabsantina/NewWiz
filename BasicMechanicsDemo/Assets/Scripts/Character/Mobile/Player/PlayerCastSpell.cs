@@ -62,8 +62,8 @@ public class PlayerCastSpell : MonoBehaviour {
 					this.m_SpellCubeInstance = GameObject.Instantiate(this.m_SpellCube);
 					this.m_SpellCubeInstance.transform.position = this.transform.position;
 					SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement>();
-					spell_movement.SetTarget(hit);
 					spell_movement.m_IsMobileCharacter = true;
+					spell_movement.SetTarget(hit);
 					any_mobile_characters = true;
 					GameObject.Destroy(this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
 					#endif
@@ -71,6 +71,21 @@ public class PlayerCastSpell : MonoBehaviour {
 			}
 			//if none of the gameobjects found in the raycastall were mobile characters...
 			if (!any_mobile_characters) {
+				RaycastHit target_hit;
+
+				if (Physics.Raycast(ray, out target_hit))
+				{
+					#if TESTING_SPELLMOVEMENT
+					Debug.Log("PlayerCastSpell::Update\tNo mobile characters found\tRay hit\tx: " + target_hit.point.x
+						+ " y: " + target_hit.point.y + " z: " + target_hit.point.z);
+					this.m_SpellCubeInstance = GameObject.Instantiate(this.m_SpellCube);
+					this.m_SpellCubeInstance.transform.position = this.transform.position;
+					SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement>();
+					spell_movement.m_IsMobileCharacter = false;
+					spell_movement.SetTarget(target_hit);
+					GameObject.Destroy(this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
+					#endif
+				}
 
 			}
 //			
