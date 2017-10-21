@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿#define TESTING_SPELLMOVEMENT
+#define TESTING_SPELLCOLLISION
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +10,8 @@ public class Spell : MonoBehaviour {
 	public SpellName m_SpellName { set; get;}
 	/**An enum variable for the spell effect. See SpellEffecr.cs for all spell effects.*/
 	public SpellEffect m_SpellEffect { set; get;}
+    /**A float which stores the initial damage of the spell*/
+    public float m_SpellDamage { set; get; }
 	/**A bool to let us know whether or not the player has discovered the spell yet.
 	*It'd be simpler to just keep all the spells in the inventory from the get-go, but only show them to the player if they've been discovered.
 	*We can do the same basic thing with the items; if the player has 0 quantity of a given item, we won't show it.*/

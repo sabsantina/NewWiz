@@ -10,7 +10,8 @@ public class PlayerInventory : MonoBehaviour {
 	public List<Spell> m_SpellList { private set; get; }
 	/**A List of all items in the inventory.*/
 	public List<Item> m_ItemList {private set; get;}
-
+    /**Int which will be used to tell the player which spell he has chosen.*/
+    private int m_ActiveSpellNumber = 0;
 
 	void Start()
 	{
@@ -24,6 +25,7 @@ public class PlayerInventory : MonoBehaviour {
 					Spell fireball = new Spell ();
 					fireball.m_SpellEffect = SpellEffect.Fire_Damage;
 					fireball.m_SpellName = SpellName.Fireball;
+                    fireball.m_SpellDamage = 30.0f;
 					this.m_SpellList.Add (fireball);
 					break;
 				}//end case Fireball
@@ -104,6 +106,17 @@ public class PlayerInventory : MonoBehaviour {
 		}//end foreach
 		return dictionary_to_return;
 	}//end f'n Dictionary<string, string> StringFormat_SpellList()
+
+    /**Function to be utilised when clicking on the spell in the inventory menu*/
+    //public void SetActiveSpellNumber(int m_SpellNumber)
+    //{
+    //
+    //}
+    /**This function returns the currently chosen spell*/
+    public Spell GetChosenSpell()
+    {
+        return m_SpellList[m_ActiveSpellNumber];
+    }
 
 //	public Dictionary<string, string, int> StringFormat_ItemList()
 //	{

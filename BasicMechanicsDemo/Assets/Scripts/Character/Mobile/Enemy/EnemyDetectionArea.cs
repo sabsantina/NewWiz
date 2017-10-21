@@ -20,7 +20,7 @@ public class EnemyDetectionArea : MonoBehaviour {
 		#if TESTING
 		string message = "OnTriggerStay::";
 		#endif
-		if (other.gameObject.GetComponent<Player> () != null) {
+		if (other.gameObject.GetComponent<Player> () != null && this.gameObject.GetComponent<EnemyMovement>() != null) {
 			this.m_EnemyMovement.SetEnemyDirection (other.transform.position - this.m_EnemyMovement.gameObject.transform.position);
 
 		}
