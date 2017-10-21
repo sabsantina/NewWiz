@@ -1435,6 +1435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 872955988}
   - component: {fileID: 872955987}
+  - component: {fileID: 872955989}
   m_Layer: 5
   m_Name: SceneManagers
   m_TagString: Untagged
@@ -1473,6 +1474,22 @@ RectTransform:
   m_AnchoredPosition: {x: -7809.2983, y: 821.7011}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &872955989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 872955986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b69754a7e4cc4d5480b732a6704360b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TempItemPrefab: {fileID: 1037877941852264, guid: 750d10d3c9a5043cba4860f04494c345,
+    type: 2}
+  m_TempSpellPrefab: {fileID: 1560220320337108, guid: 55f288681366942dc955c6fa8d67c7e3,
+    type: 2}
+  m_Player: {fileID: 1546207769}
 --- !u!1 &959023633
 GameObject:
   m_ObjectHideFlags: 0
@@ -2338,7 +2355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6a88e2198a674f749006c8526d32183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaximalVelocity: 10
+  m_MaximalVelocity: 8
 --- !u!95 &1546207773
 Animator:
   serializedVersion: 3
