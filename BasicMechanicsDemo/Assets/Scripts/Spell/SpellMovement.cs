@@ -14,7 +14,7 @@ public class SpellMovement : MonoBehaviour {
 	private GameObject m_TargetedObj;
 	/**The direction in which the spell is moving.*/
 	private Vector3 m_Direction = new Vector3();
-	/**A bool to let us know whether the target is a mobile character*/
+	/**A bool to let us know whether the target is a mobile character.*/
 	public bool m_IsMobileCharacter { get; set;}
 	/**A bool to let us know whether or not the spell made it to the target.*/
 	public bool m_TargetReached { get; private set; }
