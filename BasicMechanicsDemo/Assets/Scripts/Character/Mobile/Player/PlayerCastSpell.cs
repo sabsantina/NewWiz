@@ -43,6 +43,7 @@ public class PlayerCastSpell : MonoBehaviour {
 	void Start()
 	{
 		this.m_Animator = this.GetComponent<Animator> ();
+
 	}
 
 	// Update is called once per frame
@@ -69,9 +70,8 @@ public class PlayerCastSpell : MonoBehaviour {
 				this.m_SpellCubeInstance = GameObject.Instantiate(this.m_SpellCube);
 				this.m_SpellCubeInstance.transform.position = this.transform.position;
 				SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement>();
-//				Debug.Log("PlayerCastSpell::Update()\tTarget: " + target_hit.collider.gameObject.name);
 				spell_movement.SetTarget(target_hit);
-				GameObject.Destroy(this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
+//				GameObject.Destroy(this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
 				#endif
 
 			}//end if
