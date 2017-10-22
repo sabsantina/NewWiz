@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//BoxCollider to ensure the spell can be picked up if it's in the world
 [RequireComponent(typeof(BoxCollider))]
 public class Spell : MonoBehaviour {
 	/**An enum variable for the spell name. See SpellName.cs for all spell names.*/
@@ -23,4 +24,23 @@ public class Spell : MonoBehaviour {
 		//ensure the box collider's isTrigger is set to true
 		this.GetComponent<BoxCollider> ().isTrigger = true;
 	}//end f'n void Awake()
+
+	/**Return a copy of [spell_to_copy].*/
+	public Spell CopySpell(Spell spell_to_copy)
+	{
+		Spell new_spell = new Spell ();
+		new_spell.m_HasBeenDiscovered = spell_to_copy.m_HasBeenDiscovered;
+		new_spell.m_SpellDamage = spell_to_copy.m_SpellDamage;
+		new_spell.m_SpellEffect = spell_to_copy.m_SpellEffect;
+		new_spell.m_SpellName = spell_to_copy.m_SpellName;
+		return new_spell;
+	}
+
+	public void GenerateInstance_Fireball(bool has_been_discovered, float damage)
+	{
+		this.m_HasBeenDiscovered = has_been_discovered;
+		this.m_SpellDamage = damage;
+		this.m_SpellName = SpellName.Fireball;
+		this.m_SpellEffect = SpellEffect.Fire_Damage;
+	}
 }

@@ -98,13 +98,36 @@ public class PlayerMovement : MobileCharacter {
 			Vector3 player_current_position = this.transform.position;
 			Vector3 translation = new Vector3 (horizontal_movement_input * this.m_MaximalVelocity, 0.0f, vertical_movement_input * this.m_MaximalVelocity);
 			translation = Vector3.ClampMagnitude (translation, this.m_MaximalVelocity);
-			this.transform.position = player_current_position + (translation * Time.deltaTime);
 			//Update direction
 			this.m_Direction = translation;
+			//***Check for collision with scene objects
+
+			//if there's no object with a component of type Obstructable ahead...
+			if (!this.IsObstructableAhead ()) {
+				//...then keep moving
+				this.transform.position = player_current_position + (translation * Time.deltaTime);
+			}
 		}//end if
 
 		//Update the animator parameters
 		this.UpdateAnimatorParameters();
 	}//end f'n void Update
+
+	/**A function to stop the player moving from anything that has an Obstructable.cs component.
+	*Checks for an object with a component of type Obstructable ahead of the player in direction [this.m_Direction]; returns true if there is.*/
+	private bool IsObstructableAhead()
+	{
+		RaycastHit hit;
+		Ray ray;
+		//Cast a ray out starting from this.transform.position, along this.m_Direction
+		if (Physics.Raycast(this.transform.position, this.m_Direction, out hit, this.m_MaximalVelocity * Time.deltaTime)) {
+			//if whatever was hit's collider has an Obstructable component...
+			if (hit.collider.gameObject.GetComponent<Obstructable> () != null) {
+				//...then return true
+				return true;
+			}//end if
+		}//end if
+		return false;
+	}//end f'n bool IsObstructableAhead()
 
 }//end class PlayerMovement

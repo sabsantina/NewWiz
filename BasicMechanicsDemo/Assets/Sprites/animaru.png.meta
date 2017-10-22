@@ -1,105 +1,105 @@
 fileFormatVersion: 2
 guid: 3109a1a13c497d647b9502b6dfcc125f
-timeCreated: 1508374013
+timeCreated: 1508629911
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: Cat_down1
     21300002: Cat_down2
     21300004: Cat_down3
-    21300006: animaru_3
-    21300008: animaru_4
-    21300010: animaru_5
-    21300012: animaru_6
-    21300014: animaru_7
-    21300016: animaru_8
-    21300018: animaru_9
-    21300020: animaru_10
-    21300022: animaru_11
+    21300006: bird_walk_down1
+    21300008: bird_walk_down2
+    21300010: bird_walk_down3
+    21300012: bird_fly_down1
+    21300014: bird_fly_down2
+    21300016: bird_fly_down3
+    21300018: mouse_down1
+    21300020: mouse_down2
+    21300022: mouse_down3
     21300024: Cat_left1
     21300026: Cat_left5
     21300028: Cat_left3
-    21300030: animaru_15
-    21300032: animaru_16
-    21300034: animaru_17
-    21300036: animaru_18
-    21300038: animaru_19
-    21300040: animaru_20
-    21300042: animaru_21
-    21300044: animaru_22
-    21300046: animaru_23
+    21300030: bird_walk_left1
+    21300032: bird_walk_left2
+    21300034: bird_walk_left3
+    21300036: bird_fly_left1
+    21300038: bird_fly_left2
+    21300040: bird_fly_left3
+    21300042: mouse_left1
+    21300044: mouse_left2
+    21300046: mouse_left3
     21300048: Cat_right1
     21300050: Cat_right2
     21300052: Cat_right3
-    21300054: animaru_27
-    21300056: animaru_28
-    21300058: animaru_29
-    21300060: animaru_30
-    21300062: animaru_31
-    21300064: animaru_32
-    21300066: animaru_33
-    21300068: animaru_34
-    21300070: animaru_35
+    21300054: bird_walk_right1
+    21300056: bird_walk_right2
+    21300058: bird_walk_right3
+    21300060: bird_fly_right1
+    21300062: bird_fly_right2
+    21300064: bird_fly_right3
+    21300066: mouse_right1
+    21300068: mouse_right2
+    21300070: mouse_right3
     21300072: Cat_up
     21300074: Cat_up2
     21300076: Cat_up3
-    21300078: animaru_39
-    21300080: animaru_40
-    21300082: animaru_41
-    21300084: animaru_42
-    21300086: animaru_43
-    21300088: animaru_44
-    21300090: animaru_45
-    21300092: animaru_46
-    21300094: animaru_47
+    21300078: bird_walk_up1
+    21300080: bird_walk_up2
+    21300082: bird_walk_up3
+    21300084: bird_fly_up1
+    21300086: bird_fly_up2
+    21300088: bird_fly_up3
+    21300090: mouse_up1
+    21300092: mouse_up2
+    21300094: mouse_up3
     21300096: animaru_48
     21300098: animaru_49
     21300100: animaru_50
-    21300102: animaru_51
-    21300104: animaru_52
-    21300106: animaru_53
-    21300108: animaru_54
-    21300110: animaru_55
-    21300112: animaru_56
-    21300114: animaru_57
-    21300116: animaru_58
-    21300118: animaru_59
+    21300102: rooster_down1
+    21300104: rooster_down2
+    21300106: rooster_down3
+    21300108: frog_down1
+    21300110: frog_down2
+    21300112: frog_down3
+    21300114: rabbit_down1
+    21300116: rabbit_down2
+    21300118: rabbit_down3
     21300120: animaru_60
     21300122: animaru_61
     21300124: animaru_62
-    21300126: animaru_63
-    21300128: animaru_64
-    21300130: animaru_65
-    21300132: animaru_66
-    21300134: animaru_67
-    21300136: animaru_68
-    21300138: animaru_69
-    21300140: animaru_70
-    21300142: animaru_71
+    21300126: rooster_left1
+    21300128: rooster_left2
+    21300130: rooster_left3
+    21300132: frog_left1
+    21300134: frog_left2
+    21300136: frog_left3
+    21300138: rabbit_left1
+    21300140: rabbit_left2
+    21300142: rabbit_left3
     21300144: animaru_72
     21300146: animaru_73
     21300148: animaru_74
-    21300150: animaru_75
-    21300152: animaru_76
-    21300154: animaru_77
-    21300156: animaru_78
-    21300158: animaru_79
-    21300160: animaru_80
-    21300162: animaru_81
-    21300164: animaru_82
-    21300166: animaru_83
+    21300150: rooster_right1
+    21300152: rooster_right2
+    21300154: rooster_right3
+    21300156: frog_right1
+    21300158: frog_right2
+    21300160: frog_right3
+    21300162: rabbit_right1
+    21300164: rabbit_right2
+    21300166: rabbit_right3
     21300168: animaru_84
     21300170: animaru_85
     21300172: animaru_86
-    21300174: animaru_87
-    21300176: animaru_88
-    21300178: animaru_89
-    21300180: animaru_90
-    21300182: animaru_91
-    21300184: animaru_92
-    21300186: animaru_93
-    21300188: animaru_94
-    21300190: animaru_95
+    21300174: rooster_up1
+    21300176: rooster_up2
+    21300178: rooster_up3
+    21300180: frog_up1
+    21300182: frog_up2
+    21300184: frog_up3
+    21300186: rabbit_up1
+    21300188: rabbit_up2
+    21300190: rabbit_up3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -187,7 +187,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -201,7 +201,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -215,13 +215,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_3
+      name: bird_walk_down1
       rect:
         serializedVersion: 2
         x: 96
@@ -229,13 +229,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_4
+      name: bird_walk_down2
       rect:
         serializedVersion: 2
         x: 128
@@ -243,13 +243,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_5
+      name: bird_walk_down3
       rect:
         serializedVersion: 2
         x: 160
@@ -257,13 +257,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_6
+      name: bird_fly_down1
       rect:
         serializedVersion: 2
         x: 192
@@ -271,13 +271,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_7
+      name: bird_fly_down2
       rect:
         serializedVersion: 2
         x: 224
@@ -285,13 +285,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_8
+      name: bird_fly_down3
       rect:
         serializedVersion: 2
         x: 256
@@ -299,13 +299,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_9
+      name: mouse_down1
       rect:
         serializedVersion: 2
         x: 288
@@ -313,13 +313,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_10
+      name: mouse_down2
       rect:
         serializedVersion: 2
         x: 320
@@ -327,13 +327,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_11
+      name: mouse_down3
       rect:
         serializedVersion: 2
         x: 352
@@ -341,7 +341,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -355,7 +355,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -369,7 +369,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -383,13 +383,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_15
+      name: bird_walk_left1
       rect:
         serializedVersion: 2
         x: 96
@@ -397,13 +397,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_16
+      name: bird_walk_left2
       rect:
         serializedVersion: 2
         x: 128
@@ -411,13 +411,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_17
+      name: bird_walk_left3
       rect:
         serializedVersion: 2
         x: 160
@@ -425,13 +425,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_18
+      name: bird_fly_left1
       rect:
         serializedVersion: 2
         x: 192
@@ -439,13 +439,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_19
+      name: bird_fly_left2
       rect:
         serializedVersion: 2
         x: 224
@@ -453,13 +453,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_20
+      name: bird_fly_left3
       rect:
         serializedVersion: 2
         x: 256
@@ -467,13 +467,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_21
+      name: mouse_left1
       rect:
         serializedVersion: 2
         x: 288
@@ -481,13 +481,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_22
+      name: mouse_left2
       rect:
         serializedVersion: 2
         x: 320
@@ -495,13 +495,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_23
+      name: mouse_left3
       rect:
         serializedVersion: 2
         x: 352
@@ -509,7 +509,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -523,7 +523,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -537,7 +537,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -551,13 +551,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_27
+      name: bird_walk_right1
       rect:
         serializedVersion: 2
         x: 96
@@ -565,13 +565,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_28
+      name: bird_walk_right2
       rect:
         serializedVersion: 2
         x: 128
@@ -579,13 +579,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_29
+      name: bird_walk_right3
       rect:
         serializedVersion: 2
         x: 160
@@ -593,13 +593,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_30
+      name: bird_fly_right1
       rect:
         serializedVersion: 2
         x: 192
@@ -607,13 +607,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_31
+      name: bird_fly_right2
       rect:
         serializedVersion: 2
         x: 224
@@ -621,13 +621,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_32
+      name: bird_fly_right3
       rect:
         serializedVersion: 2
         x: 256
@@ -635,13 +635,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_33
+      name: mouse_right1
       rect:
         serializedVersion: 2
         x: 288
@@ -649,13 +649,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_34
+      name: mouse_right2
       rect:
         serializedVersion: 2
         x: 320
@@ -663,13 +663,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_35
+      name: mouse_right3
       rect:
         serializedVersion: 2
         x: 352
@@ -677,7 +677,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -691,7 +691,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -705,7 +705,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -719,13 +719,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_39
+      name: bird_walk_up1
       rect:
         serializedVersion: 2
         x: 96
@@ -733,13 +733,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_40
+      name: bird_walk_up2
       rect:
         serializedVersion: 2
         x: 128
@@ -747,13 +747,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_41
+      name: bird_walk_up3
       rect:
         serializedVersion: 2
         x: 160
@@ -761,13 +761,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_42
+      name: bird_fly_up1
       rect:
         serializedVersion: 2
         x: 192
@@ -775,13 +775,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_43
+      name: bird_fly_up2
       rect:
         serializedVersion: 2
         x: 224
@@ -789,13 +789,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_44
+      name: bird_fly_up3
       rect:
         serializedVersion: 2
         x: 256
@@ -803,13 +803,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_45
+      name: mouse_up1
       rect:
         serializedVersion: 2
         x: 288
@@ -817,13 +817,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_46
+      name: mouse_up2
       rect:
         serializedVersion: 2
         x: 320
@@ -831,13 +831,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_47
+      name: mouse_up3
       rect:
         serializedVersion: 2
         x: 352
@@ -845,7 +845,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -859,7 +859,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -873,7 +873,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -887,13 +887,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_51
+      name: rooster_down1
       rect:
         serializedVersion: 2
         x: 96
@@ -901,13 +901,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_52
+      name: rooster_down2
       rect:
         serializedVersion: 2
         x: 128
@@ -915,13 +915,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_53
+      name: rooster_down3
       rect:
         serializedVersion: 2
         x: 160
@@ -929,13 +929,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_54
+      name: frog_down1
       rect:
         serializedVersion: 2
         x: 192
@@ -943,13 +943,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_55
+      name: frog_down2
       rect:
         serializedVersion: 2
         x: 224
@@ -957,13 +957,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_56
+      name: frog_down3
       rect:
         serializedVersion: 2
         x: 256
@@ -971,13 +971,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_57
+      name: rabbit_down1
       rect:
         serializedVersion: 2
         x: 288
@@ -985,27 +985,27 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_58
+      name: rabbit_down2
       rect:
         serializedVersion: 2
         x: 320
-        y: 96
+        y: 97
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_59
+      name: rabbit_down3
       rect:
         serializedVersion: 2
         x: 352
@@ -1013,7 +1013,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1027,7 +1027,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1041,7 +1041,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1055,13 +1055,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_63
+      name: rooster_left1
       rect:
         serializedVersion: 2
         x: 96
@@ -1069,13 +1069,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_64
+      name: rooster_left2
       rect:
         serializedVersion: 2
         x: 128
@@ -1083,13 +1083,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_65
+      name: rooster_left3
       rect:
         serializedVersion: 2
         x: 160
@@ -1097,13 +1097,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_66
+      name: frog_left1
       rect:
         serializedVersion: 2
         x: 192
@@ -1111,13 +1111,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_67
+      name: frog_left2
       rect:
         serializedVersion: 2
         x: 224
@@ -1125,13 +1125,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_68
+      name: frog_left3
       rect:
         serializedVersion: 2
         x: 256
@@ -1139,13 +1139,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_69
+      name: rabbit_left1
       rect:
         serializedVersion: 2
         x: 288
@@ -1153,13 +1153,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_70
+      name: rabbit_left2
       rect:
         serializedVersion: 2
         x: 320
@@ -1167,13 +1167,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_71
+      name: rabbit_left3
       rect:
         serializedVersion: 2
         x: 352
@@ -1181,7 +1181,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1195,7 +1195,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1209,7 +1209,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1223,13 +1223,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_75
+      name: rooster_right1
       rect:
         serializedVersion: 2
         x: 96
@@ -1237,13 +1237,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_76
+      name: rooster_right2
       rect:
         serializedVersion: 2
         x: 128
@@ -1251,13 +1251,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_77
+      name: rooster_right3
       rect:
         serializedVersion: 2
         x: 160
@@ -1265,13 +1265,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_78
+      name: frog_right1
       rect:
         serializedVersion: 2
         x: 192
@@ -1279,13 +1279,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_79
+      name: frog_right2
       rect:
         serializedVersion: 2
         x: 224
@@ -1293,13 +1293,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_80
+      name: frog_right3
       rect:
         serializedVersion: 2
         x: 256
@@ -1307,13 +1307,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_81
+      name: rabbit_right1
       rect:
         serializedVersion: 2
         x: 288
@@ -1321,13 +1321,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_82
+      name: rabbit_right2
       rect:
         serializedVersion: 2
         x: 320
@@ -1335,13 +1335,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_83
+      name: rabbit_right3
       rect:
         serializedVersion: 2
         x: 352
@@ -1349,7 +1349,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1363,7 +1363,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1377,7 +1377,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1391,13 +1391,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_87
+      name: rooster_up1
       rect:
         serializedVersion: 2
         x: 96
@@ -1405,13 +1405,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_88
+      name: rooster_up2
       rect:
         serializedVersion: 2
         x: 128
@@ -1419,13 +1419,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_89
+      name: rooster_up3
       rect:
         serializedVersion: 2
         x: 160
@@ -1433,13 +1433,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_90
+      name: frog_up1
       rect:
         serializedVersion: 2
         x: 192
@@ -1447,13 +1447,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_91
+      name: frog_up2
       rect:
         serializedVersion: 2
         x: 224
@@ -1461,13 +1461,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_92
+      name: frog_up3
       rect:
         serializedVersion: 2
         x: 256
@@ -1475,13 +1475,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_93
+      name: rabbit_up1
       rect:
         serializedVersion: 2
         x: 288
@@ -1489,13 +1489,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_94
+      name: rabbit_up2
       rect:
         serializedVersion: 2
         x: 320
@@ -1503,13 +1503,13 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animaru_95
+      name: rabbit_up3
       rect:
         serializedVersion: 2
         x: 352
@@ -1517,7 +1517,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
