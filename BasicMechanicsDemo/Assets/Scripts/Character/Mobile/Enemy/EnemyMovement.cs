@@ -54,6 +54,12 @@ public class EnemyMovement : MobileCharacter {
 		//Clamp the direction to the maximal velocity
 		this.m_Direction = (this.m_IsChasing) ? Vector3.ClampMagnitude(this.m_Direction, this.m_ChasingVelocity)
 												: Vector3.ClampMagnitude(this.m_Direction, this.m_MaximalVelocity);
+		//if obstructable ahead...
+		if (this.IsObstructableAhead())
+		{
+			//...then negate direction
+			this.m_Direction = -(this.m_Direction);
+		}
 		//Add to current position
 		current_position += this.m_Direction * Time.deltaTime;
 		//Update position
