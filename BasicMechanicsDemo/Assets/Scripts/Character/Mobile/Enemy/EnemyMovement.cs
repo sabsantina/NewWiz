@@ -14,20 +14,24 @@ using UnityEngine;
 
 
 public class EnemyMovement : MobileCharacter {
-
-	/**The direction in which the enemy is moving.*/
-//	public Vector3 m_Direction = Vector3.forward;
+	
 	/**The prefab that defines the area (or volume, rather) of the enemy's detection capabilities.
 	*Note that this object shouldn't move in the scene if the enemy is patrolling a fixed region.*/
 	private Transform m_DetectionArea;
 	/**We can either have the enemy wander to the very edge of the detection area, or have him stop [this.m_DetectionAreaInteriorPadding] units short of the edge, to make sure the enemy doesn't wander out of the detection area.*/
 	private float m_DetectionAreaInteriorPadding = 1.0f;
+	/**A velocity to be used when the enemy is chasing the player.*/
+	public readonly float m_ChasingVelocity = 21.0f;
+	/**A bool to tell us whether or not the enemy is chasing the player*/
+	public bool m_IsChasing;
+
 
 	// Use this for initialization
 	void Start () {
 		this.m_DetectionArea = this.transform.parent;
 		this.SetAnimator (this.GetComponent<Animator> ());
 		this.m_Direction = Vector3.right;
+		this.m_IsChasing = false;
 	}
 	
 	// Update is called once per frame
@@ -48,7 +52,8 @@ public class EnemyMovement : MobileCharacter {
 		//Scale up the direction
 		this.m_Direction *= this.m_MaximalVelocity;
 		//Clamp the direction to the maximal velocity
-		this.m_Direction = Vector3.ClampMagnitude(this.m_Direction, this.m_MaximalVelocity);
+		this.m_Direction = (this.m_IsChasing) ? Vector3.ClampMagnitude(this.m_Direction, this.m_ChasingVelocity)
+												: Vector3.ClampMagnitude(this.m_Direction, this.m_MaximalVelocity);
 		//Add to current position
 		current_position += this.m_Direction * Time.deltaTime;
 		//Update position
@@ -120,4 +125,5 @@ public class EnemyMovement : MobileCharacter {
 	{
 		this.m_Direction = direction;
 	}//end f'n void SetEnemyDirection(Vector3)
+
 }//end class EnemyMovement

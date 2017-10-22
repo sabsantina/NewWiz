@@ -89,6 +89,11 @@ public class SpellMovement : MonoBehaviour {
             #endif
 			return;
         }
+		//if the spell hits a part of the scenery...
+		if (other.gameObject.GetComponent<Obstructable> ()) {
+			//...destroy it (we don't want stuff like spells going through trees
+			GameObject.Destroy (this.gameObject);
+		}
 
     }//end f'n void OnTriggerEnter(Collider)
 }
