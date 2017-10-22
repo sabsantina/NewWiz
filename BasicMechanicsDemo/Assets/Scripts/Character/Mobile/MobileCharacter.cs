@@ -50,4 +50,21 @@ public class MobileCharacter : MonoBehaviour {
 		//update for rightward motion
 		this.m_Animator.SetBool (STRINGKEY_PARAM_ISMOVINGRIGHT, this.m_IsMovingRight);
 	}//end f'n void UpdateAnimatorParameters()
+
+	/**A function to stop the player moving from anything that has an Obstructable.cs component.
+	*Checks for an object with a component of type Obstructable ahead of the player in direction [this.m_Direction]; returns true if there is.*/
+	protected bool IsObstructableAhead()
+	{
+		RaycastHit hit;
+		Ray ray;
+		//Cast a ray out starting from this.transform.position, along this.m_Direction
+		if (Physics.Raycast(this.transform.position, this.m_Direction, out hit, this.m_MaximalVelocity * Time.deltaTime)) {
+			//if whatever was hit's collider has an Obstructable component...
+			if (hit.collider.gameObject.GetComponent<Obstructable> () != null) {
+				//...then return true
+				return true;
+			}//end if
+		}//end if
+		return false;
+	}//end f'n bool IsObstructableAhead()
 }//end class MobileCharacter
