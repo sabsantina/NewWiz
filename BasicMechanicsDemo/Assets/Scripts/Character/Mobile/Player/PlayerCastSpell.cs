@@ -60,8 +60,18 @@ public class PlayerCastSpell : MonoBehaviour {
 
 				Ray ray = this.m_MainCamera.ScreenPointToRay (Input.mousePosition);
 				RaycastHit[] targets_hit = Physics.RaycastAll(ray);
+				//We need to find the raycast hit furthest from the camera in the event that none of the raycasthits are 
+				//mobile character as the furthest raycast hit will be the ground.
+				RaycastHit furthest = targets_hit [0];
 				bool any_mobile_characters = false;
 				foreach (RaycastHit hit in targets_hit) {
+					//if the hit's distance is greater than that of the furthest...
+					if (hit.distance > furthest.distance) {
+						//...then update the furthest
+						furthest = hit;
+					}//end if
+
+					//if the hit has a MobileCharacter component...
 					if (hit.collider.gameObject.GetComponent<MobileCharacter> () != null) {
 						#if TESTING_SPELLMOVEMENT
 						m_Target = hit.collider.gameObject;
@@ -70,49 +80,25 @@ public class PlayerCastSpell : MonoBehaviour {
 						this.m_hasCastHittingSpell = true;
 						SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement>();
 						spell_movement.m_IsMobileCharacter = true;
-                        spell_movement.SetTarget(hit);
+						spell_movement.SetTarget(hit);
 						any_mobile_characters = true;
-//						GameObject.Destroy(this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
 						#endif
-					}
-                }
+					}//end if
+				}//end foreach
+
 				//if none of the gameobjects found in the raycastall were mobile characters...
 				if (!any_mobile_characters) {
-					RaycastHit target_hit;
-
-					if (Physics.Raycast(ray, out target_hit))
-					{
-                        //If the target hit was an obstructable.
-                        if (target_hit.collider.gameObject.GetComponent<Obstructable>() != null)
-                        {
-                            #if TESTING_SPELLMOVEMENT
-                            m_Target = target_hit.collider.gameObject;
-                            this.m_SpellCubeInstance = GameObject.Instantiate(this.m_SpellCube);
-                            this.m_SpellCubeInstance.transform.position = this.transform.position;
-                            this.m_hasCastHittingSpell = true;
-                            SpellMovement spell_movement_obs = this.m_SpellCubeInstance.GetComponent<SpellMovement>();
-                            spell_movement_obs.m_IsObstructable = true;
-                            spell_movement_obs.SetTarget(target_hit);
-//						    GameObject.Destroy(this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
-                            #endif
-                        }
-                        else
-                        {
-                        #if TESTING_SPELLMOVEMENT
-                            Debug.Log("PlayerCastSpell::Update\tNo characters found\tRay hit\tx: " + target_hit.point.x
-                                + " y: " + target_hit.point.y + " z: " + target_hit.point.z);
-                            this.m_SpellCubeInstance = GameObject.Instantiate(this.m_SpellCube);
-                            this.m_SpellCubeInstance.transform.position = this.transform.position;
-                            SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement>();
-//						    spell_movement.SetSpellVariables(m_Spell);
-                            spell_movement.m_IsMobileCharacter = false;
-                            spell_movement.SetTarget(target_hit);
-                            GameObject.Destroy(this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
-                        #endif
-                        }
-
-
-                    }//end if
+					//...then send the spell to the furthest Raycast hit
+					#if TESTING_SPELLMOVEMENT
+					Debug.Log("PlayerCastSpell::Update\tNo mobile characters found\tRay hit\tx: " + furthest.point.x
+						+ " y: " + furthest.point.y + " z: " + furthest.point.z);
+					this.m_SpellCubeInstance = GameObject.Instantiate(this.m_SpellCube);
+					this.m_SpellCubeInstance.transform.position = this.transform.position;
+					SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement>();
+					spell_movement.m_IsMobileCharacter = false;
+					spell_movement.SetTarget(furthest);
+					GameObject.Destroy(this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
+					#endif
 
 				}//end if
 

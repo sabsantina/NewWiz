@@ -16,8 +16,6 @@ public class SpellMovement : MonoBehaviour {
 	private Vector3 m_Direction = new Vector3();
 	/**A bool to let us know whether the target is a mobile character.*/
 	public bool m_IsMobileCharacter { get; set;}
-    /**A bool to let us know whether the target is an obstructable*/
-    public bool m_IsObstructable { get; set; }
 
 	void Awake()
 	{
@@ -26,7 +24,7 @@ public class SpellMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (this.m_IsMobileCharacter || this.m_IsObstructable) {
+		if (this.m_IsMobileCharacter) {
 			//Update direction
 			this.SetDirection ();
 		}
@@ -50,12 +48,11 @@ public class SpellMovement : MonoBehaviour {
 	{
 		//Set the target
 		this.m_Target = spell_target;
-        //Following works the same for mobile characters and obstructables.
-		if (this.m_IsMobileCharacter || this.m_IsObstructable) {
+
+		if (this.m_IsMobileCharacter) {
 			//Set the target's gameobject, to be able to follow it around if it's moving
 			this.m_TargetedObj = this.m_Target.collider.gameObject;
-		}
-        else {
+		} else {
 			this.m_TargetedObj = null;
 			//...then send the spell in the direction of wherever the cursor was clicked
 			this.m_Direction = Vector3.Normalize(this.m_Target.point - this.transform.position) * this.m_MaximalVelocity;
@@ -66,9 +63,9 @@ public class SpellMovement : MonoBehaviour {
 	/**A private function to set the direction to the given target [this.m_Target].*/
 	private void SetDirection()
 	{
-		//if the target is a mobile character or an obstructable...
-		if (this.m_IsMobileCharacter || this.m_IsObstructable) {
-			//...then lock onto the mobile character's or obstructable's position
+		//if the target is a mobile character...
+		if (this.m_IsMobileCharacter) {
+			//...then lock onto the mobile character's position
 			Vector3 target_position = this.m_TargetedObj.transform.position;
 			this.m_Direction = Vector3.Normalize(target_position - this.transform.position) * this.m_MaximalVelocity;
 		}//end if 
@@ -92,6 +89,11 @@ public class SpellMovement : MonoBehaviour {
             #endif
 			return;
         }
+		//if the spell hits a part of the scenery...
+		if (other.gameObject.GetComponent<Obstructable> ()) {
+			//...destroy it (we don't want stuff like spells going through trees
+			GameObject.Destroy (this.gameObject);
+		}
 
     }//end f'n void OnTriggerEnter(Collider)
 }
