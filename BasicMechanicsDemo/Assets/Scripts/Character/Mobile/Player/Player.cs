@@ -11,7 +11,7 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
 	/**A variable to keep track of the player's health.*/
-	public float m_Health {get; private set;}
+	public float m_Health;
 	/**A variable to help us know what the player's full health it; public for accessibility in the Item classes (think health potions).*/
 	public readonly float PLAYER_FULL_HEALTH = 100.0f;
 
@@ -26,7 +26,8 @@ public class Player : MonoBehaviour {
 		if (this.m_Health == 0)
 		{
 			#if TESTING_ZERO_HEALTH
-			Debug.Log("Zero health; pleyer dead\tRespawn time!");
+			Debug.Log("Zero health; player dead\tResurrection time!");
+			this.m_Health = PLAYER_FULL_HEALTH;
 			#endif
 			//Game Over
 			//Should we respawn the player at a checkpoint? How do we want to do this?

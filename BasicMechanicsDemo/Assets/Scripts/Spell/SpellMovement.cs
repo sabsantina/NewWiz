@@ -1,11 +1,11 @@
-﻿#define TESTING_SPELLMOVEMENT
+﻿//#define TESTING_SPELLMOVEMENT
 #define TESTING_SPELLCOLLISION
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellMovement : Spell {
+public class SpellMovement : MonoBehaviour {
 
 	public float m_MaximalVelocity = 35.0f;
 	/**A reference to the target the spell is being cast at. Set using SpellMovement::SetTarget(GameObject).*/
@@ -21,13 +21,6 @@ public class SpellMovement : Spell {
 	{
         
 	}
-
-    public void SetSpellVariables(Spell m_Spell)
-    {
-        this.m_SpellName = m_Spell.m_SpellName;
-        this.m_SpellEffect = m_Spell.m_SpellEffect;
-        this.m_SpellDamage = m_Spell.m_SpellDamage;
-    }
 
 	// Update is called once per frame
 	void Update () {
@@ -87,16 +80,20 @@ public class SpellMovement : Spell {
         if (other.gameObject == this.m_TargetedObj)
         {
             #if TESTING_SPELLCOLLISION
-            Debug.Log("SpellMovement::OnTriggerEnter(Collider)\tTarget " + this.m_Target.collider.gameObject.name + " hit!\n" +
-                "Destroying gameobject");
-            //If it is an enemy, apply the spell effects.
-            if (other.gameObject.GetComponent<Enemy>() != null)
-            {
-                other.gameObject.GetComponent<Enemy>().ApplySpellEffects(this.gameObject.GetComponent<Spell>());
-                GameObject.Destroy(this.gameObject);
-            }
+			string message = "SpellMovement::OnTriggerEnter(Collider)\tTarget " + this.m_Target.collider.gameObject.name + " hit!\n";
+
+			GameObject.Destroy(this.gameObject);
+			message += "\nGameObject destroyed";
+
+			Debug.Log(message);
             #endif
+			return;
         }
+		//if the spell hits a part of the scenery...
+		if (other.gameObject.GetComponent<Obstructable> ()) {
+			//...destroy it (we don't want stuff like spells going through trees
+			GameObject.Destroy (this.gameObject);
+		}
 
     }//end f'n void OnTriggerEnter(Collider)
 }

@@ -15,17 +15,27 @@ public class EnemyDetectionArea : MonoBehaviour {
 		this.GetComponent<CapsuleCollider> ().isTrigger = true;
 	}
 
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.GetComponent<Player> () != null) {
+			this.m_EnemyMovement.m_IsChasing = true;
+		}//end if
+	}
+
 	void OnTriggerStay(Collider other)
 	{
-		#if TESTING
-		string message = "OnTriggerStay::";
-		#endif
-		if (other.gameObject.GetComponent<Player> () != null && this.gameObject.GetComponent<EnemyMovement>() != null) {
-			this.m_EnemyMovement.SetEnemyDirection (other.transform.position - this.m_EnemyMovement.gameObject.transform.position);
+		//If the player's within the zone...
+		if (other.gameObject.GetComponent<Player> () != null) {
+			//...then adjust the enemy's movement to give chase!
+			Vector3 new_direction = other.transform.position - this.m_EnemyMovement.gameObject.transform.position;
+			this.m_EnemyMovement.SetEnemyDirection (new_direction);
+		}//end if
+	}//end f'n void OnTriggerStay(Collider)
 
-		}
-		#if TESTING
-		Debug.Log (message);
-		#endif
+	void OnTriggerExit(Collider other)
+	{
+		if (other.gameObject.GetComponent<Player> () != null) {
+			this.m_EnemyMovement.m_IsChasing = false;
+		}//end if
 	}
 }

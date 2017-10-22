@@ -34,9 +34,11 @@ public class Spawner : MonoBehaviour {
 		#if TESTING_ITEM_PICKUP
 		if (Input.GetKeyDown (KeyCode.Alpha1)) {
 			this.Spawn_Item_HealthPotion (this.m_Player.transform.position + Vector3.left * 2.0f);
+			Debug.Log("Spawner:\nSpawning an item with properties:\t" + this.m_ItemInstances[0].m_ItemName.ToString());
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha2)) {
 			this.Spawn_Spell_Fireball (this.m_Player.transform.position + Vector3.right * 2.0f);
+			Debug.Log("Spawner:\nSpawning a spell with properties:\t" + this.m_SpellInstances[0].m_SpellName.ToString());
 		}
 		#endif
 	}
