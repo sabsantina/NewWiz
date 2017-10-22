@@ -1,4 +1,4 @@
-﻿#define TESTING_ENEMY_ATTACK
+﻿//#define TESTING_ENEMY_ATTACK
 
 using System.Collections;
 using System.Collections.Generic;
@@ -66,6 +66,9 @@ public class EnemyAttack : MonoBehaviour {
 			//then reset temporal variables
 			this.m_AttackTimer = 0.0f;
 			this.m_LastSecond = 0;
+			#if TESTING_ENEMY_ATTACK
+			Debug.Log("Player escaped! Resetting timer...");
+			#endif
 		}//end if
 	}//end f'n void OnTriggerExit(Collider)
 

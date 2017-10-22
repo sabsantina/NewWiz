@@ -30,7 +30,7 @@ public class EnemyMovement : MobileCharacter {
 	void Start () {
 		this.m_DetectionArea = this.transform.parent;
 		this.SetAnimator (this.GetComponent<Animator> ());
-		this.m_Direction = Vector3.right;
+		this.m_Direction = new Vector3(Random.Range(-100.0f, 100.0f), 0.0f, Random.Range(-100.0f, 100.0f));
 		this.m_IsChasing = false;
 	}
 	
