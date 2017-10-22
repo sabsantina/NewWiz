@@ -11,7 +11,7 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
 	/**A variable to keep track of the player's health.*/
-	public float m_Health {get; private set;}
+	public float m_Health;
 	/**A variable to help us know what the player's full health it; public for accessibility in the Item classes (think health potions).*/
 	public readonly float PLAYER_FULL_HEALTH = 100.0f;
 
