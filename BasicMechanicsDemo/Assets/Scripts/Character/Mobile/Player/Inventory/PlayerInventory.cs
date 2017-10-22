@@ -1,6 +1,8 @@
 ﻿#define TESTING_INVENTORY_CONTENTS_OUTPUT
 #define TESTING_INVENTORY_SPELLPICKUP
 
+//#define ATHANASIOS
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,112 +12,29 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour {
 	/**A list of all spells in the inventory.*/
-	public List<Spell> m_SpellList { private set; get; }
-	/**A List of all items in the inventory.*/
-	public List<Item> m_ItemList {private set; get;}
+	public List<Spell> m_SpellList {  set; get; }
+	#if ATHANASIOS
     /**Int which will be used to tell the player which spell he has chosen.*/
     private int m_ActiveSpellNumber = 0;
-	public Dictionary<Item, int> m_ItemDictionary {private set; get;}
+	#endif
+	/**The currently active spell; will be cast on click.*/
+	public Spell m_ActiveSpell = new Spell();
+	public Dictionary<Item, int> m_ItemDictionary { set; get;}
+
+	void Awake()
+	{
+		m_ActiveSpell.GenerateInstance_Fireball (true, 20.0f);
+	}
 
 	void Start()
 	{
 		//Initialize Spell List
 		this.m_SpellList = new List<Spell> ();
-		for (int index = 0; index < System.Enum.GetValues (typeof(SpellName)).Length; index++) {
-			switch (index) {
-			//Case Fireball
-			case (int)SpellName.Fireball:
-				{
-					Spell fireball = new Spell ();
-					fireball.m_SpellEffect = SpellEffect.Fire_Damage;
-					fireball.m_SpellName = SpellName.Fireball;
-                    fireball.m_SpellDamage = 30.0f;
-					this.m_SpellList.Add (fireball);
-					break;
-				}//end case Fireball
-
-				//and so on...
-			
-			default:
-				{
-					break;
-				}//end case default
-			}//end switch
-		}//end for
 
 		//Initialize Item Dictionary
-		this.m_ItemList = new List<Item>();
-		for (int index = 0; index < System.Enum.GetValues (typeof(ItemName)).Length; index++) {
-			switch (index) {
-			//Case Health Potion
-			case (int)ItemName.Health_Potion:
-				{
-					Item health_potion = new Item ();
-					health_potion.m_ItemName = ItemName.Health_Potion;
-					health_potion.m_ItemEffect = ItemEffect.Gain_Health;
-					//Start off with none
-					health_potion.m_Quantity = 0;
-					this.m_ItemList.Add(health_potion);
-					break;
-				}//end case Health Potion
+		this.m_ItemDictionary = new Dictionary<Item, int>();
 
-				//and so on...
 
-			default:
-				{
-					break;
-				}//end case default
-			}//end switch
-
-		}//end for
-		this.m_ItemDictionary = new Dictionary<Item, int> ();
-//		for (int index = 0; index < System.Enum.GetValues (typeof(SpellName)).Length; index++) {
-//			switch (index) {
-//			//Case Fireball
-//			case (int)SpellName.Fireball:
-//				{
-//					Spell fireball = new Spell ();
-//					fireball.m_SpellEffect = SpellEffect.Fire_Damage;
-//					fireball.m_SpellName = SpellName.Fireball;
-//					fireball.m_HasBeenDiscovered = false;
-//					this.m_SpellList.Add (fireball);
-//					break;
-//				}//end case Fireball
-//
-//				//and so on...
-//			
-//			default:
-//				{
-//					break;
-//				}//end case default
-//			}//end switch
-//		}//end for
-//
-//		//Initialize Item Dictionary
-//		this.m_ItemDictionary = new Dictionary<Item, int>();
-//		for (int index = 0; index < System.Enum.GetValues (typeof(ItemName)).Length; index++) {
-//			switch (index) {
-//			//Case Health Potion
-//			case (int)ItemName.Health_Potion:
-//				{
-//					Item health_potion = new Item ();
-//					health_potion.m_ItemName = ItemName.Health_Potion;
-//					health_potion.m_ItemEffect = ItemEffect.Gain_Health;
-//					//Start off with none
-////					health_potion.m_Quantity = 0;
-//					this.m_ItemDictionary.Add(health_potion, 0);
-//					break;
-//				}//end case Health Potion
-//
-//				//and so on...
-//
-//			default:
-//				{
-//					break;
-//				}//end case default
-//			}//end switch
-//
-//		}//end for
 	}//end f'n void Start()
 
 	void Update()
@@ -139,6 +58,12 @@ public class PlayerInventory : MonoBehaviour {
 		foreach (KeyValuePair<Item, int> entry in this.m_ItemDictionary) {
 			message += "Item name: " + entry.Key.m_ItemName.ToString () + "\tItem Effect: " + entry.Key.m_ItemEffect.ToString () + "\tItem Quantity:\t" + entry.Value + "\n";
 		}//end foreach
+		message += "Active spell:\t";
+		if (m_ActiveSpell == null) {
+			message += "None";
+		} else {
+			message += "Spell name: " + m_ActiveSpell.m_SpellName.ToString () + "\tSpell Effect: " + m_ActiveSpell.m_SpellEffect.ToString () + "\tisDiscovered? " + m_ActiveSpell.m_HasBeenDiscovered + "\n";
+		}
 		Debug.Log(message);
 	}//end f'n void OutputInventoryContents()
 
@@ -159,6 +84,7 @@ public class PlayerInventory : MonoBehaviour {
 		return dictionary_to_return;
 	}//end f'n Dictionary<string, string> StringFormat_SpellList()
 
+	#if ATHANASIOS
     /**Function to be utilised when clicking on the spell in the inventory menu*/
     //public void SetActiveSpellNumber(int m_SpellNumber)
     //{
@@ -167,8 +93,24 @@ public class PlayerInventory : MonoBehaviour {
     /**This function returns the currently chosen spell*/
     public Spell GetChosenSpell()
     {
-        return m_SpellList[m_ActiveSpellNumber];
+        return this.m_SpellList[m_ActiveSpellNumber];
     }
+	#endif
+	/**This function returns the currently chosen spell.
+	*Accounts for an empty inventory.*/
+	public Spell GetChosenSpell()
+	{
+//		Debug.Log ("Is chosen spell in inventory? " + this.m_SpellList.Contains (this.m_ActiveSpell));
+		//if the spell is contained in the spell list...
+		foreach (Spell spell in this.m_SpellList) {
+			if (spell.m_SpellName == m_ActiveSpell.m_SpellName) {
+//				Debug.Log ("Chosen spell found");
+				return spell;
+			}
+		}
+		return null;
+
+	}//end f'n Spell GetChosenSpell()
 
 //	public Dictionary<string, string, int> StringFormat_ItemList()
 //	{
@@ -215,7 +157,8 @@ public class PlayerInventory : MonoBehaviour {
 
 		//if the other's gameobject has a spell component...
 		if (other.gameObject.GetComponent<Spell> () != null) {
-			Spell spell_picked_up = other.gameObject.GetComponent<Spell> ();
+			Spell spell_picked_up = new Spell (); 
+			spell_picked_up = spell_picked_up.CopySpell(other.gameObject.GetComponent<Spell> ());
 			//set to true if any spells have the same name
 			bool spell_of_same_name = false;
 			foreach (Spell spell_in_list in this.m_SpellList)
@@ -236,7 +179,30 @@ public class PlayerInventory : MonoBehaviour {
 				spell_picked_up.m_HasBeenDiscovered = true;
 				this.m_SpellList.Add (spell_picked_up);
 			}//end if
+
+			this.SetDefaultChosenSpell ();
+
 			GameObject.Destroy(other.gameObject);
 		}//end if
 	}//end f'n void OnTriggerEnter(Collider)
+
+	/**A function to set a default chosen spell (fireball) on pickup.
+	*The player's inventory is empty on start, so only after the player picks up a spell can there be a default spell.*/
+	private void SetDefaultChosenSpell()
+	{
+		
+		if (this.m_SpellList.Count == 1) {
+			m_ActiveSpell = this.m_SpellList [0];
+			m_ActiveSpell.m_SpellName = this.m_SpellList [0].m_SpellName;
+			m_ActiveSpell.m_SpellEffect = this.m_SpellList [0].m_SpellEffect;
+			m_ActiveSpell.m_SpellDamage = this.m_SpellList [0].m_SpellDamage;
+			m_ActiveSpell.m_HasBeenDiscovered = this.m_SpellList [0].m_HasBeenDiscovered;
+			Debug.Log ("Active spell: " + m_ActiveSpell.m_SpellName.ToString());
+
+			if (m_ActiveSpell == null) {
+				Debug.Log ("Active spell is null");
+			}
+		}
+	}
+
 }//end class PlayerInventory
