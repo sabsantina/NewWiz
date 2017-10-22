@@ -12,12 +12,62 @@ public class PlayerInventory : MonoBehaviour {
 	/**A list of all spells in the inventory.*/
 	public List<Spell> m_SpellList { private set; get; }
 	/**A List of all items in the inventory.*/
+	public List<Item> m_ItemList {private set; get;}
+    /**Int which will be used to tell the player which spell he has chosen.*/
+    private int m_ActiveSpellNumber = 0;
 	public Dictionary<Item, int> m_ItemDictionary {private set; get;}
 
 	void Start()
 	{
 		//Initialize Spell List
 		this.m_SpellList = new List<Spell> ();
+		for (int index = 0; index < System.Enum.GetValues (typeof(SpellName)).Length; index++) {
+			switch (index) {
+			//Case Fireball
+			case (int)SpellName.Fireball:
+				{
+					Spell fireball = new Spell ();
+					fireball.m_SpellEffect = SpellEffect.Fire_Damage;
+					fireball.m_SpellName = SpellName.Fireball;
+                    fireball.m_SpellDamage = 30.0f;
+					this.m_SpellList.Add (fireball);
+					break;
+				}//end case Fireball
+
+				//and so on...
+			
+			default:
+				{
+					break;
+				}//end case default
+			}//end switch
+		}//end for
+
+		//Initialize Item Dictionary
+		this.m_ItemList = new List<Item>();
+		for (int index = 0; index < System.Enum.GetValues (typeof(ItemName)).Length; index++) {
+			switch (index) {
+			//Case Health Potion
+			case (int)ItemName.Health_Potion:
+				{
+					Item health_potion = new Item ();
+					health_potion.m_ItemName = ItemName.Health_Potion;
+					health_potion.m_ItemEffect = ItemEffect.Gain_Health;
+					//Start off with none
+					health_potion.m_Quantity = 0;
+					this.m_ItemList.Add(health_potion);
+					break;
+				}//end case Health Potion
+
+				//and so on...
+
+			default:
+				{
+					break;
+				}//end case default
+			}//end switch
+
+		}//end for
 		this.m_ItemDictionary = new Dictionary<Item, int> ();
 //		for (int index = 0; index < System.Enum.GetValues (typeof(SpellName)).Length; index++) {
 //			switch (index) {
@@ -108,6 +158,17 @@ public class PlayerInventory : MonoBehaviour {
 		}//end foreach
 		return dictionary_to_return;
 	}//end f'n Dictionary<string, string> StringFormat_SpellList()
+
+    /**Function to be utilised when clicking on the spell in the inventory menu*/
+    //public void SetActiveSpellNumber(int m_SpellNumber)
+    //{
+    //
+    //}
+    /**This function returns the currently chosen spell*/
+    public Spell GetChosenSpell()
+    {
+        return m_SpellList[m_ActiveSpellNumber];
+    }
 
 //	public Dictionary<string, string, int> StringFormat_ItemList()
 //	{
