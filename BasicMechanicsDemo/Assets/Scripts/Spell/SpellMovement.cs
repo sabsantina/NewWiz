@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellMovement : Spell {
+public class SpellMovement : MonoBehaviour {
 
 	public float m_MaximalVelocity = 35.0f;
 	/**A reference to the target the spell is being cast at. Set using SpellMovement::SetTarget(GameObject).*/
@@ -19,15 +19,8 @@ public class SpellMovement : Spell {
 
 	void Awake()
 	{
-        
+		
 	}
-
-    public void SetSpellVariables(Spell m_Spell)
-    {
-        this.m_SpellName = m_Spell.m_SpellName;
-        this.m_SpellEffect = m_Spell.m_SpellEffect;
-        this.m_SpellDamage = m_Spell.m_SpellDamage;
-    }
 
 	// Update is called once per frame
 	void Update () {
@@ -80,23 +73,17 @@ public class SpellMovement : Spell {
 			//...then make no change to the direction
 	}//end f'n void SetDirection()
 
-    /**A function to be called whenever something enters a spellmovement collider; in terms of functionality, we'll use this function to destroy the spell object prefab after it strikes with something's collider.*/
-    void OnTriggerEnter(Collider other)
-    {
-        //if we hit the target...
-        if (other.gameObject == this.m_TargetedObj)
-        {
-            #if TESTING_SPELLCOLLISION
-            Debug.Log("SpellMovement::OnTriggerEnter(Collider)\tTarget " + this.m_Target.collider.gameObject.name + " hit!\n" +
-                "Destroying gameobject");
-            //If it is an enemy, apply the spell effects.
-            if (other.gameObject.GetComponent<Enemy>() != null)
-            {
-                other.gameObject.GetComponent<Enemy>().ApplySpellEffects(this.gameObject.GetComponent<Spell>());
-                GameObject.Destroy(this.gameObject);
-            }
-            #endif
-        }
+	/**A function to be called whenever something enters a spellmovement collider; in terms of functionality, we'll use this function to destroy the spell object prefab after it strikes with something's collider.*/
+	void OnTriggerEnter(Collider other)
+	{
+		//if we hit the target...
+		if (other.gameObject == this.m_TargetedObj) {
+			#if TESTING_SPELLCOLLISION
+			Debug.Log("SpellMovement::OnTriggerEnter(Collider)\tTarget " + this.m_Target.collider.gameObject.name + " hit!\n" +
+				"Destroying gameobject");
+			GameObject.Destroy(this.gameObject);
+			#endif
+		}
 
-    }//end f'n void OnTriggerEnter(Collider)
+	}//end f'n void OnTriggerEnter(Collider)
 }
