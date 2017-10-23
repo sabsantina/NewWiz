@@ -54,7 +54,14 @@ public class EnemyMovement : MobileCharacter {
 		//Clamp the direction to the maximal velocity
 		this.m_Direction = (this.m_IsChasing) ? Vector3.ClampMagnitude(this.m_Direction, this.m_ChasingVelocity)
 												: Vector3.ClampMagnitude(this.m_Direction, this.m_MaximalVelocity);
-		//if obstructable ahead...
+
+		//if player immediately ahead...
+		if (this.IsPlayerAhead())
+		{
+			//...then don't move forward
+			return;
+		}
+		//if obstructable immediately ahead...
 		if (this.IsObstructableAhead())
 		{
 			//...then negate direction
@@ -131,5 +138,22 @@ public class EnemyMovement : MobileCharacter {
 	{
 		this.m_Direction = direction;
 	}//end f'n void SetEnemyDirection(Vector3)
+
+	/**A function to stop the player moving from anything that has an Obstructable.cs component.
+	*Checks for an object with a component of type Obstructable ahead of the player in direction [this.m_Direction]; returns true if there is.*/
+	private bool IsPlayerAhead()
+	{
+		RaycastHit hit;
+		Ray ray;
+		//Cast a ray out starting from this.transform.position, along this.m_Direction
+		if (Physics.Raycast(this.transform.position, this.m_Direction, out hit, (this.m_ChasingVelocity * 1.5f) * Time.deltaTime)) {
+			//if whatever was hit's collider has an Obstructable component...
+			if (hit.collider.gameObject.GetComponent<Player> () != null) {
+				//...then return true
+				return true;
+			}//end if
+		}//end if
+		return false;
+	}//end f'n bool IsObstructableAhead()
 
 }//end class EnemyMovement
