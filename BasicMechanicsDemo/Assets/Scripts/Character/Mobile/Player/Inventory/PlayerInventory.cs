@@ -1,7 +1,6 @@
 ﻿#define TESTING_INVENTORY_CONTENTS_OUTPUT
 #define TESTING_INVENTORY_SPELLPICKUP
 
-//#define ATHANASIOS
 
 using System.Collections;
 using System.Collections.Generic;
@@ -11,12 +10,11 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider))]
 
 public class PlayerInventory : MonoBehaviour {
+	[SerializeField] private GameObject m_DefaultSpellPickupPrefab;
+	[SerializeField] private GameObject m_DefaultItemPickupPrefab;
+
 	/**A list of all spells in the inventory.*/
 	public List<Spell> m_SpellList {  set; get; }
-	#if ATHANASIOS
-    /**Int which will be used to tell the player which spell he has chosen.*/
-    private int m_ActiveSpellNumber = 0;
-	#endif
 	/**A reference to a default spell prefab to contain all our active spell information.*/
 	[SerializeField] public GameObject m_DefaultSpellPrefab;
 	private GameObject m_DefaultSpellInstance;
@@ -28,7 +26,7 @@ public class PlayerInventory : MonoBehaviour {
 	{
 		//for testing
 		this.m_ActiveSpell = this.m_DefaultSpellPrefab.GetComponent<Spell> ();
-		m_ActiveSpell.GenerateInstance_Fireball (true, 20.0f);
+		m_ActiveSpell.GenerateInstance_Fireball (true);
 		this.m_ActiveSpellName = this.m_ActiveSpell.m_SpellName.ToString ();
 	}
 
@@ -56,7 +54,7 @@ public class PlayerInventory : MonoBehaviour {
 		string message = "Inventory Contents:\n";
 		message += "Spells:\n";
 		foreach (Spell spell in this.m_SpellList) {
-			message += "Spell name: " + spell.m_SpellName.ToString () + "\tSpell Effect: " + spell.m_SpellEffect.ToString() + "\tisDiscovered? " + spell.m_HasBeenDiscovered + "\n";
+			message += "Spell name: " + spell.m_SpellName.ToString () + "\tSpell Effect: " + spell.m_SpellEffect.ToString() + "\n";
 		}//end foreach
 		message += "Items:\n";
 		foreach (KeyValuePair<Item, int> entry in this.m_ItemDictionary) {
@@ -66,49 +64,35 @@ public class PlayerInventory : MonoBehaviour {
 		if (m_ActiveSpell == null) {
 			message += "None";
 		} else {
-			message += "Spell name: " + m_ActiveSpell.m_SpellName.ToString () + "\tSpell Effect: " + m_ActiveSpell.m_SpellEffect.ToString () + "\tisDiscovered? " + m_ActiveSpell.m_HasBeenDiscovered + "\n";
+			message += "Spell name: " + m_ActiveSpell.m_SpellName.ToString () + "\tSpell Effect: " + m_ActiveSpell.m_SpellEffect.ToString () + "\n";
 		}
 		Debug.Log(message);
 	}//end f'n void OutputInventoryContents()
 
-	/**A function to return a dictionary filled with all spells to be displayed in the inventory when the player checks it. 
-	 * Only spells that have been discovered will be returned to the inventory ([Spell.m_HasBeenDiscovered] must be true).*/
-	public Dictionary<string, string> StringFormat_SpellList()
-	{
-		//A dictionary made up of <spell_name, spell_effect>
-		Dictionary<string, string> dictionary_to_return = new Dictionary<string, string> ();
-		foreach (Spell spell in this.m_SpellList) {
-			//if the player's discovered the given spell...
-			if (spell.m_HasBeenDiscovered) {
-				//...then add that spell to the dictionary
-				dictionary_to_return.Add (spell.m_SpellName.ToString (), spell.m_SpellEffect.ToString ());
-			}//end if
-			//else if the player hasn't discovered the given spell, then we don't care about it.
-		}//end foreach
-		return dictionary_to_return;
-	}//end f'n Dictionary<string, string> StringFormat_SpellList()
+//	/**A function to return a dictionary filled with all spells to be displayed in the inventory when the player checks it. 
+//	 * Only spells that have been discovered will be returned to the inventory ([Spell.m_HasBeenDiscovered] must be true).*/
+//	public Dictionary<string, string> StringFormat_SpellList()
+//	{
+//		//A dictionary made up of <spell_name, spell_effect>
+//		Dictionary<string, string> dictionary_to_return = new Dictionary<string, string> ();
+//		foreach (Spell spell in this.m_SpellList) {
+//			//if the player's discovered the given spell...
+//			if (spell.m_HasBeenDiscovered) {
+//				//...then add that spell to the dictionary
+//				dictionary_to_return.Add (spell.m_SpellName.ToString (), spell.m_SpellEffect.ToString ());
+//			}//end if
+//			//else if the player hasn't discovered the given spell, then we don't care about it.
+//		}//end foreach
+//		return dictionary_to_return;
+//	}//end f'n Dictionary<string, string> StringFormat_SpellList()
 
-	#if ATHANASIOS
-    /**Function to be utilised when clicking on the spell in the inventory menu*/
-    //public void SetActiveSpellNumber(int m_SpellNumber)
-    //{
-    //
-    //}
-    /**This function returns the currently chosen spell*/
-    public Spell GetChosenSpell()
-    {
-        return this.m_SpellList[m_ActiveSpellNumber];
-    }
-	#endif
 	/**This function returns the currently chosen spell.
-	*Accounts for an empty inventory.*/
+	*Accounts for an empty inventory by returning null if the active spell can't be found.*/
 	public Spell GetChosenSpell()
 	{
-//		Debug.Log ("Is chosen spell in inventory? " + this.m_SpellList.Contains (this.m_ActiveSpell));
 		//if the spell is contained in the spell list...
 		foreach (Spell spell in this.m_SpellList) {
 			if (spell.m_SpellName == m_ActiveSpell.m_SpellName) {
-//				Debug.Log ("Chosen spell found");
 				return spell;
 			}
 		}
@@ -116,6 +100,29 @@ public class PlayerInventory : MonoBehaviour {
 
 	}//end f'n Spell GetChosenSpell()
 
+	/**A function to add the item to the inventory.*/
+	public void AddItem(Item item_to_add)
+	{
+		int current_quantity;
+		//returns zero if none of the item are found.
+		this.m_ItemDictionary.TryGetValue (item_to_add, out current_quantity);
+		this.m_ItemDictionary [item_to_add] = current_quantity + 1;
+	}//end f'n void AddItem(Item)
+
+	/**A function to add the spell to the inventory.*/
+	public void AddSpell(Spell spell_to_add)
+	{
+		//if the spell is contained in the inventory...
+		if (this.m_SpellList.Contains (spell_to_add)) {
+			//...do nothing
+			return;
+		}//end if 
+		//else if the spell is not contained in the inventory...
+		else {
+			//...then add it
+			this.m_SpellList.Add(spell_to_add);
+		}//end else
+	}//end f'n void AddSpell(Spell)
 
 //	void OnTriggerEnter(Collider other)
 //	{
@@ -176,23 +183,23 @@ public class PlayerInventory : MonoBehaviour {
 //		}//end if
 //	}//end f'n void OnTriggerEnter(Collider)
 
-	/**A function to set a default chosen spell (fireball) on pickup.
-	*The player's inventory is empty on start, so only after the player picks up a spell can there be a default spell.*/
-	private void SetDefaultChosenSpell()
-	{
-		
-		if (this.m_SpellList.Count == 1) {
-			m_ActiveSpell = this.m_SpellList [0];
-			m_ActiveSpell.m_SpellName = this.m_SpellList [0].m_SpellName;
-			m_ActiveSpell.m_SpellEffect = this.m_SpellList [0].m_SpellEffect;
-			m_ActiveSpell.m_SpellDamage = this.m_SpellList [0].m_SpellDamage;
-			m_ActiveSpell.m_HasBeenDiscovered = this.m_SpellList [0].m_HasBeenDiscovered;
-			Debug.Log ("Active spell: " + m_ActiveSpell.m_SpellName.ToString());
-
-			if (m_ActiveSpell == null) {
-				Debug.Log ("Active spell is null");
-			}
-		}
-	}
+//	/**A function to set a default chosen spell (fireball) on pickup.
+//	*The player's inventory is empty on start, so only after the player picks up a spell can there be a default spell.*/
+//	private void SetDefaultChosenSpell()
+//	{
+//		
+//		if (this.m_SpellList.Count == 1) {
+//			m_ActiveSpell = this.m_SpellList [0];
+//			m_ActiveSpell.m_SpellName = this.m_SpellList [0].m_SpellName;
+//			m_ActiveSpell.m_SpellEffect = this.m_SpellList [0].m_SpellEffect;
+//			m_ActiveSpell.m_SpellDamage = this.m_SpellList [0].m_SpellDamage;
+//			m_ActiveSpell.m_HasBeenDiscovered = this.m_SpellList [0].m_HasBeenDiscovered;
+//			Debug.Log ("Active spell: " + m_ActiveSpell.m_SpellName.ToString());
+//
+//			if (m_ActiveSpell == null) {
+//				Debug.Log ("Active spell is null");
+//			}
+//		}
+//	}
 
 }//end class PlayerInventory

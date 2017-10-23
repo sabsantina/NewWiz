@@ -40,17 +40,6 @@ public class Enemy : MonoBehaviour {
         this.m_Health += effect;
     }//end f'n void AffectHealth(float)
 
-//    /**Function which applies the effect of a spell on the enemy.
-//     *Should make it abstract when we add a variety of enemies.*/
-//    public void ApplySpellEffects(Spell hitSpell)
-//    {
-//		Debug.Log ("Applying spell " + hitSpell.m_SpellName.ToString() + " with damage " + hitSpell.m_SpellDamage);
-//        if(hitSpell.m_SpellName == SpellName.Fireball)
-//        {
-//            /**Could add further spell effects here.*/
-//            AffectHealth(-hitSpell.m_SpellDamage);
-//        }
-//    }
 
 	/**Function which applies the effect of a spell on the enemy.
      *Should make it abstract when we add a variety of enemies.*/
