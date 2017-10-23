@@ -5,8 +5,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//BoxCollider to ensure the spell can be picked up if it's in the world
-[RequireComponent(typeof(BoxCollider))]
+//Collider to ensure the spell can be picked up if it's in the world
+[RequireComponent(typeof(Collider))]
 public class Spell : MonoBehaviour {
 	/**An enum variable for the spell name. See SpellName.cs for all spell names.*/
 	public SpellName m_SpellName { set; get;}
@@ -22,7 +22,7 @@ public class Spell : MonoBehaviour {
 	void Awake()
 	{
 		//ensure the box collider's isTrigger is set to true
-		this.GetComponent<BoxCollider> ().isTrigger = true;
+		this.GetComponent<Collider> ().isTrigger = true;
 	}//end f'n void Awake()
 
 	/**Return a copy of [spell_to_copy].*/

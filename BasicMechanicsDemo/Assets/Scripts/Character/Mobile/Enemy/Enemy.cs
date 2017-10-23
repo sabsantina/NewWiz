@@ -21,8 +21,17 @@ public class Enemy : MonoBehaviour {
         /**Should add animation for death here later.*/
         if(this.m_Health <= 0.0f)
         {
-			Debug.Log ("Enemy dead!");
-            GameObject.Destroy(this.gameObject);
+			string message = "Enemy dead! ";
+			//if the enemy has a parent with a detection area...
+			if (this.gameObject.transform.GetComponentInParent<EnemyDetectionArea> () != null) {
+				message += "Has enemy detection area; therefore destroying parent.";
+				//...then destroy its parent, along with THIS gameobject
+				GameObject.Destroy (this.gameObject.transform.parent.gameObject);
+			} else {
+				message += "Has no enemy detection area; therefore destroying THIS gameobject.";
+				GameObject.Destroy(this.gameObject);
+			}
+			Debug.Log (message);
         }
     }
     /**A function to add [effect] to the enemys's health.*/

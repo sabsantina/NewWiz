@@ -18,10 +18,8 @@ public class PlayerCastSpell : MonoBehaviour {
 	#if TESTING_SPELLCAST
 	[SerializeField] private GameObject m_MagicCubePrefab;
 	#endif
-	#if TESTING_SPELLMOVEMENT
-	[SerializeField] private GameObject m_SpellCube;
+	public GameObject m_SpellCube;
     private GameObject m_SpellCubeInstance;
-    #endif
 
     private GameObject m_Target;
 	/**A reference to our main camera.*/
@@ -57,6 +55,7 @@ public class PlayerCastSpell : MonoBehaviour {
 		this.m_Animator = this.GetComponent<Animator> ();
     }
 
+
 	// Update is called once per frame
 	void Update () {
 		
@@ -82,7 +81,6 @@ public class PlayerCastSpell : MonoBehaviour {
 
 					//if the hit has a MobileCharacter component...
 					if (hit.collider.gameObject.GetComponent<MobileCharacter> () != null) {
-						#if TESTING_SPELLMOVEMENT
 						m_Target = hit.collider.gameObject;
 						this.m_SpellCubeInstance = GameObject.Instantiate(this.m_SpellCube);
 						this.m_SpellCubeInstance.transform.position = this.transform.position;
@@ -93,7 +91,7 @@ public class PlayerCastSpell : MonoBehaviour {
 						any_mobile_characters = true;
 
 						spell_movement.SetSpellToCast (this.m_SpellToFire);
-						#endif
+
 					}//end if
 				}//end foreach
 
@@ -103,6 +101,7 @@ public class PlayerCastSpell : MonoBehaviour {
 					#if TESTING_SPELLMOVEMENT
 					Debug.Log("PlayerCastSpell::Update\tNo mobile characters found\tRay hit\tx: " + furthest.point.x
 						+ " y: " + furthest.point.y + " z: " + furthest.point.z);
+					#endif
 					this.m_SpellCubeInstance = GameObject.Instantiate(this.m_SpellCube);
 					this.m_SpellCubeInstance.transform.position = this.transform.position;
 					SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement>();
@@ -111,7 +110,6 @@ public class PlayerCastSpell : MonoBehaviour {
 
 					spell_movement.SetSpellToCast (this.m_SpellToFire);
 					GameObject.Destroy(this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
-					#endif
 
 				}//end if
 
@@ -135,8 +133,7 @@ public class PlayerCastSpell : MonoBehaviour {
 		this.m_SpellToFire = this.gameObject.GetComponent<PlayerInventory>().m_ActiveSpell;
 		if (this.m_SpellToFire != null) {
 			Debug.Log ("Chosen spell: " + this.gameObject.GetComponent<PlayerInventory> ().m_ActiveSpell.m_SpellName.ToString());
-//			SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement>();
-//			spell_movement.SetSpellToCast (this.m_SpellToFire);
+
 		}
     }
 
