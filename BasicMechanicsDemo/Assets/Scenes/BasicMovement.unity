@@ -4463,13 +4463,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 311970231}
-  m_LocalRotation: {x: 0.5, y: -0, z: -0, w: 0.8660254}
-  m_LocalPosition: {x: 27.95, y: 0.3, z: 16.98}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2081791763}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &311970233
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5220,6 +5220,7 @@ GameObject:
   - component: {fileID: 368024977}
   - component: {fileID: 368024978}
   - component: {fileID: 368024979}
+  - component: {fileID: 368024980}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -5266,6 +5267,17 @@ CapsuleCollider:
   m_Height: 2.25
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &368024980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 368024976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b951155be441a4463b10990a08f4f44a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &384023766
 GameObject:
   m_ObjectHideFlags: 0
@@ -11774,8 +11786,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.6, y: 1.6, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.6, y: 1.39, z: 1.6}
+  m_Center: {x: 0, y: -0.28, z: 0.27}
 --- !u!4 &843243163
 Transform:
   m_ObjectHideFlags: 0
@@ -20645,6 +20657,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c824f4b6b784545429a327344e1482ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DefaultSpellPickupPrefab: {fileID: 1560220320337108, guid: 55f288681366942dc955c6fa8d67c7e3,
+    type: 2}
+  m_DefaultItemPickupPrefab: {fileID: 1037877941852264, guid: 750d10d3c9a5043cba4860f04494c345,
+    type: 2}
   m_DefaultSpellPrefab: {fileID: 1081312389218078, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
     type: 2}
   m_ActiveSpell: {fileID: 114168349272079364, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
@@ -23080,6 +23096,26 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 29407e2dc217943a1925c239ca4c79b6, type: 2}
+    - target: {fileID: 212307006107648292, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 1.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 212307006107648292, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 1.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 212307006107648292, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
+        type: 2}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95144408624912346, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e78b574e24bcd4c5ca14bd25cf5ee863, type: 2}
   m_IsPrefabParent: 0
@@ -26870,14 +26906,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2081791762}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.233704, y: 4.0343018, z: -13.62}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: 1.5, y: 4.0343018, z: 2.3}
+  m_LocalScale: {x: 1, y: 1.73, z: 1}
   m_Children:
   - {fileID: 311970232}
   m_Father: {fileID: 710377759}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!114 &2081791764
 MonoBehaviour:
   m_ObjectHideFlags: 0

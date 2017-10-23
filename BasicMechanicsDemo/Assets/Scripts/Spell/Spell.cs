@@ -9,15 +9,13 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Spell : MonoBehaviour {
 	/**An enum variable for the spell name. See SpellName.cs for all spell names.*/
-	public SpellName m_SpellName { set; get;}
+	public SpellName m_SpellName;
 	/**An enum variable for the spell effect. See SpellEffecr.cs for all spell effects.*/
-	public SpellEffect m_SpellEffect { set; get;}
-    /**A float which stores the initial damage of the spell*/
-    public float m_SpellDamage { set; get; }
-	/**A bool to let us know whether or not the player has discovered the spell yet.
-	*It'd be simpler to just keep all the spells in the inventory from the get-go, but only show them to the player if they've been discovered.
-	*We can do the same basic thing with the items; if the player has 0 quantity of a given item, we won't show it.*/
-	public bool m_HasBeenDiscovered{ set; get;}
+	public SpellEffect m_SpellEffect;
+	/**A bool to tell us whether or not a spell is mobile.
+	*A mobile spell is a spell that is cast by the player at an enemy (i.e. Fireball), that moves around.
+	*An immobile spell is a spell that is cast by the player on the player (i.e. Heal, Shield), that stays fixed on the player.*/
+	public bool m_IsMobileSpell;
 
 	void Awake()
 	{
@@ -29,17 +27,15 @@ public class Spell : MonoBehaviour {
 	public Spell CopySpell(Spell spell_to_copy)
 	{
 		Spell new_spell = new Spell ();
-		new_spell.m_HasBeenDiscovered = spell_to_copy.m_HasBeenDiscovered;
-		new_spell.m_SpellDamage = spell_to_copy.m_SpellDamage;
+		new_spell.m_IsMobileSpell = spell_to_copy.m_IsMobileSpell;
 		new_spell.m_SpellEffect = spell_to_copy.m_SpellEffect;
 		new_spell.m_SpellName = spell_to_copy.m_SpellName;
 		return new_spell;
 	}
 
-	public void GenerateInstance_Fireball(bool has_been_discovered, float damage)
+	public void GenerateInstance_Fireball(bool is_mobile)
 	{
-		this.m_HasBeenDiscovered = has_been_discovered;
-		this.m_SpellDamage = damage;
+		this.m_IsMobileSpell = is_mobile;
 		this.m_SpellName = SpellName.Fireball;
 		this.m_SpellEffect = SpellEffect.Fire_Damage;
 	}
