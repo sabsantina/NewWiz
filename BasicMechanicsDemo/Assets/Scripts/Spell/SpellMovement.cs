@@ -16,6 +16,11 @@ public class SpellMovement : MonoBehaviour {
 	private Vector3 m_Direction = new Vector3();
 	/**A bool to let us know whether the target is a mobile character.*/
 	public bool m_IsMobileCharacter { get; set;}
+	/**The spell we're currently casting.*/
+	public Spell m_SpellToCast;
+
+	//For testing purposes
+	public string m_SpellName;
 
 	void Awake()
 	{
@@ -63,15 +68,28 @@ public class SpellMovement : MonoBehaviour {
 	/**A private function to set the direction to the given target [this.m_Target].*/
 	private void SetDirection()
 	{
-		//if the target is a mobile character...
-		if (this.m_IsMobileCharacter) {
+		//Note on the following if: it's possible that we destroy the enemy while spells are still on their way to them
+		//if the target is a mobile character and exists...
+		if (this.m_IsMobileCharacter && this.m_TargetedObj != null) {
 			//...then lock onto the mobile character's position
 			Vector3 target_position = this.m_TargetedObj.transform.position;
 			this.m_Direction = Vector3.Normalize(target_position - this.transform.position) * this.m_MaximalVelocity;
 		}//end if 
+		//else if the target is a mobile character but has since been destroyed...
+		if (this.m_IsMobileCharacter && this.m_TargetedObj == null) {
+			//...then change the [m_IsMobileCharacter] value.
+			this.m_IsMobileCharacter = false;
+		}//end if 
 		//else if the target is not a mobile character...
 			//...then make no change to the direction
 	}//end f'n void SetDirection()
+
+	/**A function to be called from PlayerCastSpell to set the spell that's being cast.*/
+	public void SetSpellToCast(Spell spell)
+	{
+		this.m_SpellToCast = spell;
+		this.m_SpellName = this.m_SpellToCast.m_SpellName.ToString ();
+	}
 
     /**A function to be called whenever something enters a spellmovement collider; in terms of functionality, we'll use this function to destroy the spell object prefab after it strikes with something's collider.*/
     void OnTriggerEnter(Collider other)
@@ -81,6 +99,13 @@ public class SpellMovement : MonoBehaviour {
         {
             #if TESTING_SPELLCOLLISION
 			string message = "SpellMovement::OnTriggerEnter(Collider)\tTarget " + this.m_Target.collider.gameObject.name + " hit!\n";
+
+			if (other.gameObject.GetComponent<Enemy>() != null)
+			{
+				Enemy enemy = other.gameObject.GetComponent<Enemy>();
+				enemy.ApplySpellEffects(this.m_SpellToCast.m_SpellName);
+				message += "Subtracting enemy health...\n";
+			}
 
 			GameObject.Destroy(this.gameObject);
 			message += "\nGameObject destroyed";
