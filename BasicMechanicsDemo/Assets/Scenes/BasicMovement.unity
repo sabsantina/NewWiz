@@ -20587,10 +20587,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c824f4b6b784545429a327344e1482ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DefaultSpellPrefab: {fileID: 1560220320337108, guid: 55f288681366942dc955c6fa8d67c7e3,
+  m_DefaultSpellPrefab: {fileID: 1081312389218078, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
     type: 2}
-  m_ActiveSpell: {fileID: 114373048042979178, guid: 55f288681366942dc955c6fa8d67c7e3,
+  m_ActiveSpell: {fileID: 114168349272079364, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
     type: 2}
+  m_ActiveSpellName: 
 --- !u!114 &1546207776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20629,9 +20630,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6476643d016c4a35b5e743f229ee845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SpellCube: {fileID: 1248025652367110, guid: ef96b8f70033a40d592604ef532682a7,
+  m_SpellCube: {fileID: 1081312389218078, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
     type: 2}
   m_MainCamera: {fileID: 1448755375}
+  m_SpellToFire: {fileID: 0}
+  m_SpellName: 
 --- !u!212 &1546207779
 SpriteRenderer:
   m_ObjectHideFlags: 0
