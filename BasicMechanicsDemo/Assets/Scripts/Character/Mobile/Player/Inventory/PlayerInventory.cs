@@ -18,8 +18,10 @@ public class PlayerInventory : MonoBehaviour {
     private int m_ActiveSpellNumber = 0;
 	#endif
 	/**A reference to a default spell prefab to contain all our active spell information.*/
-	[SerializeField] private GameObject m_DefaultSpellPrefab;
+	[SerializeField] public GameObject m_DefaultSpellPrefab;
+	private GameObject m_DefaultSpellInstance;
 	public Spell m_ActiveSpell;
+	public string m_ActiveSpellName;
 	public Dictionary<Item, int> m_ItemDictionary { set; get;}
 
 	void Awake()
@@ -27,6 +29,7 @@ public class PlayerInventory : MonoBehaviour {
 		//for testing
 		this.m_ActiveSpell = this.m_DefaultSpellPrefab.GetComponent<Spell> ();
 		m_ActiveSpell.GenerateInstance_Fireball (true, 20.0f);
+		this.m_ActiveSpellName = this.m_ActiveSpell.m_SpellName.ToString ();
 	}
 
 	void Start()
@@ -114,64 +117,64 @@ public class PlayerInventory : MonoBehaviour {
 	}//end f'n Spell GetChosenSpell()
 
 
-	void OnTriggerEnter(Collider other)
-	{
-		//if the other's gameobject has an item component...
-		if (other.gameObject.GetComponent<Item> () != null) {
-			//For some reason, this function is getting called twice immediately. Uncomment the following line to see.
-			Debug.Log("PlayerInventory::OnTriggerEnter::Item running");
-
-			Item pickedup_item = other.gameObject.GetComponent<Item> ();
-
-			//if the dictionary contains key pickedup_item...
-			if (this.m_ItemDictionary.ContainsKey (pickedup_item)) {
-				//...then increment to the quantity of the item
-				this.m_ItemDictionary [pickedup_item]++;
-			}//end if
-			//else if the dictionary doesn't contain key pickedup_item...
-			else {
-				//...then add the Item key with quantity 1.
-				this.m_ItemDictionary.Add (pickedup_item, 1);
-			}//end else
-			//Destroy picked-up item
-			GameObject.Destroy(other.gameObject);
-		}//end if
-
-		/*
-		* Note: We assume the only time the player will ever encounter a spell is if the player hasn't yet discovered them.
-		* That being said, I won't take chances with the code.
-		*/
-
-		//if the other's gameobject has a spell component...
-		if (other.gameObject.GetComponent<Spell> () != null) {
-			Spell spell_picked_up = new Spell (); 
-			spell_picked_up = spell_picked_up.CopySpell(other.gameObject.GetComponent<Spell> ());
-			//set to true if any spells have the same name
-			bool spell_of_same_name = false;
-			foreach (Spell spell_in_list in this.m_SpellList)
-			{
-				//if the spell we're picking up has the same name as another spell in the list...
-				if (spell_in_list.m_SpellName == spell_picked_up.m_SpellName) {
-					//update spell_of_same_name
-					spell_of_same_name = true;
-					//...update m_HasBeenDiscovered
-					if (spell_in_list.m_HasBeenDiscovered != true) {
-						spell_in_list.m_HasBeenDiscovered = true;
-					}//end if
-				}//end if
-			}//end foreach
-			//if none of the spells in the spell list had the same name...
-			if (!spell_of_same_name) {
-				//...then add the spell to the list
-				spell_picked_up.m_HasBeenDiscovered = true;
-				this.m_SpellList.Add (spell_picked_up);
-			}//end if
-
-			this.SetDefaultChosenSpell ();
-
-			GameObject.Destroy(other.gameObject);
-		}//end if
-	}//end f'n void OnTriggerEnter(Collider)
+//	void OnTriggerEnter(Collider other)
+//	{
+//		//if the other's gameobject has an item component...
+//		if (other.gameObject.GetComponent<Item> () != null) {
+//			//For some reason, this function is getting called twice immediately. Uncomment the following line to see.
+//			Debug.Log("PlayerInventory::OnTriggerEnter::Item running");
+//
+//			Item pickedup_item = other.gameObject.GetComponent<Item> ();
+//
+//			//if the dictionary contains key pickedup_item...
+//			if (this.m_ItemDictionary.ContainsKey (pickedup_item)) {
+//				//...then increment to the quantity of the item
+//				this.m_ItemDictionary [pickedup_item]++;
+//			}//end if
+//			//else if the dictionary doesn't contain key pickedup_item...
+//			else {
+//				//...then add the Item key with quantity 1.
+//				this.m_ItemDictionary.Add (pickedup_item, 1);
+//			}//end else
+//			//Destroy picked-up item
+//			GameObject.Destroy(other.gameObject);
+//		}//end if
+//
+//		/*
+//		* Note: We assume the only time the player will ever encounter a spell is if the player hasn't yet discovered them.
+//		* That being said, I won't take chances with the code.
+//		*/
+//
+//		//if the other's gameobject has a spell component...
+//		if (other.gameObject.GetComponent<Spell> () != null) {
+//			Spell spell_picked_up = new Spell (); 
+//			spell_picked_up = spell_picked_up.CopySpell(other.gameObject.GetComponent<Spell> ());
+//			//set to true if any spells have the same name
+//			bool spell_of_same_name = false;
+//			foreach (Spell spell_in_list in this.m_SpellList)
+//			{
+//				//if the spell we're picking up has the same name as another spell in the list...
+//				if (spell_in_list.m_SpellName == spell_picked_up.m_SpellName) {
+//					//update spell_of_same_name
+//					spell_of_same_name = true;
+//					//...update m_HasBeenDiscovered
+//					if (spell_in_list.m_HasBeenDiscovered != true) {
+//						spell_in_list.m_HasBeenDiscovered = true;
+//					}//end if
+//				}//end if
+//			}//end foreach
+//			//if none of the spells in the spell list had the same name...
+//			if (!spell_of_same_name) {
+//				//...then add the spell to the list
+//				spell_picked_up.m_HasBeenDiscovered = true;
+//				this.m_SpellList.Add (spell_picked_up);
+//			}//end if
+//
+//			this.SetDefaultChosenSpell ();
+//
+//			GameObject.Destroy(other.gameObject);
+//		}//end if
+//	}//end f'n void OnTriggerEnter(Collider)
 
 	/**A function to set a default chosen spell (fireball) on pickup.
 	*The player's inventory is empty on start, so only after the player picks up a spell can there be a default spell.*/

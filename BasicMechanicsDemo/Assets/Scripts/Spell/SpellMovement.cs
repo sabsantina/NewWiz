@@ -5,6 +5,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//We need a rigidbody for collisions to go off properly
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Collider))]
 public class SpellMovement : MonoBehaviour {
 
 	public float m_MaximalVelocity = 35.0f;
@@ -24,7 +27,14 @@ public class SpellMovement : MonoBehaviour {
 
 	void Awake()
 	{
-        
+		this.gameObject.GetComponent<Collider> ().isTrigger = true;
+		Rigidbody spell_rigidbody = this.gameObject.GetComponent<Rigidbody> ();
+		//Disable gravity
+		spell_rigidbody.useGravity = false;
+		//Freeze effects of physics on rotation and position
+		spell_rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+		//Ensure we can use collisions properly.
+		spell_rigidbody.detectCollisions = true;
 	}
 
 	// Update is called once per frame
@@ -99,15 +109,20 @@ public class SpellMovement : MonoBehaviour {
         {
             #if TESTING_SPELLCOLLISION
 			string message = "SpellMovement::OnTriggerEnter(Collider)\tTarget " + this.m_Target.collider.gameObject.name + " hit!\n";
-
+			#endif
+			//if the other is an enemy...
 			if (other.gameObject.GetComponent<Enemy>() != null)
 			{
 				Enemy enemy = other.gameObject.GetComponent<Enemy>();
 				enemy.ApplySpellEffects(this.m_SpellToCast.m_SpellName);
-				message += "Subtracting enemy health...\n";
-			}
 
+				#if TESTING_SPELLCOLLISION
+				message += "Subtracting enemy health...\n";
+				#endif
+			}//end if
+			//Destroy the spell
 			GameObject.Destroy(this.gameObject);
+			#if TESTING_SPELLCOLLISION
 			message += "\nGameObject destroyed";
 
 			Debug.Log(message);
