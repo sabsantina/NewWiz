@@ -66,56 +66,81 @@ public class PlayerCastSpell : MonoBehaviour {
 				//Update [this.m_isCastingSpell] for the animator
 				this.m_isCastingSpell = true;
 
-				Ray ray = this.m_MainCamera.ScreenPointToRay (Input.mousePosition);
-				RaycastHit[] targets_hit = Physics.RaycastAll(ray);
-				//We need to find the raycast hit furthest from the camera in the event that none of the raycasthits are 
-				//mobile character as the furthest raycast hit will be the ground.
-				RaycastHit furthest = targets_hit [0];
-				bool any_mobile_characters = false;
-				foreach (RaycastHit hit in targets_hit) {
-					//if the hit's distance is greater than that of the furthest...
-					if (hit.distance > furthest.distance) {
-						//...then update the furthest
-						furthest = hit;
-					}//end if
+				//if the spell is mobile (meaning it's to be cast somewhere away from the player)...
+				if (this.m_SpellToFire.m_IsMobileSpell) {
+					Ray ray = this.m_MainCamera.ScreenPointToRay (Input.mousePosition);
+					RaycastHit[] targets_hit = Physics.RaycastAll (ray);
+					//We need to find the raycast hit furthest from the camera in the event that none of the raycasthits are 
+					//mobile character as the furthest raycast hit will be the ground.
+					RaycastHit furthest = targets_hit [0];
+					bool any_mobile_characters = false;
+					foreach (RaycastHit hit in targets_hit) {
+						//if the hit's distance is greater than that of the furthest...
+						if (hit.distance > furthest.distance) {
+							//...then update the furthest
+							furthest = hit;
+						}//end if
 
-					//if the hit has a MobileCharacter component...
-					if (hit.collider.gameObject.GetComponent<MobileCharacter> () != null) {
-						m_Target = hit.collider.gameObject;
-						this.m_SpellCubeInstance = GameObject.Instantiate(this.m_SpellCube);
+						//if the hit has a MobileCharacter component...
+						if (hit.collider.gameObject.GetComponent<MobileCharacter> () != null) {
+							m_Target = hit.collider.gameObject;
+							this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
+							this.m_SpellCubeInstance.transform.position = this.transform.position;
+							this.m_hasCastHittingSpell = true;
+							SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
+							spell_movement.m_IsMobileCharacter = true;
+							spell_movement.SetTarget (hit);
+							any_mobile_characters = true;
+
+							spell_movement.SetSpellToCast (this.m_SpellToFire);
+
+						}//end if
+					}//end foreach
+
+					//if none of the gameobjects found in the raycastall were mobile characters...
+					if (!any_mobile_characters) {
+						//...then send the spell to the furthest Raycast hit
+						#if TESTING_SPELLMOVEMENT
+						Debug.Log("PlayerCastSpell::Update\tNo mobile characters found\tRay hit\tx: " + furthest.point.x
+							+ " y: " + furthest.point.y + " z: " + furthest.point.z);
+						#endif
+						this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
 						this.m_SpellCubeInstance.transform.position = this.transform.position;
-						this.m_hasCastHittingSpell = true;
-						SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement>();
-						spell_movement.m_IsMobileCharacter = true;
-						spell_movement.SetTarget(hit);
-						any_mobile_characters = true;
+						SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
+						spell_movement.m_IsMobileCharacter = false;
+						spell_movement.SetTarget (furthest);
 
 						spell_movement.SetSpellToCast (this.m_SpellToFire);
+						GameObject.Destroy (this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
 
 					}//end if
-				}//end foreach
+				}//end if
+				//else if the spell is not mobile (meaning it's cast at the player's location...)
+				//we have no spells that fit this yet, so do nothing.
+			
+			}//end if
+		}//end if
+		//else if the user holds down the mouse...
+		else if (Input.GetButton(STRINGKEY_INPUT_CASTSPELL)) {
+			this.CheckChosenSpell ();
+			//if the spell to fire exists...
+			if (this.m_SpellToFire != null) {
+				//Update [this.m_isCastingSpell] for the animator
+				this.m_isCastingSpell = true;
 
-				//if none of the gameobjects found in the raycastall were mobile characters...
-				if (!any_mobile_characters) {
-					//...then send the spell to the furthest Raycast hit
-					#if TESTING_SPELLMOVEMENT
-					Debug.Log("PlayerCastSpell::Update\tNo mobile characters found\tRay hit\tx: " + furthest.point.x
-						+ " y: " + furthest.point.y + " z: " + furthest.point.z);
-					#endif
-					this.m_SpellCubeInstance = GameObject.Instantiate(this.m_SpellCube);
-					this.m_SpellCubeInstance.transform.position = this.transform.position;
-					SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement>();
-					spell_movement.m_IsMobileCharacter = false;
-					spell_movement.SetTarget(furthest);
+				//if the spell is not mobile (meaning it's to be cast at the player)...
+				if (!this.m_SpellToFire.m_IsMobileSpell) {
+					/*
+					* We need to figure out how to cast immobile spells (i.e. healing, shield).
+					*/
 
-					spell_movement.SetSpellToCast (this.m_SpellToFire);
-					GameObject.Destroy(this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
 
 				}//end if
+				//else if the spell is not mobile (meaning it's cast at the player's location...)
+				//we have no spells that fit this yet, so do nothing.
 
 			}//end if
-
-		}//end if
+		}
 		//else if the player doesn't click (doesn't fire a spell)...
 		else {
 			//Update [this.m_isCastingSpell] for the animator
