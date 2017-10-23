@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 135226295539117192}
   - component: {fileID: 114168349272079364}
   - component: {fileID: 54862699077050900}
+  - component: {fileID: 95144408624912346}
   m_Layer: 0
   m_Name: Spell_DefaultPrefab
   m_TagString: Untagged
@@ -63,7 +64,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4431182114066536
 Transform:
   m_ObjectHideFlags: 1
@@ -71,7 +72,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1081312389218078}
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: -2.2288833, y: 1.36, z: -3.8104656}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4644639657903014}
@@ -87,7 +88,7 @@ Transform:
   m_GameObject: {fileID: 1249387806405536}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 1}
   m_Children: []
   m_Father: {fileID: 4431182114066536}
   m_RootOrder: 0
@@ -159,6 +160,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &95144408624912346
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1081312389218078}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 29407e2dc217943a1925c239ca4c79b6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114168349272079364
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -181,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4929f3f9e54b0499a9fa328a08702816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaximalVelocity: 35
+  m_MaximalVelocity: 30
   m_SpellToCast: {fileID: 0}
   m_SpellName: 
 --- !u!135 &135010289913475408
@@ -245,7 +263,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.27, y: 0.36}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
