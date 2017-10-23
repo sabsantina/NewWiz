@@ -40,6 +40,14 @@ public class Spawner : MonoBehaviour {
 			this.Spawn_Spell_Fireball (this.m_Player.transform.position + Vector3.right * 2.0f);
 			Debug.Log("Spawner:\nSpawning a spell with properties:\t" + this.m_SpellInstances[0].m_Spell.m_SpellName.ToString());
 		}
+		if (Input.GetKeyDown (KeyCode.Alpha3)) {
+			this.Spawn_Item_ManaPotion (this.m_Player.transform.position + Vector3.forward * 2.0f);
+			Debug.Log("Spawner:\nSpawning an item with properties:\t" + this.m_ItemInstances[1].m_Item.m_ItemName.ToString());
+		}
+		if (Input.GetKeyDown (KeyCode.Alpha4)) {
+			this.Spawn_Spell_Shield (this.m_Player.transform.position + Vector3.back * 2.0f);
+			Debug.Log("Spawner:\nSpawning a spell with properties:\t" + this.m_SpellInstances[1].m_Spell.m_SpellName.ToString());
+		}
 		#endif
 	}
 
@@ -53,6 +61,15 @@ public class Spawner : MonoBehaviour {
 		this.m_ItemInstances.Add (health_potion_item);
 	}//end f'n void Spawn_Item_HealthPotion(Vector3)
 
+	public void Spawn_Item_ManaPotion(Vector3 position)
+	{
+		GameObject mana_potion = GameObject.Instantiate (this.m_TempItemPrefab);
+		mana_potion.transform.position = position;
+		ItemPickup mana_potion_item = mana_potion.GetComponent<ItemPickup> ();
+		mana_potion_item.SetItem(this.GenerateInstance_Item_ManaPotion ());
+		this.m_ItemInstances.Add (mana_potion_item);
+	}
+
 	public void Spawn_Spell_Fireball(Vector3 position)
 	{
 		GameObject fireball = GameObject.Instantiate (this.m_TempSpellPrefab);
@@ -60,6 +77,15 @@ public class Spawner : MonoBehaviour {
 		SpellPickup fireball_spell = fireball.GetComponent<SpellPickup> ();
 		fireball_spell.SetSpell(this.GenerateInstance_Spell_Fireball ());
 		this.m_SpellInstances.Add (fireball_spell);
+	}//end f'n void Spawn_Spell_Fireball(Vector3)
+
+	public void Spawn_Spell_Shield(Vector3 position)
+	{
+		GameObject shield = GameObject.Instantiate (this.m_TempSpellPrefab);
+		shield.transform.position = position;
+		SpellPickup shield_spell = shield.GetComponent<SpellPickup> ();
+		shield_spell.SetSpell(this.GenerateInstance_Spell_Shield ());
+		this.m_SpellInstances.Add (shield_spell);
 	}//end f'n void Spawn_Spell_Fireball(Vector3)
 
 	/**A private function to spawn a default health potion item; returns the instance of the Item.*/
@@ -71,6 +97,15 @@ public class Spawner : MonoBehaviour {
 		return health_potion;
 	}//end f'n Item GenerateInstance_Item_HealthPotion()
 
+	/**A private function to spawn a default mana potion item; returns the instance of the Item.*/
+	private Item GenerateInstance_Item_ManaPotion()
+	{
+		Item mana_potion = new Item ();
+		mana_potion.m_ItemEffect = ItemEffect.Gain_Mana;
+		mana_potion.m_ItemName = ItemName.Mana_Potion;
+		return mana_potion;
+	}//end f'n Item GenerateInstance_Item_ManaPotion()
+
 	/**A private function to spawn a default fireball spell; returns the instance of the Spell.*/
 	private Spell GenerateInstance_Spell_Fireball()
 	{
@@ -80,4 +115,14 @@ public class Spawner : MonoBehaviour {
 		fireball.m_IsMobileSpell = true;
 		return fireball;
 	}//end f'n Spell GenerateInstance_Spell_Fireball()
+
+	/**A private function to spawn a default shield spell; returns the instance of the Spell.*/
+	private Spell GenerateInstance_Spell_Shield()
+	{
+		Spell shield = new Spell ();
+		shield.m_SpellName = SpellName.Shield;
+		shield.m_SpellEffect = SpellEffect.Damage_Resistance;
+		shield.m_IsMobileSpell = true;
+		return shield;
+	}//end f'n Spell GenerateInstance_Spell_Shield()
 }

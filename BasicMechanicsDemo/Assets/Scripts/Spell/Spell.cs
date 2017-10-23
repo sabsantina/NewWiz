@@ -39,4 +39,10 @@ public class Spell : MonoBehaviour {
 		this.m_SpellName = SpellName.Fireball;
 		this.m_SpellEffect = SpellEffect.Fire_Damage;
 	}
+
+	/**A function to compare spells. Returns true if they both have the same name, as that's all we need to differentiate spells.*/
+	public bool isEqual(Spell other)
+	{
+		return (this.m_SpellName.ToString () == other.m_SpellName.ToString ());
+	}
 }

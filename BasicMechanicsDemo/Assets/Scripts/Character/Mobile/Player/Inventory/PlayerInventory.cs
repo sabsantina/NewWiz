@@ -103,25 +103,54 @@ public class PlayerInventory : MonoBehaviour {
 	/**A function to add the item to the inventory.*/
 	public void AddItem(Item item_to_add)
 	{
-		int current_quantity;
-		//returns zero if none of the item are found.
-		this.m_ItemDictionary.TryGetValue (item_to_add, out current_quantity);
-		this.m_ItemDictionary [item_to_add] = current_quantity + 1;
+		bool match_found = false;
+		//for all items in the dictionary...
+		foreach (KeyValuePair<Item, int> entry in this.m_ItemDictionary) {
+			//...if the item to add has the same name as that of the current entry...
+			if (item_to_add.isEqual (entry.Key)) {
+				//...then a match for a common name was found
+				match_found = true;
+			}//end if
+		}//end foreach
+		//if there was a match for the item name...
+		if (match_found) {
+			//...then add to the current quantity
+			int current_quantity;
+			//returns zero if none of the item are found.
+			this.m_ItemDictionary.TryGetValue (item_to_add, out current_quantity);
+			this.m_ItemDictionary [item_to_add] = current_quantity + 1;
+		}//end if
+		//else if there was no match for the item name...
+		else
+		{
+			//...then add the entry into the dictionary
+			this.m_ItemDictionary.Add (item_to_add, 1);
+		}//end else
+		Debug.Log ("PlayerInventory::Adding item " + item_to_add.m_ItemName.ToString () + "\n"
+			+ "Item already in list? " + match_found);
+
 	}//end f'n void AddItem(Item)
 
 	/**A function to add the spell to the inventory.*/
 	public void AddSpell(Spell spell_to_add)
 	{
-		//if the spell is contained in the inventory...
-		if (this.m_SpellList.Contains (spell_to_add)) {
-			//...do nothing
-			return;
-		}//end if 
-		//else if the spell is not contained in the inventory...
-		else {
-			//...then add it
-			this.m_SpellList.Add(spell_to_add);
-		}//end else
+		bool match_found = false;
+		//for all spells in the spell list...
+		foreach (Spell spell in this.m_SpellList) {
+			//...if any of them have the same name as the one we're trying to add...
+			if (spell_to_add.isEqual (spell)) {
+				//...then a match was found
+				match_found = true;
+			}//end if
+		}//end foreach
+		//if no match was found...
+		if (!match_found) {
+			//...then the spell is not already in the spell list, and we can add it, now.
+			this.m_SpellList.Add (spell_to_add);
+		}//end if
+		Debug.Log ("PlayerInventory::Adding spell " + spell_to_add.m_SpellName.ToString () + "\n"
+			+ "Spell already in list? " + match_found);
+
 	}//end f'n void AddSpell(Spell)
 
 //	void OnTriggerEnter(Collider other)
