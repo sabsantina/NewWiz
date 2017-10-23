@@ -8,7 +8,30 @@ using UnityEngine;
 //We need a rigidbody for collisions to go off properly
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
+//Need an animator to animate the spells
+[RequireComponent(typeof(Animator))]
 public class SpellMovement : MonoBehaviour {
+
+	/**A reference to the mobile character's animator.*/
+	private Animator m_Animator; 
+
+	/**A string variable containing the string name of the isMovingLeft parameter in the character animator.*/
+	private readonly string STRINGKEY_PARAM_ISMOVINGLEFT = "isMovingLeft";
+	/**A string variable containing the string name of the isMovingRight parameter in the character animator.*/
+	private readonly string STRINGKEY_PARAM_ISMOVINGRIGHT = "isMovingRight";
+	/**A string variable containing the string name of the isMovingUp parameter in the character animator.*/
+	private readonly string STRINGKEY_PARAM_ISMOVINGUP = "isMovingUp";
+	/**A string variable containing the string name of the isMovingDown parameter in the character animator.*/
+	private readonly string STRINGKEY_PARAM_ISMOVINGDOWN = "isMovingDown";
+
+	/**A private bool to help us keep track of whether the character's moving leftward, and send the result to the character animator.*/
+	protected bool m_IsMovingLeft = false;
+	/**A private bool to help us keep track of whether the character's moving rightward, and send the result to the character animator.*/
+	protected bool m_IsMovingRight = false;
+	/**A private bool to help us keep track of whether the character's moving upward, and send the result to the character animator.*/
+	protected bool m_IsMovingUp = false;
+	/**A private bool to help us keep track of whether the character's moving downward, and send the result to the character animator.*/
+	protected bool m_IsMovingDown = false;
 
 	public float m_MaximalVelocity = 35.0f;
 	/**A reference to the target the spell is being cast at. Set using SpellMovement::SetTarget(GameObject).*/
@@ -35,6 +58,8 @@ public class SpellMovement : MonoBehaviour {
 		spell_rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 		//Ensure we can use collisions properly.
 		spell_rigidbody.detectCollisions = true;
+
+		this.m_Animator = this.GetComponent<Animator> ();
 	}
 
 	// Update is called once per frame
@@ -56,6 +81,8 @@ public class SpellMovement : MonoBehaviour {
 		//and update the current position
 		current_position += translation;
 		this.transform.position = current_position;
+
+		this.UpdateAnimatorParameters ();
 	}//end f'n void Update()
 
 	/**Set the target at which we're shooting the magic.*/
@@ -136,4 +163,21 @@ public class SpellMovement : MonoBehaviour {
 		}
 
     }//end f'n void OnTriggerEnter(Collider)
+
+	/**A function to update the animator parameters, with regard to motion.*/
+	public void UpdateAnimatorParameters()
+	{
+		this.m_IsMovingRight = (this.m_Direction.x > 0) ? true : false;
+		this.m_IsMovingLeft = (this.m_Direction.x < 0) ? true : false;
+		this.m_IsMovingUp = (this.m_Direction.z > 0) ? true : false;
+		this.m_IsMovingDown = (this.m_Direction.z < 0) ? true : false;
+		//update for downward motion
+		this.m_Animator.SetBool (STRINGKEY_PARAM_ISMOVINGDOWN, this.m_IsMovingDown);
+		//update for upward motion
+		this.m_Animator.SetBool (STRINGKEY_PARAM_ISMOVINGUP, this.m_IsMovingUp);
+		//update for leftward motion
+		this.m_Animator.SetBool (STRINGKEY_PARAM_ISMOVINGLEFT, this.m_IsMovingLeft);
+		//update for rightward motion
+		this.m_Animator.SetBool (STRINGKEY_PARAM_ISMOVINGRIGHT, this.m_IsMovingRight);
+	}//end f'n void UpdateAnimatorParameters()
 }
