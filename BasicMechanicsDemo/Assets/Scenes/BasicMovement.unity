@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -844,6 +844,64 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &61849685
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4172748373422008, guid: d687b16270004534987afd1f9839b82e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -2.9512627
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172748373422008, guid: d687b16270004534987afd1f9839b82e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.2542894
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172748373422008, guid: d687b16270004534987afd1f9839b82e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -8.847912
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172748373422008, guid: d687b16270004534987afd1f9839b82e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172748373422008, guid: d687b16270004534987afd1f9839b82e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172748373422008, guid: d687b16270004534987afd1f9839b82e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172748373422008, guid: d687b16270004534987afd1f9839b82e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172748373422008, guid: d687b16270004534987afd1f9839b82e, type: 2}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211420006127472, guid: d687b16270004534987afd1f9839b82e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211420006127472, guid: d687b16270004534987afd1f9839b82e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211420006127472, guid: d687b16270004534987afd1f9839b82e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211420006127472, guid: d687b16270004534987afd1f9839b82e, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d687b16270004534987afd1f9839b82e, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &66095343
 GameObject:
   m_ObjectHideFlags: 0
@@ -2276,7 +2334,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 175525041}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 11
   m_Height: 1
@@ -3818,7 +3876,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 273882120}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 11
   m_Height: 1
@@ -8612,7 +8670,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 603401693}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 11
   m_Height: 1
@@ -18618,7 +18676,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1381424481}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 11
   m_Height: 1
@@ -20630,8 +20688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6476643d016c4a35b5e743f229ee845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SpellCube: {fileID: 1081312389218078, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
-    type: 2}
+  m_SpellCube: {fileID: 0}
   m_MainCamera: {fileID: 1448755375}
   m_SpellToFire: {fileID: 0}
   m_SpellName: 
@@ -20923,7 +20980,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1557507307}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 11
   m_Height: 1
@@ -23018,6 +23075,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 95144408624912346, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 29407e2dc217943a1925c239ca4c79b6, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e78b574e24bcd4c5ca14bd25cf5ee863, type: 2}
   m_IsPrefabParent: 0
@@ -25069,7 +25131,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1883115232}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 11
   m_Height: 1

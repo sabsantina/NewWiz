@@ -24,10 +24,14 @@ public class PlayerInventory : MonoBehaviour {
 	public string m_ActiveSpellName;
 	public Dictionary<Item, int> m_ItemDictionary { set; get;}
 
-	void Awake()
+    /**Hotkeys to switch spells placed on the UI. Currently don't use the UI elements.*/
+    private readonly string STRINGKEY_INPUT_HOTKEY1 = "f1";
+    private readonly string STRINGKEY_INPUT_HOTKEY2 = "f2";
+
+    void Awake()
 	{
 		//for testing
-		this.m_ActiveSpell = this.m_DefaultSpellPrefab.GetComponent<Spell> ();
+		//this.m_ActiveSpell = this.m_DefaultSpellPrefab.GetComponent<Spell> ();
 		m_ActiveSpell.GenerateInstance_Fireball (true, 20.0f);
 		this.m_ActiveSpellName = this.m_ActiveSpell.m_SpellName.ToString ();
 	}
@@ -47,7 +51,9 @@ public class PlayerInventory : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Return)) {
 			this.OutputInventoryContents ();
 		}
-		#endif
+#endif
+
+        UpdateActiveSpell();
 	}
 
 	/**A function, for testing purposes, to print out the inventory contents.*/
@@ -100,6 +106,27 @@ public class PlayerInventory : MonoBehaviour {
         return this.m_SpellList[m_ActiveSpellNumber];
     }
 	#endif
+
+    private void UpdateActiveSpell()
+    {
+        /**Temporary hardcoded. Will receive inputs from SpellList and the UI to get the correct spell.*/
+        if (Input.GetKeyDown(STRINGKEY_INPUT_HOTKEY1))
+        {
+            Debug.Log("Fireball chosen!");
+            this.m_ActiveSpell = this.m_DefaultSpellPrefab.GetComponent<Spell>();
+            m_ActiveSpell.GenerateInstance_Fireball(true, 20.0f);
+            this.m_ActiveSpellName = this.m_ActiveSpell.m_SpellName.ToString();
+        }
+
+        if (Input.GetKeyDown(STRINGKEY_INPUT_HOTKEY2))
+        {
+            Debug.Log("IceBall chosen!");
+            this.m_ActiveSpell = this.m_DefaultSpellPrefab.GetComponent<Spell>();
+            m_ActiveSpell.GenerateInstance_IceBall(true, 5.0f);
+            this.m_ActiveSpellName = this.m_ActiveSpell.m_SpellName.ToString();
+        }
+
+    }
 	/**This function returns the currently chosen spell.
 	*Accounts for an empty inventory.*/
 	public Spell GetChosenSpell()
@@ -116,6 +143,10 @@ public class PlayerInventory : MonoBehaviour {
 
 	}//end f'n Spell GetChosenSpell()
 
+    public void AddSpell(Spell m_Spell)
+    {
+        this.m_SpellList.Add(m_Spell);
+    }
 
 //	void OnTriggerEnter(Collider other)
 //	{

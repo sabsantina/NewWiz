@@ -43,4 +43,12 @@ public class Spell : MonoBehaviour {
 		this.m_SpellName = SpellName.Fireball;
 		this.m_SpellEffect = SpellEffect.Fire_Damage;
 	}
+
+    public void GenerateInstance_IceBall(bool has_been_discovered, float damage)
+    {
+        this.m_HasBeenDiscovered = has_been_discovered;
+        this.m_SpellDamage = damage;
+        this.m_SpellName = SpellName.Iceball;
+        this.m_SpellEffect = SpellEffect.Ice_Freeze;
+    }
 }

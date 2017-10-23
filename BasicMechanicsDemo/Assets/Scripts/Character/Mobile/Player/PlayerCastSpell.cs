@@ -18,7 +18,7 @@ public class PlayerCastSpell : MonoBehaviour {
 	#if TESTING_SPELLCAST
 	[SerializeField] private GameObject m_MagicCubePrefab;
 	#endif
-	public GameObject m_SpellCube;
+    public GameObject m_SpellCube;
     private GameObject m_SpellCubeInstance;
 
     private GameObject m_Target;
@@ -46,7 +46,8 @@ public class PlayerCastSpell : MonoBehaviour {
 
 	void Awake()
 	{
-		this.m_SpellToFire = this.gameObject.GetComponent<PlayerInventory>().m_ActiveSpell;
+        this.m_SpellCube = Resources.Load("Spell_Iceball_Prefab") as GameObject;
+        this.m_SpellToFire = this.gameObject.GetComponent<PlayerInventory>().m_ActiveSpell;
 		this.m_SpellName = m_SpellToFire.m_SpellName.ToString();
 	}
 
@@ -135,6 +136,14 @@ public class PlayerCastSpell : MonoBehaviour {
 			Debug.Log ("Chosen spell: " + this.gameObject.GetComponent<PlayerInventory> ().m_ActiveSpell.m_SpellName.ToString());
 
 		}
+        if(this.m_SpellToFire.m_SpellName == SpellName.Fireball)
+        {
+            this.m_SpellCube = Resources.Load("Prefabs/Spell/Spell_DefaultPrefab") as GameObject;
+        }
+        else if (this.m_SpellToFire.m_SpellName == SpellName.Iceball)
+        {
+            this.m_SpellCube = Resources.Load("Prefabs/Spell/Spell_IceballPrefab") as GameObject;
+        }
     }
 
 	/**A function to update the player animator with regards to the player spell casting animations.*/
