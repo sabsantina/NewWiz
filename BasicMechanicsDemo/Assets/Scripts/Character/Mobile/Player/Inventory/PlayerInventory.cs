@@ -17,12 +17,15 @@ public class PlayerInventory : MonoBehaviour {
     /**Int which will be used to tell the player which spell he has chosen.*/
     private int m_ActiveSpellNumber = 0;
 	#endif
-	/**The currently active spell; will be cast on click.*/
-	public Spell m_ActiveSpell = new Spell();
+	/**A reference to a default spell prefab to contain all our active spell information.*/
+	[SerializeField] private GameObject m_DefaultSpellPrefab;
+	public Spell m_ActiveSpell;
 	public Dictionary<Item, int> m_ItemDictionary { set; get;}
 
 	void Awake()
 	{
+		//for testing
+		this.m_ActiveSpell = this.m_DefaultSpellPrefab.GetComponent<Spell> ();
 		m_ActiveSpell.GenerateInstance_Fireball (true, 20.0f);
 	}
 
@@ -33,8 +36,6 @@ public class PlayerInventory : MonoBehaviour {
 
 		//Initialize Item Dictionary
 		this.m_ItemDictionary = new Dictionary<Item, int>();
-
-
 	}//end f'n void Start()
 
 	void Update()
@@ -112,20 +113,6 @@ public class PlayerInventory : MonoBehaviour {
 
 	}//end f'n Spell GetChosenSpell()
 
-//	public Dictionary<string, string, int> StringFormat_ItemList()
-//	{
-//		//A dictionary made up of <item_name, item_effect, item_quantity>
-//		Dictionary<string, string, int> dictionary_to_return = new Dictionary<string, string, int> ();
-//		foreach (Item item in this.m_ItemList) {
-//			//if the player's discovered the given spell...
-//			if (item.m_Quantity > 0) {
-//				//...then add that spell to the dictionary
-//				dictionary_to_return.Add (item.m_ItemName.);
-//			}//end if
-//			//else if the player hasn't discovered the given spell, then we don't care about it.
-//		}//end foreach
-//		return dictionary_to_return;
-//	}
 
 	void OnTriggerEnter(Collider other)
 	{

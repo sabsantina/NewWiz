@@ -38,10 +38,19 @@ public class PlayerCastSpell : MonoBehaviour {
 	/**The player animator, including the bit about casting spells.*/
 	private Animator m_Animator;
     /**The reference to the spell which is fired by the player.*/
-	private Spell m_SpellToFire;
+	public Spell m_SpellToFire;
+	/**A variable for testing purposes*/
+	public string m_SpellName;
+
 
 	/**The number of seconds until we destroy the spell gameobject.*/
 	private readonly float TIME_UNTIL_DESTROY = 1.25f;
+
+	void Awake()
+	{
+		this.m_SpellToFire = this.gameObject.GetComponent<PlayerInventory>().m_ActiveSpell;
+		this.m_SpellName = m_SpellToFire.m_SpellName.ToString();
+	}
 
 	void Start()
 	{
@@ -53,7 +62,7 @@ public class PlayerCastSpell : MonoBehaviour {
 		
 		if (Input.GetButtonDown (STRINGKEY_INPUT_CASTSPELL)) {
 			this.CheckChosenSpell ();
-			//
+			//if the spell to fire exists...
 			if (this.m_SpellToFire != null) {
 				//Update [this.m_isCastingSpell] for the animator
 				this.m_isCastingSpell = true;
@@ -82,6 +91,8 @@ public class PlayerCastSpell : MonoBehaviour {
 						spell_movement.m_IsMobileCharacter = true;
 						spell_movement.SetTarget(hit);
 						any_mobile_characters = true;
+
+						spell_movement.SetSpellToCast (this.m_SpellToFire);
 						#endif
 					}//end if
 				}//end foreach
@@ -97,6 +108,8 @@ public class PlayerCastSpell : MonoBehaviour {
 					SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement>();
 					spell_movement.m_IsMobileCharacter = false;
 					spell_movement.SetTarget(furthest);
+
+					spell_movement.SetSpellToCast (this.m_SpellToFire);
 					GameObject.Destroy(this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
 					#endif
 
@@ -120,6 +133,11 @@ public class PlayerCastSpell : MonoBehaviour {
     private void CheckChosenSpell()
     {
 		this.m_SpellToFire = this.gameObject.GetComponent<PlayerInventory>().m_ActiveSpell;
+		if (this.m_SpellToFire != null) {
+			Debug.Log ("Chosen spell: " + this.gameObject.GetComponent<PlayerInventory> ().m_ActiveSpell.m_SpellName.ToString());
+//			SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement>();
+//			spell_movement.SetSpellToCast (this.m_SpellToFire);
+		}
     }
 
 	/**A function to update the player animator with regards to the player spell casting animations.*/
