@@ -129,7 +129,7 @@ public class PlayerCastSpell : MonoBehaviour {
 			this.CheckChosenSpell ();
 
 			//if the spell to fire exists...
-			if (this.m_SpellClassToFire != null) {
+			if (this.m_SpellClassToFire != null && !this.m_SpellClassToFire.m_IsMobileSpell) {
 				//Update [this.m_isCastingSpell] for the animator
 				this.m_isCastingSpell = true;
 
@@ -165,6 +165,7 @@ public class PlayerCastSpell : MonoBehaviour {
 			//...then the spell is no longer being cast
 			this.m_isCastingSpell = false;
 			//...and we need to destroy the gameobject instance
+
 			GameObject.Destroy (this.m_SpellCubeInstance);
 		}//end if
 
@@ -189,6 +190,34 @@ public class PlayerCastSpell : MonoBehaviour {
 		this.m_Player.m_IsShielded = (this.m_isCastingSpell && 
 										this.m_SpellClassToFire.m_SpellName == SpellName.Shield) ? true : false;
 	}//end f'n void ApplyPlayerAttributesAsResultOfMagic()
+
+//	/**A function to return the medium-most time for a clip in the animator.
+//	*This is to help us know when to destroy the gameobject such that the fade-out animation can play.*/
+//	private float TimeOfEndClip()
+//	{
+//		float shortest_clip_time = 1000.0f, medium_clip_time = 0.0f, longest_clip_time = 0.0f;
+//		foreach(AnimationClip clip in this.m_Animator.runtimeAnimatorController.animationClips)
+//		{
+//			//...if a given clip's length is greater than that of the longest clip's length...
+//			if (clip.length > longest_clip_time) {
+//				//...then update the longest clip
+//				longest_clip_time = clip.length;
+//			}//end if
+//			//...if a given clip's length is less than that of the shortest clip's length...
+//			if (clip.length < shortest_clip_time) {
+//				//...then update the shortest clip
+//				shortest_clip_time = clip.length;
+//			}//end if
+//			//...if a given clip's length is greater-than or equal to the shortest clip length
+//			//		AND that same given clip's length is less-than or equal to the longest clip length...
+//			if (clip.length >= shortest_clip_time && clip.length <= longest_clip_time) {
+//				//...then update the medium clip
+//				medium_clip_time = clip.length;
+//			}//end if
+//		}//end foreach
+//		Debug.Log(medium_clip_time);
+//		return medium_clip_time + 0.1f;
+//	}//end f'n float TimeOfEndClip()
 
 	/**Used to retrieve the current spell from the inventory.*/
 	private void CheckChosenSpell()
