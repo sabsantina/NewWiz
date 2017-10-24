@@ -5,8 +5,7 @@
 */
 //A macro for testing; comment out to remove testing functionalities
 //#define TESTING_SPELLCAST
-#define TESTING_SPELLMOVEMENT
-#define TESTING_SPELLFROMINVENTORY
+//#define TESTING_SPELLMOVEMENT
 
 //#define ATHANASIOS
 
