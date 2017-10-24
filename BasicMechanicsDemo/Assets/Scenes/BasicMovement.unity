@@ -12375,6 +12375,7 @@ GameObject:
   - component: {fileID: 872955988}
   - component: {fileID: 872955987}
   - component: {fileID: 872955989}
+  - component: {fileID: 872955990}
   m_Layer: 5
   m_Name: SceneManagers
   m_TagString: Untagged
@@ -12429,6 +12430,17 @@ MonoBehaviour:
   m_TempSpellPrefab: {fileID: 1560220320337108, guid: 55f288681366942dc955c6fa8d67c7e3,
     type: 2}
   m_Player: {fileID: 1546207769}
+--- !u!114 &872955990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 872955986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23987fb161f84fa5b62da001f558d9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &874569331
 GameObject:
   m_ObjectHideFlags: 0
@@ -20604,8 +20616,6 @@ MonoBehaviour:
     type: 2}
   m_DefaultSpellPrefab: {fileID: 1081312389218078, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
     type: 2}
-  m_ActiveSpell: {fileID: 114168349272079364, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
-    type: 2}
   m_ActiveSpellName: 
 --- !u!114 &1546207776
 MonoBehaviour:
@@ -20649,7 +20659,6 @@ MonoBehaviour:
     type: 2}
   m_SpellCubeInstance: {fileID: 0}
   m_MainCamera: {fileID: 1448755375}
-  m_SpellToFire: {fileID: 0}
   m_SpellName: 
 --- !u!114 &1546207780
 MonoBehaviour:

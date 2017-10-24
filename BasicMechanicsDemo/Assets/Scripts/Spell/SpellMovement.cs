@@ -4,6 +4,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+using UnityEditor.Animations;
+
 
 //We need a rigidbody for collisions to go off properly
 [RequireComponent(typeof(Rigidbody))]
@@ -201,4 +204,10 @@ public class SpellMovement : MonoBehaviour {
         this.m_Animator.SetBool(STRINGKEY_PARAM_ISMOVING, this.m_IsMoving);
 
     }//end f'n void UpdateAnimatorParameters()
+
+	/**A function to set the animator controller with respect to the type of spell.*/
+	public void SetAnimatorController(AnimatorController spell_animator_controller)
+	{
+		this.m_Animator.runtimeAnimatorController = spell_animator_controller as RuntimeAnimatorController;
+	}
 }
