@@ -24,7 +24,8 @@ public class EnemyMovement : MobileCharacter {
 	public readonly float m_ChasingVelocity = 21.0f;
 	/**A bool to tell us whether or not the enemy is chasing the player*/
 	public bool m_IsChasing;
-
+	/**A reference to the Enemy component of this gameobject.*/
+	private Enemy m_THIS_Enemy;
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +33,8 @@ public class EnemyMovement : MobileCharacter {
 		this.SetAnimator (this.GetComponent<Animator> ());
 		this.m_Direction = new Vector3(Random.Range(-100.0f, 100.0f), 0.0f, Random.Range(-100.0f, 100.0f));
 		this.m_IsChasing = false;
+
+		this.m_THIS_Enemy = this.GetComponent<Enemy> ();
 	}
 	
 	// Update is called once per frame
@@ -55,7 +58,8 @@ public class EnemyMovement : MobileCharacter {
 		this.m_Direction = (this.m_IsChasing) ? Vector3.ClampMagnitude(this.m_Direction, this.m_ChasingVelocity)
 												: Vector3.ClampMagnitude(this.m_Direction, this.m_MaximalVelocity);
 
-        if (!this.gameObject.GetComponent<Enemy>().frozen)
+		//if the enemy isn't frozen...
+		if (!this.m_THIS_Enemy.m_IsFrozen)
         {
             //if player immediately ahead...
             if (this.IsPlayerAhead())
@@ -82,7 +86,7 @@ public class EnemyMovement : MobileCharacter {
         this.SetAnimatorParameters();
 
         this.UpdateAnimatorParameters();
-#endif
+	#endif
     }//end f'n void Update
 
     /**A function to change the direction of the enemy to keep it in the detection area.
