@@ -1,4 +1,4 @@
-﻿#define TESTING_ENEMY_ATTACK
+﻿//#define TESTING_ENEMY_ATTACK
 
 using System.Collections;
 using System.Collections.Generic;

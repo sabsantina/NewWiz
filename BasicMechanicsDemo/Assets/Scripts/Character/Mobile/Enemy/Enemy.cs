@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour {
 			}
 			Debug.Log (message);
         }
-        /**Checks if enemy is m_IsFrozen.*/
+        /**Checks if enemy is frozen.*/
         if (m_IsFrozen)
         {
             this.gameObject.GetComponent<Animator>().enabled = false;

@@ -6826,6 +6826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Health: 0
+  m_IsFrozen: 0
 --- !u!114 &475894579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12443,6 +12444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FireballAnimator: {fileID: 9100000, guid: a9855de1b34ddc742816040b79e0bf94, type: 2}
   m_IceballAnimator: {fileID: 9100000, guid: 8d42b9085b0b591498c4bcaf393e6daf, type: 2}
+  m_ShieldAnimator: {fileID: 9100000, guid: 9d5296329446a4a18886d2984dcdedf5, type: 2}
 --- !u!1 &874569331
 GameObject:
   m_ObjectHideFlags: 0
@@ -13602,6 +13604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Health: 0
+  m_IsFrozen: 0
 --- !u!114 &965130570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15562,6 +15565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Health: 0
+  m_IsFrozen: 0
 --- !u!114 &1122455707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21067,6 +21071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Health: 100
+  m_IsFrozen: 0
 --- !u!65 &1562185629
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22361,6 +22366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Health: 0
+  m_IsFrozen: 0
 --- !u!114 &1671459860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23011,16 +23017,16 @@ Prefab:
         type: 2}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 8d42b9085b0b591498c4bcaf393e6daf, type: 2}
+      objectReference: {fileID: 9100000, guid: 9d5296329446a4a18886d2984dcdedf5, type: 2}
     - target: {fileID: 212307006107648292, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
         type: 2}
       propertyPath: m_Size.x
-      value: 0.74
+      value: 1.22
       objectReference: {fileID: 0}
     - target: {fileID: 212307006107648292, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
         type: 2}
       propertyPath: m_Size.y
-      value: 0.73
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 212307006107648292, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
         type: 2}
@@ -26661,6 +26667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Health: 0
+  m_IsFrozen: 0
 --- !u!114 &2073420877
 MonoBehaviour:
   m_ObjectHideFlags: 0

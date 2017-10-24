@@ -1,8 +1,14 @@
 #define TESTING_INVENTORY_CONTENTS_OUTPUT
 #define TESTING_INVENTORY_SPELLPICKUP
 #define TESTING_ACTIVE_SPELL
+
+/*Activating this macro will enable the player to start the game with the Fireball spell.*/
 #define START_WITH_FIREBALL
+/*Activating this macro will enable the player to start the game with the Iceball spell.*/
 #define START_WITH_ICEBALL
+/*Activating this macro will enable the player to start the game with the Shield spell.*/
+#define START_WITH_SHIELD
+
 
 using System.Collections;
 using System.Collections.Generic;
@@ -53,6 +59,10 @@ public class PlayerInventory : MonoBehaviour {
 		#endif
 		#if START_WITH_ICEBALL
 		this.AddSpell (spell_class_instance.GenerateInstance(SpellName.Iceball));
+		this.m_ActiveSpellClass = this.m_SpellClassList[0];
+		#endif
+		#if START_WITH_SHIELD
+		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Shield));
 		this.m_ActiveSpellClass = this.m_SpellClassList[0];
 		#endif
 

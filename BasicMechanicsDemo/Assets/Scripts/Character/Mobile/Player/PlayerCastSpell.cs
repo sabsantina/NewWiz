@@ -6,8 +6,7 @@
 //A macro for testing; comment out to remove testing functionalities
 //#define TESTING_SPELLCAST
 //#define TESTING_SPELLMOVEMENT
-
-//#define ATHANASIOS
+#define TESTING_MOUSE_UP
 
 using System.Collections;
 using System.Collections.Generic;
@@ -127,24 +126,47 @@ public class PlayerCastSpell : MonoBehaviour {
 		//else if the user holds down the mouse...
 		else if (Input.GetButton(STRINGKEY_INPUT_CASTSPELL)) {
 			this.CheckChosenSpell ();
+
 			//if the spell to fire exists...
 			if (this.m_SpellClassToFire != null) {
 				//Update [this.m_isCastingSpell] for the animator
 				this.m_isCastingSpell = true;
 
-				//if the spell is not mobile (meaning it's to be cast at the player)...
-				if (!this.m_SpellClassToFire.m_IsMobileSpell) {
-					/*
-					* We need to figure out how to cast immobile spells (i.e. healing, shield).
-					*/
+				//if the spell is not mobile (meaning it's to be cast at the player)
+				//	AND if the spell cube instance is null (which can only mean the last spell cube was destroyed)...
+				if (!this.m_SpellClassToFire.m_IsMobileSpell && this.m_SpellCubeInstance == null) {
+					//...then create a new spell cube
+					this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
+					this.m_SpellCubeInstance.transform.position = this.transform.position;
+					SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
+					spell_movement.SetSpellToCast (this.m_SpellClassToFire);
+					this.m_SpellAnimatorManager.SetSpellAnimator (this.m_SpellCubeInstance);
 
-
+				}//end if
+				//if the spell cube instance exists (meaning we're in the process of casting a spell)...
+				if (this.m_SpellCubeInstance != null) {
+					//...then ensure the spell's always at our position
+					SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
+					spell_movement.MaintainPosition (this.transform.position);
 				}//end if
 				//else if the spell is not mobile (meaning it's cast at the player's location...)
 				//we have no spells that fit this yet, so do nothing.
 
 			}//end if
-		}
+
+		}//end if
+		//if the player lets go of the mouse and the spell wasn't a mobile spell (meaning that at this point they're probably still
+			//holding down the mouse...
+		else if (Input.GetButtonUp (STRINGKEY_INPUT_CASTSPELL) && !this.m_SpellClassToFire.m_IsMobileSpell) {
+			#if TESTING_MOUSE_UP
+			Debug.Log ("Mouse up");
+			#endif
+			//...then the spell is no longer being cast
+			this.m_isCastingSpell = false;
+			//...and we need to destroy the gameobject instance
+			GameObject.Destroy (this.m_SpellCubeInstance);
+		}//end if
+
 		//else if the player doesn't click (doesn't fire a spell)...
 		else {
 			//Update [this.m_isCastingSpell] for the animator
