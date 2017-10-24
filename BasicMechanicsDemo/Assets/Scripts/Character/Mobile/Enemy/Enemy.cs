@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour {
 
     public readonly float ENEMY_FULL_HEALTH = 100.0f;
 
+	public float TIME_BEFORE_THAW = 2.0f;
+
     /**Boolean to check if enemy can move. To be used for the IceBall effects*/
 	public bool m_IsFrozen;
     /**Timer to be used for the freezing effect.*/
@@ -44,7 +46,7 @@ public class Enemy : MonoBehaviour {
         {
             this.gameObject.GetComponent<Animator>().enabled = false;
             freeze_Timer += Time.deltaTime;
-            if(freeze_Timer >= 2.0f)
+			if(freeze_Timer >= TIME_BEFORE_THAW)
             {
                 this.gameObject.GetComponent<Animator>().enabled = true;
                 m_IsFrozen = false;
