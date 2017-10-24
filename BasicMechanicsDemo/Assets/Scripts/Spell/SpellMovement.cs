@@ -37,8 +37,6 @@ public class SpellMovement : MonoBehaviour {
 	protected bool m_IsMovingUp = false;
 	/**A private bool to help us keep track of whether the character's moving downward, and send the result to the character animator.*/
 	protected bool m_IsMovingDown = false;
-    /**A private bool to help us keep track of whether the character's moving at all, and send the result to the character animator.*/
-    protected bool m_IsMoving = false;
 
 	public float m_MaximalVelocity = 30.0f;
 	/**A reference to the target the spell is being cast at. Set using SpellMovement::SetTarget(GameObject).*/
@@ -189,9 +187,7 @@ public class SpellMovement : MonoBehaviour {
 		this.m_IsMovingUp = (this.m_Direction.z > 0) ? true : false;
 		this.m_IsMovingDown = (this.m_Direction.z < 0) ? true : false;
         if (this.m_IsMovingDown || this.m_IsMovingLeft || this.m_IsMovingRight || this.m_IsMovingUp)
-        {
-            this.m_IsMoving = true;
-        }
+        
         //update for downward motion
         this.m_Animator.SetBool (STRINGKEY_PARAM_ISMOVINGDOWN, this.m_IsMovingDown);
 		//update for upward motion
@@ -201,7 +197,7 @@ public class SpellMovement : MonoBehaviour {
 		//update for rightward motion
 		this.m_Animator.SetBool (STRINGKEY_PARAM_ISMOVINGRIGHT, this.m_IsMovingRight);
         //update for motion in general
-        this.m_Animator.SetBool(STRINGKEY_PARAM_ISMOVING, this.m_IsMoving);
+		this.m_Animator.SetBool(STRINGKEY_PARAM_ISMOVING, this.m_IsMovingDown || this.m_IsMovingLeft || this.m_IsMovingRight || this.m_IsMovingUp);
 
     }//end f'n void UpdateAnimatorParameters()
 

@@ -162,6 +162,7 @@ public class PlayerCastSpell : MonoBehaviour {
 	{
 		this.m_SpellClassToFire = this.gameObject.GetComponent<PlayerInventory>().m_ActiveSpellClass;
 		this.m_SpellName = this.m_SpellClassToFire.m_SpellName.ToString ();
+
 	}//end f'n void CheckChosenSpell()
 
 	/**A function to update the player animator with regards to the player spell casting animations.*/

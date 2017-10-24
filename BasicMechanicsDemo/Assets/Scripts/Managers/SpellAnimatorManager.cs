@@ -14,6 +14,7 @@ public class SpellAnimatorManager : MonoBehaviour {
 	/**A function to set a spell animator with respect to the spell*/
 	public void SetSpellAnimator(GameObject spell_default_prefab)
 	{
+		Debug.Log (spell_default_prefab.gameObject.name);
 		SpellName spell_class_name = spell_default_prefab.GetComponent<SpellMovement>().m_SpellClassToCast.m_SpellName;
 		SpellMovement spell_movement_component = spell_default_prefab.GetComponent<SpellMovement> ();
 		switch((int)spell_class_name)

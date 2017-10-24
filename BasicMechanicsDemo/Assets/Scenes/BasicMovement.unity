@@ -12441,6 +12441,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b23987fb161f84fa5b62da001f558d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_FireballAnimator: {fileID: 9100000, guid: a9855de1b34ddc742816040b79e0bf94, type: 2}
+  m_IceballAnimator: {fileID: 9100000, guid: 8d42b9085b0b591498c4bcaf393e6daf, type: 2}
 --- !u!1 &874569331
 GameObject:
   m_ObjectHideFlags: 0
@@ -20658,6 +20660,7 @@ MonoBehaviour:
   m_SpellCube: {fileID: 1081312389218078, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
     type: 2}
   m_SpellCubeInstance: {fileID: 0}
+  m_SpellAnimatorManager: {fileID: 872955990}
   m_MainCamera: {fileID: 1448755375}
   m_SpellName: 
 --- !u!114 &1546207780
@@ -23008,16 +23011,16 @@ Prefab:
         type: 2}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 29407e2dc217943a1925c239ca4c79b6, type: 2}
+      objectReference: {fileID: 9100000, guid: 8d42b9085b0b591498c4bcaf393e6daf, type: 2}
     - target: {fileID: 212307006107648292, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
         type: 2}
       propertyPath: m_Size.x
-      value: 1.64
+      value: 0.74
       objectReference: {fileID: 0}
     - target: {fileID: 212307006107648292, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
         type: 2}
       propertyPath: m_Size.y
-      value: 1.85
+      value: 0.73
       objectReference: {fileID: 0}
     - target: {fileID: 212307006107648292, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
         type: 2}
@@ -23031,7 +23034,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1910178985691910, guid: e78b574e24bcd4c5ca14bd25cf5ee863, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e78b574e24bcd4c5ca14bd25cf5ee863, type: 2}
