@@ -46,8 +46,11 @@ public class SpellMovement : MonoBehaviour {
 	private Vector3 m_Direction = new Vector3();
 	/**A bool to let us know whether the target is a mobile character.*/
 	public bool m_IsMobileCharacter { get; set;}
+
 	/**The spell we're currently casting.*/
 	public Spell m_SpellToCast;
+	/**The SpellClass spell we're currently casting.*/
+	public SpellClass m_SpellClassToCast;
 
 	//For testing purposes
 	public string m_SpellName;
@@ -125,11 +128,18 @@ public class SpellMovement : MonoBehaviour {
 			//...then make no change to the direction
 	}//end f'n void SetDirection()
 
-	/**A function to be called from PlayerCastSpell to set the spell that's being cast.*/
-	public void SetSpellToCast(Spell spell)
+//	/**A function to be called from PlayerCastSpell to set the spell that's being cast.*/
+//	public void SetSpellToCast(Spell spell)
+//	{
+//		this.m_SpellToCast = spell;
+//		this.m_SpellName = this.m_SpellToCast.m_SpellName.ToString ();
+//	}
+
+	/**A function to be called from PlayerCastSpell to set the SpellClass that's being cast.*/
+	public void SetSpellToCast(SpellClass spell)
 	{
-		this.m_SpellToCast = spell;
-		this.m_SpellName = this.m_SpellToCast.m_SpellName.ToString ();
+		this.m_SpellClassToCast = spell;
+		this.m_SpellName = this.m_SpellClassToCast.m_SpellName.ToString ();
 	}
 
     /**A function to be called whenever something enters a spellmovement collider; in terms of functionality, we'll use this function to destroy the spell object prefab after it strikes with something's collider.*/
@@ -145,7 +155,7 @@ public class SpellMovement : MonoBehaviour {
 			if (other.gameObject.GetComponent<Enemy>() != null)
 			{
 				Enemy enemy = other.gameObject.GetComponent<Enemy>();
-				enemy.ApplySpellEffects(this.m_SpellToCast.m_SpellName);
+				enemy.ApplySpellEffects(this.m_SpellClassToCast.m_SpellName);
 
 				#if TESTING_SPELLCOLLISION
 				message += "Subtracting enemy health...\n";

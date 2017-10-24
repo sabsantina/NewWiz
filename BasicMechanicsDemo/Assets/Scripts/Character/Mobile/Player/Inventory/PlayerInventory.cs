@@ -1,5 +1,6 @@
 #define TESTING_INVENTORY_CONTENTS_OUTPUT
 #define TESTING_INVENTORY_SPELLPICKUP
+#define TESTING_ACTIVE_SPELL
 #define START_WITH_FIREBALL
 #define START_WITH_ICEBALL
 
@@ -45,7 +46,7 @@ public class PlayerInventory : MonoBehaviour {
 		this.m_DefaultSpellInstance = GameObject.Instantiate(this.m_DefaultSpellPrefab);
 //		this.m_ActiveSpell = this.m_DefaultSpellPrefab.GetComponent<Spell> ();
 //		m_ActiveSpell.GenerateInstance_Fireball ();
-		this.m_ActiveSpellName = this.m_ActiveSpellClass.m_SpellName.ToString ();
+//		this.m_ActiveSpellName = this.m_ActiveSpellClass.m_SpellName.ToString ();
 	}
 
 	void Start()
@@ -53,8 +54,6 @@ public class PlayerInventory : MonoBehaviour {
 		//Initialize Spell List
 		this.m_SpellList = new List<Spell> ();
 		Spell spell_to_add = this.m_DefaultSpellInstance.GetComponent<Spell> ();
-
-
 
 		//Initialize Item Dictionary
 		this.m_ItemDictionary = new Dictionary<Item, int>();
@@ -87,7 +86,7 @@ public class PlayerInventory : MonoBehaviour {
 		}
 		#if TESTING_INVENTORY_CONTENTS_OUTPUT
 		if (Input.GetKeyDown (KeyCode.Return)) {
-			this.OutputSpellClass();
+			this.OutputInventoryContents();
 		}
 		#endif
 	}//end f'n void Update()
@@ -138,7 +137,9 @@ public class PlayerInventory : MonoBehaviour {
 
 				//Update active spell
 				this.m_ActiveSpellClass = this.m_SpellClassList [next_index];
-				Debug.Log ("Active spell: " + this.m_ActiveSpellClass.m_SpellName.ToString ());
+				#if TESTING_ACTIVE_SPELL
+				Debug.Log ("UpdateActiveSpell::Active SpellClass: " + this.m_ActiveSpellClass.m_SpellName.ToString ());
+				#endif
 			}//end if
 		}//end if
 	}//end f'n void UpdateActiveSpell()
@@ -150,13 +151,14 @@ public class PlayerInventory : MonoBehaviour {
 		this.m_ActiveSpellClass = this.m_SpellClassList [0];
 	}//end f'n void AssignDefaultActiveSpell()
 
-	private void OutputSpellClass()
+	/**A function to return the string containing all of the SpellClass instances of the [this.m_SpellClassList]*/
+	private string OutputSpellClassList()
 	{
 		string all_messages = "";
 		foreach (SpellClass spell_class in this.m_SpellClassList) {
 			all_messages += spell_class.ReturnSpellInstanceInfo () + "\n";
 		}
-		Debug.Log (all_messages);
+		return all_messages;
 	}
 
 	/**A function, for testing purposes, to print out the inventory contents.*/
@@ -164,18 +166,17 @@ public class PlayerInventory : MonoBehaviour {
 	{
 		string message = "Inventory Contents:\n";
 		message += "Spells:\n";
-		foreach (Spell spell in this.m_SpellList) {
-			message += "Spell name: " + spell.m_SpellName.ToString () + "\tSpell Effect: " + spell.m_SpellEffect.ToString() + "\n";
-		}//end foreach
+		message += this.OutputSpellClassList ();
+
 		message += "Items:\n";
 		foreach (KeyValuePair<Item, int> entry in this.m_ItemDictionary) {
 			message += "Item name: " + entry.Key.m_ItemName.ToString () + "\tItem Effect: " + entry.Key.m_ItemEffect.ToString () + "\tItem Quantity:\t" + entry.Value + "\n";
 		}//end foreach
 		message += "Active spell:\t";
-		if (m_ActiveSpell == null) {
+		if (this.m_ActiveSpellClass == null) {
 			message += "None";
 		} else {
-			message += "Spell name: " + m_ActiveSpell.m_SpellName.ToString () + "\tSpell Effect: " + m_ActiveSpell.m_SpellEffect.ToString () + "\n";
+			message += this.m_ActiveSpellClass.ReturnSpellInstanceInfo();
 		}
 		Debug.Log(message);
 	}//end f'n void OutputInventoryContents()
