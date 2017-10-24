@@ -8,5 +8,9 @@ public enum SpellName {
 	//Fireball as an example, with corresponding effect Fire_Damage.
 	//We need a more comprehensive list of spells and their effects.
 	Fireball = 0,
+<<<<<<< HEAD
 	Shield
+=======
+    Iceball = 1
+>>>>>>> master
 }

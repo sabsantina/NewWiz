@@ -12,9 +12,15 @@ public class Enemy : MonoBehaviour {
 
     public readonly float ENEMY_FULL_HEALTH = 100.0f;
 
+    /**Boolean to check if enemy can move. To be used for the IceBall effects*/
+    public bool frozen { get; set; }
+    /**Timer to be used for the freezing effect.*/
+    private float freeze_Timer = 0.0f;
+
     void Start()
     {
 		m_Health = ENEMY_FULL_HEALTH;
+        frozen = false;
     }
     void Update()
     {
@@ -32,6 +38,17 @@ public class Enemy : MonoBehaviour {
 				GameObject.Destroy(this.gameObject);
 			}
 			Debug.Log (message);
+        }
+        /**Checks if enemy is frozen.*/
+        if (frozen)
+        {
+            this.gameObject.GetComponent<Animator>().enabled = false;
+            freeze_Timer += Time.deltaTime;
+            if(freeze_Timer >= 2.0f)
+            {
+                this.gameObject.GetComponent<Animator>().enabled = true;
+                frozen = false;
+            }
         }
     }
     /**A function to add [effect] to the enemys's health.*/
@@ -51,6 +68,13 @@ public class Enemy : MonoBehaviour {
 				this.AffectHealth (-10.0f);
 				break;
 			}
+        case (int)SpellName.Iceball:
+            {
+                this.AffectHealth(-2.0f);
+                this.frozen = true;
+                freeze_Timer = 0.0f;
+                break;
+            }
 		default:
 			{
 				//Impossible, right now
