@@ -19,14 +19,14 @@ public class Spawner : MonoBehaviour {
 	#endif
 
 	/**A list of all Item instances we spawn.*/
-	private List<Item> m_ItemInstances;
+	private List<ItemPickup> m_ItemInstances;
 	/**A list of all Spell instances we spawn.*/
-	private List<Spell> m_SpellInstances;
+	private List<SpellPickup> m_SpellInstances;
 
 	void Start()
 	{
-		this.m_ItemInstances = new List<Item> ();
-		this.m_SpellInstances = new List<Spell>();
+		this.m_ItemInstances = new List<ItemPickup> ();
+		this.m_SpellInstances = new List<SpellPickup>();
 	}
 
 	// Update is called once per frame
@@ -34,11 +34,11 @@ public class Spawner : MonoBehaviour {
 		#if TESTING_ITEM_PICKUP
 		if (Input.GetKeyDown (KeyCode.Alpha1)) {
 			this.Spawn_Item_HealthPotion (this.m_Player.transform.position + Vector3.left * 2.0f);
-			Debug.Log("Spawner:\nSpawning an item with properties:\t" + this.m_ItemInstances[0].m_ItemName.ToString());
+			Debug.Log("Spawner:\nSpawning an item with properties:\t" + this.m_ItemInstances[0].m_Item.m_ItemName.ToString());
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha2)) {
 			this.Spawn_Spell_Fireball (this.m_Player.transform.position + Vector3.right * 2.0f);
-			Debug.Log("Spawner:\nSpawning a spell with properties:\t" + this.m_SpellInstances[0].m_SpellName.ToString());
+			Debug.Log("Spawner:\nSpawning a spell with properties:\t" + this.m_SpellInstances[0].m_Spell.m_SpellName.ToString());
 		}
 		#endif
 	}
@@ -48,8 +48,8 @@ public class Spawner : MonoBehaviour {
 	{
 		GameObject health_potion = GameObject.Instantiate (this.m_TempItemPrefab);
 		health_potion.transform.position = position;
-		Item health_potion_item = health_potion.GetComponent<Item> ();
-		health_potion_item = this.GenerateInstance_Item_HealthPotion ();
+		ItemPickup health_potion_item = health_potion.GetComponent<ItemPickup> ();
+		health_potion_item.SetItem(this.GenerateInstance_Item_HealthPotion ());
 		this.m_ItemInstances.Add (health_potion_item);
 	}//end f'n void Spawn_Item_HealthPotion(Vector3)
 
@@ -57,8 +57,8 @@ public class Spawner : MonoBehaviour {
 	{
 		GameObject fireball = GameObject.Instantiate (this.m_TempSpellPrefab);
 		fireball.transform.position = position;
-		Spell fireball_spell = fireball.GetComponent<Spell> ();
-		fireball_spell = this.GenerateInstance_Spell_Fireball ();
+		SpellPickup fireball_spell = fireball.GetComponent<SpellPickup> ();
+		fireball_spell.SetSpell(this.GenerateInstance_Spell_Fireball ());
 		this.m_SpellInstances.Add (fireball_spell);
 	}//end f'n void Spawn_Spell_Fireball(Vector3)
 
@@ -77,7 +77,7 @@ public class Spawner : MonoBehaviour {
 		Spell fireball = new Spell ();
 		fireball.m_SpellName = SpellName.Fireball;
 		fireball.m_SpellEffect = SpellEffect.Fire_Damage;
-		fireball.m_HasBeenDiscovered = false;
+		fireball.m_IsMobileSpell = true;
 		return fireball;
 	}//end f'n Spell GenerateInstance_Spell_Fireball()
 }
