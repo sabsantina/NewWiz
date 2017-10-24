@@ -49,8 +49,13 @@ public class PlayerInventory : MonoBehaviour {
 		SpellClass spell_class_instance = new SpellClass();
 		#if START_WITH_FIREBALL
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Fireball));
-		Debug.Log("Hit Return to display inventory and then add Ice ball to inventory.");
+		this.m_ActiveSpellClass = this.m_SpellClassList[0];
 		#endif
+		#if START_WITH_ICEBALL
+		this.AddSpell (spell_class_instance.GenerateInstance(SpellName.Iceball));
+		this.m_ActiveSpellClass = this.m_SpellClassList[0];
+		#endif
+
 
 	}//end f'n void Start()
 
@@ -70,10 +75,6 @@ public class PlayerInventory : MonoBehaviour {
 		#if TESTING_INVENTORY_CONTENTS_OUTPUT
 		if (Input.GetKeyDown (KeyCode.Return)) {
 			this.OutputInventoryContents();
-		#if START_WITH_ICEBALL
-			SpellClass spell_class_instance = new SpellClass();
-			this.AddSpell (spell_class_instance.GenerateInstance(SpellName.Iceball));
-		#endif
 		}
 		#endif
 	}//end f'n void Update()
@@ -84,7 +85,6 @@ public class PlayerInventory : MonoBehaviour {
 	{
 		//the user needs to have at least two spells to be able to switch between them
 		if (this.m_SpellClassList.Count > 1) {
-
 			float input = Input.GetAxis (STRINGKEY_INPUT_SWITCHSPELLS);
 
 			//If the user wants to switch their active spells...
