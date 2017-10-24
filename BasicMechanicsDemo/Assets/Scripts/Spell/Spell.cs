@@ -39,4 +39,11 @@ public class Spell : MonoBehaviour {
 		this.m_SpellName = SpellName.Fireball;
 		this.m_SpellEffect = SpellEffect.Fire_Damage;
 	}
+
+    public void GenerateInstance_IceBall(bool is_mobile)
+    {
+        this.m_IsMobileSpell = is_mobile;
+        this.m_SpellName = SpellName.Iceball;
+        this.m_SpellEffect = SpellEffect.Ice_Freeze;
+    }
 }

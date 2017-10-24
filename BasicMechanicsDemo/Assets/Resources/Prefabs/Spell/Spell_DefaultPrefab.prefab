@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4929f3f9e54b0499a9fa328a08702816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaximalVelocity: 30
+  m_MaximalVelocity: 25
   m_SpellToCast: {fileID: 0}
   m_SpellName: 
 --- !u!135 &135010289913475408
