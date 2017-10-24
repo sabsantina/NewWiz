@@ -186,8 +186,7 @@ public class SpellMovement : MonoBehaviour {
 		this.m_IsMovingLeft = (this.m_Direction.x < 0) ? true : false;
 		this.m_IsMovingUp = (this.m_Direction.z > 0) ? true : false;
 		this.m_IsMovingDown = (this.m_Direction.z < 0) ? true : false;
-        if (this.m_IsMovingDown || this.m_IsMovingLeft || this.m_IsMovingRight || this.m_IsMovingUp)
-        
+       
         //update for downward motion
         this.m_Animator.SetBool (STRINGKEY_PARAM_ISMOVINGDOWN, this.m_IsMovingDown);
 		//update for upward motion
