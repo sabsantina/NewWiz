@@ -62,11 +62,8 @@ public class PlayerInventory : MonoBehaviour {
 		//**********
 		this.m_SpellClassList = new List<SpellClass>();
 		SpellClass spell_class_instance = new SpellClass();
-		#if START_WITH_ICEBALL
-		this.m_SpellClassList.Add (spell_class_instance.GenerateInstance(SpellName.Iceball));
-		#endif
 		#if START_WITH_FIREBALL
-		this.m_SpellClassList.Add (spell_class_instance.GenerateInstance(SpellName.Fireball));
+		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Fireball));
 		#endif
 
 	}//end f'n void Start()
@@ -87,6 +84,10 @@ public class PlayerInventory : MonoBehaviour {
 		#if TESTING_INVENTORY_CONTENTS_OUTPUT
 		if (Input.GetKeyDown (KeyCode.Return)) {
 			this.OutputInventoryContents();
+		#if START_WITH_ICEBALL
+			SpellClass spell_class_instance = new SpellClass();
+			this.AddSpell (spell_class_instance.GenerateInstance(SpellName.Iceball));
+		#endif
 		}
 		#endif
 	}//end f'n void Update()
@@ -137,6 +138,7 @@ public class PlayerInventory : MonoBehaviour {
 
 				//Update active spell
 				this.m_ActiveSpellClass = this.m_SpellClassList [next_index];
+				Debug.Log (next_index);
 				#if TESTING_ACTIVE_SPELL
 				Debug.Log ("UpdateActiveSpell::Active SpellClass: " + this.m_ActiveSpellClass.m_SpellName.ToString ());
 				#endif
@@ -265,21 +267,30 @@ public class PlayerInventory : MonoBehaviour {
 	public void AddSpell(Spell spell_to_add)
 	{
 		SpellClass converted_spell = new SpellClass ().GenerateInstance (spell_to_add.m_SpellName);
-		if (this.m_SpellClassList.Contains (converted_spell)) {
-			return;
-		} else {
-			this.m_SpellClassList.Add (converted_spell);
+		foreach (SpellClass spell in this.m_SpellClassList) {
+			if (spell.m_SpellName.ToString () == spell_to_add.m_SpellName.ToString ()) {
+				return;
+			}
 		}
+		this.m_SpellClassList.Add (converted_spell);
 	}//end f'n void AddSpell(Spell)
 
 	/**A function to add a SpellClass object to the SpellClass list if the SpellClass is not already in the list.*/
 	public void AddSpell(SpellClass spell_to_add)
 	{
-		if (this.m_SpellClassList.Contains (spell_to_add)) {
-			return;
-		} else {
-			this.m_SpellClassList.Add (spell_to_add);
+////		Debug.Log (this.m_SpellClassList.Contains (spell_to_add));
+//		if (this.m_SpellClassList.Contains (spell_to_add)) {
+//			return;
+//		} else {
+//			this.m_SpellClassList.Add (spell_to_add);
+//		}
+		foreach (SpellClass spell in this.m_SpellClassList) {
+			if (spell.m_SpellName.ToString () == spell_to_add.m_SpellName.ToString ()) {
+				return;
+			}
 		}
+		this.m_SpellClassList.Add (spell_to_add);
+
 	}//end f'n void AddSpell(SpellClass)
 
 
