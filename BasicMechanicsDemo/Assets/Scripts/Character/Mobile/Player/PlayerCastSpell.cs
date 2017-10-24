@@ -7,6 +7,7 @@
 //#define TESTING_SPELLCAST
 #define TESTING_SPELLMOVEMENT
 
+//#define ATHANASIOS
 
 using System.Collections;
 using System.Collections.Generic;
@@ -18,8 +19,10 @@ public class PlayerCastSpell : MonoBehaviour {
 	#if TESTING_SPELLCAST
 	[SerializeField] private GameObject m_MagicCubePrefab;
 	#endif
-    public GameObject m_SpellCube;
-    private GameObject m_SpellCubeInstance;
+	/**A reference to our default spell prefab.*/
+	[SerializeField] public GameObject m_SpellCube;
+	/**A reference to an instantiated spell cube (instantiated from the reference to the default spell prefab), to have its Spell component set accordingly.*/
+    public GameObject m_SpellCubeInstance;
 
     private GameObject m_Target;
 	/**A reference to our main camera.*/
@@ -46,7 +49,9 @@ public class PlayerCastSpell : MonoBehaviour {
 
 	void Awake()
 	{
+		#if ATHANASIOS
         this.m_SpellCube = Resources.Load("Spell_Iceball_Prefab") as GameObject;
+		#endif
         this.m_SpellToFire = this.gameObject.GetComponent<PlayerInventory>().m_ActiveSpell;
 		this.m_SpellName = m_SpellToFire.m_SpellName.ToString();
 	}
@@ -85,7 +90,7 @@ public class PlayerCastSpell : MonoBehaviour {
 						//if the hit has a MobileCharacter component...
 						if (hit.collider.gameObject.GetComponent<MobileCharacter> () != null) {
 							m_Target = hit.collider.gameObject;
-							this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
+//							this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
 							this.m_SpellCubeInstance.transform.position = this.transform.position;
 							this.m_hasCastHittingSpell = true;
 							SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
@@ -105,7 +110,7 @@ public class PlayerCastSpell : MonoBehaviour {
 						Debug.Log("PlayerCastSpell::Update\tNo mobile characters found\tRay hit\tx: " + furthest.point.x
 							+ " y: " + furthest.point.y + " z: " + furthest.point.z);
 						#endif
-						this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
+//						this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
 						this.m_SpellCubeInstance.transform.position = this.transform.position;
 						SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
 						spell_movement.m_IsMobileCharacter = false;
@@ -157,19 +162,33 @@ public class PlayerCastSpell : MonoBehaviour {
     private void CheckChosenSpell()
     {
 		this.m_SpellToFire = this.gameObject.GetComponent<PlayerInventory>().m_ActiveSpell;
+		//if the spell to fire exists...
 		if (this.m_SpellToFire != null) {
 			Debug.Log ("Chosen spell: " + this.gameObject.GetComponent<PlayerInventory> ().m_ActiveSpell.m_SpellName.ToString());
+			//instantiate a default spell cube
+			this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
+			Spell spell_component = this.m_SpellCubeInstance.GetComponent<Spell> ();
 
-		}
-        if(this.m_SpellToFire.m_SpellName == SpellName.Fireball)
-        {
-            this.m_SpellCube = Resources.Load("Prefabs/Spell/Spell_DefaultPrefab") as GameObject;
-        }
-        else if (this.m_SpellToFire.m_SpellName == SpellName.Iceball)
-        {
-            this.m_SpellCube = Resources.Load("Prefabs/Spell/Spell_IceballPrefab") as GameObject;
-        }
-    }
+			//if the spell to fire is a fireball...
+			if (this.m_SpellToFire.m_SpellName == SpellName.Fireball) {
+				//...then set the spell component of the spell cube instance to represent that.
+				spell_component.GenerateInstance_Fireball ();
+				return;
+			}//end if
+			//if the spell to fire is a shield...
+			if (this.m_SpellToFire.m_SpellName == SpellName.Shield) {
+				//...then set the spell component of the spell cube instance to represent that.
+				spell_component.GenerateInstance_Shield ();
+				return;
+			}//end if
+			//if the spell to fire is an iceball...
+			if (this.m_SpellToFire.m_SpellName == SpellName.Iceball) {
+				//...then set the spell component of the spell cube instance to represent that.
+				spell_component.GenerateInstance_IceBall();
+				return;
+			}//end if
+		}//end if
+	}//end f'n void CheckChosenSpell()
 
 	/**A function to update the player animator with regards to the player spell casting animations.*/
 	private void UpdateAnimatorParameters()
