@@ -18,4 +18,10 @@ public class Item : MonoBehaviour {
 		//ensure the box collider's isTrigger is set to true
 		this.GetComponent<BoxCollider> ().isTrigger = true;
 	}//end f'n void Awake()
+
+	/**A function to compare items. Returns true if they both have the same name, as that's all we need to differentiate items.*/
+	public bool isEqual(Item other)
+	{
+		return (this.m_ItemName.ToString () == other.m_ItemName.ToString ());
+	}//
 }

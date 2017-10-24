@@ -1,4 +1,4 @@
-﻿#define TESTING_SPELLMOVEMENT
+#define TESTING_SPELLMOVEMENT
 #define TESTING_SPELLCOLLISION
 
 using System.Collections;
@@ -33,17 +33,49 @@ public class Spell : MonoBehaviour {
 		return new_spell;
 	}
 
+	/**A function to return a Spell instance representative of the Fireball spell.*/
 	public void GenerateInstance_Fireball(bool is_mobile)
 	{
 		this.m_IsMobileSpell = is_mobile;
 		this.m_SpellName = SpellName.Fireball;
 		this.m_SpellEffect = SpellEffect.Fire_Damage;
-	}
+	}//end f'n void GenerateInstance_Fireball(bool)
+		
+	/**A function to return a Spell instance representative of the Fireball spell.*/
+	public void GenerateInstance_Fireball()
+	{
+		this.m_IsMobileSpell = true;
+		this.m_SpellName = SpellName.Fireball;
+		this.m_SpellEffect = SpellEffect.Fire_Damage;
+	}//end f'n void GenerateInstance_Fireball()
 
+	/**A function to return a Spell instance representative of the Iceball spell.*/
     public void GenerateInstance_IceBall(bool is_mobile)
     {
         this.m_IsMobileSpell = is_mobile;
         this.m_SpellName = SpellName.Iceball;
         this.m_SpellEffect = SpellEffect.Ice_Freeze;
-    }
+	}//end f'n void GenerateInstance_Iceball(bool)
+
+	/**A function to return a Spell instance representative of the Iceball spell.*/
+	public void GenerateInstance_IceBall()
+	{
+		this.m_IsMobileSpell = true;
+		this.m_SpellName = SpellName.Iceball;
+		this.m_SpellEffect = SpellEffect.Ice_Freeze;
+	}//end f'n void GenerateInstance_Iceball(bool)
+
+	/**A function to return a Spell instance representative of the Shield spell.*/
+	public void GenerateInstance_Shield()
+	{
+		this.m_IsMobileSpell = false;
+		this.m_SpellName = SpellName.Shield;
+		this.m_SpellEffect = SpellEffect.Damage_Resistance;
+	}//end f'n void GenerateInstance_Shield()
+
+	/**A function to compare spells. Returns true if they both have the same name, as that's all we need to differentiate spells.*/
+	public bool isEqual(Spell other)
+	{
+		return (this.m_SpellName.ToString () == other.m_SpellName.ToString ());
+	}
 }

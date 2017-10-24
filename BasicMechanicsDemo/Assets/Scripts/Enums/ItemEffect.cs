@@ -5,5 +5,6 @@
 */
 public enum ItemEffect {
 	//Gain health as an example, we'll supplement this as we go.
-	Gain_Health
+	Gain_Health,
+	Gain_Mana
 }

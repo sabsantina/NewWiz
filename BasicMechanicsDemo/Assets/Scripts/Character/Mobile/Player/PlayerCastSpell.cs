@@ -6,7 +6,9 @@
 //A macro for testing; comment out to remove testing functionalities
 //#define TESTING_SPELLCAST
 #define TESTING_SPELLMOVEMENT
+#define TESTING_SPELLFROMINVENTORY
 
+//#define ATHANASIOS
 
 using System.Collections;
 using System.Collections.Generic;
@@ -18,8 +20,13 @@ public class PlayerCastSpell : MonoBehaviour {
 	#if TESTING_SPELLCAST
 	[SerializeField] private GameObject m_MagicCubePrefab;
 	#endif
-    public GameObject m_SpellCube;
-    private GameObject m_SpellCubeInstance;
+	/**A reference to our default spell prefab.*/
+	[SerializeField] public GameObject m_SpellCube;
+	/**A reference to an instantiated spell cube (instantiated from the reference to the default spell prefab), to have its Spell component set accordingly.*/
+    public GameObject m_SpellCubeInstance;
+
+	/**A manager for the spell animator controllers*/
+	[SerializeField] private SpellAnimatorManager m_SpellAnimatorManager;
 
     private GameObject m_Target;
 	/**A reference to our main camera.*/
@@ -35,40 +42,33 @@ public class PlayerCastSpell : MonoBehaviour {
     private bool m_hasCastHittingSpell;
 	/**The player animator, including the bit about casting spells.*/
 	private Animator m_Animator;
-    /**The reference to the spell which is fired by the player.*/
-	public Spell m_SpellToFire;
+    
+	/**The reference to the SpellClass which is fired by the player.*/
+	public SpellClass m_SpellClassToFire;
+
 	/**A variable for testing purposes*/
 	public string m_SpellName;
 
-
 	/**The number of seconds until we destroy the spell gameobject.*/
 	private readonly float TIME_UNTIL_DESTROY = 1.25f;
-
-	void Awake()
-	{
-        this.m_SpellCube = Resources.Load("Spell_Iceball_Prefab") as GameObject;
-        this.m_SpellToFire = this.gameObject.GetComponent<PlayerInventory>().m_ActiveSpell;
-		this.m_SpellName = m_SpellToFire.m_SpellName.ToString();
-	}
 
 	void Start()
 	{
 		this.m_Animator = this.GetComponent<Animator> ();
     }
 
-
 	// Update is called once per frame
 	void Update () {
-		
+
 		if (Input.GetButtonDown (STRINGKEY_INPUT_CASTSPELL)) {
 			this.CheckChosenSpell ();
 			//if the spell to fire exists...
-			if (this.m_SpellToFire != null) {
+			if (this.m_SpellClassToFire != null) {
 				//Update [this.m_isCastingSpell] for the animator
 				this.m_isCastingSpell = true;
 
 				//if the spell is mobile (meaning it's to be cast somewhere away from the player)...
-				if (this.m_SpellToFire.m_IsMobileSpell) {
+				if (this.m_SpellClassToFire.m_IsMobileSpell) {
 					Ray ray = this.m_MainCamera.ScreenPointToRay (Input.mousePosition);
 					RaycastHit[] targets_hit = Physics.RaycastAll (ray);
 					//We need to find the raycast hit furthest from the camera in the event that none of the raycasthits are 
@@ -92,8 +92,9 @@ public class PlayerCastSpell : MonoBehaviour {
 							spell_movement.m_IsMobileCharacter = true;
 							spell_movement.SetTarget (hit);
 							any_mobile_characters = true;
+							spell_movement.SetSpellToCast (this.m_SpellClassToFire);
 
-							spell_movement.SetSpellToCast (this.m_SpellToFire);
+							this.m_SpellAnimatorManager.SetSpellAnimator (this.m_SpellCubeInstance);
 
 						}//end if
 					}//end foreach
@@ -111,26 +112,29 @@ public class PlayerCastSpell : MonoBehaviour {
 						spell_movement.m_IsMobileCharacter = false;
 						spell_movement.SetTarget (furthest);
 
-						spell_movement.SetSpellToCast (this.m_SpellToFire);
+						spell_movement.SetSpellToCast (this.m_SpellClassToFire);
+
+						this.m_SpellAnimatorManager.SetSpellAnimator (this.m_SpellCubeInstance);
+
 						GameObject.Destroy (this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
 
 					}//end if
 				}//end if
 				//else if the spell is not mobile (meaning it's cast at the player's location...)
 				//we have no spells that fit this yet, so do nothing.
-			
+
 			}//end if
 		}//end if
 		//else if the user holds down the mouse...
 		else if (Input.GetButton(STRINGKEY_INPUT_CASTSPELL)) {
 			this.CheckChosenSpell ();
 			//if the spell to fire exists...
-			if (this.m_SpellToFire != null) {
+			if (this.m_SpellClassToFire != null) {
 				//Update [this.m_isCastingSpell] for the animator
 				this.m_isCastingSpell = true;
 
 				//if the spell is not mobile (meaning it's to be cast at the player)...
-				if (!this.m_SpellToFire.m_IsMobileSpell) {
+				if (!this.m_SpellClassToFire.m_IsMobileSpell) {
 					/*
 					* We need to figure out how to cast immobile spells (i.e. healing, shield).
 					*/
@@ -153,23 +157,13 @@ public class PlayerCastSpell : MonoBehaviour {
 		this.UpdateAnimatorParameters ();
 	}//end f'n void Update()
 
-    /**Used to retrieve the current spell from the inventory.*/
-    private void CheckChosenSpell()
-    {
-		this.m_SpellToFire = this.gameObject.GetComponent<PlayerInventory>().m_ActiveSpell;
-		if (this.m_SpellToFire != null) {
-			Debug.Log ("Chosen spell: " + this.gameObject.GetComponent<PlayerInventory> ().m_ActiveSpell.m_SpellName.ToString());
+	/**Used to retrieve the current spell from the inventory.*/
+	private void CheckChosenSpell()
+	{
+		this.m_SpellClassToFire = this.gameObject.GetComponent<PlayerInventory>().m_ActiveSpellClass;
+		this.m_SpellName = this.m_SpellClassToFire.m_SpellName.ToString ();
 
-		}
-        if(this.m_SpellToFire.m_SpellName == SpellName.Fireball)
-        {
-            this.m_SpellCube = Resources.Load("Prefabs/Spell/Spell_DefaultPrefab") as GameObject;
-        }
-        else if (this.m_SpellToFire.m_SpellName == SpellName.Iceball)
-        {
-            this.m_SpellCube = Resources.Load("Prefabs/Spell/Spell_IceballPrefab") as GameObject;
-        }
-    }
+	}//end f'n void CheckChosenSpell()
 
 	/**A function to update the player animator with regards to the player spell casting animations.*/
 	private void UpdateAnimatorParameters()

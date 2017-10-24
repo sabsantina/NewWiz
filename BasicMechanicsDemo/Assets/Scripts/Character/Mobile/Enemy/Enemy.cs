@@ -82,7 +82,6 @@ public class Enemy : MonoBehaviour {
 			}
 		}
 
-		Debug.Log ("Applying spell " + spell_name.ToString() + " with damage " + 10.0f);
 
 	}
 
