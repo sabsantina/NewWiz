@@ -1,4 +1,4 @@
-﻿#define TESTING_ENEMY_ATTACK
+﻿//#define TESTING_ENEMY_ATTACK
 
 using System.Collections;
 using System.Collections.Generic;
@@ -27,10 +27,31 @@ public class EnemyAttack : MonoBehaviour {
 		this.m_THIS_Enemy = this.GetComponent<Enemy> ();
 	}
 
+	/**A private bool to tell us whether or not the enemy is capable of damaging [other].
+	*Returns true if the enemy can damage [other]; false, otherwise.*/
+	private bool CanDamageOther(GameObject other)
+	{
+		//if THIS enemy is frozen...
+		if (this.m_THIS_Enemy.m_IsFrozen) {
+			//...then the enemy cannot damage [other].
+			return false;
+		}//end if
+		//if [other] is the player...
+		if (other.GetComponent<Player> () != null) {
+			Player player = other.GetComponent<Player> ();
+			//...and if the player is shielded
+			if (player.m_IsShielded) {
+				//...then the enemy cannot damage the player.
+				return false;
+			}//end if
+		}//end if
+		return true;
+	}//end f'n bool CanDamageOther(GameObject other)
+
 	void OnTriggerEnter(Collider other)
 	{
-		//if the enemy isn't frozen...
-		if (!this.m_THIS_Enemy.m_IsFrozen) {
+		//if the enemy is capable of attacking...
+		if (this.CanDamageOther (other.gameObject)) {
 			//if the player enters the collider...
 			if (other.gameObject.GetComponent<Player> () != null) {
 				//... then attack the player
@@ -48,8 +69,8 @@ public class EnemyAttack : MonoBehaviour {
 
 	void OnTriggerStay(Collider other)
 	{
-		//if the enemy isn't frozen...
-		if (!this.m_THIS_Enemy.m_IsFrozen) {
+		//if the enemy is capable of attacking...
+		if (this.CanDamageOther (other.gameObject)) {
 			//if the player stays in the collider...
 			if (other.gameObject.GetComponent<Player> () != null) {
 				//...and if the attack timer is greater than or equal to one more than the last second at which the player was attacked...
@@ -71,9 +92,9 @@ public class EnemyAttack : MonoBehaviour {
 
 	void OnTriggerExit(Collider other)
 	{
-		//if the enemy isn't frozen...
-		if (!this.m_THIS_Enemy.m_IsFrozen) {
-			//if the player exits the collider...
+		//if the enemy is capable of attacking...
+		if (this.CanDamageOther (other.gameObject)) {
+			//...and if the other is the player...
 			if (other.gameObject.GetComponent<Player> () != null) {
 				//then reset temporal variables
 				this.m_AttackTimer = 0.0f;

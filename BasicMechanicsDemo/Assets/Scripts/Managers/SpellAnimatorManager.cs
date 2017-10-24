@@ -8,9 +8,12 @@ using UnityEditor.Animations;
 
 public class SpellAnimatorManager : MonoBehaviour {
 
+	/**The animator containing the animations and bools for the fireball spell.*/
 	[SerializeField] private AnimatorController m_FireballAnimator;
+	/**The animator containing the animations and bools for the iceball spell.*/
 	[SerializeField] private AnimatorController m_IceballAnimator;
-//	[SerializeField] private m_ShieldAnimator;
+	/**The animator containing the animations and bools for the shield spell.*/
+	[SerializeField] private AnimatorController m_ShieldAnimator;
 
 
 	/**A function to set a spell animator with respect to the spell*/
@@ -36,6 +39,14 @@ public class SpellAnimatorManager : MonoBehaviour {
 				spell_movement_component.SetAnimatorController (this.m_IceballAnimator);
 				break;
 			}
+		case (int)SpellName.Shield:
+			{
+				#if TESTING_SUCCESSFUL_ANIMATOR_ASSIGNMENT
+				Debug.Log ("Shield animator controller assigned");
+				#endif
+				spell_movement_component.SetAnimatorController (this.m_ShieldAnimator);
+				break;
+			}
 		default:
 			{
 				//Impossible
@@ -43,5 +54,7 @@ public class SpellAnimatorManager : MonoBehaviour {
 			}
 		}//end switch
 	}//end f'n void SetSpellAnimator(GameObject)
+
+
 
 }

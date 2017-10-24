@@ -6,8 +6,7 @@
 //A macro for testing; comment out to remove testing functionalities
 //#define TESTING_SPELLCAST
 //#define TESTING_SPELLMOVEMENT
-
-//#define ATHANASIOS
+//#define TESTING_MOUSE_UP
 
 using System.Collections;
 using System.Collections.Generic;
@@ -30,6 +29,8 @@ public class PlayerCastSpell : MonoBehaviour {
     private GameObject m_Target;
 	/**A reference to our main camera.*/
 	[SerializeField] private Camera m_MainCamera;
+	/**A reference to the player, so we can affect his parameters as a result of magic usage.*/
+	private Player m_Player;
 
 	/**A string variable containing the string name of the Input Manager variable responsible for player firing off spells.*/
 	private readonly string STRINGKEY_INPUT_CASTSPELL = "Cast Spell";
@@ -38,7 +39,6 @@ public class PlayerCastSpell : MonoBehaviour {
 	/**A bool variable to let us know whether or not the player's in the process of casting a spell.*/
 	private bool m_isCastingSpell;
 
-    private bool m_hasCastHittingSpell;
 	/**The player animator, including the bit about casting spells.*/
 	private Animator m_Animator;
     
@@ -54,6 +54,7 @@ public class PlayerCastSpell : MonoBehaviour {
 	void Start()
 	{
 		this.m_Animator = this.GetComponent<Animator> ();
+		this.m_Player = this.GetComponent<Player> ();
     }
 
 	// Update is called once per frame
@@ -86,7 +87,6 @@ public class PlayerCastSpell : MonoBehaviour {
 							m_Target = hit.collider.gameObject;
 							this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
 							this.m_SpellCubeInstance.transform.position = this.transform.position;
-							this.m_hasCastHittingSpell = true;
 							SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
 							spell_movement.m_IsMobileCharacter = true;
 							spell_movement.SetTarget (hit);
@@ -127,34 +127,68 @@ public class PlayerCastSpell : MonoBehaviour {
 		//else if the user holds down the mouse...
 		else if (Input.GetButton(STRINGKEY_INPUT_CASTSPELL)) {
 			this.CheckChosenSpell ();
+
 			//if the spell to fire exists...
 			if (this.m_SpellClassToFire != null) {
 				//Update [this.m_isCastingSpell] for the animator
 				this.m_isCastingSpell = true;
 
-				//if the spell is not mobile (meaning it's to be cast at the player)...
-				if (!this.m_SpellClassToFire.m_IsMobileSpell) {
-					/*
-					* We need to figure out how to cast immobile spells (i.e. healing, shield).
-					*/
+				//if the spell is not mobile (meaning it's to be cast at the player)
+				//	AND if the spell cube instance is null (which can only mean the last spell cube was destroyed)...
+				if (!this.m_SpellClassToFire.m_IsMobileSpell && this.m_SpellCubeInstance == null) {
+					//...then create a new spell cube
+					this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
+					this.m_SpellCubeInstance.transform.position = this.transform.position;
+					SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
+					spell_movement.SetSpellToCast (this.m_SpellClassToFire);
+					this.m_SpellAnimatorManager.SetSpellAnimator (this.m_SpellCubeInstance);
 
-
+				}//end if
+				//if the spell cube instance exists (meaning we're in the process of casting a spell)...
+				if (this.m_SpellCubeInstance != null) {
+					//...then ensure the spell's always at our position
+					SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
+					spell_movement.MaintainPosition (this.transform.position);
 				}//end if
 				//else if the spell is not mobile (meaning it's cast at the player's location...)
 				//we have no spells that fit this yet, so do nothing.
 
 			}//end if
-		}
+
+		}//end if
+		//if the player lets go of the mouse and the spell wasn't a mobile spell (meaning that at this point they're probably still
+			//holding down the mouse...
+		else if (Input.GetButtonUp (STRINGKEY_INPUT_CASTSPELL) && !this.m_SpellClassToFire.m_IsMobileSpell) {
+			#if TESTING_MOUSE_UP
+			Debug.Log ("Mouse up");
+			#endif
+			//...then the spell is no longer being cast
+			this.m_isCastingSpell = false;
+			//...and we need to destroy the gameobject instance
+			GameObject.Destroy (this.m_SpellCubeInstance);
+		}//end if
+
 		//else if the player doesn't click (doesn't fire a spell)...
 		else {
 			//Update [this.m_isCastingSpell] for the animator
 			this.m_isCastingSpell = false;
 		}//end else
 
-
+		//USE THIS SPACE TO UPDATE ANY PLAYER ATTRIBUTES AS A RESULT OF MAGIC
+		this.ApplyPlayerAttributesAsResultOfMagic();
 
 		this.UpdateAnimatorParameters ();
 	}//end f'n void Update()
+
+	/**A function to neatly apply all player attributes as a result of a given magic.
+	*For instance, we'll use this function to apply the [IsShielded] to the Player class.*/
+	private void ApplyPlayerAttributesAsResultOfMagic()
+	{
+		//***SHIELD
+		//if we're casting a spell and the spell we're firing is the shield then the player is shielded.
+		this.m_Player.m_IsShielded = (this.m_isCastingSpell && 
+										this.m_SpellClassToFire.m_SpellName == SpellName.Shield) ? true : false;
+	}//end f'n void ApplyPlayerAttributesAsResultOfMagic()
 
 	/**Used to retrieve the current spell from the inventory.*/
 	private void CheckChosenSpell()

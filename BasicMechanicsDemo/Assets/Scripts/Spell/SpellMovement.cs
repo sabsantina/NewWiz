@@ -72,25 +72,29 @@ public class SpellMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (this.m_IsMobileCharacter) {
-			//Update direction
-			this.SetDirection ();
-		}
+		//if the spell we want to cast exists and is a mobile spell...
+		if (this.m_SpellClassToCast != null && this.m_SpellClassToCast.m_IsMobileSpell) {
+			//...if our target is mobile...
+			if (this.m_IsMobileCharacter) {
+				//Update direction
+				this.SetDirection ();
+			}//end if
 
-		#if TESTING_SPELLMOVEMENT
-		string message = "SpellMovement::Update::Direction of spell:\tx:" + this.m_Direction.x + "\ty:" + this.m_Direction.y +
-		"\tz:" + this.m_Direction.z;
-		Debug.Log(message);
-		#endif
+			#if TESTING_SPELLMOVEMENT
+			string message = "SpellMovement::Update::Direction of spell:\tx:" + this.m_Direction.x + "\ty:" + this.m_Direction.y +
+			"\tz:" + this.m_Direction.z;
+			Debug.Log(message);
+			#endif
 
-		//get our current position (which will be at whoever cast the spell)
-		Vector3 current_position = this.transform.position;
-		Vector3 translation = Vector3.ClampMagnitude (this.m_Direction, this.m_MaximalVelocity) * Time.deltaTime;
-		//and update the current position
-		current_position += translation;
-		this.transform.position = current_position;
+			//get our current position (which will be at whoever cast the spell)
+			Vector3 current_position = this.transform.position;
+			Vector3 translation = Vector3.ClampMagnitude (this.m_Direction, this.m_MaximalVelocity) * Time.deltaTime;
+			//and update the current position
+			current_position += translation;
+			this.transform.position = current_position;
 
-		this.UpdateAnimatorParameters ();
+			this.UpdateAnimatorParameters ();
+		}//end if
 	}//end f'n void Update()
 
 	/**Set the target at which we're shooting the magic.*/
@@ -109,6 +113,12 @@ public class SpellMovement : MonoBehaviour {
 			this.m_Direction.y = 0.0f;
 		}
 	}//end f'n void SetTarget(GameObject)
+
+	/**A function to tell the spells where to go from another class; this will be helpful for those spells who aren't mobile, where the player may move.*/
+	public void MaintainPosition(Vector3 position)
+	{
+		this.transform.position = position;
+	}//end f'n void MaintainPosition(Vector3)
 
 	/**A private function to set the direction to the given target [this.m_Target].*/
 	private void SetDirection()
@@ -129,13 +139,6 @@ public class SpellMovement : MonoBehaviour {
 			//...then make no change to the direction
 	}//end f'n void SetDirection()
 
-//	/**A function to be called from PlayerCastSpell to set the spell that's being cast.*/
-//	public void SetSpellToCast(Spell spell)
-//	{
-//		this.m_SpellToCast = spell;
-//		this.m_SpellName = this.m_SpellToCast.m_SpellName.ToString ();
-//	}
-
 	/**A function to be called from PlayerCastSpell to set the SpellClass that's being cast.*/
 	public void SetSpellToCast(SpellClass spell)
 	{
@@ -146,36 +149,44 @@ public class SpellMovement : MonoBehaviour {
     /**A function to be called whenever something enters a spellmovement collider; in terms of functionality, we'll use this function to destroy the spell object prefab after it strikes with something's collider.*/
     void OnTriggerEnter(Collider other)
     {
-        //if we hit the target...
-        if (other.gameObject == this.m_TargetedObj)
-        {
-            #if TESTING_SPELLCOLLISION
-			string message = "SpellMovement::OnTriggerEnter(Collider)\tTarget " + this.m_Target.collider.gameObject.name + " hit!\n";
-			#endif
-			//if the other is an enemy...
-			if (other.gameObject.GetComponent<Enemy>() != null)
-			{
-				Enemy enemy = other.gameObject.GetComponent<Enemy>();
-				enemy.ApplySpellEffects(this.m_SpellClassToCast.m_SpellName);
-
-				#if TESTING_SPELLCOLLISION
-				message += "Subtracting enemy health...\n";
-				#endif
-			}//end if
-			//Destroy the spell
-			GameObject.Destroy(this.gameObject);
-			#if TESTING_SPELLCOLLISION
-			message += "\nGameObject destroyed";
-
-			Debug.Log(message);
-            #endif
+		//if the spell we're casting isn't mobile...
+		if (!this.m_SpellClassToCast.m_IsMobileSpell) {
+			//...then we don't really care about collisions
 			return;
-        }
-		//if the spell hits a part of the scenery...
-		if (other.gameObject.GetComponent<Obstructable> ()) {
-			//...destroy it (we don't want stuff like spells going through trees
-			GameObject.Destroy (this.gameObject);
-		}
+		}//end if
+		//else if the spell we're casting is mobile...
+		else {
+			//if we hit the target...
+			if (other.gameObject == this.m_TargetedObj)
+			{
+				#if TESTING_SPELLCOLLISION
+				string message = "SpellMovement::OnTriggerEnter(Collider)\tTarget " + this.m_Target.collider.gameObject.name + " hit!\n";
+				#endif
+				//if the other is an enemy...
+				if (other.gameObject.GetComponent<Enemy>() != null)
+				{
+					Enemy enemy = other.gameObject.GetComponent<Enemy>();
+					enemy.ApplySpellEffects(this.m_SpellClassToCast.m_SpellName);
+
+					#if TESTING_SPELLCOLLISION
+					message += "Subtracting enemy health...\n";
+					#endif
+				}//end if
+				//Destroy the spell
+				GameObject.Destroy(this.gameObject);
+				#if TESTING_SPELLCOLLISION
+				message += "\nGameObject destroyed";
+
+				Debug.Log(message);
+				#endif
+				return;
+			}
+			//if the spell hits a part of the scenery...
+			if (other.gameObject.GetComponent<Obstructable> ()) {
+				//...destroy it (we don't want stuff like spells going through trees
+				GameObject.Destroy (this.gameObject);
+			}//end if
+		}//end if
 
     }//end f'n void OnTriggerEnter(Collider)
 
