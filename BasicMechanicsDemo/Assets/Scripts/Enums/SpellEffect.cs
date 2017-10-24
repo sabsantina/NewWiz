@@ -10,4 +10,5 @@ public enum  SpellEffect
 	//We need a more comprehensive list of spells and their effects.
 	Fire_Damage,
 	Damage_Resistance
+    Ice_Freeze
 }

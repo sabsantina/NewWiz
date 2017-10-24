@@ -55,35 +55,39 @@ public class EnemyMovement : MobileCharacter {
 		this.m_Direction = (this.m_IsChasing) ? Vector3.ClampMagnitude(this.m_Direction, this.m_ChasingVelocity)
 												: Vector3.ClampMagnitude(this.m_Direction, this.m_MaximalVelocity);
 
-		//if player immediately ahead...
-		if (this.IsPlayerAhead())
-		{
-			//...then don't move forward
-			return;
-		}
-		//if obstructable immediately ahead...
-		if (this.IsObstructableAhead())
-		{
-			//...then negate direction
-			this.m_Direction = -(this.m_Direction);
-		}
-		//Add to current position
-		current_position += this.m_Direction * Time.deltaTime;
-		//Update position
-		this.transform.position = current_position;
+        if (!this.gameObject.GetComponent<Enemy>().frozen)
+        {
+            //if player immediately ahead...
+            if (this.IsPlayerAhead())
+            {
+                //...then don't move forward
+                return;
+            }
+            //if obstructable immediately ahead...
+            if (this.IsObstructableAhead())
+            {
+                //...then negate direction
+                this.m_Direction = -(this.m_Direction);
+            }
+            //Add to current position
+            current_position += this.m_Direction * Time.deltaTime;
+            //Update position
+            this.transform.position = current_position;
 
-		if (this.isLeavingDetectionArea ()) {
-			this.RedirectIntoDetectionArea ();
-		}
-		#endif
-		this.SetAnimatorParameters ();
+            if (this.isLeavingDetectionArea())
+            {
+                this.RedirectIntoDetectionArea();
+            }
+        }
+        this.SetAnimatorParameters();
 
-		this.UpdateAnimatorParameters ();
-	}//end f'n void Update
+        this.UpdateAnimatorParameters();
+#endif
+    }//end f'n void Update
 
-	/**A function to change the direction of the enemy to keep it in the detection area.
+    /**A function to change the direction of the enemy to keep it in the detection area.
 	*Note that the resulting [m_Direction] is only applied to THIS gameobject in the Update() function, where Time.deltaTime is applied to it. Thus, we have no need of Time.deltaTime here.*/
-	public void RedirectIntoDetectionArea()
+    public void RedirectIntoDetectionArea()
 	{
 		float initial_y = this.transform.position.y;
 		float detection_area_radius = this.m_DetectionArea.gameObject.GetComponent<CapsuleCollider> ().radius;

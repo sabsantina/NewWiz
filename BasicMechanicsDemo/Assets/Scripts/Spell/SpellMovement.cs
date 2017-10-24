@@ -23,6 +23,8 @@ public class SpellMovement : MonoBehaviour {
 	private readonly string STRINGKEY_PARAM_ISMOVINGUP = "isMovingUp";
 	/**A string variable containing the string name of the isMovingDown parameter in the character animator.*/
 	private readonly string STRINGKEY_PARAM_ISMOVINGDOWN = "isMovingDown";
+    /**A string variable containing the string name of the isMoving parameter in the character animator.*/
+    private readonly string STRINGKEY_PARAM_ISMOVING = "isMoving";
 
 	/**A private bool to help us keep track of whether the character's moving leftward, and send the result to the character animator.*/
 	protected bool m_IsMovingLeft = false;
@@ -32,10 +34,12 @@ public class SpellMovement : MonoBehaviour {
 	protected bool m_IsMovingUp = false;
 	/**A private bool to help us keep track of whether the character's moving downward, and send the result to the character animator.*/
 	protected bool m_IsMovingDown = false;
+    /**A private bool to help us keep track of whether the character's moving at all, and send the result to the character animator.*/
+    protected bool m_IsMoving = false;
 
-	public float m_MaximalVelocity = 35.0f;
+	public float m_MaximalVelocity = 30.0f;
 	/**A reference to the target the spell is being cast at. Set using SpellMovement::SetTarget(GameObject).*/
-	public RaycastHit m_Target { get; private set; }
+    public RaycastHit m_Target { get; private set; }
 	/**A reference to the gameobject of [this.m_Target] - this will be for the spells to lock on in case the enemy or target is moving.*/
 	private GameObject m_TargetedObj;
 	/**The direction in which the spell is moving.*/
@@ -171,13 +175,20 @@ public class SpellMovement : MonoBehaviour {
 		this.m_IsMovingLeft = (this.m_Direction.x < 0) ? true : false;
 		this.m_IsMovingUp = (this.m_Direction.z > 0) ? true : false;
 		this.m_IsMovingDown = (this.m_Direction.z < 0) ? true : false;
-		//update for downward motion
-		this.m_Animator.SetBool (STRINGKEY_PARAM_ISMOVINGDOWN, this.m_IsMovingDown);
+        if (this.m_IsMovingDown || this.m_IsMovingLeft || this.m_IsMovingRight || this.m_IsMovingUp)
+        {
+            this.m_IsMoving = true;
+        }
+        //update for downward motion
+        this.m_Animator.SetBool (STRINGKEY_PARAM_ISMOVINGDOWN, this.m_IsMovingDown);
 		//update for upward motion
 		this.m_Animator.SetBool (STRINGKEY_PARAM_ISMOVINGUP, this.m_IsMovingUp);
 		//update for leftward motion
 		this.m_Animator.SetBool (STRINGKEY_PARAM_ISMOVINGLEFT, this.m_IsMovingLeft);
 		//update for rightward motion
 		this.m_Animator.SetBool (STRINGKEY_PARAM_ISMOVINGRIGHT, this.m_IsMovingRight);
-	}//end f'n void UpdateAnimatorParameters()
+        //update for motion in general
+        this.m_Animator.SetBool(STRINGKEY_PARAM_ISMOVING, this.m_IsMoving);
+
+    }//end f'n void UpdateAnimatorParameters()
 }

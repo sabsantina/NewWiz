@@ -9,4 +9,5 @@ public enum SpellName {
 	//We need a more comprehensive list of spells and their effects.
 	Fireball = 0,
 	Shield
+    Iceball = 1
 }

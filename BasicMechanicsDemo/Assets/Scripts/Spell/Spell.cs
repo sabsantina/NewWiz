@@ -45,4 +45,10 @@ public class Spell : MonoBehaviour {
 	{
 		return (this.m_SpellName.ToString () == other.m_SpellName.ToString ());
 	}
+    public void GenerateInstance_IceBall(bool is_mobile)
+    {
+        this.m_IsMobileSpell = is_mobile;
+        this.m_SpellName = SpellName.Iceball;
+        this.m_SpellEffect = SpellEffect.Ice_Freeze;
+    }
 }
