@@ -49,6 +49,7 @@ public class PlayerInventory : MonoBehaviour {
 		SpellClass spell_class_instance = new SpellClass();
 		#if START_WITH_FIREBALL
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Fireball));
+		Debug.Log("Hit Return to display inventory and then add Ice ball to inventory.");
 		#endif
 
 	}//end f'n void Start()
