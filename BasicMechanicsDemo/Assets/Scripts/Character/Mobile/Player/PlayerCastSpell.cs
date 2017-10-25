@@ -95,7 +95,8 @@ public class PlayerCastSpell : MonoBehaviour {
 							spell_movement.SetSpellToCast (this.m_SpellClassToFire);
 
 							this.m_SpellAnimatorManager.SetSpellAnimator (this.m_SpellCubeInstance);
-
+							//return to ensure we only launch one spell
+							return;
 						}//end if
 					}//end foreach
 

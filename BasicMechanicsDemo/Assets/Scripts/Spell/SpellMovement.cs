@@ -187,9 +187,9 @@ public class SpellMovement : MonoBehaviour {
 		}//end if
 		//else if the spell we're casting is mobile...
 		else {
-//			if (other is CapsuleCollider) {
-//				return;
-//			}
+			if (other is CapsuleCollider) {
+				return;
+			}
 			//if we hit the target and specifically NOT the enemy's detection collider...
 			if (other.gameObject == this.m_TargetedObj)
 			{
