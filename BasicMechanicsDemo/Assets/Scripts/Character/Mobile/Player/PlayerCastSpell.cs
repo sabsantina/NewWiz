@@ -64,6 +64,7 @@ public class PlayerCastSpell : MonoBehaviour {
 			this.CheckChosenSpell ();
 			//if the spell to fire exists...
 			if (this.m_SpellClassToFire != null) {
+
 				//Update [this.m_isCastingSpell] for the animator
 				this.m_isCastingSpell = true;
 
@@ -94,7 +95,8 @@ public class PlayerCastSpell : MonoBehaviour {
 							spell_movement.SetSpellToCast (this.m_SpellClassToFire);
 
 							this.m_SpellAnimatorManager.SetSpellAnimator (this.m_SpellCubeInstance);
-
+							//return to ensure we only launch one spell
+							return;
 						}//end if
 					}//end foreach
 

@@ -67,18 +67,18 @@ public class PlayerInteraction : MonoBehaviour {
 		this.m_SpeechBubbleTest.transform.position = speech_bubble_position;
 		this.m_SpeechBubbleTest.transform.Rotate (new Vector3 (60.0f, 0.0f, 0.0f));
 		#endif
-		Vector3 desired_position = NPC_GameObject.transform.position + (NPC_GameObject.transform.up * 7.0f);
-		Vector3 screen_position = this.m_MainCamera.WorldToScreenPoint (desired_position);
-
-		Vector3 screen_coords = this.m_MainCamera.WorldToScreenPoint (desired_position);
-		Rect button_rect = this.m_SpeechBubbleButton.GetComponent<Rect> ();
-		button_rect.center = new Vector2 (screen_coords.x, screen_coords.y);
-		this.m_SpeechBubbleButton.GetComponentInChildren<Text> ().text = dialog;
-
-
-		Debug.Log ("Screen coordinates of above NPC:\n"
-			+ "x: " + screen_coords.x + "\ty: " + screen_coords.y + "\tz: " + screen_coords.z);
-
+//		Vector3 desired_position = NPC_GameObject.transform.position + (NPC_GameObject.transform.up * 7.0f);
+//		Vector3 screen_position = this.m_MainCamera.WorldToScreenPoint (desired_position);
+//
+//		Vector3 screen_coords = this.m_MainCamera.WorldToScreenPoint (desired_position);
+//		Rect button_rect = this.m_SpeechBubbleButton.GetComponent<Rect> ();
+//		button_rect.center = new Vector2 (screen_coords.x, screen_coords.y);
+//		this.m_SpeechBubbleButton.GetComponentInChildren<Text> ().text = dialog;
+//
+//
+//		Debug.Log ("Screen coordinates of above NPC:\n"
+//			+ "x: " + screen_coords.x + "\ty: " + screen_coords.y + "\tz: " + screen_coords.z);
+//
 //		this.m_SpeechBubbleButton.transform.position = screen_position;
 	}
 }

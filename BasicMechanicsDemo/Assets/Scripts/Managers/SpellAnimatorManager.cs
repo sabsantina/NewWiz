@@ -14,6 +14,8 @@ public class SpellAnimatorManager : MonoBehaviour {
 	[SerializeField] private AnimatorController m_IceballAnimator;
 	/**The animator containing the animations and bools for the shield spell.*/
 	[SerializeField] private AnimatorController m_ShieldAnimator;
+	/**The animator containing the animations and bools for the thunderball spell.*/
+	[SerializeField] private AnimatorController m_ThunderballAnimator;
 
 
 	/**A function to set a spell animator with respect to the spell*/
@@ -45,6 +47,14 @@ public class SpellAnimatorManager : MonoBehaviour {
 				Debug.Log ("Shield animator controller assigned");
 				#endif
 				spell_movement_component.SetAnimatorController (this.m_ShieldAnimator);
+				break;
+			}
+		case (int)SpellName.Thunderball:
+			{
+				#if TESTING_SUCCESSFUL_ANIMATOR_ASSIGNMENT
+				Debug.Log ("Thunderball animator controller assigned");
+				#endif
+				spell_movement_component.SetAnimatorController (this.m_ThunderballAnimator);
 				break;
 			}
 		default:
