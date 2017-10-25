@@ -50,6 +50,10 @@ public class PlayerCastSpell : MonoBehaviour {
 
 	/**The number of seconds until we destroy the spell gameobject.*/
 	private readonly float TIME_UNTIL_DESTROY = 1.25f;
+	/**A vector to help us know what the offset is for a given AOE animation, with respect to the player click position.*/
+	public Vector3 AOE_offset = new Vector3(0.0f, 2.8f, 4.20f);
+	/**A reference to the floor.*/
+	[SerializeField] private GameObject m_Floor;
 
 	void Start()
 	{
@@ -121,7 +125,33 @@ public class PlayerCastSpell : MonoBehaviour {
 
 					}//end if
 				}//end if
-				//else if the spell is not mobile (meaning it's cast at the player's location...)
+				//else if the spell is not mobile and is an AOE spell...
+//				else if (this.m_SpellClassToFire.m_IsAOESpell) {
+//					//...then we'll want to spawn one of these a little bit askew of wherever was clicked by the user, so let's start by getting that.
+//					//It's easiest to shoot a ray at the ground.
+//					Ray ray = this.m_MainCamera.ScreenPointToRay (Input.mousePosition);
+//					RaycastHit[] targets_hit = Physics.RaycastAll (ray);
+//					//We need to find the raycast hit furthest from the camera in the event that none of the raycasthits are 
+//					//mobile character as the furthest raycast hit will be the ground.
+//					RaycastHit furthest = targets_hit [0];
+//					bool any_mobile_characters = false;
+//					foreach (RaycastHit hit in targets_hit) {
+//						//if the hit's distance is greater than that of the furthest...
+//						if (hit.distance > furthest.distance) {
+//							//...then update the furthest
+//							furthest = hit;
+//						}//end if
+//					}//end foreach
+//
+//					this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
+//					SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
+//
+//					spell_movement.SetSpellToCast (this.m_SpellClassToFire);
+//					spell_movement.MaintainPosition(furthest.point + AOE_offset);
+//					this.m_SpellAnimatorManager.SetSpellAnimator (this.m_SpellCubeInstance);
+//
+//					GameObject.Destroy (this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
+//				}
 				//we have no spells that fit this yet, so do nothing.
 
 			}//end if
@@ -130,12 +160,12 @@ public class PlayerCastSpell : MonoBehaviour {
 		else if (Input.GetButton(STRINGKEY_INPUT_CASTSPELL)) {
 			this.CheckChosenSpell ();
 
-			//if the spell to fire exists...
+			//if the spell to fire exists and is immobile...
 			if (this.m_SpellClassToFire != null && !this.m_SpellClassToFire.m_IsMobileSpell) {
 				//Update [this.m_isCastingSpell] for the animator
 				this.m_isCastingSpell = true;
 
-				//if the spell is not mobile (meaning it's to be cast at the player)
+				//if the spell is not mobile
 				//	AND if the spell cube instance is null (which can only mean the last spell cube was destroyed)...
 				if (!this.m_SpellClassToFire.m_IsMobileSpell && this.m_SpellCubeInstance == null) {
 					//...then create a new spell cube
@@ -148,11 +178,44 @@ public class PlayerCastSpell : MonoBehaviour {
 				}//end if
 				//if the spell cube instance exists (meaning we're in the process of casting a spell)...
 				if (this.m_SpellCubeInstance != null) {
-					//...then ensure the spell's always at our position
+					//...then ensure the spell's always at our chosen position
 					SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
-					spell_movement.MaintainPosition (this.transform.position);
+//					//get the position to maintain with respect to the spell to cast.
+
+					//if it's an AOE spell...
+					if (this.m_SpellClassToFire.m_IsAOESpell) {
+						Ray ray = this.m_MainCamera.ScreenPointToRay (Input.mousePosition);
+						RaycastHit[] targets_hit = Physics.RaycastAll (ray);
+						//We need to find the raycast hit furthest from the camera in the event that none of the raycasthits are 
+						//mobile character as the furthest raycast hit will be the ground.
+//						RaycastHit furthest = targets_hit [0];
+//						bool any_mobile_characters = false;
+//						foreach (RaycastHit hit in targets_hit) {
+//							//if the hit's distance is greater than that of the furthest...
+//							if (hit.distance > furthest.distance) {
+//								//...then update the furthest
+//								furthest = hit;
+//							}//end if
+//						}//end foreach
+
+						RaycastHit target = targets_hit [0];
+						bool any_mobile_characters = false;
+						foreach (RaycastHit hit in targets_hit) {
+							//if the hit's distance is greater than that of the furthest...
+							if (hit.collider.gameObject == this.m_Floor) {
+								target = hit;
+							}
+						}//end foreach
+						Vector3 modified_target = new Vector3(target.point.x, 0.0f, target.point.z);
+						Vector3 position = modified_target + AOE_offset;
+						spell_movement.MaintainPosition (position);
+					}//end if
+					//else if it isn't an AOE spell...
+					else {
+						spell_movement.MaintainPosition (this.transform.position);
+					}//end else
 				}//end if
-				//else if the spell is not mobile (meaning it's cast at the player's location...)
+				//else if the spell is not mobile
 				//we have no spells that fit this yet, so do nothing.
 
 			}//end if
@@ -182,6 +245,25 @@ public class PlayerCastSpell : MonoBehaviour {
 
 		this.UpdateAnimatorParameters ();
 	}//end f'n void Update()
+
+	/**A function to return the position to maintain of an immobile spell (an immobile spell could be cast either on the player or on an enemy, as it turns out).*/
+	private Vector3 PositionToMaintain()
+	{
+		Vector3 position_to_maintain = new Vector3 ();
+		switch ((int)this.m_SpellClassToFire.m_SpellName) {
+		case (int)SpellName.Shield:
+			{
+				position_to_maintain = this.transform.position;
+				break;
+			}//end case Shield
+		default:
+			{
+				//impossible
+				break;
+			}//end case default
+		}//end switch
+		return position_to_maintain;
+	}//end f'n Vector3 PositionToMaintain()
 
 	/**A function to neatly apply all player attributes as a result of a given magic.
 	*For instance, we'll use this function to apply the [IsShielded] to the Player class.*/

@@ -10,6 +10,8 @@ public class SpellClass {
 	*A mobile spell is a spell that is cast by the player at an enemy (i.e. Fireball), that moves around.
 	*An immobile spell is a spell that is cast by the player on the player (i.e. Heal, Shield), that stays fixed on the player.*/
 	public bool m_IsMobileSpell;
+	/**A bool to tell us whether or not a spell is an AOE spell.*/
+	public bool m_IsAOESpell = false;
 
 	/**A function to return a SpellClass instance based on the spell name, from the SpellName enum, in its enum form.*/
 	public SpellClass GenerateInstance(SpellName spell_name)
@@ -44,6 +46,14 @@ public class SpellClass {
 				spellinstance_to_return.m_IsMobileSpell = true;
 				break;
 			}//end case Thunderball
+		case (int)SpellName.Thunderstorm:
+			{
+				spellinstance_to_return.m_SpellName = SpellName.Thunderstorm;
+				spellinstance_to_return.m_SpellEffect = SpellEffect.AOE_Shock;
+				spellinstance_to_return.m_IsMobileSpell = false;
+				spellinstance_to_return.m_IsAOESpell = true;
+				break;
+			}//end case Thunderstorm
 		default:
 			{
 				//Impossible
@@ -59,7 +69,8 @@ public class SpellClass {
 	public string ReturnSpellInstanceInfo()
 	{
 		string message = "SpellClass::ReturnSpellInstanceInfo()\t:\tSpell Name: " + this.m_SpellName.ToString ()
-			+ "\tSpell Effect: " + this.m_SpellEffect.ToString () + "\tisMobile? " + this.m_IsMobileSpell;
+			+ "\tSpell Effect: " + this.m_SpellEffect.ToString () + "\tisMobile? " + this.m_IsMobileSpell + "\tisAOE? " 
+			+ this.m_IsAOESpell;
 		return message;
 	}//end f'n string ReturnSpellInstanceInfo()
 }//end class SpellClass
