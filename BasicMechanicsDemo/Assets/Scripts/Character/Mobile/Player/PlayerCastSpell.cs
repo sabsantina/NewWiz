@@ -50,8 +50,10 @@ public class PlayerCastSpell : MonoBehaviour {
 
 	/**The number of seconds until we destroy the spell gameobject.*/
 	private readonly float TIME_UNTIL_DESTROY = 1.25f;
-
+	/**A vector to help us know what the offset is for a given AOE animation, with respect to the player click position.*/
 	public Vector3 AOE_offset = new Vector3(0.0f, 2.8f, 4.20f);
+	/**A reference to the floor.*/
+	[SerializeField] private GameObject m_Floor;
 
 	void Start()
 	{
@@ -186,17 +188,26 @@ public class PlayerCastSpell : MonoBehaviour {
 						RaycastHit[] targets_hit = Physics.RaycastAll (ray);
 						//We need to find the raycast hit furthest from the camera in the event that none of the raycasthits are 
 						//mobile character as the furthest raycast hit will be the ground.
-						RaycastHit furthest = targets_hit [0];
+//						RaycastHit furthest = targets_hit [0];
+//						bool any_mobile_characters = false;
+//						foreach (RaycastHit hit in targets_hit) {
+//							//if the hit's distance is greater than that of the furthest...
+//							if (hit.distance > furthest.distance) {
+//								//...then update the furthest
+//								furthest = hit;
+//							}//end if
+//						}//end foreach
+
+						RaycastHit target = targets_hit [0];
 						bool any_mobile_characters = false;
 						foreach (RaycastHit hit in targets_hit) {
 							//if the hit's distance is greater than that of the furthest...
-							if (hit.distance > furthest.distance) {
-								//...then update the furthest
-								furthest = hit;
-							}//end if
+							if (hit.collider.gameObject == this.m_Floor) {
+								target = hit;
+							}
 						}//end foreach
-						Vector3 modified_furthest = new Vector3(furthest.point.x, 0.0f, furthest.point.z);
-						Vector3 position = modified_furthest + AOE_offset;
+						Vector3 modified_target = new Vector3(target.point.x, 0.0f, target.point.z);
+						Vector3 position = modified_target + AOE_offset;
 						spell_movement.MaintainPosition (position);
 					}//end if
 					//else if it isn't an AOE spell...
