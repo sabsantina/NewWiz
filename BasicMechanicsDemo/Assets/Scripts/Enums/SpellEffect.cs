@@ -11,5 +11,6 @@ public enum  SpellEffect
 	Fire_Damage,
 	Damage_Resistance,
     Ice_Freeze,
-	Shock_Damage
+	Shock_Damage,
+	AOE_Shock
 }

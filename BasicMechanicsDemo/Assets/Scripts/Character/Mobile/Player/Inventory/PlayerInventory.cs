@@ -10,6 +10,8 @@
 #define START_WITH_SHIELD
 /*Activating this macro will enable the player to start the game with the Thunderball spell.*/
 #define START_WITH_THUNDERBALL
+/*Activating this macro will enable the player to start the game with the Thunderstorm spell.*/
+#define START_WITH_THUNDERSTORM
 
 
 using System.Collections;
@@ -67,6 +69,10 @@ public class PlayerInventory : MonoBehaviour {
 		#endif
 		#if START_WITH_THUNDERBALL
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Thunderball));
+		this.m_ActiveSpellClass = this.m_SpellClassList[0];
+		#endif
+		#if START_WITH_THUNDERSTORM
+		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Thunderstorm));
 		this.m_ActiveSpellClass = this.m_SpellClassList[0];
 		#endif
 
