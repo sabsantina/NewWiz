@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour {
 	public float m_ShockJumpDistance = 0.25f;
 	/**A variable to manage the frequency of the shock stutters the enemies go through (the lower this value, the more frequent the stutters will be).*/
 	public float m_ShockJumpFrequency = 0.0005f;
+    /**A variable to control the percentage of the drop of the enemy*/
+    public float m_HealthPotionDropPercentage = 58.0f;
 
 	/**A bool to let us know whether or not to stop the enemy moving.*/
 	public bool m_CanMove = true;
@@ -50,6 +52,12 @@ public class Enemy : MonoBehaviour {
         if(this.m_Health <= 0.0f)
         {
 			string message = "Enemy dead! ";
+            /**Check to see if enemy will drop potion at given percentage*/
+            if (Utilities.ProbabilityCheck(m_HealthPotionDropPercentage))
+            {
+                //Item is spawned at death position.
+                this.gameObject.GetComponent<EnemySpawner>().Spawn_Item_HealthPotion(transform.position);
+            }
 			//if the enemy has a parent with a detection area...
 			if (this.gameObject.transform.GetComponentInParent<EnemyDetectionArea> () != null) {
 				message += "Has enemy detection area; therefore destroying parent.";
