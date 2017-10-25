@@ -4,6 +4,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+using UnityEditor.Animations;
+
 
 //We need a rigidbody for collisions to go off properly
 [RequireComponent(typeof(Rigidbody))]
@@ -34,8 +37,6 @@ public class SpellMovement : MonoBehaviour {
 	protected bool m_IsMovingUp = false;
 	/**A private bool to help us keep track of whether the character's moving downward, and send the result to the character animator.*/
 	protected bool m_IsMovingDown = false;
-    /**A private bool to help us keep track of whether the character's moving at all, and send the result to the character animator.*/
-    protected bool m_IsMoving = false;
 
 	public float m_MaximalVelocity = 30.0f;
 	/**A reference to the target the spell is being cast at. Set using SpellMovement::SetTarget(GameObject).*/
@@ -46,11 +47,16 @@ public class SpellMovement : MonoBehaviour {
 	private Vector3 m_Direction = new Vector3();
 	/**A bool to let us know whether the target is a mobile character.*/
 	public bool m_IsMobileCharacter { get; set;}
+
 	/**The spell we're currently casting.*/
 	public Spell m_SpellToCast;
+	/**The SpellClass spell we're currently casting.*/
+	public SpellClass m_SpellClassToCast;
 
 	//For testing purposes
 	public string m_SpellName;
+
+	private float m_OnTriggerEnterTimer = 0.0f;
 
 	void Awake()
 	{
@@ -59,34 +65,64 @@ public class SpellMovement : MonoBehaviour {
 		//Disable gravity
 		spell_rigidbody.useGravity = false;
 		//Freeze effects of physics on rotation and position
-		spell_rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+//		spell_rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+		spell_rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 		//Ensure we can use collisions properly.
 		spell_rigidbody.detectCollisions = true;
 
 		this.m_Animator = this.GetComponent<Animator> ();
 	}
 
+//	// Update is called once per frame
+//	void Update () {
+//		//if the spell we want to cast exists and is a mobile spell...
+//		if (this.m_SpellClassToCast != null && this.m_SpellClassToCast.m_IsMobileSpell) {
+//			//...if our target is mobile...
+//			if (this.m_IsMobileCharacter) {
+//				//Update direction
+//				this.SetDirection ();
+//			}//end if
+//
+//			#if TESTING_SPELLMOVEMENT
+//			string message = "SpellMovement::Update::Direction of spell:\tx:" + this.m_Direction.x + "\ty:" + this.m_Direction.y +
+//			"\tz:" + this.m_Direction.z;
+//			Debug.Log(message);
+//			#endif
+//
+//			//get our current position (which will be at whoever cast the spell)
+//			Vector3 current_position = this.transform.position;
+//			Vector3 translation = Vector3.ClampMagnitude (this.m_Direction, this.m_MaximalVelocity) * Time.deltaTime;
+//			//and update the current position
+//			current_position += translation;
+//			this.transform.position = current_position;
+//
+//			this.UpdateAnimatorParameters ();
+//		}//end if
+//	}//end f'n void Update()
+
 	// Update is called once per frame
-	void Update () {
-		if (this.m_IsMobileCharacter) {
-			//Update direction
-			this.SetDirection ();
-		}
+	void FixedUpdate () {
+		//if the spell we want to cast exists and is a mobile spell...
+		if (this.m_SpellClassToCast != null 
+			&& this.m_SpellClassToCast.m_IsMobileSpell) {
+			//...if our target is mobile...
+			if (this.m_IsMobileCharacter) {
+				//Update direction
+				this.SetDirection ();
+			}//end if
 
-		#if TESTING_SPELLMOVEMENT
-		string message = "SpellMovement::Update::Direction of spell:\tx:" + this.m_Direction.x + "\ty:" + this.m_Direction.y +
-		"\tz:" + this.m_Direction.z;
-		Debug.Log(message);
-		#endif
+			#if TESTING_SPELLMOVEMENT
+			string message = "SpellMovement::Update::Direction of spell:\tx:" + this.m_Direction.x + "\ty:" + this.m_Direction.y +
+			"\tz:" + this.m_Direction.z;
+			Debug.Log(message);
+			#endif
 
-		//get our current position (which will be at whoever cast the spell)
-		Vector3 current_position = this.transform.position;
-		Vector3 translation = Vector3.ClampMagnitude (this.m_Direction, this.m_MaximalVelocity) * Time.deltaTime;
-		//and update the current position
-		current_position += translation;
-		this.transform.position = current_position;
 
-		this.UpdateAnimatorParameters ();
+			Rigidbody rigidbody = this.GetComponent<Rigidbody> ();
+			rigidbody.velocity = Vector3.ClampMagnitude (this.m_Direction, this.m_MaximalVelocity);
+
+			this.UpdateAnimatorParameters ();
+		}//end if
 	}//end f'n void Update()
 
 	/**Set the target at which we're shooting the magic.*/
@@ -106,6 +142,12 @@ public class SpellMovement : MonoBehaviour {
 		}
 	}//end f'n void SetTarget(GameObject)
 
+	/**A function to tell the spells where to go from another class; this will be helpful for those spells who aren't mobile, where the player may move.*/
+	public void MaintainPosition(Vector3 position)
+	{
+		this.transform.position = position;
+	}//end f'n void MaintainPosition(Vector3)
+
 	/**A private function to set the direction to the given target [this.m_Target].*/
 	private void SetDirection()
 	{
@@ -122,49 +164,68 @@ public class SpellMovement : MonoBehaviour {
 			this.m_IsMobileCharacter = false;
 		}//end if 
 		//else if the target is not a mobile character...
-			//...then make no change to the direction
+		//...then make no change to the direction
 	}//end f'n void SetDirection()
 
-	/**A function to be called from PlayerCastSpell to set the spell that's being cast.*/
-	public void SetSpellToCast(Spell spell)
+	/**A function to be called from PlayerCastSpell to set the SpellClass that's being cast.*/
+	public void SetSpellToCast(SpellClass spell)
 	{
-		this.m_SpellToCast = spell;
-		this.m_SpellName = this.m_SpellToCast.m_SpellName.ToString ();
+		this.m_SpellClassToCast = spell;
+		this.m_SpellName = this.m_SpellClassToCast.m_SpellName.ToString ();
 	}
 
+	//***************FOR SOME REASON THIS FUNCTION IS RUNNING TWICE
     /**A function to be called whenever something enters a spellmovement collider; in terms of functionality, we'll use this function to destroy the spell object prefab after it strikes with something's collider.*/
     void OnTriggerEnter(Collider other)
     {
-        //if we hit the target...
-        if (other.gameObject == this.m_TargetedObj)
-        {
-            #if TESTING_SPELLCOLLISION
-			string message = "SpellMovement::OnTriggerEnter(Collider)\tTarget " + this.m_Target.collider.gameObject.name + " hit!\n";
-			#endif
-			//if the other is an enemy...
-			if (other.gameObject.GetComponent<Enemy>() != null)
+//		if (other is BoxCollider) {
+//			Debug.Log ("Other is BoxCollider");
+//		}
+		//if the spell we're casting isn't mobile...
+		if (this.m_SpellClassToCast != null && !this.m_SpellClassToCast.m_IsMobileSpell) {
+			//...then we don't really care about collisions
+			return;
+		}//end if
+		//else if the spell we're casting is mobile...
+		else {
+			if (other is CapsuleCollider) {
+				return;
+			}
+			//if we hit the target and specifically NOT the enemy's detection collider...
+			if (other.gameObject == this.m_TargetedObj)
 			{
-				Enemy enemy = other.gameObject.GetComponent<Enemy>();
-				enemy.ApplySpellEffects(this.m_SpellToCast.m_SpellName);
 
 				#if TESTING_SPELLCOLLISION
-				message += "Subtracting enemy health...\n";
+				string message = "SpellMovement::OnTriggerEnter(Collider)\tTarget " + this.m_Target.collider.gameObject.name + " hit!\n";
 				#endif
-			}//end if
-			//Destroy the spell
-			GameObject.Destroy(this.gameObject);
-			#if TESTING_SPELLCOLLISION
-			message += "\nGameObject destroyed";
+				//if the other is an enemy...
+				if (other.gameObject.GetComponent<Enemy>() != null)
+				{
+//					Debug.Log("Am I running twice?\t" + "other: " + other.name + "\t" + this.m_SpellClassToCast.ReturnSpellInstanceInfo());
 
-			Debug.Log(message);
-            #endif
-			return;
-        }
-		//if the spell hits a part of the scenery...
-		if (other.gameObject.GetComponent<Obstructable> ()) {
-			//...destroy it (we don't want stuff like spells going through trees
-			GameObject.Destroy (this.gameObject);
-		}
+
+					Enemy enemy = other.gameObject.GetComponent<Enemy>();
+					enemy.ApplySpellEffects(this.m_SpellClassToCast.m_SpellName);
+
+					#if TESTING_SPELLCOLLISION
+					message += "Subtracting enemy health...\n";
+					#endif
+				}//end if
+				//Destroy the spell
+				GameObject.Destroy(this.gameObject);
+				#if TESTING_SPELLCOLLISION
+				message += "GameObject destroyed";
+
+				Debug.Log(message);
+				#endif
+				return;
+			}
+			//if the spell hits a part of the scenery...
+			if (other.gameObject.GetComponent<Obstructable> ()) {
+				//...destroy it (we don't want stuff like spells going through trees
+				GameObject.Destroy (this.gameObject);
+			}//end if
+		}//end if
 
     }//end f'n void OnTriggerEnter(Collider)
 
@@ -175,10 +236,7 @@ public class SpellMovement : MonoBehaviour {
 		this.m_IsMovingLeft = (this.m_Direction.x < 0) ? true : false;
 		this.m_IsMovingUp = (this.m_Direction.z > 0) ? true : false;
 		this.m_IsMovingDown = (this.m_Direction.z < 0) ? true : false;
-        if (this.m_IsMovingDown || this.m_IsMovingLeft || this.m_IsMovingRight || this.m_IsMovingUp)
-        {
-            this.m_IsMoving = true;
-        }
+       
         //update for downward motion
         this.m_Animator.SetBool (STRINGKEY_PARAM_ISMOVINGDOWN, this.m_IsMovingDown);
 		//update for upward motion
@@ -188,7 +246,13 @@ public class SpellMovement : MonoBehaviour {
 		//update for rightward motion
 		this.m_Animator.SetBool (STRINGKEY_PARAM_ISMOVINGRIGHT, this.m_IsMovingRight);
         //update for motion in general
-        this.m_Animator.SetBool(STRINGKEY_PARAM_ISMOVING, this.m_IsMoving);
+		this.m_Animator.SetBool(STRINGKEY_PARAM_ISMOVING, this.m_IsMovingDown || this.m_IsMovingLeft || this.m_IsMovingRight || this.m_IsMovingUp);
 
     }//end f'n void UpdateAnimatorParameters()
+
+	/**A function to set the animator controller with respect to the type of spell.*/
+	public void SetAnimatorController(AnimatorController spell_animator_controller)
+	{
+		this.m_Animator.runtimeAnimatorController = spell_animator_controller as RuntimeAnimatorController;
+	}
 }

@@ -15,6 +15,8 @@ public class Player : MonoBehaviour {
 	/**A variable to help us know what the player's full health it; public for accessibility in the Item classes (think health potions).*/
 	public readonly float PLAYER_FULL_HEALTH = 100.0f;
 
+	public bool m_IsShielded = false;
+
 	void Start()
 	{
 		//Start off with full health

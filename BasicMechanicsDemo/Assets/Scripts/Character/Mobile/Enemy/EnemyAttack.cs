@@ -14,6 +14,8 @@ public class EnemyAttack : MonoBehaviour {
 	/**A variable to keep track of the value of the last second at which the player was attacked.*/
 	public int m_LastSecond = 0;
 
+	private Enemy m_THIS_Enemy;
+
 	void Awake()
 	{
 		//Ensure our capsule collider is how we like it
@@ -21,55 +23,87 @@ public class EnemyAttack : MonoBehaviour {
 		this_capsule_collider.radius = 2.5f;
 		this_capsule_collider.height = 1.0f;
 		this_capsule_collider.isTrigger = true;
+
+		this.m_THIS_Enemy = this.GetComponent<Enemy> ();
 	}
+
+	/**A private bool to tell us whether or not the enemy is capable of damaging [other].
+	*Returns true if the enemy can damage [other]; false, otherwise.*/
+	private bool CanDamageOther(GameObject other)
+	{
+		//if THIS enemy is frozen...
+		if (this.m_THIS_Enemy.m_IsFrozen) {
+			//...then the enemy cannot damage [other].
+			return false;
+		}//end if
+		//if [other] is the player...
+		if (other.GetComponent<Player> () != null) {
+			Player player = other.GetComponent<Player> ();
+			//...and if the player is shielded
+			if (player.m_IsShielded) {
+				//...then the enemy cannot damage the player.
+				return false;
+			}//end if
+		}//end if
+		return true;
+	}//end f'n bool CanDamageOther(GameObject other)
 
 	void OnTriggerEnter(Collider other)
 	{
-		//if the player enters the collider...
-		if (other.gameObject.GetComponent<Player> () != null) {
-			//... then attack the player
-			Player player = other.gameObject.GetComponent<Player>();
-			player.AffectHealth (this.m_AttackDamage);
-			//...and start the timer
-			this.m_AttackTimer += Time.deltaTime;
-			this.m_LastSecond = 0;
-			#if TESTING_ENEMY_ATTACK
-			Debug.Log("Player detected! Attacking...\tTimer: " + this.m_AttackTimer);
-			#endif
+		//if the enemy is capable of attacking...
+		if (this.CanDamageOther (other.gameObject)) {
+			//if the player enters the collider...
+			if (other.gameObject.GetComponent<Player> () != null) {
+				//... then attack the player
+				Player player = other.gameObject.GetComponent<Player>();
+				player.AffectHealth (this.m_AttackDamage);
+				//...and start the timer
+				this.m_AttackTimer += Time.deltaTime;
+				this.m_LastSecond = 0;
+				#if TESTING_ENEMY_ATTACK
+				Debug.Log("Player detected! Attacking...\tTimer: " + this.m_AttackTimer);
+				#endif
+			}//end if
 		}//end if
 	}//end f'n void OnTriggerEnter(Collider)
 
 	void OnTriggerStay(Collider other)
 	{
-		//if the player stays in the collider...
-		if (other.gameObject.GetComponent<Player> () != null) {
-			//...and if the attack timer is greater than or equal to one more than the last second at which the player was attacked...
-			if (this.m_AttackTimer >= this.m_LastSecond + 1) {
-				//...then attack the player
-				Player player = other.gameObject.GetComponent<Player>();
-				player.AffectHealth (this.m_AttackDamage);
-				//... and increase last second value for the next iteration
-				this.m_LastSecond++;
+		//if the enemy is capable of attacking...
+		if (this.CanDamageOther (other.gameObject)) {
+			//if the player stays in the collider...
+			if (other.gameObject.GetComponent<Player> () != null) {
+				//...and if the attack timer is greater than or equal to one more than the last second at which the player was attacked...
+				if (this.m_AttackTimer >= this.m_LastSecond + 1) {
+					//...then attack the player
+					Player player = other.gameObject.GetComponent<Player>();
+					player.AffectHealth (this.m_AttackDamage);
+					//... and increase last second value for the next iteration
+					this.m_LastSecond++;
+				}//end if
+				//Update timer
+				this.m_AttackTimer += Time.deltaTime;
+				#if TESTING_ENEMY_ATTACK
+				Debug.Log("Timer: " + this.m_AttackTimer);
+				#endif
 			}//end if
-			//Update timer
-			this.m_AttackTimer += Time.deltaTime;
-			#if TESTING_ENEMY_ATTACK
-			Debug.Log("Timer: " + this.m_AttackTimer);
-			#endif
 		}//end if
 	}//end f'n void OnTriggerStay(Collider)
 
 	void OnTriggerExit(Collider other)
 	{
-		//if the player exits the collider...
-		if (other.gameObject.GetComponent<Player> () != null) {
-			//then reset temporal variables
-			this.m_AttackTimer = 0.0f;
-			this.m_LastSecond = 0;
-			#if TESTING_ENEMY_ATTACK
-			Debug.Log("Player escaped! Resetting timer...");
-			#endif
+		//if the enemy is capable of attacking...
+		if (this.CanDamageOther (other.gameObject)) {
+			//...and if the other is the player...
+			if (other.gameObject.GetComponent<Player> () != null) {
+				//then reset temporal variables
+				this.m_AttackTimer = 0.0f;
+				this.m_LastSecond = 0;
+				#if TESTING_ENEMY_ATTACK
+				Debug.Log("Player escaped! Resetting timer...");
+				#endif
+			}//end if
 		}//end if
 	}//end f'n void OnTriggerExit(Collider)
 
-}
+}//end class EnemyAttack : MonoBehaviour
