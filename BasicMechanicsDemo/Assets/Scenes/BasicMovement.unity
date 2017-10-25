@@ -20691,6 +20691,7 @@ MonoBehaviour:
   m_MainCamera: {fileID: 1448755375}
   m_SpellName: 
   AOE_offset: {x: 0, y: 2.8, z: 4.2}
+  m_Floor: {fileID: 628671963}
 --- !u!114 &1546207780
 MonoBehaviour:
   m_ObjectHideFlags: 0
