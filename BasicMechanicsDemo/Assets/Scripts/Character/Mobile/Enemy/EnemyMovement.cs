@@ -27,6 +27,7 @@ public class EnemyMovement : MobileCharacter {
 	/**A reference to the Enemy component of this gameobject.*/
 	private Enemy m_THIS_Enemy;
 
+
 	// Use this for initialization
 	void Start () {
 		this.m_DetectionArea = this.transform.parent;
@@ -35,6 +36,7 @@ public class EnemyMovement : MobileCharacter {
 		this.m_IsChasing = false;
 
 		this.m_THIS_Enemy = this.GetComponent<Enemy> ();
+
 	}
 	
 	// Update is called once per frame
@@ -59,7 +61,7 @@ public class EnemyMovement : MobileCharacter {
 												: Vector3.ClampMagnitude(this.m_Direction, this.m_MaximalVelocity);
 
 		//if the enemy isn't frozen...
-		if (!this.m_THIS_Enemy.m_IsFrozen)
+		if (this.m_THIS_Enemy.m_CanMove)
         {
             //if player immediately ahead...
             if (this.IsPlayerAhead())
@@ -83,11 +85,14 @@ public class EnemyMovement : MobileCharacter {
                 this.RedirectIntoDetectionArea();
             }
         }
+
+
         this.SetAnimatorParameters();
 
         this.UpdateAnimatorParameters();
 	#endif
     }//end f'n void Update
+
 
     /**A function to change the direction of the enemy to keep it in the detection area.
 	*Note that the resulting [m_Direction] is only applied to THIS gameobject in the Update() function, where Time.deltaTime is applied to it. Thus, we have no need of Time.deltaTime here.*/
