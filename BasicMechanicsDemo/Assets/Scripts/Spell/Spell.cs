@@ -20,7 +20,7 @@ public class Spell : MonoBehaviour {
 	void Awake()
 	{
 		//ensure the box collider's isTrigger is set to true
-		this.GetComponent<Collider> ().isTrigger = true;
+//		this.GetComponent<Collider> ().isTrigger = true;
 	}//end f'n void Awake()
 
 	/**Return a copy of [spell_to_copy].*/

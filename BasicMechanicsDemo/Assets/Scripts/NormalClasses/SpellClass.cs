@@ -37,6 +37,13 @@ public class SpellClass {
 				spellinstance_to_return.m_IsMobileSpell = true;
 				break;
 			}//end case Iceball
+		case (int)SpellName.Thunderball:
+			{
+				spellinstance_to_return.m_SpellName = SpellName.Thunderball;
+				spellinstance_to_return.m_SpellEffect = SpellEffect.Shock_Damage;
+				spellinstance_to_return.m_IsMobileSpell = true;
+				break;
+			}//end case Thunderball
 		default:
 			{
 				//Impossible

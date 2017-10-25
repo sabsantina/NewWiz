@@ -8,6 +8,8 @@
 #define START_WITH_ICEBALL
 /*Activating this macro will enable the player to start the game with the Shield spell.*/
 #define START_WITH_SHIELD
+/*Activating this macro will enable the player to start the game with the Thunderball spell.*/
+#define START_WITH_THUNDERBALL
 
 
 using System.Collections;
@@ -30,7 +32,6 @@ public class PlayerInventory : MonoBehaviour {
 
 	/**A reference to a default spell prefab to contain all our active spell information.*/
 	[SerializeField] public GameObject m_DefaultSpellPrefab;
-	private GameObject m_DefaultSpellInstance;
 
 	/**The active spell, of type SpellClass, used for firing spells.*/
 	public SpellClass m_ActiveSpellClass = null;
@@ -43,7 +44,6 @@ public class PlayerInventory : MonoBehaviour {
     void Awake()
 	{
 		//for testing
-		this.m_DefaultSpellInstance = GameObject.Instantiate(this.m_DefaultSpellPrefab);
 	}
 
 	void Start()
@@ -65,6 +65,11 @@ public class PlayerInventory : MonoBehaviour {
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Shield));
 		this.m_ActiveSpellClass = this.m_SpellClassList[0];
 		#endif
+		#if START_WITH_THUNDERBALL
+		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Thunderball));
+		this.m_ActiveSpellClass = this.m_SpellClassList[0];
+		#endif
+
 
 
 	}//end f'n void Start()
