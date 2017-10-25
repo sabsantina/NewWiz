@@ -10,5 +10,6 @@ public enum SpellName {
 	Fireball = 0,
 	Shield,
     Iceball,
-	Thunderball
+	Thunderball,
+	Thunderstorm
 }

@@ -103,7 +103,8 @@ public class SpellMovement : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		//if the spell we want to cast exists and is a mobile spell...
-		if (this.m_SpellClassToCast != null && this.m_SpellClassToCast.m_IsMobileSpell) {
+		if (this.m_SpellClassToCast != null 
+			&& this.m_SpellClassToCast.m_IsMobileSpell) {
 			//...if our target is mobile...
 			if (this.m_IsMobileCharacter) {
 				//Update direction
