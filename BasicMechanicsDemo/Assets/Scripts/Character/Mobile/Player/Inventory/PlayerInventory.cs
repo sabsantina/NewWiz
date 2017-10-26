@@ -2,16 +2,16 @@
 #define TESTING_INVENTORY_SPELLPICKUP
 #define TESTING_ACTIVE_SPELL
 
-///*Activating this macro will enable the player to start the game with the Fireball spell.*/
-//#define START_WITH_FIREBALL
-///*Activating this macro will enable the player to start the game with the Iceball spell.*/
-//#define START_WITH_ICEBALL
-///*Activating this macro will enable the player to start the game with the Shield spell.*/
-//#define START_WITH_SHIELD
-///*Activating this macro will enable the player to start the game with the Thunderball spell.*/
-//#define START_WITH_THUNDERBALL
-///*Activating this macro will enable the player to start the game with the Thunderstorm spell.*/
-//#define START_WITH_THUNDERSTORM
+/*Activating this macro will enable the player to start the game with the Fireball spell.*/
+#define START_WITH_FIREBALL
+/*Activating this macro will enable the player to start the game with the Iceball spell.*/
+#define START_WITH_ICEBALL
+/*Activating this macro will enable the player to start the game with the Shield spell.*/
+#define START_WITH_SHIELD
+/*Activating this macro will enable the player to start the game with the Thunderball spell.*/
+#define START_WITH_THUNDERBALL
+/*Activating this macro will enable the player to start the game with the Thunderstorm spell.*/
+#define START_WITH_THUNDERSTORM
 
 
 using System.Collections;
