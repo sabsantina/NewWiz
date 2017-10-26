@@ -64,27 +64,27 @@ public class EnemySpawner : MonoBehaviour {
     }//end f'n void Spawn_Spell_Fireball(Vector3)
 
     /**A private function to spawn a default health potion item; returns the instance of the Item.*/
-    private Item GenerateInstance_Item_HealthPotion()
+    private ItemClass GenerateInstance_Item_HealthPotion()
     {
-        Item health_potion = new Item();
+        ItemClass health_potion = new ItemClass();
         health_potion.m_ItemEffect = ItemEffect.Gain_Health;
         health_potion.m_ItemName = ItemName.Health_Potion;
         return health_potion;
     }//end f'n Item GenerateInstance_Item_HealthPotion()
 
     /**A private function to spawn a default mana potion item; returns the instance of the Item.*/
-    private Item GenerateInstance_Item_ManaPotion()
+    private ItemClass GenerateInstance_Item_ManaPotion()
     {
-        Item mana_potion = new Item();
+        ItemClass mana_potion = new ItemClass();
         mana_potion.m_ItemEffect = ItemEffect.Gain_Mana;
         mana_potion.m_ItemName = ItemName.Mana_Potion;
         return mana_potion;
     }//end f'n Item GenerateInstance_Item_ManaPotion()
 
     /**A private function to spawn a default fireball spell; returns the instance of the Spell.*/
-    private Spell GenerateInstance_Spell_Fireball()
+    private SpellClass GenerateInstance_Spell_Fireball()
     {
-        Spell fireball = new Spell();
+        SpellClass fireball = new SpellClass();
         fireball.m_SpellName = SpellName.Fireball;
         fireball.m_SpellEffect = SpellEffect.Fire_Damage;
         fireball.m_IsMobileSpell = true;
@@ -92,9 +92,9 @@ public class EnemySpawner : MonoBehaviour {
     }//end f'n Spell GenerateInstance_Spell_Fireball()
 
     /**A private function to spawn a default shield spell; returns the instance of the Spell.*/
-    private Spell GenerateInstance_Spell_Shield()
+    private SpellClass GenerateInstance_Spell_Shield()
     {
-        Spell shield = new Spell();
+        SpellClass shield = new SpellClass();
         shield.m_SpellName = SpellName.Shield;
         shield.m_SpellEffect = SpellEffect.Damage_Resistance;
         shield.m_IsMobileSpell = true;
