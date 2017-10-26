@@ -22,6 +22,7 @@ public class SpellPickup : MonoBehaviour {
 		this.m_Spell.m_SpellEffect = spell_spawned.m_SpellEffect;
 		this.m_Spell.m_IsAOESpell = spell_spawned.m_IsAOESpell;
 		this.m_Spell.m_IsMobileSpell = spell_spawned.m_IsMobileSpell;
+		this.m_Spell.m_IsPersistent = spell_spawned.m_IsPersistent;
 		this.m_SpellName = spell_spawned.m_SpellName.ToString();
 
 //		Debug.Log ("Set spell: " + this.m_Spell.ReturnSpellInstanceInfo ());

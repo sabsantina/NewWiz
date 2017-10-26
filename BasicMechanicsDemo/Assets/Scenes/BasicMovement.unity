@@ -20576,10 +20576,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c824f4b6b784545429a327344e1482ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DefaultSpellPickupPrefab: {fileID: 1560220320337108, guid: 55f288681366942dc955c6fa8d67c7e3,
-    type: 2}
-  m_DefaultItemPickupPrefab: {fileID: 1037877941852264, guid: 750d10d3c9a5043cba4860f04494c345,
-    type: 2}
   m_DefaultSpellPrefab: {fileID: 1081312389218078, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
     type: 2}
   m_ActiveSpellName: 
@@ -20595,7 +20591,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Health: 0
+  m_Mana: 0
   m_IsShielded: 0
+  m_CanCastSpells: 1
 --- !u!54 &1546207777
 Rigidbody:
   m_ObjectHideFlags: 0
