@@ -1,5 +1,5 @@
 ﻿//#define TESTING_OVERLAPSPHERE_COLLISIONS
-#define TESTING_DIALOG
+//#define TESTING_DIALOG
 #define TEMP_SPEECH_BUBBLE
 
 using System.Collections;
@@ -58,7 +58,6 @@ public class PlayerInteraction : MonoBehaviour {
 	/**A function to generate a button (effectively a speech bubble) right above the NPC*/
 	private void GenerateSpeechBubble(GameObject NPC_GameObject, string dialog)
 	{
-		#if TEMP_SPEECH_BUBBLE
 		//Create text bubble and set text to dialog
 		GameObject textBubble = Instantiate (m_SpeechBubblePrefab, NPC_GameObject.transform);
 		Text bubbleText = textBubble.GetComponentInChildren<Text> ();
