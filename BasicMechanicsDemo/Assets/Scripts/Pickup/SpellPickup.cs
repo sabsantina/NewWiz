@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpellPickup : MonoBehaviour {
 
 	/**A private instance of the contents of the pickup.*/
-	public Spell m_Spell;
+	public SpellClass m_Spell = new SpellClass();
 	/**The spell name, for debugging purposes.*/
 	public string m_SpellName;
 
@@ -16,10 +16,15 @@ public class SpellPickup : MonoBehaviour {
 	}
 
 	/**A function to set the Item instance to this ItemPickup.*/
-	public void SetSpell(Spell spell_spawned)
+	public void SetSpell(SpellClass spell_spawned)
 	{
-		this.m_Spell = spell_spawned;
-		this.m_SpellName = this.m_Spell.m_SpellName.ToString();
+		this.m_Spell.m_SpellName = spell_spawned.m_SpellName;
+		this.m_Spell.m_SpellEffect = spell_spawned.m_SpellEffect;
+		this.m_Spell.m_IsAOESpell = spell_spawned.m_IsAOESpell;
+		this.m_Spell.m_IsMobileSpell = spell_spawned.m_IsMobileSpell;
+		this.m_SpellName = spell_spawned.m_SpellName.ToString();
+
+//		Debug.Log ("Set spell: " + this.m_Spell.ReturnSpellInstanceInfo ());
 	}//end f'n void SetItem(Item)
 
 	//A function to trigger when the player walks into an item pickup
@@ -27,6 +32,8 @@ public class SpellPickup : MonoBehaviour {
 	{
 		//if the object colliding with the item pickup is the player...
 		if (other.gameObject.GetComponent<PlayerInventory> ()) {
+//			Debug.Log ("Spell picked up: " + this.m_Spell.ReturnSpellInstanceInfo());
+
 			other.gameObject.GetComponent<PlayerInventory> ().AddSpell (this.m_Spell);
 
 			GameObject.Destroy (this.gameObject);

@@ -53,6 +53,8 @@ public class SpellMovement : MonoBehaviour {
 	/**The SpellClass spell we're currently casting.*/
 	public SpellClass m_SpellClassToCast;
 
+	public SpellEffectManager m_SpellEffectManager;
+
 	//For testing purposes
 	public string m_SpellName;
 
@@ -174,7 +176,6 @@ public class SpellMovement : MonoBehaviour {
 		this.m_SpellName = this.m_SpellClassToCast.m_SpellName.ToString ();
 	}
 
-	//***************FOR SOME REASON THIS FUNCTION IS RUNNING TWICE
     /**A function to be called whenever something enters a spellmovement collider; in terms of functionality, we'll use this function to destroy the spell object prefab after it strikes with something's collider.*/
     void OnTriggerEnter(Collider other)
     {
@@ -206,6 +207,7 @@ public class SpellMovement : MonoBehaviour {
 
 					Enemy enemy = other.gameObject.GetComponent<Enemy>();
 					enemy.ApplySpellEffects(this.m_SpellClassToCast.m_SpellName);
+//					this.m_SpellEffectManager.SetSpellToApply(this.m_SpellClassToCast, enemy);
 
 					#if TESTING_SPELLCOLLISION
 					message += "Subtracting enemy health...\n";

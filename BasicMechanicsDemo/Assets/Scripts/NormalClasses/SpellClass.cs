@@ -60,9 +60,9 @@ public class SpellClass {
 				break;
 			}//end case default
 		}//end switch
+			
 		return spellinstance_to_return;
 	}//end f'n SpellClass GenerateInstance(SpellName)
-
 
 
 	/**A function to return a SpellClass instance's properties in a string for testing purposes.*/

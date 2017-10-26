@@ -2,16 +2,16 @@
 #define TESTING_INVENTORY_SPELLPICKUP
 #define TESTING_ACTIVE_SPELL
 
-/*Activating this macro will enable the player to start the game with the Fireball spell.*/
-#define START_WITH_FIREBALL
-/*Activating this macro will enable the player to start the game with the Iceball spell.*/
-#define START_WITH_ICEBALL
-/*Activating this macro will enable the player to start the game with the Shield spell.*/
-#define START_WITH_SHIELD
-/*Activating this macro will enable the player to start the game with the Thunderball spell.*/
-#define START_WITH_THUNDERBALL
-/*Activating this macro will enable the player to start the game with the Thunderstorm spell.*/
-#define START_WITH_THUNDERSTORM
+///*Activating this macro will enable the player to start the game with the Fireball spell.*/
+//#define START_WITH_FIREBALL
+///*Activating this macro will enable the player to start the game with the Iceball spell.*/
+//#define START_WITH_ICEBALL
+///*Activating this macro will enable the player to start the game with the Shield spell.*/
+//#define START_WITH_SHIELD
+///*Activating this macro will enable the player to start the game with the Thunderball spell.*/
+//#define START_WITH_THUNDERBALL
+///*Activating this macro will enable the player to start the game with the Thunderstorm spell.*/
+//#define START_WITH_THUNDERSTORM
 
 
 using System.Collections;
@@ -22,10 +22,11 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider))]
 
 public class PlayerInventory : MonoBehaviour {
-	[SerializeField] private GameObject m_DefaultSpellPickupPrefab;
-	[SerializeField] private GameObject m_DefaultItemPickupPrefab;
+//	[SerializeField] private GameObject m_DefaultSpellPickupPrefab;
+//	[SerializeField] private GameObject m_DefaultItemPickupPrefab;
 
-	public Dictionary<Item, int> m_ItemDictionary { set; get;}
+//	public Dictionary<Item, int> m_ItemDictionary { set; get;}
+	public Dictionary<ItemClass, int> m_ItemDictionary;
 
 
 	/**A list of all SpellClass instances of spells in the inventory.*/
@@ -51,7 +52,7 @@ public class PlayerInventory : MonoBehaviour {
 	void Start()
 	{
 		//Initialize Item Dictionary
-		this.m_ItemDictionary = new Dictionary<Item, int>();
+		this.m_ItemDictionary = new Dictionary<ItemClass, int>();
 
 		this.m_SpellClassList = new List<SpellClass>();
 		SpellClass spell_class_instance = new SpellClass();
@@ -88,7 +89,7 @@ public class PlayerInventory : MonoBehaviour {
 			this.UpdateActiveSpell ();
 		} //end if
 		//if there's only one spell in the player's inventory and an active SpellClass instance hasn't yet been set...
-		if (this.m_SpellClassList.Count == 1 && this.m_ActiveSpellClass == null)
+		else if (this.m_SpellClassList.Count == 1 && this.m_ActiveSpellClass == null)
 		{
 			//...then assign a default value for the active SpellClass
 			this.AssignDefaultActiveSpell ();
@@ -147,6 +148,8 @@ public class PlayerInventory : MonoBehaviour {
 				this.m_ActiveSpellClass = this.m_SpellClassList [next_index];
 				this.m_ActiveSpellName = this.m_ActiveSpellClass.m_SpellName.ToString ();
 
+				this.GetComponent<PlayerCastSpell> ().m_SpellClassToFire = this.m_ActiveSpellClass;
+
 				#if TESTING_ACTIVE_SPELL
 				Debug.Log ("UpdateActiveSpell::Active SpellClass: " + this.m_ActiveSpellClass.m_SpellName.ToString ());
 				#endif
@@ -160,6 +163,8 @@ public class PlayerInventory : MonoBehaviour {
 	{
 		this.m_ActiveSpellClass = this.m_SpellClassList [0];
 		this.m_ActiveSpellName = this.m_ActiveSpellClass.m_SpellName.ToString ();
+
+		this.GetComponent<PlayerCastSpell> ().m_SpellClassToFire = this.m_ActiveSpellClass;
 	}//end f'n void AssignDefaultActiveSpell()
 
 	/**A function to return the string containing all of the SpellClass instances of the [this.m_SpellClassList]*/
@@ -180,7 +185,7 @@ public class PlayerInventory : MonoBehaviour {
 		message += this.OutputSpellClassList ();
 
 		message += "Items:\n";
-		foreach (KeyValuePair<Item, int> entry in this.m_ItemDictionary) {
+		foreach (KeyValuePair<ItemClass, int> entry in this.m_ItemDictionary) {
 			message += "Item name: " + entry.Key.m_ItemName.ToString () + "\tItem Effect: " + entry.Key.m_ItemEffect.ToString () + "\tItem Quantity:\t" + entry.Value + "\n";
 		}//end foreach
 		message += "Active spell:\t";
@@ -193,62 +198,30 @@ public class PlayerInventory : MonoBehaviour {
 	}//end f'n void OutputInventoryContents()
 
 	/**A function to add the item to the inventory.*/
-	public void AddItem(Item item_to_add)
+	public void AddItem(ItemClass item_to_add)
 	{
 		int value;
 		//if the key was found in the dictionary...
-		if (this.m_ItemDictionary.TryGetValue (item_to_add, out value)) {
+		if (!this.m_ItemDictionary.TryGetValue (item_to_add, out value)) {
 			//...then increment quantity
 			this.m_ItemDictionary [item_to_add] = value + 1;
 		} else {
 			this.m_ItemDictionary.Add (item_to_add, 1);
 		}
 
-//		bool match_found = false;
-//		//for all items in the dictionary...
-//		foreach (KeyValuePair<Item, int> entry in this.m_ItemDictionary) {
-//			//...if the item to add has the same name as that of the current entry...
-//			if (item_to_add.isEqual (entry.Key)) {
-//				//...then a match for a common name was found
-//				match_found = true;
-//			}//end if
-//		}//end foreach
-//		//if there was a match for the item name...
-//		if (match_found) {
-//			//...then add to the current quantity
-//			int current_quantity;
-//			//returns zero if none of the item are found.
-//			this.m_ItemDictionary.TryGetValue (item_to_add, out current_quantity);
-//			this.m_ItemDictionary [item_to_add] = current_quantity + 1;
-//		}//end if
-//		//else if there was no match for the item name...
-//		else
-//		{
-//			//...then add the entry into the dictionary
-//			this.m_ItemDictionary.Add (item_to_add, 1);
-//		}//end else
 		Debug.Log ("PlayerInventory::Adding item " + item_to_add.m_ItemName.ToString () + "\n"
-			+ "Item already in list? " + this.m_ItemDictionary.TryGetValue (item_to_add, out value));
+			+ "Item already in list? " + !this.m_ItemDictionary.TryGetValue (item_to_add, out value));
 
 	}//end f'n void AddItem(Item)
 
-	/**A function to add a Spell object to the SpellClass list, converting it into a new instance and adding it afterwards, if necessary.*/
-	public void AddSpell(Spell spell_to_add)
-	{
-		SpellClass converted_spell = new SpellClass ().GenerateInstance (spell_to_add.m_SpellName);
-		foreach (SpellClass spell in this.m_SpellClassList) {
-			if (spell.m_SpellName.ToString () == spell_to_add.m_SpellName.ToString ()) {
-				return;
-			}
-		}
-		this.m_SpellClassList.Add (converted_spell);
-	}//end f'n void AddSpell(Spell)
 
 	/**A function to add a SpellClass object to the SpellClass list if the SpellClass is not already in the list.*/
 	public void AddSpell(SpellClass spell_to_add)
 	{
+		Debug.Log ("Add spell");
 		foreach (SpellClass spell in this.m_SpellClassList) {
 			if (spell.m_SpellName.ToString () == spell_to_add.m_SpellName.ToString ()) {
+				Debug.Log ("Spell to add name == spell name");
 				return;
 			}
 		}
