@@ -61,6 +61,13 @@ public class PlayerInteraction : MonoBehaviour {
 		//Create text bubble and set text to dialog
 		GameObject textBubble = Instantiate (m_SpeechBubblePrefab, NPC_GameObject.transform);
 		Text bubbleText = textBubble.GetComponentInChildren<Text> ();
+
+//		string simulated_dialog = "";
+//		for (int index = 0; index < 50; index++)
+//		{
+//			simulated_dialog += "m";
+//		}
+//		bubbleText.text = simulated_dialog;
 		bubbleText.text = dialog;
 
 		//Destroy text bubble after 3
