@@ -3,6 +3,7 @@
 */
 
 #define TESTING_ZERO_HEALTH
+#define TESTING_MANA_REGEN
 
 using System.Collections;
 using System.Collections.Generic;
@@ -18,10 +19,12 @@ public class Player : MonoBehaviour {
 	public readonly float PLAYER_FULL_HEALTH = 100.0f;
 	/**A variable to help us know what the player's full mana count is.*/
 	public readonly float PLAYER_FULL_MANA = 100.0f;
-
+	/**A bool to tell us whether or not the player is capable of being damaged.*/
 	public bool m_IsShielded = false;
-
+	/**A bool to tell us whether or not the player is capable of casting spells, with respect to mana.*/
 	public bool m_CanCastSpells = true;
+	/**A multiplier to help with mana regeneration.*/
+	public float m_ManaRegenMultiplier = 1.125f;
 
 	void Start()
 	{
@@ -44,8 +47,18 @@ public class Player : MonoBehaviour {
 		}//end if
 		//if the player runs out of mana, they can't cast spells anymore
 		if (this.m_Mana <= 0
-			|| this.GetComponent<PlayerInventory>().m_ActiveSpellClass.m_ManaCost > this.m_Mana) {
+		    || this.GetComponent<PlayerInventory> ().m_ActiveSpellClass.m_ManaCost > this.m_Mana) {
 			this.m_CanCastSpells = false;
+		}//end if
+		else {
+			this.m_CanCastSpells = true;
+		}
+
+		if (this.m_Mana < PLAYER_FULL_MANA) {
+			this.m_Mana += Time.deltaTime * this.m_ManaRegenMultiplier;
+			if (this.m_Mana > PLAYER_FULL_MANA) {
+				this.m_Mana = PLAYER_FULL_MANA;
+			}//end if
 		}//end if
 	}
 

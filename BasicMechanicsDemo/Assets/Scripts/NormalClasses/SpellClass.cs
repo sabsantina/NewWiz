@@ -28,8 +28,8 @@ public class SpellClass {
 	public readonly float THUNDERBALL_MANA_COST = 5.0f;
 	/**A variable to represent the mana cost of the shield spell. This is a persisting spell, so the player will be expending 15 mana * a value increasing by Time.deltatime every frame.
 	*At starting mana of 100, the player can cast 50 of these before needing a mana refill.*/
-	public readonly float SHIELD_MANA_COST = 15.0f;
-	public readonly float THUNDERSTORM_MANA_COST = 20.0f;
+	public readonly float SHIELD_MANA_COST = 5.0f;
+	public readonly float THUNDERSTORM_MANA_COST = 10.0f;
 
 	/**A function to return a SpellClass instance based on the spell name, from the SpellName enum, in its enum form.*/
 	public SpellClass GenerateInstance(SpellName spell_name)
