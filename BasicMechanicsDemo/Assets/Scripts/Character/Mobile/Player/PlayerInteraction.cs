@@ -1,6 +1,6 @@
 ﻿//#define TESTING_OVERLAPSPHERE_COLLISIONS
 #define TESTING_DIALOG
-//#define TEMP_SPEECH_BUBBLE
+#define TEMP_SPEECH_BUBBLE
 
 using System.Collections;
 using System.Collections.Generic;
@@ -17,10 +17,10 @@ public class PlayerInteraction : MonoBehaviour {
 	/**A reference to the camera to convert the world position of the NPC to screen coordinates.*/
 	[SerializeField] private Camera m_MainCamera;
 	#if TEMP_SPEECH_BUBBLE
-	[SerializeField] private GameObject m_SpeechBubbleTest;
+	[SerializeField] private GameObject m_SpeechBubblePrefab;
 	#endif
 
-	[SerializeField] private Button m_SpeechBubbleButton;
+	[SerializeField] private GameObject m_SpeechBubbleButton;
 
 	/**A string variable containing the string name of the Input Manager variable responsible for player interaction with the world.*/
 	private readonly string STRINGKEY_INPUT_INTERACT = "Interact";
@@ -59,13 +59,21 @@ public class PlayerInteraction : MonoBehaviour {
 	private void GenerateSpeechBubble(GameObject NPC_GameObject, string dialog)
 	{
 		#if TEMP_SPEECH_BUBBLE
-		this.m_SpeechBubbleTest = GameObject.Instantiate (this.m_SpeechBubbleTest);
+		//Create text bubble and set text to dialog
+		GameObject textBubble = Instantiate (m_SpeechBubblePrefab, NPC_GameObject.transform);
+		Text bubbleText = textBubble.GetComponentInChildren<Text> ();
+		bubbleText.text = dialog;
+
+		//Destroy text bubble after 3
+		Destroy (textBubble, 3);
+
+		/*this.m_SpeechBubbleTest = GameObject.Instantiate (this.m_SpeechBubbleTest);
 		this.m_SpeechBubbleTest.transform.position = NPC_GameObject.transform.position;
 		float height_adjustment = this.m_SpeechBubbleTest.transform.position.y * 7.0f;
 		Vector3 speech_bubble_position = this.m_SpeechBubbleTest.transform.position;
 		speech_bubble_position += (NPC_GameObject.transform.up * height_adjustment);
 		this.m_SpeechBubbleTest.transform.position = speech_bubble_position;
-		this.m_SpeechBubbleTest.transform.Rotate (new Vector3 (60.0f, 0.0f, 0.0f));
+		this.m_SpeechBubbleTest.transform.Rotate (new Vector3 (60.0f, 0.0f, 0.0f));*/
 		#endif
 //		Vector3 desired_position = NPC_GameObject.transform.position + (NPC_GameObject.transform.up * 7.0f);
 //		Vector3 screen_position = this.m_MainCamera.WorldToScreenPoint (desired_position);
