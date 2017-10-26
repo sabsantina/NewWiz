@@ -148,6 +148,14 @@ public class Enemy : MonoBehaviour {
 
 				break;
 			}//end case Thunderball
+		case (int)SpellName.Thunderstorm:
+			{
+				this.AffectHealth (-0.005f);
+				this.m_IsShocked = true;
+				this.m_ShockTimer = 0.0f;
+
+				break;
+			}
 		default:
 			{
 				//Impossible, right now

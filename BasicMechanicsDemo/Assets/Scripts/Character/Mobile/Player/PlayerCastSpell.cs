@@ -52,6 +52,10 @@ public class PlayerCastSpell : MonoBehaviour {
 	private readonly float TIME_UNTIL_DESTROY = 1.25f;
 	/**A vector to help us know what the offset is for a given AOE animation, with respect to the player click position.*/
 	public Vector3 AOE_offset = new Vector3(0.0f, 2.8f, 4.20f);
+	/**A variable to keep track of the AOE radius.*/
+	public float AOE_Radius = 15.0f;
+	/**A variable to ensure AOE attacks don't apply themselves to the enemy for every frame.*/
+	public float AOE_Timer = 0.0f;
 	/**A reference to the floor.*/
 	[SerializeField] private GameObject m_Floor;
 
@@ -125,35 +129,7 @@ public class PlayerCastSpell : MonoBehaviour {
 
 					}//end if
 				}//end if
-				//else if the spell is not mobile and is an AOE spell...
-//				else if (this.m_SpellClassToFire.m_IsAOESpell) {
-//					//...then we'll want to spawn one of these a little bit askew of wherever was clicked by the user, so let's start by getting that.
-//					//It's easiest to shoot a ray at the ground.
-//					Ray ray = this.m_MainCamera.ScreenPointToRay (Input.mousePosition);
-//					RaycastHit[] targets_hit = Physics.RaycastAll (ray);
-//					//We need to find the raycast hit furthest from the camera in the event that none of the raycasthits are 
-//					//mobile character as the furthest raycast hit will be the ground.
-//					RaycastHit furthest = targets_hit [0];
-//					bool any_mobile_characters = false;
-//					foreach (RaycastHit hit in targets_hit) {
-//						//if the hit's distance is greater than that of the furthest...
-//						if (hit.distance > furthest.distance) {
-//							//...then update the furthest
-//							furthest = hit;
-//						}//end if
-//					}//end foreach
-//
-//					this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
-//					SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
-//
-//					spell_movement.SetSpellToCast (this.m_SpellClassToFire);
-//					spell_movement.MaintainPosition(furthest.point + AOE_offset);
-//					this.m_SpellAnimatorManager.SetSpellAnimator (this.m_SpellCubeInstance);
-//
-//					GameObject.Destroy (this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
-//				}
-				//we have no spells that fit this yet, so do nothing.
-
+			
 			}//end if
 		}//end if
 		//else if the user holds down the mouse...
@@ -193,18 +169,39 @@ public class PlayerCastSpell : MonoBehaviour {
 							//if the hit's distance is greater than that of the furthest...
 							if (hit.collider.gameObject == this.m_Floor) {
 								target = hit;
+								break;
 							}
 						}//end foreach
+						//Set position of AOE spell animation
 						Vector3 modified_target = new Vector3(target.point.x, 0.0f, target.point.z);
 						Vector3 position = modified_target + AOE_offset;
 						spell_movement.MaintainPosition (position);
 
-//						Physics.SphereCastAll
+						//If we're just starting to cast the spell...
+						if (this.AOE_Timer == 0.0f) {
+							//... then apply the AOE to the enemies
+							this.ApplyAOEToEnemies (position - AOE_offset);
+							//Then set AOE timer to 1, to avoid repeating the base case
+							this.AOE_Timer = 1.0f;
+						}//end if
+						//else if the AOE timer is greater than or equal to 1 + the time it takes for the specific AOE spell to wear off...
+						else if (this.AOE_Timer >= 1.0f + this.GetAOESpellDuration (this.m_SpellClassToFire.m_SpellName)) {
+							//...then apply damage to the enemies and reset AOE timer to 1.0f
+							this.ApplyAOEToEnemies (position - AOE_offset);
+							this.AOE_Timer = 1.0f;
+						}//end else if
+						//else increment AOE timer by time.delta time
+						else {
+							this.AOE_Timer += Time.deltaTime;
+						}//end else
 					}//end if
 					//else if it isn't an AOE spell...
 					else {
 						spell_movement.MaintainPosition (this.transform.position);
 					}//end else
+
+					//Reset AOE timer
+					this.AOE_Timer = 0.0f;
 				}//end if
 				//else if the spell is not mobile
 				//we have no spells that fit this yet, so do nothing.
@@ -236,6 +233,50 @@ public class PlayerCastSpell : MonoBehaviour {
 
 		this.UpdateAnimatorParameters ();
 	}//end f'n void Update()
+
+	/**A function to return an AOE spell's duration*/
+	private float GetAOESpellDuration(SpellName spell_name)
+	{
+		float value_to_return = 0.0f;
+		switch ((int)spell_name) {
+		case (int)SpellName.Thunderstorm:
+			{
+				//the Enemy class has this as TIME_BEFORE_SHOCK_RELEASE; might need to restructure the code...
+				value_to_return = 1.25f;
+				break;
+			}//end case Thunderstorm
+		default:
+			{
+				//Impossible
+				break;
+			}//end case default
+		}//end switch
+		return value_to_return;
+	}//end f'n float GetAOESpellDuration(SpellName)
+
+	/**A function to apply AOE spells effects to all nearby enemies in a given radius.*/
+	private void ApplyAOEToEnemies(Vector3 position)
+	{
+		//Kind of a cool effect?
+//		GameObject test = GameObject.Instantiate (this.m_SpellCube);
+//		test.transform.position = position;
+//		GameObject.Destroy (test, 2.0f);
+
+		//Get all nearby collisions in a sphere at the specified position, in a radius [this.AOE_Radius]
+		Collider[] all_hit = Physics.OverlapSphere (position, this.AOE_Radius);
+		foreach (Collider hit in all_hit) {
+			//Note: enemies are all surrounded by a box collider for their actual person; capsule colliders are for their
+			//detection regions. We only want this to apply to the box collider
+			//So if the hit collider is a box collider
+				//AND the hit collider has an Enemy component...
+			if (hit is BoxCollider
+			    && hit.gameObject.GetComponent<Enemy> () != null) {
+//				Debug.Log ("Collider hit");
+				//...then apply the spell damage to that enemy
+				hit.gameObject.GetComponent<Enemy>().ApplySpellEffects(this.m_SpellClassToFire.m_SpellName);
+			}//end if
+		}//end foreach
+	}//end f'n void ApplyAOEToEnemies(Vector3)
 
 	/**A function to return the position to maintain of an immobile spell (an immobile spell could be cast either on the player or on an enemy, as it turns out).*/
 	private Vector3 PositionToMaintain()
