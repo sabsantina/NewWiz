@@ -63,7 +63,17 @@ public class SpellClass {
 		return spellinstance_to_return;
 	}//end f'n SpellClass GenerateInstance(SpellName)
 
-
+//	/**A function to simplify the spell application process.*/
+//	public void ApplySpellEffect(Enemy enemy, float delay_in_seconds)
+//	{
+//		switch ((int)this.m_SpellName) {
+//			case (int)SpellName.Fireball:
+//			{
+//				//Fireball is instantaneous, so far, so the delay doesn't bother us so much.
+//
+//			}
+//		}
+//	}
 
 	/**A function to return a SpellClass instance's properties in a string for testing purposes.*/
 	public string ReturnSpellInstanceInfo()

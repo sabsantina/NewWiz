@@ -26,6 +26,8 @@ public class PlayerCastSpell : MonoBehaviour {
 	/**A manager for the spell animator controllers*/
 	[SerializeField] private SpellAnimatorManager m_SpellAnimatorManager;
 
+	[SerializeField] private SpellEffectManager m_SpellEffectManager;
+
     private GameObject m_Target;
 	/**A reference to our main camera.*/
 	[SerializeField] private Camera m_MainCamera;

@@ -53,6 +53,8 @@ public class SpellMovement : MonoBehaviour {
 	/**The SpellClass spell we're currently casting.*/
 	public SpellClass m_SpellClassToCast;
 
+	public SpellEffectManager m_SpellEffectManager;
+
 	//For testing purposes
 	public string m_SpellName;
 
@@ -205,6 +207,7 @@ public class SpellMovement : MonoBehaviour {
 
 					Enemy enemy = other.gameObject.GetComponent<Enemy>();
 					enemy.ApplySpellEffects(this.m_SpellClassToCast.m_SpellName);
+//					this.m_SpellEffectManager.SetSpellToApply(this.m_SpellClassToCast, enemy);
 
 					#if TESTING_SPELLCOLLISION
 					message += "Subtracting enemy health...\n";
