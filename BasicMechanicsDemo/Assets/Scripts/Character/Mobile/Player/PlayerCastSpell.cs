@@ -65,10 +65,14 @@ public class PlayerCastSpell : MonoBehaviour {
 	{
 		this.m_Animator = this.GetComponent<Animator> ();
 		this.m_Player = this.GetComponent<Player> ();
+		this.m_SpellClassToFire = this.GetComponent<PlayerInventory> ().m_ActiveSpellClass;
     }
 
 	// Update is called once per frame
 	void Update () {
+		if (this.GetComponent<PlayerInventory> ().m_ActiveSpellClass == null) {
+			return;
+		}
 
 		if (Input.GetButtonDown (STRINGKEY_INPUT_CASTSPELL)) {
 			this.CheckChosenSpell ();
@@ -213,7 +217,8 @@ public class PlayerCastSpell : MonoBehaviour {
 		}//end if
 		//if the player lets go of the mouse and the spell wasn't a mobile spell (meaning that at this point they're probably still
 			//holding down the mouse...
-		else if (Input.GetButtonUp (STRINGKEY_INPUT_CASTSPELL) && !this.m_SpellClassToFire.m_IsMobileSpell) {
+		else if (Input.GetButtonUp (STRINGKEY_INPUT_CASTSPELL) 
+			&& !this.m_SpellClassToFire.m_IsMobileSpell) {
 			#if TESTING_MOUSE_UP
 			Debug.Log ("Mouse up");
 			#endif
@@ -342,6 +347,7 @@ public class PlayerCastSpell : MonoBehaviour {
 	{
 		this.m_SpellClassToFire = this.gameObject.GetComponent<PlayerInventory>().m_ActiveSpellClass;
 		this.m_SpellName = this.m_SpellClassToFire.m_SpellName.ToString ();
+			
 
 	}//end f'n void CheckChosenSpell()
 

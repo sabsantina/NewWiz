@@ -6830,6 +6830,8 @@ MonoBehaviour:
   TIME_BEFORE_SHOCK_RELEASE: 1.25
   m_IsFrozen: 0
   m_IsShocked: 0
+  m_ShockTimer: 0
+  m_ShockTimerIncrementor: 1
   m_ShockJumpDistance: 0.25
   m_ShockJumpFrequency: 0.0005
   m_CanMove: 1
@@ -12351,9 +12353,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b69754a7e4cc4d5480b732a6704360b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TempItemPrefab: {fileID: 1037877941852264, guid: 750d10d3c9a5043cba4860f04494c345,
+  m_DefaultItemPickupPrefab: {fileID: 1037877941852264, guid: 750d10d3c9a5043cba4860f04494c345,
     type: 2}
-  m_TempSpellPrefab: {fileID: 1560220320337108, guid: 55f288681366942dc955c6fa8d67c7e3,
+  m_DefaultSpellPickupPrefab: {fileID: 1560220320337108, guid: 55f288681366942dc955c6fa8d67c7e3,
     type: 2}
   m_Player: {fileID: 1546207769}
 --- !u!114 &872955990
@@ -13551,6 +13553,8 @@ MonoBehaviour:
   TIME_BEFORE_SHOCK_RELEASE: 1.25
   m_IsFrozen: 0
   m_IsShocked: 0
+  m_ShockTimer: 0
+  m_ShockTimerIncrementor: 1
   m_ShockJumpDistance: 0.25
   m_ShockJumpFrequency: 0.0005
   m_CanMove: 1
@@ -15518,6 +15522,8 @@ MonoBehaviour:
   TIME_BEFORE_SHOCK_RELEASE: 1.25
   m_IsFrozen: 0
   m_IsShocked: 0
+  m_ShockTimer: 0
+  m_ShockTimerIncrementor: 1
   m_ShockJumpDistance: 0.25
   m_ShockJumpFrequency: 0.0005
   m_CanMove: 1
@@ -21036,6 +21042,8 @@ MonoBehaviour:
   TIME_BEFORE_SHOCK_RELEASE: 1.25
   m_IsFrozen: 0
   m_IsShocked: 0
+  m_ShockTimer: 0
+  m_ShockTimerIncrementor: 1
   m_ShockJumpDistance: 0.25
   m_ShockJumpFrequency: 0.0005
   m_CanMove: 1
@@ -22337,6 +22345,8 @@ MonoBehaviour:
   TIME_BEFORE_SHOCK_RELEASE: 1.25
   m_IsFrozen: 0
   m_IsShocked: 0
+  m_ShockTimer: 0
+  m_ShockTimerIncrementor: 1
   m_ShockJumpDistance: 0.25
   m_ShockJumpFrequency: 0.0005
   m_CanMove: 1
@@ -26659,6 +26669,8 @@ MonoBehaviour:
   TIME_BEFORE_SHOCK_RELEASE: 1.25
   m_IsFrozen: 0
   m_IsShocked: 0
+  m_ShockTimer: 0
+  m_ShockTimerIncrementor: 1
   m_ShockJumpDistance: 0.25
   m_ShockJumpFrequency: 0.0005
   m_CanMove: 1

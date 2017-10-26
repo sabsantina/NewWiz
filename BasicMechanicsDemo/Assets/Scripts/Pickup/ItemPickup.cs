@@ -8,9 +8,10 @@ using UnityEngine;
 
 //Ensure the object has a collider so we can pick it up
 [RequireComponent(typeof(Collider))]
+
 public class ItemPickup : MonoBehaviour {
 	
-	public Item m_Item;
+	public ItemClass m_Item = new ItemClass();
 	public string m_ItemName;
 
 	void Awake()
@@ -19,10 +20,15 @@ public class ItemPickup : MonoBehaviour {
 	}
 
 	/**A function to set the Item instance to this ItemPickup.*/
-	public void SetItem(Item item_spawned)
+	public void SetItem(ItemClass item_spawned)
 	{
-		this.m_Item = item_spawned;
-		this.m_ItemName = this.m_Item.m_ItemName.ToString();
+		this.m_Item.m_ItemName = item_spawned.m_ItemName;
+		this.m_Item.m_ItemEffect = item_spawned.m_ItemEffect;
+		this.m_ItemName = item_spawned.m_ItemName.ToString ();
+
+//		Debug.Log ("Set item: " + this.m_Item.ReturnItemInstanceInfo ());
+
+
 	}//end f'n void SetItem(Item)
 
 	//A function to trigger when the player walks into an item pickup
@@ -30,7 +36,10 @@ public class ItemPickup : MonoBehaviour {
 	{
 		//if the object colliding with the item pickup is the player...
 		if (other.gameObject.GetComponent<PlayerInventory> ()) {
+//			Debug.Log ("Item picked up: " + this.m_Item.ReturnItemInstanceInfo ());
+
 			other.gameObject.GetComponent<PlayerInventory> ().AddItem (this.m_Item);
+
 
 			GameObject.Destroy (this.gameObject);
 		}
