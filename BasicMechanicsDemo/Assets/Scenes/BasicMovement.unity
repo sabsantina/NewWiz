@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -6831,6 +6831,8 @@ MonoBehaviour:
   TIME_BEFORE_SHOCK_RELEASE: 1.25
   m_IsFrozen: 0
   m_IsShocked: 0
+  m_ShockTimer: 0
+  m_ShockTimerIncrementor: 1
   m_ShockJumpDistance: 0.25
   m_ShockJumpFrequency: 0.0005
   m_CanMove: 1
@@ -12317,6 +12319,7 @@ GameObject:
   - component: {fileID: 872955987}
   - component: {fileID: 872955989}
   - component: {fileID: 872955990}
+  - component: {fileID: 872955991}
   m_Layer: 5
   m_Name: SceneManagers
   m_TagString: Untagged
@@ -12366,9 +12369,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b69754a7e4cc4d5480b732a6704360b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TempItemPrefab: {fileID: 1037877941852264, guid: 750d10d3c9a5043cba4860f04494c345,
+  m_DefaultItemPickupPrefab: {fileID: 1037877941852264, guid: 750d10d3c9a5043cba4860f04494c345,
     type: 2}
-  m_TempSpellPrefab: {fileID: 1560220320337108, guid: 55f288681366942dc955c6fa8d67c7e3,
+  m_DefaultSpellPickupPrefab: {fileID: 1560220320337108, guid: 55f288681366942dc955c6fa8d67c7e3,
     type: 2}
   m_Player: {fileID: 1546207769}
 --- !u!114 &872955990
@@ -12389,6 +12392,20 @@ MonoBehaviour:
     type: 2}
   m_ThunderStormAnimator: {fileID: 9100000, guid: 6f3ed9a61c7e64c4db2b7dbb3d266ce7,
     type: 2}
+--- !u!114 &872955991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 872955986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40082795307274d1194fca47d31027b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Enemy: {fileID: 0}
+  TIME_BEFORE_THAW: 2.5
+  TIME_BEFORE_SHOCK_RELEASE: 1.25
 --- !u!1 &874569331
 GameObject:
   m_ObjectHideFlags: 0
@@ -13553,6 +13570,8 @@ MonoBehaviour:
   TIME_BEFORE_SHOCK_RELEASE: 1.25
   m_IsFrozen: 0
   m_IsShocked: 0
+  m_ShockTimer: 0
+  m_ShockTimerIncrementor: 1
   m_ShockJumpDistance: 0.25
   m_ShockJumpFrequency: 0.0005
   m_CanMove: 1
@@ -15536,6 +15555,8 @@ MonoBehaviour:
   TIME_BEFORE_SHOCK_RELEASE: 1.25
   m_IsFrozen: 0
   m_IsShocked: 0
+  m_ShockTimer: 0
+  m_ShockTimerIncrementor: 1
   m_ShockJumpDistance: 0.25
   m_ShockJumpFrequency: 0.0005
   m_CanMove: 1
@@ -20603,10 +20624,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c824f4b6b784545429a327344e1482ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DefaultSpellPickupPrefab: {fileID: 1560220320337108, guid: 55f288681366942dc955c6fa8d67c7e3,
-    type: 2}
-  m_DefaultItemPickupPrefab: {fileID: 1037877941852264, guid: 750d10d3c9a5043cba4860f04494c345,
-    type: 2}
   m_DefaultSpellPrefab: {fileID: 1081312389218078, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
     type: 2}
   m_ActiveSpellName: 
@@ -20622,7 +20639,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Health: 0
+  m_Mana: 0
   m_IsShielded: 0
+  m_CanCastSpells: 1
 --- !u!54 &1546207777
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20653,9 +20672,12 @@ MonoBehaviour:
     type: 2}
   m_SpellCubeInstance: {fileID: 0}
   m_SpellAnimatorManager: {fileID: 872955990}
+  m_SpellEffectManager: {fileID: 872955991}
   m_MainCamera: {fileID: 1448755375}
   m_SpellName: 
   AOE_offset: {x: 0, y: 2.8, z: 4.2}
+  AOE_Radius: 15
+  AOE_Timer: 0
   m_Floor: {fileID: 628671963}
 --- !u!114 &1546207780
 MonoBehaviour:
@@ -21067,6 +21089,8 @@ MonoBehaviour:
   TIME_BEFORE_SHOCK_RELEASE: 1.25
   m_IsFrozen: 0
   m_IsShocked: 0
+  m_ShockTimer: 0
+  m_ShockTimerIncrementor: 1
   m_ShockJumpDistance: 0.25
   m_ShockJumpFrequency: 0.0005
   m_CanMove: 1
@@ -22384,6 +22408,8 @@ MonoBehaviour:
   TIME_BEFORE_SHOCK_RELEASE: 1.25
   m_IsFrozen: 0
   m_IsShocked: 0
+  m_ShockTimer: 0
+  m_ShockTimerIncrementor: 1
   m_ShockJumpDistance: 0.25
   m_ShockJumpFrequency: 0.0005
   m_CanMove: 1
@@ -26722,6 +26748,8 @@ MonoBehaviour:
   TIME_BEFORE_SHOCK_RELEASE: 1.25
   m_IsFrozen: 0
   m_IsShocked: 0
+  m_ShockTimer: 0
+  m_ShockTimerIncrementor: 1
   m_ShockJumpDistance: 0.25
   m_ShockJumpFrequency: 0.0005
   m_CanMove: 1

@@ -22,11 +22,12 @@ public class Enemy : MonoBehaviour {
 
 	/**A bool letting us know whether or not the enemy is shocked.*/
 	public bool m_IsShocked;
+
 	/**Time to be used for the shocking effect.*/
-	private float m_ShockTimer = 0.0f;
+	public float m_ShockTimer = 0.0f;
 	/**A variable to keep track of how many times we've incremented the shock timer by units of 0.5.
 	*The plan is for the enemy to move up/down every 0.5 seconds. So if the time before shock release is 3.0, the enemy should move a grand total of 6 times; three times upward, and three times downward.*/
-	private int m_ShockTimerIncrementor = 1;
+	public int m_ShockTimerIncrementor = 1;
 	/**A variable to keep track of the enemy start height, to ensure we don't wind up leaving them somewhere floating after shocking them.*/
 	private float m_EnemyStartHeight = 0.0f;
 	/**A variable to manage the distance of the height increase the enemy undergoes while shocked.*/
@@ -38,6 +39,8 @@ public class Enemy : MonoBehaviour {
 
 	/**A bool to let us know whether or not to stop the enemy moving.*/
 	public bool m_CanMove = true;
+
+
 
     void Start()
     {
@@ -120,6 +123,9 @@ public class Enemy : MonoBehaviour {
 		}//end if
 		else {
 			this.m_CanMove = true;
+			this.m_ShockTimer = 0.0f;
+//			this.freeze_Timer = 0.0f;
+			this.m_ShockTimerIncrementor = 1;
 		}
 	}//end f'n void Update()
 
@@ -153,18 +159,61 @@ public class Enemy : MonoBehaviour {
 				this.AffectHealth (-5.0f);
 				this.m_IsShocked = true;
 				this.m_ShockTimer = 0.0f;
+				this.m_ShockTimerIncrementor = 1;
 
 				break;
 			}//end case Thunderball
+		case (int)SpellName.Thunderstorm:
+			{
+				this.AffectHealth (-0.005f);
+				this.m_IsShocked = true;
+				if (this.m_ShockTimerIncrementor > 10) {
+					this.m_ShockTimer = 0.0f;
+					this.m_ShockTimerIncrementor = 1;
+				}
+				break;
+			}
 		default:
 			{
 				//Impossible, right now
 				break;
 			}
 		}
+	}//end f'n void ApplySpellEffects(SpellName)
 
 
-	}
+//	private SpellName m_SpellToApply;
+//	private float m_Delay = 0.0f;
+//
+//	private void Apply(SpellName spell_to_apply)
+//	{
+//		switch ((int)spell_to_apply) {
+//		case (int)SpellName.Fireball:
+//			{
+//				//Fireball is instantaneous, as of yet, so the delay doesn't matter so much.
+//				this.AffectHealth(FIREBALL_DAMAGE);
+//				break;
+//			}//end case
+//		case (int)SpellName.Iceball:
+//			{
+//				//Iceball is instantaneous, but freezes the enemy for [TIME_UNTIL_THAW]
+//
+//				//...then stop the animator
+//				this.gameObject.GetComponent<Animator> ().enabled = false;
+//				//...if the enemy is specifically frozen...
+//				if (m_IsFrozen) {
+//					//...then increment the freeze timer and release the enemy after the alloted time.
+//					freeze_Timer += Time.deltaTime;
+//					if (freeze_Timer >= TIME_BEFORE_THAW) {
+//						this.gameObject.GetComponent<Animator> ().enabled = true;
+//						m_IsFrozen = false;
+//					}//end if
+//				}//end if
+//			}
+//		}
+//	}//end f'n void Apply(SpellName spell_to_apply)
+
+
 
 
 }
