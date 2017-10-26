@@ -63,6 +63,8 @@ public class PlayerCastSpell : MonoBehaviour {
 
 	/**A multiplier for mana drain for when the user holds down the mouse casting a given spell*/
 	public float m_ManaDrainTimer = 0.0f;
+	/**A variable to ensure the spell class instance gameobject is destroyed.*/
+	public float m_ManaToDrain = 0.0f;
 
 	void Start()
 	{
@@ -79,16 +81,16 @@ public class PlayerCastSpell : MonoBehaviour {
 			return;
 		}//end if
 
-		//Same story if the player's out of mana
-		if (!this.m_Player.m_CanCastSpells) {
-			//Quickly update game before returning
-			this.m_isCastingSpell = false;
-			GameObject.Destroy (this.m_SpellCubeInstance);
-			this.UpdateAnimatorParameters ();
-			return;
-		}//end if
+//		//Same story if the player's out of mana
+//		if (!this.m_Player.m_CanCastSpells) {
+//			//Quickly update game before returning
+//			this.m_isCastingSpell = false;
+//			//GameObject.Destroy(spellcube instance?)
+//			this.UpdateAnimatorParameters ();
+//			return;
+//		}//end if
 
-		if (Input.GetButtonDown (STRINGKEY_INPUT_CASTSPELL)) {
+		if (Input.GetButtonDown (STRINGKEY_INPUT_CASTSPELL) && this.m_Player.m_CanCastSpells) {
 			this.CheckChosenSpell ();
 			//if the spell to fire exists...
 			if (this.m_SpellClassToFire != null) {
@@ -153,7 +155,6 @@ public class PlayerCastSpell : MonoBehaviour {
 						this.m_SpellAnimatorManager.SetSpellAnimator (this.m_SpellCubeInstance);
 
 						GameObject.Destroy (this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
-
 					}//end if
 				}//end if
 			
@@ -162,24 +163,31 @@ public class PlayerCastSpell : MonoBehaviour {
 			}//end if
 		}//end if
 		//else if the user holds down the mouse...
-		else if (Input.GetButton(STRINGKEY_INPUT_CASTSPELL)) {
+		else if (Input.GetButton (STRINGKEY_INPUT_CASTSPELL) && this.m_Player.m_CanCastSpells) {
 			this.CheckChosenSpell ();
 
 			//if the spell to fire exists 
 			if (this.m_SpellClassToFire != null) {
-
-				//the only reason we want to consistently deduce the player's mana if they're holding the mouse is if the spell is persistent.
-				//Else they're losing mana for nothing.
-				if (this.m_SpellClassToFire.m_IsPersistent) {
-					//At this point the user is casting a spell whose mana cost will grow as it is cast
-					this.m_ManaDrainTimer += Time.deltaTime;
-					this.m_Player.AffectMana (-(this.m_SpellClassToFire.m_ManaCost * m_ManaDrainTimer));
-				}
+//				//The spell cube instance shouldn't be here
+//				if (this.m_SpellCubeInstance != null) {
+//					this.m_isCastingSpell = false;
+//					this.UpdateAnimatorParameters ();
+//					GameObject.Destroy (this.m_SpellCubeInstance);
+//					return;
+//				}
 
 				//and is immobile...
 				if (!this.m_SpellClassToFire.m_IsMobileSpell) {
 					//Update [this.m_isCastingSpell] for the animator
 					this.m_isCastingSpell = true;
+
+					//the only reason we want to consistently deduce the player's mana if they're holding the mouse is if the spell is persistent.
+					//Else they're losing mana for nothing.
+					if (this.m_SpellClassToFire.m_IsPersistent) {
+						//At this point the user is casting a spell whose mana cost will grow as it is cast
+						this.m_ManaDrainTimer += Time.deltaTime;
+						this.m_Player.AffectMana (-(this.m_SpellClassToFire.m_ManaCost * this.m_ManaDrainTimer));
+					}
 
 					//if the spell is not mobile
 					//	AND if the spell cube instance is null (which can only mean the last spell cube was destroyed)...
@@ -213,7 +221,7 @@ public class PlayerCastSpell : MonoBehaviour {
 								}
 							}//end foreach
 							//Set position of AOE spell animation
-							Vector3 modified_target = new Vector3(target.point.x, 0.0f, target.point.z);
+							Vector3 modified_target = new Vector3 (target.point.x, 0.0f, target.point.z);
 							Vector3 position = modified_target + AOE_offset;
 							spell_movement.MaintainPosition (position);
 
@@ -248,13 +256,14 @@ public class PlayerCastSpell : MonoBehaviour {
 
 				}//end if
 			}
-			 //FROM HERE
+			//FROM HERE
 
 		}//end if
 		//if the player lets go of the mouse and the spell wasn't a mobile spell (meaning that at this point they're probably still
 			//holding down the mouse...
-		else if (Input.GetButtonUp (STRINGKEY_INPUT_CASTSPELL) 
-			&& !this.m_SpellClassToFire.m_IsMobileSpell) {
+		else if (Input.GetButtonUp (STRINGKEY_INPUT_CASTSPELL)
+		         && !this.m_SpellClassToFire.m_IsMobileSpell
+			&& this.m_SpellCubeInstance != null) {
 			#if TESTING_MOUSE_UP
 			Debug.Log ("Mouse up");
 			#endif
@@ -263,8 +272,18 @@ public class PlayerCastSpell : MonoBehaviour {
 			//...and we need to destroy the gameobject instance
 
 			GameObject.Destroy (this.m_SpellCubeInstance);
+
 		}//end if
 
+		else if (!Input.GetButtonUp (STRINGKEY_INPUT_CASTSPELL)
+			&& this.m_SpellClassToFire.m_IsPersistent) {
+			//The spell cube instance shouldn't be here
+			if (this.m_SpellCubeInstance != null) {
+				this.m_isCastingSpell = false;
+				this.UpdateAnimatorParameters ();
+				GameObject.Destroy (this.m_SpellCubeInstance);
+			}
+		}
 		//else if the player doesn't click (doesn't fire a spell)...
 		else {
 			//Update [this.m_isCastingSpell] for the animator
