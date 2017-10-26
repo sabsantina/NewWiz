@@ -186,17 +186,6 @@ public class PlayerCastSpell : MonoBehaviour {
 					if (this.m_SpellClassToFire.m_IsAOESpell) {
 						Ray ray = this.m_MainCamera.ScreenPointToRay (Input.mousePosition);
 						RaycastHit[] targets_hit = Physics.RaycastAll (ray);
-						//We need to find the raycast hit furthest from the camera in the event that none of the raycasthits are 
-						//mobile character as the furthest raycast hit will be the ground.
-//						RaycastHit furthest = targets_hit [0];
-//						bool any_mobile_characters = false;
-//						foreach (RaycastHit hit in targets_hit) {
-//							//if the hit's distance is greater than that of the furthest...
-//							if (hit.distance > furthest.distance) {
-//								//...then update the furthest
-//								furthest = hit;
-//							}//end if
-//						}//end foreach
 
 						RaycastHit target = targets_hit [0];
 						bool any_mobile_characters = false;
@@ -209,6 +198,8 @@ public class PlayerCastSpell : MonoBehaviour {
 						Vector3 modified_target = new Vector3(target.point.x, 0.0f, target.point.z);
 						Vector3 position = modified_target + AOE_offset;
 						spell_movement.MaintainPosition (position);
+
+//						Physics.SphereCastAll
 					}//end if
 					//else if it isn't an AOE spell...
 					else {

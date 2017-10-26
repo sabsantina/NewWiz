@@ -174,7 +174,6 @@ public class SpellMovement : MonoBehaviour {
 		this.m_SpellName = this.m_SpellClassToCast.m_SpellName.ToString ();
 	}
 
-	//***************FOR SOME REASON THIS FUNCTION IS RUNNING TWICE
     /**A function to be called whenever something enters a spellmovement collider; in terms of functionality, we'll use this function to destroy the spell object prefab after it strikes with something's collider.*/
     void OnTriggerEnter(Collider other)
     {
