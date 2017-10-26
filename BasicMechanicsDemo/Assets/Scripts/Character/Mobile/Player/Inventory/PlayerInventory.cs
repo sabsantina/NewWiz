@@ -1,6 +1,8 @@
 #define TESTING_INVENTORY_CONTENTS_OUTPUT
 #define TESTING_INVENTORY_SPELLPICKUP
 #define TESTING_ACTIVE_SPELL
+#define TESTING_INVENTORY_ITEMPICKUP
+
 
 /*Activating this macro will enable the player to start the game with the Fireball spell.*/
 #define START_WITH_FIREBALL
@@ -200,31 +202,50 @@ public class PlayerInventory : MonoBehaviour {
 	/**A function to add the item to the inventory.*/
 	public void AddItem(ItemClass item_to_add)
 	{
-		int value;
-		//if the key was found in the dictionary...
-		if (!this.m_ItemDictionary.TryGetValue (item_to_add, out value)) {
-			//...then increment quantity
-			this.m_ItemDictionary [item_to_add] = value + 1;
-		} else {
-			this.m_ItemDictionary.Add (item_to_add, 1);
-		}
+		#if TESTING_INVENTORY_ITEMPICKUP
+		string message = "";
+		message += "PlayerInventory::Adding item " + item_to_add.m_ItemName.ToString () +"\t";
+		#endif
 
-		Debug.Log ("PlayerInventory::Adding item " + item_to_add.m_ItemName.ToString () + "\n"
-			+ "Item already in list? " + !this.m_ItemDictionary.TryGetValue (item_to_add, out value));
-
+		foreach (KeyValuePair<ItemClass, int> entry in this.m_ItemDictionary) {
+			if (item_to_add.m_ItemName.ToString () == entry.Key.m_ItemName.ToString ()) {
+				this.m_ItemDictionary [entry.Key]++;
+				#if TESTING_INVENTORY_ITEMPICKUP
+				message += "item " + item_to_add.m_ItemName.ToString () + " found in inventory; quantity: " + this.m_ItemDictionary[entry.Key];
+				Debug.Log(message);
+				#endif
+				return;
+			}//end if
+		}//end foreach
+		#if TESTING_INVENTORY_ITEMPICKUP
+		message += "item " + item_to_add.m_ItemName.ToString () + " not found in inventory; adding...";
+		Debug.Log(message);
+		#endif
+		this.m_ItemDictionary.Add(item_to_add, 1);
 	}//end f'n void AddItem(Item)
 
 
 	/**A function to add a SpellClass object to the SpellClass list if the SpellClass is not already in the list.*/
 	public void AddSpell(SpellClass spell_to_add)
 	{
-		Debug.Log ("Add spell");
+		#if TESTING_INVENTORY_SPELLPICKUP
+		string message = "";
+		message += "PlayerInventory::Adding spell " + spell_to_add.m_SpellName.ToString () +"\t";
+		#endif
 		foreach (SpellClass spell in this.m_SpellClassList) {
 			if (spell.m_SpellName.ToString () == spell_to_add.m_SpellName.ToString ()) {
-				Debug.Log ("Spell to add name == spell name");
+
+				#if TESTING_INVENTORY_SPELLPICKUP
+				message += "spell " + spell_to_add.m_SpellName.ToString () +" already found in inventory; making no changes";
+				Debug.Log(message);
+				#endif
 				return;
 			}
 		}
+		#if TESTING_INVENTORY_SPELLPICKUP
+		message += "spell " + spell_to_add.m_SpellName.ToString () +" not already found in inventory; adding...";
+		Debug.Log(message);
+		#endif
 		this.m_SpellClassList.Add (spell_to_add);
 
 	}//end f'n void AddSpell(SpellClass)
