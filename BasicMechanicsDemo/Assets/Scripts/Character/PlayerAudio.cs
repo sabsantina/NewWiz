@@ -7,6 +7,7 @@ public class PlayerAudio : MonoBehaviour
 	[SerializeField] public AudioClip shieldHitSound;
 	[SerializeField] AudioClip fireSpellSound;
 	[SerializeField] AudioClip thunderSpellSound;
+	[SerializeField] AudioClip thunderStormSound;
 	[SerializeField] AudioClip healSpellSound;
 	[SerializeField] AudioClip rockSpellSound;
 	[SerializeField] AudioClip shieldCastSound;
@@ -35,7 +36,7 @@ public class PlayerAudio : MonoBehaviour
 		case SpellName.Thunderball:
 			return thunderSpellSound;
 		case SpellName.Thunderstorm:
-			return thunderSpellSound; //will change it later
+			return thunderStormSound; //will change it later
 		//Add more as new spells are created
 		}
 		return shieldCastSound;

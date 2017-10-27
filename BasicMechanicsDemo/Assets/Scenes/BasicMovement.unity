@@ -21039,8 +21039,8 @@ MonoBehaviour:
   m_MainCamera: {fileID: 1448755375}
   m_SpeechBubblePrefab: {fileID: 1768874769348516, guid: 49ea150aee9d35a4a861b40dada0c698,
     type: 2}
-  m_SpeechBubbleButton: {fileID: 0}
   m_InteractionRadius: 5
+  m_DialogFitsIntoBubble: 0
 --- !u!114 &1546207781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21055,6 +21055,7 @@ MonoBehaviour:
   shieldHitSound: {fileID: 8300000, guid: 0aedace4f9af6e64bb4dd2c5c9107cc6, type: 3}
   fireSpellSound: {fileID: 8300000, guid: 56b1fa7ea488aa5478bbcdab43c9ad9c, type: 3}
   thunderSpellSound: {fileID: 8300000, guid: 9704e2de1da2a944a8d56b66a594073d, type: 3}
+  thunderStormSound: {fileID: 8300000, guid: 0d5405832bb9e5546818ec7696895ef1, type: 3}
   healSpellSound: {fileID: 8300000, guid: 34b3ff90c09af754daf9a4edc444485d, type: 3}
   rockSpellSound: {fileID: 8300000, guid: 4a8222af7075ac8459229b33bcd07c5f, type: 3}
   shieldCastSound: {fileID: 8300000, guid: 88997d08b8800d042a4565f0cbadacaa, type: 3}
