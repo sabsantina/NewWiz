@@ -47,6 +47,8 @@ public class PlayerCastSpell : MonoBehaviour {
 	/**The reference to the SpellClass which is fired by the player.*/
 	public SpellClass m_SpellClassToFire;
 
+	public PlayerAudio m_playerAudio;
+
 	/**A variable for testing purposes*/
 	public string m_SpellName;
 
@@ -71,6 +73,7 @@ public class PlayerCastSpell : MonoBehaviour {
 		this.m_Animator = this.GetComponent<Animator> ();
 		this.m_Player = this.GetComponent<Player> ();
 		this.m_SpellClassToFire = this.GetComponent<PlayerInventory> ().m_ActiveSpellClass;
+		this.m_playerAudio = this.GetComponent<PlayerAudio> ();
     }
 
 	// Update is called once per frame
@@ -125,6 +128,7 @@ public class PlayerCastSpell : MonoBehaviour {
 						if (hit.collider.gameObject.GetComponent<MobileCharacter> () != null) {
 							m_Target = hit.collider.gameObject;
 							this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
+							this.m_Player.m_audioSource.PlayOneShot(m_playerAudio.getAudioForSpell(this.m_SpellClassToFire.m_SpellName));
 							this.m_SpellCubeInstance.transform.position = this.transform.position;
 							SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
 							spell_movement.m_IsMobileCharacter = true;
@@ -146,6 +150,7 @@ public class PlayerCastSpell : MonoBehaviour {
 							+ " y: " + furthest.point.y + " z: " + furthest.point.z);
 						#endif
 						this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
+						this.m_Player.m_audioSource.PlayOneShot(m_playerAudio.getAudioForSpell(this.m_SpellClassToFire.m_SpellName));
 						this.m_SpellCubeInstance.transform.position = this.transform.position;
 						SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
 						spell_movement.m_IsMobileCharacter = false;
@@ -199,6 +204,7 @@ public class PlayerCastSpell : MonoBehaviour {
 					if (!this.m_SpellClassToFire.m_IsMobileSpell && this.m_SpellCubeInstance == null) {
 						//...then create a new spell cube
 						this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
+						this.m_Player.m_audioSource.PlayOneShot(m_playerAudio.getAudioForSpell(this.m_SpellClassToFire.m_SpellName));
 						this.m_SpellCubeInstance.transform.position = this.transform.position;
 						SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
 						spell_movement.SetSpellToCast (this.m_SpellClassToFire);

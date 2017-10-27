@@ -7,7 +7,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
-
+	[SerializeField] public AudioClip attackSound;
+	[SerializeField] AudioClip enemyDamaged;
 	public float m_Health;
 
     public readonly float ENEMY_FULL_HEALTH = 100.0f;
@@ -133,6 +134,7 @@ public class Enemy : MonoBehaviour {
     /**A function to add [effect] to the enemys's health.*/
     public void AffectHealth(float effect)
     {
+		this.gameObject.GetComponent<AudioSource> ().PlayOneShot (enemyDamaged);
         this.m_Health += effect;
     }//end f'n void AffectHealth(float)
 
