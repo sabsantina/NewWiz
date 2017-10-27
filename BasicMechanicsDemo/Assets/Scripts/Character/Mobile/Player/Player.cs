@@ -70,8 +70,8 @@ public class Player : MonoBehaviour {
 			this.m_Mana += Time.deltaTime * this.m_ManaRegenMultiplier;
 			if (this.m_Mana > PLAYER_FULL_MANA) {
 				this.m_Mana = PLAYER_FULL_MANA;
-				setMeterValue (manaMeter, this.m_Mana);
 			}//end if
+			setMeterValue (manaMeter, this.m_Mana);
 		}//end if
 	}
 
