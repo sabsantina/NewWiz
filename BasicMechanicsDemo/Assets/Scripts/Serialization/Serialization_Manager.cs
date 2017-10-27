@@ -14,7 +14,7 @@ public class Serialization_Manager : MonoBehaviour {
 		Serializable_Player SP = new Serializable_Player ();
 		m_SavedSessions.Add(SP.GenerateSerializableInstance(m_Player));
 		BinaryFormatter bf = new BinaryFormatter();
-		//Application.persistentDataPath is a string, so if you wanted you can put that into debug.log if you want to know where save games are located
+		Debug.Log (Application.persistentDataPath);
 		FileStream file = File.Create (Application.persistentDataPath + "/savedGames.gd"); //you can call it anything you want
 		bf.Serialize(file, m_SavedSessions);
 		file.Close();
