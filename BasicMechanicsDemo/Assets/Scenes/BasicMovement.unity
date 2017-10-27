@@ -8940,7 +8940,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &628671964
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12477,6 +12477,7 @@ MonoBehaviour:
     type: 2}
   m_ThunderStormAnimator: {fileID: 9100000, guid: 6f3ed9a61c7e64c4db2b7dbb3d266ce7,
     type: 2}
+  m_HealAnimator: {fileID: 9100000, guid: aca82ae3d59444c02b05a69f62cf3b0e, type: 2}
 --- !u!114 &872955991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20943,6 +20944,7 @@ MonoBehaviour:
   m_Floor: {fileID: 628671963}
   m_ManaDrainTimer: 0
   m_ManaToDrain: 0
+
 --- !u!82 &1546207779
 AudioSource:
   m_ObjectHideFlags: 0
@@ -21023,6 +21025,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+
 --- !u!114 &1546207780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21041,6 +21044,7 @@ MonoBehaviour:
     type: 2}
   m_InteractionRadius: 5
   m_DialogFitsIntoBubble: 0
+
 --- !u!114 &1546207781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21060,6 +21064,7 @@ MonoBehaviour:
   rockSpellSound: {fileID: 8300000, guid: 4a8222af7075ac8459229b33bcd07c5f, type: 3}
   shieldCastSound: {fileID: 8300000, guid: 88997d08b8800d042a4565f0cbadacaa, type: 3}
   waterCastSound: {fileID: 8300000, guid: d2d9ec391fe80ca4ba7eda0b52b2cdfc, type: 3}
+
 --- !u!1 &1551504155
 GameObject:
   m_ObjectHideFlags: 0
@@ -23611,16 +23616,16 @@ Prefab:
         type: 2}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 6f3ed9a61c7e64c4db2b7dbb3d266ce7, type: 2}
+      objectReference: {fileID: 9100000, guid: aca82ae3d59444c02b05a69f62cf3b0e, type: 2}
     - target: {fileID: 212307006107648292, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
         type: 2}
       propertyPath: m_Size.x
-      value: 1.69
+      value: 1.62
       objectReference: {fileID: 0}
     - target: {fileID: 212307006107648292, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
         type: 2}
       propertyPath: m_Size.y
-      value: 1.89
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 212307006107648292, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
         type: 2}
