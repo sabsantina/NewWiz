@@ -13,6 +13,7 @@ public class Interactable : MonoBehaviour {
 
 	public virtual string ReturnRandomDialog ()
 	{
-		return "Interactable::";
+		//Intentionally empty
+		return "";
 	}
 }

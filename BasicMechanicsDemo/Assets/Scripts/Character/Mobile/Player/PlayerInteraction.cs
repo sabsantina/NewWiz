@@ -1,5 +1,5 @@
 ﻿//#define TESTING_OVERLAPSPHERE_COLLISIONS
-#define TESTING_DIALOG
+//#define TESTING_DIALOG
 #define TEMP_SPEECH_BUBBLE
 
 using System.Collections;
@@ -58,35 +58,20 @@ public class PlayerInteraction : MonoBehaviour {
 	/**A function to generate a button (effectively a speech bubble) right above the NPC*/
 	private void GenerateSpeechBubble(GameObject NPC_GameObject, string dialog)
 	{
-		#if TEMP_SPEECH_BUBBLE
 		//Create text bubble and set text to dialog
 		GameObject textBubble = Instantiate (m_SpeechBubblePrefab, NPC_GameObject.transform);
 		Text bubbleText = textBubble.GetComponentInChildren<Text> ();
+
+//		string simulated_dialog = "";
+//		for (int index = 0; index < 50; index++)
+//		{
+//			simulated_dialog += "m";
+//		}
+//		bubbleText.text = simulated_dialog;
 		bubbleText.text = dialog;
 
 		//Destroy text bubble after 3
 		Destroy (textBubble, 3);
 
-		/*this.m_SpeechBubbleTest = GameObject.Instantiate (this.m_SpeechBubbleTest);
-		this.m_SpeechBubbleTest.transform.position = NPC_GameObject.transform.position;
-		float height_adjustment = this.m_SpeechBubbleTest.transform.position.y * 7.0f;
-		Vector3 speech_bubble_position = this.m_SpeechBubbleTest.transform.position;
-		speech_bubble_position += (NPC_GameObject.transform.up * height_adjustment);
-		this.m_SpeechBubbleTest.transform.position = speech_bubble_position;
-		this.m_SpeechBubbleTest.transform.Rotate (new Vector3 (60.0f, 0.0f, 0.0f));*/
-		#endif
-//		Vector3 desired_position = NPC_GameObject.transform.position + (NPC_GameObject.transform.up * 7.0f);
-//		Vector3 screen_position = this.m_MainCamera.WorldToScreenPoint (desired_position);
-//
-//		Vector3 screen_coords = this.m_MainCamera.WorldToScreenPoint (desired_position);
-//		Rect button_rect = this.m_SpeechBubbleButton.GetComponent<Rect> ();
-//		button_rect.center = new Vector2 (screen_coords.x, screen_coords.y);
-//		this.m_SpeechBubbleButton.GetComponentInChildren<Text> ().text = dialog;
-//
-//
-//		Debug.Log ("Screen coordinates of above NPC:\n"
-//			+ "x: " + screen_coords.x + "\ty: " + screen_coords.y + "\tz: " + screen_coords.z);
-//
-//		this.m_SpeechBubbleButton.transform.position = screen_position;
 	}
 }
