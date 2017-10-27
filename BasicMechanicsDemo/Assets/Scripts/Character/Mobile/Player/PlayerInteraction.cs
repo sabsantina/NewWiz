@@ -86,6 +86,7 @@ public class PlayerInteraction : MonoBehaviour {
 						if (!this.m_DialogFitsIntoBubble) {
 							current_dialog = this.m_AllDialog.Substring (0, this.m_Total_Char_Per_Bubble);
 							this.m_AllDialog = this.m_AllDialog.Substring (current_dialog.Length, this.m_AllDialog.Length - current_dialog.Length);
+//							Debug.Log ("Current dialog: " + current_dialog + "\nAllDialog: " + m_AllDialog);
 						} else {
 							current_dialog = this.m_AllDialog;
 						}

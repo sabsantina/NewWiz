@@ -10,6 +10,11 @@ public class SpellPickup : MonoBehaviour {
 	/**The spell name, for debugging purposes.*/
 	public string m_SpellName;
 
+
+//	[SerializeField] private AudioClip m_Clip;
+//	/**The place the sound comes from.*/
+//	private AudioSource m_AudioSource;
+
 	void Awake()
 	{
 		this.gameObject.GetComponent<Collider> ().isTrigger = true;

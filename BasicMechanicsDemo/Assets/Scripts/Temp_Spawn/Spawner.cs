@@ -2,7 +2,7 @@
 * A temp class for spawning items and whatever else could potentially be spawned, for testing purposes.
 */
 
-#define TESTING_ITEM_PICKUP
+//#define TESTING_ITEM_PICKUP
 #define TESTING_WHATAMISPAWNING
 
 using System.Collections;
@@ -10,25 +10,49 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour {
-	#if TESTING_ITEM_PICKUP
 	/**A reference to the default item prefab to be spawned, before it is set to represent a specific item.*/
 	[SerializeField] private GameObject m_DefaultItemPickupPrefab;
 	/**A reference to the default spell prefab to be spawned, before it is set to represent a specific spell.*/
 	[SerializeField] private GameObject m_DefaultSpellPickupPrefab;
+
+	//*** Item sprites
+
+	/**The sprite to be used for a health potion*/
+	[SerializeField] private Sprite m_HealthPotionSprite;
+	/**The sprite to be used for a mana potion*/
+	[SerializeField] private Sprite m_ManaPotionSprite;
+
+	//*** Spell sprites
+	/**The sprite to be used for the fireball spell when it is a pickup*/
+	[SerializeField] private Sprite m_FireballSprite;
+	/**The sprite to be used for the iceball spell when it is a pickup*/
+	[SerializeField] private Sprite m_IceballSprite;
+	/**The sprite to be used for the thunderball spell when it is a pickup*/
+	[SerializeField] private Sprite m_ThunderballSprite;
+	/**The sprite to be used for the shield spell when it is a pickup*/
+	[SerializeField] private Sprite m_ShieldSprite;
+	/**The sprite to be used for the heal spell when it is a pickup*/
+	[SerializeField] private Sprite m_HealSprite;
+	/**The sprite to be used for the thunderstorm spell when it is a pickup*/
+	[SerializeField] private Sprite m_ThunderstormSprite;
+
+	private Sprite m_SpriteToBeUsed;
+
+	#if TESTING_ITEM_PICKUP
 	/**A reference to the player, just so we can consistently spawn something close to the player's transform.position.*/
 	[SerializeField] private GameObject m_Player;
 	#endif
-
-	/**A list of all Item instances we spawn.*/
-	private List<ItemPickup> m_ItemInstances;
-	/**A list of all Spell instances we spawn.*/
-	private List<SpellPickup> m_SpellInstances;
-
-	void Start()
-	{
-		this.m_ItemInstances = new List<ItemPickup> ();
-		this.m_SpellInstances = new List<SpellPickup>();
-	}
+//
+//	/**A list of all Item instances we spawn.*/
+//	private List<ItemPickup> m_ItemInstances;
+//	/**A list of all Spell instances we spawn.*/
+//	private List<SpellPickup> m_SpellInstances;
+//
+//	void Start()
+//	{
+//		this.m_ItemInstances = new List<ItemPickup> ();
+//		this.m_SpellInstances = new List<SpellPickup>();
+//	}
 
 	// Update is called once per frame
 	void Update () {
@@ -62,11 +86,13 @@ public class Spawner : MonoBehaviour {
 		case (int)ItemName.Health_Potion:
 			{
 				instance.GenerateInstance (ItemName.Health_Potion);
+				this.m_SpriteToBeUsed = this.m_HealthPotionSprite;
 				break;
 			}
 		case (int)ItemName.Mana_Potion:
 			{
 				instance.GenerateInstance (ItemName.Mana_Potion);
+				this.m_SpriteToBeUsed = this.m_ManaPotionSprite;
 				break;
 			}
 		default:
@@ -78,7 +104,8 @@ public class Spawner : MonoBehaviour {
 
 		GameObject obj = GameObject.Instantiate (this.m_DefaultItemPickupPrefab);
 		obj.GetComponent<ItemPickup> ().SetItem(instance);
-
+		//Set the sprite
+		obj.transform.GetComponentInChildren<SpriteRenderer> ().sprite = this.m_SpriteToBeUsed;
 		obj.transform.position = position;
 	}
 
@@ -92,31 +119,37 @@ public class Spawner : MonoBehaviour {
 		case (int)SpellName.Fireball:
 			{
 				instance = instance.GenerateInstance (SpellName.Fireball);
+				this.m_SpriteToBeUsed = this.m_FireballSprite;
 				break;
 			}
 		case (int)SpellName.Iceball:
 			{
 				instance = instance.GenerateInstance (SpellName.Iceball);
+				this.m_SpriteToBeUsed = this.m_IceballSprite;
 				break;
 			}
 		case (int)SpellName.Thunderball:
 			{
 				instance = instance.GenerateInstance (SpellName.Thunderball);
+				this.m_SpriteToBeUsed = this.m_ThunderballSprite;
 				break;
 			}
 		case (int)SpellName.Shield:
 			{
 				instance = instance.GenerateInstance (SpellName.Shield);
+				this.m_SpriteToBeUsed = this.m_ShieldSprite;
 				break;
 			}
 		case (int)SpellName.Thunderstorm:
 			{
 				instance = instance.GenerateInstance (SpellName.Thunderstorm);
+				this.m_SpriteToBeUsed = this.m_ThunderstormSprite;
 				break;
 			}
 		case (int)SpellName.Heal:
 			{
 				instance = instance.GenerateInstance (SpellName.Heal);
+				this.m_SpriteToBeUsed = this.m_HealSprite;
 				break;
 			}
 		default:
@@ -131,6 +164,7 @@ public class Spawner : MonoBehaviour {
 //		Debug.Log ("Spawner:: instance: " + instance.ReturnSpellInstanceInfo ());
 
 		obj.GetComponent<SpellPickup> ().SetSpell(instance);
+		obj.transform.GetComponentInChildren<SpriteRenderer> ().sprite = this.m_SpriteToBeUsed;
 
 		obj.transform.position = position;
 	}
