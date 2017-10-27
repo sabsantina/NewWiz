@@ -3,6 +3,7 @@
 #define TESTING_ACTIVE_SPELL
 #define TESTING_INVENTORY_ITEMPICKUP
 
+//Spell macros
 
 /*Activating this macro will enable the player to start the game with the Fireball spell.*/
 #define START_WITH_FIREBALL
@@ -17,6 +18,11 @@
 /*Activating this macro will enable the player to start the game with the Heal spell*/
 #define START_WITH_HEAL
 
+//Item macros
+/*Activating this macro will enable the player to start the game with the health potion item.*/
+#define START_WITH_HEALTH_POTION
+/*Activating this macro will enable the player to start the game with the mana potion item.*/
+#define START_WITH_MANA_POTION
 
 using System.Collections;
 using System.Collections.Generic;
@@ -26,12 +32,8 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider))]
 
 public class PlayerInventory : MonoBehaviour {
-//	[SerializeField] private GameObject m_DefaultSpellPickupPrefab;
-//	[SerializeField] private GameObject m_DefaultItemPickupPrefab;
-
-//	public Dictionary<Item, int> m_ItemDictionary { set; get;}
+	
 	public Dictionary<ItemClass, int> m_ItemDictionary;
-
 
 	/**A list of all SpellClass instances of spells in the inventory.*/
 	public List<SpellClass> m_SpellClassList;
@@ -51,14 +53,19 @@ public class PlayerInventory : MonoBehaviour {
     void Awake()
 	{
 		//for testing
-	}
-
-	void Start()
-	{
 		//Initialize Item Dictionary
 		this.m_ItemDictionary = new Dictionary<ItemClass, int>();
 
 		this.m_SpellClassList = new List<SpellClass>();
+		SpellClass spell_class_instance = new SpellClass();
+	}
+
+	void Start()
+	{
+//		//Initialize Item Dictionary
+//		this.m_ItemDictionary = new Dictionary<ItemClass, int>();
+//
+//		this.m_SpellClassList = new List<SpellClass>();
 		SpellClass spell_class_instance = new SpellClass();
 		#if START_WITH_FIREBALL
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Fireball));
@@ -86,6 +93,16 @@ public class PlayerInventory : MonoBehaviour {
 		#endif
 
 
+		#if START_WITH_HEALTH_POTION
+		ItemClass health_potion = new ItemClass ();
+		health_potion.GenerateInstance(ItemName.Health_Potion);
+		this.AddItem(health_potion);
+		#endif
+		#if START_WITH_MANA_POTION
+		ItemClass mana_potion = new ItemClass();
+		mana_potion.GenerateInstance(ItemName.Mana_Potion);
+		this.AddItem(mana_potion);
+		#endif
 
 	}//end f'n void Start()
 
@@ -208,6 +225,8 @@ public class PlayerInventory : MonoBehaviour {
 	/**A function to add the item to the inventory.*/
 	public void AddItem(ItemClass item_to_add)
 	{
+
+
 		#if TESTING_INVENTORY_ITEMPICKUP
 		string message = "";
 		message += "PlayerInventory::Adding item " + item_to_add.m_ItemName.ToString () +"\t";
