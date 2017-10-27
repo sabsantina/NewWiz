@@ -8,15 +8,20 @@ using UnityEngine;
 
 //Ensure the object has a collider so we can pick it up
 [RequireComponent(typeof(Collider))]
-
+//[RequireComponent(typeof(AudioSource))]
 public class ItemPickup : MonoBehaviour {
-	
+
 	public ItemClass m_Item = new ItemClass();
 	public string m_ItemName;
+
+//	[SerializeField] private AudioClip m_Clip;
+//	/**The place the sound comes from.*/
+//	private AudioSource m_AudioSource;
 
 	void Awake()
 	{
 		this.gameObject.GetComponent<Collider> ().isTrigger = true;
+//		this.m_AudioSource = this.GetComponent<AudioSource>();
 	}
 
 	/**A function to set the Item instance to this ItemPickup.*/
