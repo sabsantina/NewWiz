@@ -9,7 +9,7 @@ public class Peasant : Interactable {
 	void Start () {
 		this.m_Default_Text = new List<string> ();
 		string peasant_default_1 = "Oh, how my old bones creak!";
-		string peasant_default_2 = "Better watch out for those roosters over yonder! They've all gone feral!";
+		string peasant_default_2 = "Better watch out for those roosters over yonder!\n\nThey've all gone feral!";
 		this.m_Default_Text.Add (peasant_default_1);
 		this.m_Default_Text.Add (peasant_default_2);
 	}
