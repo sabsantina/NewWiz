@@ -50,13 +50,27 @@ public class Serializable_Player {
 	}//end f'n void GatherPlayerPosition(GameObject)
 
 	/**A function to gather all player attributes (health and mana, as well as the full possible value of each).*/
-	public void GatherPlayerAttributes(Player player)
+	public void GatherPlayerAttributes(GameObject player_obj)
 	{
+		Player player = player_obj.GetComponent<Player> ();
 		this.m_PlayerHealth = player.m_Health;
 		this.m_PlayerMana = player.m_Mana;
 		this.m_MaxPlayerHealth = player.PLAYER_FULL_HEALTH;
 		this.m_MaxPlayerMana = player.PLAYER_FULL_MANA;
 	}//end f'n void GatherPlayerAttributes(Player)
+
+	/**A function to generate our serializable instance.*/
+	public Serializable_Player GenerateSerializableInstance(GameObject player)
+	{
+		Serializable_Player serializable_player = new Serializable_Player ();
+		serializable_player.GatherPlayerAttributes (player);
+		serializable_player.GatherPlayerPosition (player);
+
+		PlayerInventory inventory = player.GetComponent<PlayerInventory> ();
+		serializable_player.ParseItemDictionary (inventory.m_ItemDictionary);
+		serializable_player.ParseSpellList (inventory.m_SpellClassList);
+		return serializable_player;
+	}//end f'n Serializable_Player GenerateSerializableInstance(GameObject)
 
 	/**For testing purposes; a function to use in a debug, to ensure all variables are well-set.*/
 	public string ReturnAllInformation()
