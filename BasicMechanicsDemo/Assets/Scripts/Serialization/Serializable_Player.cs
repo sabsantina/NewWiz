@@ -10,8 +10,13 @@ public class Serializable_Player {
 	public List<int> m_ItemQuantities = new List<int>();
 	/**A list containing all spell name strings in the player inventory*/
 	public List<string> m_SpellNames = new List<string>();
-	/**A vector to store the player's position in the world at the time of the save.*/
-	public Vector3 m_PlayerPositionInWorld = new Vector3();
+//	/**A vector to store the player's position in the world at the time of the save.*/
+//	public Vector3 m_PlayerPositionInWorld = new Vector3();
+
+	public float m_PlayerPositionInWorld_X;
+	public float m_PlayerPositionInWorld_Y;
+	public float m_PlayerPositionInWorld_Z;
+
 	/**A variable to store the value of the player health*/
 	public float m_PlayerHealth;
 	/**A variable to store the maximal value of the player health*/
@@ -46,7 +51,10 @@ public class Serializable_Player {
 	/**A function to gather the player position in the world (little to do here, since the Vector3 format is serializable as it is).*/
 	public void GatherPlayerPosition(GameObject player)
 	{
-		this.m_PlayerPositionInWorld = player.transform.position;
+//		this.m_PlayerPositionInWorld = player.transform.position;
+		this.m_PlayerPositionInWorld_X = player.transform.position.x;
+		this.m_PlayerPositionInWorld_Y = player.transform.position.y;
+		this.m_PlayerPositionInWorld_Z = player.transform.position.z;
 	}//end f'n void GatherPlayerPosition(GameObject)
 
 	/**A function to gather all player attributes (health and mana, as well as the full possible value of each).*/
