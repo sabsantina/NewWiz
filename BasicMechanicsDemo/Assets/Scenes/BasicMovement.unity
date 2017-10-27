@@ -20638,6 +20638,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f6a102a0b6d4386b03163ca7f62b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthMeter: {fileID: 1401973407}
+  manaMeter: {fileID: 137870621}
   m_Health: 0
   m_Mana: 0
   m_IsShielded: 0
