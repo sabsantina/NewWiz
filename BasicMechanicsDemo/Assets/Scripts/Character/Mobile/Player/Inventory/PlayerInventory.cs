@@ -14,6 +14,8 @@
 #define START_WITH_THUNDERBALL
 /*Activating this macro will enable the player to start the game with the Thunderstorm spell.*/
 #define START_WITH_THUNDERSTORM
+/*Activating this macro will enable the player to start the game with the Heal spell*/
+#define START_WITH_HEAL
 
 
 using System.Collections;
@@ -76,6 +78,10 @@ public class PlayerInventory : MonoBehaviour {
 		#endif
 		#if START_WITH_THUNDERSTORM
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Thunderstorm));
+		this.m_ActiveSpellClass = this.m_SpellClassList[0];
+		#endif
+		#if START_WITH_HEAL
+		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Heal));
 		this.m_ActiveSpellClass = this.m_SpellClassList[0];
 		#endif
 

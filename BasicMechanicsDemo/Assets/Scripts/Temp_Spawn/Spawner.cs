@@ -114,6 +114,11 @@ public class Spawner : MonoBehaviour {
 				instance = instance.GenerateInstance (SpellName.Thunderstorm);
 				break;
 			}
+		case (int)SpellName.Heal:
+			{
+				instance = instance.GenerateInstance (SpellName.Heal);
+				break;
+			}
 		default:
 			{
 				//impossible

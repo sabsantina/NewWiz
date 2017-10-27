@@ -18,6 +18,8 @@ public class SpellAnimatorManager : MonoBehaviour {
 	[SerializeField] private AnimatorController m_ThunderballAnimator;
 	/**The animator containing the animations and bools for the thunderstorm spell.*/
 	[SerializeField] private AnimatorController m_ThunderStormAnimator;
+	/**The animator containing the animations and bools for the healing spell.*/
+	[SerializeField] private AnimatorController m_HealAnimator;
 
 
 	/**A function to set a spell animator with respect to the spell*/
@@ -65,6 +67,14 @@ public class SpellAnimatorManager : MonoBehaviour {
 				Debug.Log ("Thunderstorm animator controller assigned");
 				#endif
 				spell_movement_component.SetAnimatorController (this.m_ThunderStormAnimator);
+				break;
+			}
+		case (int)SpellName.Heal:
+			{
+				#if TESTING_SUCCESSFUL_ANIMATOR_ASSIGNMENT
+				Debug.Log ("Heal animator controller assigned");
+				#endif
+				spell_movement_component.SetAnimatorController (this.m_HealAnimator);
 				break;
 			}
 		default:

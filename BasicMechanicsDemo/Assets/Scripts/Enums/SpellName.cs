@@ -11,5 +11,6 @@ public enum SpellName {
 	Shield,
     Iceball,
 	Thunderball,
-	Thunderstorm
+	Thunderstorm,
+	Heal
 }

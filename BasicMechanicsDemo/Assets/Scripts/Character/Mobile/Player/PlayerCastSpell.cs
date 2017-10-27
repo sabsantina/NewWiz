@@ -47,6 +47,8 @@ public class PlayerCastSpell : MonoBehaviour {
 	/**The reference to the SpellClass which is fired by the player.*/
 	public SpellClass m_SpellClassToFire;
 
+	public PlayerAudio m_playerAudio;
+
 	/**A variable for testing purposes*/
 	public string m_SpellName;
 
@@ -71,10 +73,12 @@ public class PlayerCastSpell : MonoBehaviour {
 		this.m_Animator = this.GetComponent<Animator> ();
 		this.m_Player = this.GetComponent<Player> ();
 		this.m_SpellClassToFire = this.GetComponent<PlayerInventory> ().m_ActiveSpellClass;
+		this.m_playerAudio = this.GetComponent<PlayerAudio> ();
     }
 
 	// Update is called once per frame
 	void Update () {
+
 		//If the player has no active spell...
 		if (this.GetComponent<PlayerInventory> ().m_ActiveSpellClass == null) {
 			//don't waste your time executing further
@@ -124,6 +128,7 @@ public class PlayerCastSpell : MonoBehaviour {
 						if (hit.collider.gameObject.GetComponent<MobileCharacter> () != null) {
 							m_Target = hit.collider.gameObject;
 							this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
+							this.m_Player.m_audioSource.PlayOneShot(m_playerAudio.getAudioForSpell(this.m_SpellClassToFire.m_SpellName));
 							this.m_SpellCubeInstance.transform.position = this.transform.position;
 							SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
 							spell_movement.m_IsMobileCharacter = true;
@@ -145,6 +150,7 @@ public class PlayerCastSpell : MonoBehaviour {
 							+ " y: " + furthest.point.y + " z: " + furthest.point.z);
 						#endif
 						this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
+						this.m_Player.m_audioSource.PlayOneShot(m_playerAudio.getAudioForSpell(this.m_SpellClassToFire.m_SpellName));
 						this.m_SpellCubeInstance.transform.position = this.transform.position;
 						SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
 						spell_movement.m_IsMobileCharacter = false;
@@ -187,13 +193,18 @@ public class PlayerCastSpell : MonoBehaviour {
 						//At this point the user is casting a spell whose mana cost will grow as it is cast
 						this.m_ManaDrainTimer += Time.deltaTime;
 						this.m_Player.AffectMana (-(this.m_SpellClassToFire.m_ManaCost * this.m_ManaDrainTimer));
+						if (this.m_SpellClassToFire.m_SpellName == SpellName.Heal) {
+							this.m_Player.AffectHealth (this.m_SpellClassToFire.m_ManaCost * 50.0f * Time.deltaTime);
+						}
 					}
+
 
 					//if the spell is not mobile
 					//	AND if the spell cube instance is null (which can only mean the last spell cube was destroyed)...
 					if (!this.m_SpellClassToFire.m_IsMobileSpell && this.m_SpellCubeInstance == null) {
 						//...then create a new spell cube
 						this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
+						this.m_Player.m_audioSource.PlayOneShot(m_playerAudio.getAudioForSpell(this.m_SpellClassToFire.m_SpellName));
 						this.m_SpellCubeInstance.transform.position = this.transform.position;
 						SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
 						spell_movement.SetSpellToCast (this.m_SpellClassToFire);
@@ -355,6 +366,11 @@ public class PlayerCastSpell : MonoBehaviour {
 				position_to_maintain = this.transform.position;
 				break;
 			}//end case Shield
+		case (int)SpellName.Heal:
+			{
+				position_to_maintain = this.transform.position;
+				break;
+			}
 		default:
 			{
 				//impossible
