@@ -78,6 +78,7 @@ public class PlayerCastSpell : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
 		//If the player has no active spell...
 		if (this.GetComponent<PlayerInventory> ().m_ActiveSpellClass == null) {
 			//don't waste your time executing further
@@ -192,7 +193,11 @@ public class PlayerCastSpell : MonoBehaviour {
 						//At this point the user is casting a spell whose mana cost will grow as it is cast
 						this.m_ManaDrainTimer += Time.deltaTime;
 						this.m_Player.AffectMana (-(this.m_SpellClassToFire.m_ManaCost * this.m_ManaDrainTimer));
+						if (this.m_SpellClassToFire.m_SpellName == SpellName.Heal) {
+							this.m_Player.AffectHealth (this.m_SpellClassToFire.m_ManaCost * 50.0f * Time.deltaTime);
+						}
 					}
+
 
 					//if the spell is not mobile
 					//	AND if the spell cube instance is null (which can only mean the last spell cube was destroyed)...
@@ -361,6 +366,11 @@ public class PlayerCastSpell : MonoBehaviour {
 				position_to_maintain = this.transform.position;
 				break;
 			}//end case Shield
+		case (int)SpellName.Heal:
+			{
+				position_to_maintain = this.transform.position;
+				break;
+			}
 		default:
 			{
 				//impossible

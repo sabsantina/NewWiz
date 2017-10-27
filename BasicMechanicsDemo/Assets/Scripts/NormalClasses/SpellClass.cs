@@ -27,9 +27,14 @@ public class SpellClass {
 	*At starting mana of 100, the player can cast 20 of these before needing a mana refill.*/
 	public readonly float THUNDERBALL_MANA_COST = 5.0f;
 	/**A variable to represent the mana cost of the shield spell. This is a persisting spell, so the player will be expending 15 mana * a value increasing by Time.deltatime every frame.
-	*At starting mana of 100, the player can cast 50 of these before needing a mana refill.*/
-	public readonly float SHIELD_MANA_COST = 5.0f;
+	*At starting mana of 100, the player can cast this for a couple of seconds before needing a mana refill.*/
+	public readonly float SHIELD_MANA_COST = 0.75f;
+	/**A variable to represent the mana cost of the thunderstorm spell. This is a persisting spell, so the player will be expending 10 mana * a value increasing by Time.deltatime every frame.
+	*At starting mana of 100, the player can cast this for a couple of seconds before needing a mana refill.*/
 	public readonly float THUNDERSTORM_MANA_COST = 10.0f;
+	/**A variable to represent the mana cost of the heal spell. This is a persisting spell, so the player will be expending 0.5 mana * a value increasing by Time.deltatime every frame.
+	*At starting mana of 100, the player can cast this for several seconds before needing a mana refill.*/
+	public readonly float HEAL_MANA_COST = 0.5f;
 
 	/**A function to return a SpellClass instance based on the spell name, from the SpellName enum, in its enum form.*/
 	public SpellClass GenerateInstance(SpellName spell_name)
@@ -82,6 +87,16 @@ public class SpellClass {
 				spellinstance_to_return.m_IsPersistent = true;
 				break;
 			}//end case Thunderstorm
+		case (int)SpellName.Heal:
+			{
+				spellinstance_to_return.m_SpellName = SpellName.Heal;
+				spellinstance_to_return.m_SpellEffect = SpellEffect.Heal_Player;
+				spellinstance_to_return.m_IsMobileSpell = false;
+				spellinstance_to_return.m_IsAOESpell = false;
+				spellinstance_to_return.m_ManaCost = HEAL_MANA_COST;
+				spellinstance_to_return.m_IsPersistent = true;
+				break;
+			}//end case Heal
 		default:
 			{
 				//Impossible
