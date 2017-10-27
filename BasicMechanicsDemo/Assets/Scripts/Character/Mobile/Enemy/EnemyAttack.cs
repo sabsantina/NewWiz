@@ -8,6 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider))]
 public class EnemyAttack : MonoBehaviour {
 
+	public AudioSource m_audioSource;
 	public float m_AttackDamage = -5.0f;
 	/**A timer to ensure we don't relentlessly spam the player's health.*/
 	public float m_AttackTimer = 0.0f;
@@ -18,6 +19,7 @@ public class EnemyAttack : MonoBehaviour {
 
 	void Awake()
 	{
+		m_audioSource = GetComponent<AudioSource> ();
 		//Ensure our capsule collider is how we like it
 		CapsuleCollider this_capsule_collider = this.GetComponent<CapsuleCollider> ();
 		this_capsule_collider.radius = 2.5f;
@@ -41,6 +43,7 @@ public class EnemyAttack : MonoBehaviour {
 			Player player = other.GetComponent<Player> ();
 			//...and if the player is shielded
 			if (player.m_IsShielded) {
+				player.m_audioSource.PlayOneShot(player.GetComponent<PlayerAudio>().shieldHitSound);
 				//...then the enemy cannot damage the player.
 				return false;
 			}//end if
@@ -56,6 +59,7 @@ public class EnemyAttack : MonoBehaviour {
 			if (other.gameObject.GetComponent<Player> () != null) {
 				//... then attack the player
 				Player player = other.gameObject.GetComponent<Player>();
+				m_audioSource.PlayOneShot (m_THIS_Enemy.attackSound);
 				player.AffectHealth (this.m_AttackDamage);
 				//...and start the timer
 				this.m_AttackTimer += Time.deltaTime;
@@ -77,6 +81,7 @@ public class EnemyAttack : MonoBehaviour {
 				if (this.m_AttackTimer >= this.m_LastSecond + 1) {
 					//...then attack the player
 					Player player = other.gameObject.GetComponent<Player>();
+					m_audioSource.PlayOneShot (m_THIS_Enemy.attackSound);
 					player.AffectHealth (this.m_AttackDamage);
 					//... and increase last second value for the next iteration
 					this.m_LastSecond++;

@@ -14,6 +14,8 @@ public class Player : MonoBehaviour {
 	[SerializeField] public GameObject healthMeter;
 	[SerializeField] public GameObject manaMeter;
 
+	public AudioSource m_audioSource;
+
 	/**A variable to keep track of the player's health.*/
 	public float m_Health;
 	/**A variable to keep track of the player's mana.*/
@@ -31,6 +33,7 @@ public class Player : MonoBehaviour {
 
 	void Start()
 	{
+		this.m_audioSource = GetComponent<AudioSource> ();
 		//Start off with full health
 		this.m_Health = PLAYER_FULL_HEALTH;
 		setMaxMeter (healthMeter, this.m_Health);
