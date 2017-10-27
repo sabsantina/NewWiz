@@ -34,9 +34,12 @@ public class Player : MonoBehaviour {
 		//Start off with full health
 		this.m_Health = PLAYER_FULL_HEALTH;
 		setMaxMeter (healthMeter, this.m_Health);
+		setMeterValue (healthMeter, this.m_Health);
 		
 		//Start off with full mana
 		this.m_Mana = PLAYER_FULL_MANA;
+		setMaxMeter (manaMeter, this.m_Mana);
+		setMeterValue (manaMeter, this.m_Mana);
 	}
 
 	void Update()
@@ -64,6 +67,7 @@ public class Player : MonoBehaviour {
 			this.m_Mana += Time.deltaTime * this.m_ManaRegenMultiplier;
 			if (this.m_Mana > PLAYER_FULL_MANA) {
 				this.m_Mana = PLAYER_FULL_MANA;
+				setMeterValue (manaMeter, this.m_Mana);
 			}//end if
 		}//end if
 	}
@@ -76,6 +80,12 @@ public class Player : MonoBehaviour {
 
 	}//end f'n void AffectHealth(float)
 
+	public void AffectMana(float effect)
+	{
+		this.m_Mana += effect;
+		setMeterValue (manaMeter, this.m_Mana);
+	}
+		
 	public void setMaxMeter(GameObject meter, float value)
 	{
 		meter.GetComponent<Slider> ().maxValue = value;
@@ -85,11 +95,5 @@ public class Player : MonoBehaviour {
 	{
 		meter.GetComponent<Slider> ().value = value;
 	}
-
-	public void AffectMana(float effect)
-	{
-		this.m_Mana += effect;
-	}
-
 }
 
