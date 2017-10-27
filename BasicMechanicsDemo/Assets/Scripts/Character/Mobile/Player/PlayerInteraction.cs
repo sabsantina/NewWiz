@@ -1,4 +1,4 @@
-﻿//#define TESTING_OVERLAPSPHERE_COLLISIONS
+//#define TESTING_OVERLAPSPHERE_COLLISIONS
 //#define TESTING_DIALOG
 //#define TESTING_SPEECH_BUBBLE
 
@@ -136,8 +136,10 @@ public class PlayerInteraction : MonoBehaviour {
 	private void GenerateSpeechBubble(GameObject NPC_GameObject, string dialog)
 	{
 		//Create text bubble and set text to dialog
+
 		this.m_TextBubble = Instantiate (m_SpeechBubblePrefab, NPC_GameObject.transform);
 		Text bubbleText = this.m_TextBubble.GetComponentInChildren<Text> ();
+
 		bubbleText.text = dialog;
 	}
 }

@@ -208,7 +208,6 @@ public class SpellMovement : MonoBehaviour {
 					Enemy enemy = other.gameObject.GetComponent<Enemy>();
 					enemy.ApplySpellEffects(this.m_SpellClassToCast.m_SpellName);
 //					this.m_SpellEffectManager.SetSpellToApply(this.m_SpellClassToCast, enemy);
-
 					#if TESTING_SPELLCOLLISION
 					message += "Subtracting enemy health...\n";
 					#endif
