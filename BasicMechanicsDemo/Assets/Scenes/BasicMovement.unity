@@ -5284,6 +5284,9 @@ MonoBehaviour:
       m_Targets: []
       m_EnemyLootSpawner: {fileID: 0}
     m_NumberOfEnemiesToKill: 0
+    m_NumberOfItemsToFind: 0
+  m_PlayerInventory: {fileID: 0}
+  m_RewardHasBeenGiven: 0
 --- !u!1 &384023766
 GameObject:
   m_ObjectHideFlags: 0
@@ -12459,10 +12462,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Spawner: {fileID: 872955989}
+  m_Player: {fileID: 1546207776}
   m_QuestGiver_RoosterBane: {fileID: 368024981}
   m_DefautRoosterPrefab: {fileID: 1299896596757046, guid: c3ea17809bbc64ef89f9abe1ab56cf7f,
     type: 2}
   NUMBER_ENEMIES_ROOSTERBANE: 5
+  m_QuestGiver_PotionMaster: {fileID: 0}
+  m_DefaultPotionQuestItemPrefab: {fileID: 0}
+  NUMBER_ITEMS_POTIONMASTER: 2
   m_AllQuests: []
   m_AllQuestGivers:
   - {fileID: 0}

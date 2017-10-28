@@ -28,15 +28,21 @@ public class Quest {
 
 	/*If the quest is a Fetch*/
 
-//	public Fetch m_Fetch;
+	public Fetch m_Fetch;
+	public int m_NumberOfItemsToFind;
 
 	/**A function to be overloaded, to initialize an objective type*/
 	public void InitializeObjectiveType()
 	{
 		if (this.m_QuestType == QuestType.KILL_EVERYTHING) {
 			this.m_KillEverything = new KillEverything ();
-//			this.m_Fetch = null;
+			this.m_Fetch = null;
+			return;
 		}//end if
+		if (this.m_QuestType == QuestType.FETCH) {
+			this.m_Fetch = new Fetch ();
+			this.m_KillEverything = null;
+		}
 	}
 
 	/**A function to spawn in whatever is needed for the quest.*/
@@ -56,6 +62,19 @@ public class Quest {
 			
 			}//end foreach
 		}//end if
+		//else if the quest type is FETCH...
+		else if (this.m_QuestType == QuestType.FETCH) {
+			
+			foreach (GameObject obj in this.m_RequisitePrefabs) {
+				
+				if (this.m_RequisitePrefabs.Count == 1) {
+					this.m_Fetch.SpawnQuestItemsAtPosition (this.m_QuestObjectivePosition, obj, this.m_NumberOfItemsToFind);
+				}//end if
+
+				//Dunno how to do this if there's more than one item type at a time. Will come back to it later
+
+			}//end foreach
+		}
 	}//end f'n void SpawnInQuestObjects()
 
 	/**A function to set the location of the quest objective, so we know where to spawn things.*/

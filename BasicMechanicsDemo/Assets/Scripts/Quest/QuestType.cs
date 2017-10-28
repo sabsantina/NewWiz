@@ -4,6 +4,6 @@
 public enum QuestType{
 	/**Where the quest is literally a list of targets to kill*/
 	KILL_EVERYTHING,
-	/**Where the quest consists of bringing a quest item to an NPC*/
+	/**Where the quest consists of bringing one, or several, quest item to an NPC*/
 	FETCH
 }

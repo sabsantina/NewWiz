@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class Objective {
 
+
+
 	public string m_QuestObjectiveDialog;
 	protected bool m_QuestObjectiveIsMet = false;
 

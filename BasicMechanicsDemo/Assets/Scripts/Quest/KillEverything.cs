@@ -8,7 +8,7 @@ using UnityEngine;
 
 [System.Serializable]
 public class KillEverything : Objective {
-
+	/**A list of quest targets; once they're all dead, the player's completed the quest.*/
 	public List<Enemy> m_Targets = new List<Enemy>();
 	/**A spawner to spawn loot by the enemy, when they die.*/
 	public Spawner m_EnemyLootSpawner;
