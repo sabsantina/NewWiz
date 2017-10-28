@@ -15,7 +15,7 @@ public class Peasant : Interactable {
 	}
 		
 	/**A function to return random dialog corresponding to the character.*/
-	public override string ReturnRandomDialog()
+	public override string ReturnDialog()
 	{
 		int index = Random.Range (0, this.m_Default_Text.Count);
 		return "Peasant:\n" + this.m_Default_Text [index];

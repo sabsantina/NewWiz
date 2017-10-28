@@ -38,6 +38,8 @@ public class PlayerInteraction : MonoBehaviour {
 	/**A collider corresponding to the NPC to make our lives a little easier.*/
 	private Collider m_NPCCollider;
 
+	public bool m_IsTalking = false;
+
 	void Start()
 	{
 		this.m_Total_Char_Per_Bubble = NUM_OF_CHAR_PER_LINE * NUM_OF_LINES_PER_BUBBLE;
@@ -46,6 +48,12 @@ public class PlayerInteraction : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (this.m_IsTalking) {
+			this.GetComponent<PlayerMovement> ().DisableMovement ();
+		} else {
+			this.GetComponent<PlayerMovement> ().EnableMovement ();
+		}
+
 		//if the user hits the interact key...
 		if (Input.GetButtonDown(STRINGKEY_INPUT_INTERACT)) {
 			//if there's no text bubble...
@@ -63,7 +71,7 @@ public class PlayerInteraction : MonoBehaviour {
 						Debug.Log ("Dialog: " + interactable.ReturnRandomDialog ());
 						#endif
 
-						this.m_AllDialog = interactable.ReturnRandomDialog ();
+						this.m_AllDialog = interactable.ReturnDialog ();
 
 						#if TESTING_SPEECH_BUBBLE
 						string simulated_message = "";
@@ -99,6 +107,8 @@ public class PlayerInteraction : MonoBehaviour {
 			else if (this.m_TextBubble != null && this.m_DialogFitsIntoBubble) {
 				//...then destroy the text bubble
 				GameObject.Destroy (this.m_TextBubble);
+				//...at which point the player is no longer talking.
+				this.m_IsTalking = false;
 			}//end else if
 			//else if the bubble is up and the text hasn't reached its end at the current bubble...
 			else if (this.m_TextBubble != null && !this.m_DialogFitsIntoBubble) {
@@ -136,8 +146,10 @@ public class PlayerInteraction : MonoBehaviour {
 	/**A function to generate a button (effectively a speech bubble) right above the NPC*/
 	private void GenerateSpeechBubble(GameObject NPC_GameObject, string dialog)
 	{
-		//Create text bubble and set text to dialog
+		//If we're generating a speech bubble, it's because the player's talking.
+		this.m_IsTalking = true;
 
+		//Create text bubble and set text to dialog
 		this.m_TextBubble = Instantiate (m_SpeechBubblePrefab, NPC_GameObject.transform);
 		Text bubbleText = this.m_TextBubble.GetComponentInChildren<Text> ();
 

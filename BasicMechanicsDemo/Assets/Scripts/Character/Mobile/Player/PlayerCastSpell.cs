@@ -85,14 +85,10 @@ public class PlayerCastSpell : MonoBehaviour {
 			return;
 		}//end if
 
-//		//Same story if the player's out of mana
-//		if (!this.m_Player.m_CanCastSpells) {
-//			//Quickly update game before returning
-//			this.m_isCastingSpell = false;
-//			//GameObject.Destroy(spellcube instance?)
-//			this.UpdateAnimatorParameters ();
-//			return;
-//		}//end if
+		//Same story if the player is having a conversation...
+		if (this.GetComponent<PlayerInteraction> ().m_IsTalking) {
+			return;
+		}
 
 		if (Input.GetButtonDown (STRINGKEY_INPUT_CASTSPELL) && this.m_Player.m_CanCastSpells) {
 			this.CheckChosenSpell ();
