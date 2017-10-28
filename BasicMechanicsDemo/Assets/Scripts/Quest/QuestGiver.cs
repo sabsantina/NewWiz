@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class QuestGiver : Interactable {
 	[SerializeField] QuestManager m_QuestManager;
-
+	/**The actual quest the NPC gives the player.*/
 	public Quest m_QuestToGive;
+	/**The item reward, if any*/
+	public ItemClass m_RewardItem;
+	/**The spell reward, if any*/
+	public SpellClass m_RewardSpell;
+	/**A reference to the player inventory*/
+	public PlayerInventory m_PlayerInventory;
+	/**A bool to let us know whether the player's been rewarded.*/
+	public bool m_RewardHasBeenGiven = false;
 
 	/**A function to return the quest dialog, with respect to quest type and quest state*/
 	public override string ReturnDialog ()
@@ -71,7 +79,7 @@ public class QuestGiver : Interactable {
 			string message = "";
 			if (this.m_QuestToGive.m_QuestType == QuestType.KILL_EVERYTHING) {
 				//Kill ...
-				message += "And so, the kingdom will finally be rid of those\n";
+				message += "And so, the kingdom will finally be rid of those ";
 				//...x number ...
 				message += this.m_QuestToGive.m_NumberOfEnemiesToKill + " ";
 				//...of [ENEMY NAME]
@@ -91,6 +99,13 @@ public class QuestGiver : Interactable {
 
 			//else if fetch...
 
+
+			//if the reward's not yet been given...
+			if (!this.m_RewardHasBeenGiven) {
+				//...then reward the player
+				this.RewardPlayer ();
+			}//end if
+
 			return message;
 		}//end if quest state is in process
 
@@ -98,5 +113,15 @@ public class QuestGiver : Interactable {
 		return "";
 	}//end f'n string ReturnDialog()
 
+	public void RewardPlayer()
+	{
+		if (this.m_RewardItem != null) {
+			this.m_PlayerInventory.AddItem (this.m_RewardItem);
+		}
+		if (this.m_RewardSpell != null) {
+			this.m_PlayerInventory.AddSpell (this.m_RewardSpell);
+		}
+		this.m_RewardHasBeenGiven = true;
+	}
 
 }

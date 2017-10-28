@@ -3,17 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour {
-
+	
+	/**A reference to the spawner; we need to still be able to spawn items from quest enemy corpses.*/
 	[SerializeField] public Spawner m_Spawner;
+	/**A reference to the player. We need to check the player's inventory for quest items.*/
+	[SerializeField] public Player m_Player;
 
 	/*		For quest Rooster Bane: 	*/
 
-	/**The default rooster prefab for the enemies we'll spawn once the quest is given to the player.*/
+	/**The NPC responsible for giving the quest to the player*/
 	[SerializeField] public QuestGiver m_QuestGiver_RoosterBane;
-
+	/**The default rooster prefab for the enemies we'll spawn once the quest is given to the player.*/
 	[SerializeField] public GameObject m_DefautRoosterPrefab;
 	public int NUMBER_ENEMIES_ROOSTERBANE = 5;
 
+	/*		For quest Potion Master		*/
+
+	[SerializeField] public QuestGiver m_QuestGiver_PotionMaster;
+
+	[SerializeField] public GameObject m_DefaultPotionQuestItemPrefab;
+	public int NUMBER_ITEMS_POTIONMASTER = 2;
+
+	/**/
 
 	/**A list of all the quests in the game.*/
 	public List<Quest> m_AllQuests = new List<Quest>();
@@ -52,8 +63,22 @@ public class QuestManager : MonoBehaviour {
 		rooster_bane.SetQuestGoalLocation (new Vector3 (15.74f, 0.55f, -0.43f));
 		rooster_bane.m_KillEverything.m_EnemyLootSpawner = this.m_Spawner;
 
+		this.m_QuestGiver_RoosterBane.m_PlayerInventory = this.m_Player.GetComponent<PlayerInventory> ();
+
+		//Set reward item (as an example)
+		ItemClass health_potion = new ItemClass();
+		health_potion.GenerateInstance(ItemName.Health_Potion);
+		this.m_QuestGiver_RoosterBane.m_RewardItem = health_potion;
+
+		//Set reward spell (as an example)
+		SpellClass iceball = new SpellClass();
+		iceball = iceball.GenerateInstance (SpellName.Iceball);
+		this.m_QuestGiver_RoosterBane.m_RewardSpell = iceball;
 		this.m_AllQuests.Add (rooster_bane);
 
+		//Potion master
+		Quest potion_master = new Quest();
+//		potion_master.m_QuestName = 
 
 	}//end f'n void InitializeAllQuests()
 
@@ -68,6 +93,7 @@ public class QuestManager : MonoBehaviour {
 				{
 					//Assign rooster bane quest to quest giver
 					this.m_QuestGiver_RoosterBane.m_QuestToGive = quest;
+
 					break;
 				}//end case Rooster Bane
 			default:
