@@ -4,7 +4,8 @@ using UnityEngine;
 
 [System.Serializable]
 public class Quest {
-	public string m_QuestName;
+	public QuestName m_QuestName;
+	public string m_QuestNameString;
 	public QuestState m_QuestState;
 	public QuestType m_QuestType;
 
@@ -23,6 +24,7 @@ public class Quest {
 	/*If the quest is a Kill Everything*/
 
 	public KillEverything m_KillEverything;
+	public int m_NumberOfEnemiesToKill;
 
 	/*If the quest is a Fetch*/
 

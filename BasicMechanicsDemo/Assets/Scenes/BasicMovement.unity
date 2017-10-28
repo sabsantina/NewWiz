@@ -5210,6 +5210,7 @@ GameObject:
   - component: {fileID: 368024978}
   - component: {fileID: 368024979}
   - component: {fileID: 368024980}
+  - component: {fileID: 368024981}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -5238,7 +5239,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 368024976}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d61f22d0f31374463916513e8f64f3bd, type: 3}
   m_Name: 
@@ -5267,6 +5268,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b951155be441a4463b10990a08f4f44a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &368024981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 368024976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c95b41536ad154d0493bae5650f192a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_QuestManager: {fileID: 872955993}
+  m_QuestToGive:
+    m_QuestName: 0
+    m_QuestNameString: 
+    m_QuestState: 0
+    m_QuestType: 0
+    m_RequisitePrefabs: []
+    m_QuestObjectivePosition: {x: 0, y: 0, z: 0}
+    m_KillEverything:
+      m_QuestObjectiveDialog: 
+      m_Targets: []
+    m_NumberOfEnemiesToKill: 0
 --- !u!1 &384023766
 GameObject:
   m_ObjectHideFlags: 0
@@ -12441,9 +12465,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28771e409f2724aeba2c7de0ace837fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_QuestGiver_RoosterBane: {fileID: 368024981}
   m_DefautRoosterPrefab: {fileID: 1299896596757046, guid: c3ea17809bbc64ef89f9abe1ab56cf7f,
     type: 2}
+  NUMBER_ENEMIES_ROOSTERBANE: 5
   m_AllQuests: []
+  m_AllQuestGivers:
+  - {fileID: 0}
 --- !u!1 &874569331
 GameObject:
   m_ObjectHideFlags: 0

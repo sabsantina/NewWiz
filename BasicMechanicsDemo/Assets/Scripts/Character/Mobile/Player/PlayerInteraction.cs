@@ -71,7 +71,7 @@ public class PlayerInteraction : MonoBehaviour {
 						Debug.Log ("Dialog: " + interactable.ReturnRandomDialog ());
 						#endif
 
-						this.m_AllDialog = interactable.ReturnRandomDialog ();
+						this.m_AllDialog = interactable.ReturnDialog ();
 
 						#if TESTING_SPEECH_BUBBLE
 						string simulated_message = "";
