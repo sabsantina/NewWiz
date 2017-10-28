@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class KillEverything : Objective {
 
 	public List<Enemy> m_Targets = new List<Enemy>();
