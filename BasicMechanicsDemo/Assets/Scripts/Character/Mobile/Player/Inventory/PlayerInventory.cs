@@ -113,7 +113,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	void Update()
 	{
-		this.m_DefaultSpellPrefab.GetComponent<SpellMovement> ().m_SpellClassToCast = this.m_ActiveSpellClass;
+//		this.m_DefaultSpellPrefab.GetComponent<SpellMovement> ().m_SpellClassToCast = this.m_ActiveSpellClass;
 		//If there's more than one spell in the player's inventory...
 		if (this.m_SpellClassList.Count > 1) {
 			//...then check for player input and switch SpellClass instance on command.
