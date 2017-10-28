@@ -28,6 +28,8 @@ public class PlayerMovement : MobileCharacter {
 	*Note: Here, "downward" denotes motion out of the scene, toward the camera.*/
 	private readonly string STRINGKEY_INPUT_DOWN = "Down";
 
+	private bool m_CanMove = true;
+
 	void Start()
 	{
 		this.m_MaximalVelocity = 20.0f;
@@ -46,6 +48,13 @@ public class PlayerMovement : MobileCharacter {
 
 	// Update is called once per frame
 	void Update () {
+
+		//if the player can't move...
+		if (!this.m_CanMove) {
+			//then forget about input
+			return;
+		}//end if
+
 		float leftward_input = -(Input.GetAxisRaw (STRINGKEY_INPUT_LEFT));
 		float rightward_input = Input.GetAxisRaw (STRINGKEY_INPUT_RIGHT);
 		//Note: "downward" in this context means down the scene, toward the camera
@@ -113,21 +122,16 @@ public class PlayerMovement : MobileCharacter {
 		this.UpdateAnimatorParameters();
 	}//end f'n void Update
 
-//	/**A function to stop the player moving from anything that has an Obstructable.cs component.
-//	*Checks for an object with a component of type Obstructable ahead of the player in direction [this.m_Direction]; returns true if there is.*/
-//	private bool IsObstructableAhead()
-//	{
-//		RaycastHit hit;
-//		Ray ray;
-//		//Cast a ray out starting from this.transform.position, along this.m_Direction
-//		if (Physics.Raycast(this.transform.position, this.m_Direction, out hit, this.m_MaximalVelocity * Time.deltaTime)) {
-//			//if whatever was hit's collider has an Obstructable component...
-//			if (hit.collider.gameObject.GetComponent<Obstructable> () != null) {
-//				//...then return true
-//				return true;
-//			}//end if
-//		}//end if
-//		return false;
-//	}//end f'n bool IsObstructableAhead()
+	/**A function to disable player movement.*/
+	public void DisableMovement()
+	{
+		this.m_CanMove = false;
+	}
+
+	/**A function to enable player movement*/
+	public void EnableMovement()
+	{
+		this.m_CanMove = true;
+	}
 
 }//end class PlayerMovement
