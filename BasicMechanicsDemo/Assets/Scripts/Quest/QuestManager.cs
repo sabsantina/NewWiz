@@ -15,21 +15,26 @@ public class QuestManager : MonoBehaviour {
 	[SerializeField] public QuestGiver m_QuestGiver_RoosterBane;
 	/**The default rooster prefab for the enemies we'll spawn once the quest is given to the player.*/
 	[SerializeField] public GameObject m_DefautRoosterPrefab;
+	/**The number of quest enemies to kill*/
 	public int NUMBER_ENEMIES_ROOSTERBANE = 5;
+
 
 	/*		For quest Potion Master		*/
 
+	/**The NPC responsible for giving the quest to the player*/
 	[SerializeField] public QuestGiver m_QuestGiver_PotionMaster;
-
+	/**The default potion prefab for the potions we'll spawn in once the quest is given to the player.*/
 	[SerializeField] public GameObject m_DefaultPotionQuestItemPrefab;
+	/**The number of quest items to fetch*/
 	public int NUMBER_ITEMS_POTIONMASTER = 2;
+
 
 	/**/
 
 	/**A list of all the quests in the game.*/
 	public List<Quest> m_AllQuests = new List<Quest>();
-	/**A list of all the quest-givers in the game.*/
-	public List<QuestGiver> m_AllQuestGivers = new List<QuestGiver> ();
+//	/**A list of all the quest-givers in the game.*/
+//	public List<QuestGiver> m_AllQuestGivers = new List<QuestGiver> ();
 
 	// Use this for initialization
 	void Awake () {
@@ -59,7 +64,7 @@ public class QuestManager : MonoBehaviour {
 
 		rooster_bane.InitializeObjectiveType();
 		rooster_bane.m_RequisitePrefabs.Add (this.m_DefautRoosterPrefab);
-		rooster_bane.m_NumberOfEnemiesToKill = 5;
+		rooster_bane.m_NumberOfEnemiesToKill = NUMBER_ENEMIES_ROOSTERBANE;
 		rooster_bane.SetQuestGoalLocation (new Vector3 (15.74f, 0.55f, -0.43f));
 		rooster_bane.m_KillEverything.m_EnemyLootSpawner = this.m_Spawner;
 
@@ -78,7 +83,29 @@ public class QuestManager : MonoBehaviour {
 
 		//Potion master
 		Quest potion_master = new Quest();
-//		potion_master.m_QuestName = 
+		potion_master.m_QuestName = QuestName.POTION_MASTER;
+		potion_master.m_QuestNameString = "Potion Master!";
+		potion_master.m_QuestState = QuestState.NOT_YET_GIVEN;
+		potion_master.m_QuestType = QuestType.FETCH;
+
+		potion_master.InitializeObjectiveType();
+		potion_master.m_RequisitePrefabs.Add (this.m_DefaultPotionQuestItemPrefab);
+		potion_master.m_NumberOfItemsToFind = NUMBER_ITEMS_POTIONMASTER;
+		potion_master.SetQuestGoalLocation (new Vector3 (15.74f, 0.55f, -0.43f));
+//		potion_master.m_KillEverything.m_EnemyLootSpawner = this.m_Spawner;
+
+		this.m_QuestGiver_PotionMaster.m_PlayerInventory = this.m_Player.GetComponent<PlayerInventory> ();
+
+		//Set reward item (as an example)
+//		ItemClass health_potion = new ItemClass();
+		health_potion.GenerateInstance(ItemName.Health_Potion);
+		this.m_QuestGiver_PotionMaster.m_RewardItem = health_potion;
+
+		//Set reward spell (as an example)
+//		SpellClass iceball = new SpellClass();
+		iceball = iceball.GenerateInstance (SpellName.Iceball);
+		this.m_QuestGiver_PotionMaster.m_RewardSpell = iceball;
+		this.m_AllQuests.Add (potion_master);
 
 	}//end f'n void InitializeAllQuests()
 
@@ -93,6 +120,13 @@ public class QuestManager : MonoBehaviour {
 				{
 					//Assign rooster bane quest to quest giver
 					this.m_QuestGiver_RoosterBane.m_QuestToGive = quest;
+
+					break;
+				}//end case Rooster Bane
+			case (int)QuestName.POTION_MASTER:
+				{
+					//Assign rooster bane quest to quest giver
+					this.m_QuestGiver_PotionMaster.m_QuestToGive = quest;
 
 					break;
 				}//end case Rooster Bane
