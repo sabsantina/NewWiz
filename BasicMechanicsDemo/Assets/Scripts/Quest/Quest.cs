@@ -31,7 +31,7 @@ public class Quest {
 	public Fetch m_Fetch;
 	public int m_NumberOfItemsToFind;
 
-	/**A function to be overloaded, to initialize an objective type*/
+	/**A to initialize an objective type for any quest*/
 	public void InitializeObjectiveType()
 	{
 		if (this.m_QuestType == QuestType.KILL_EVERYTHING) {
