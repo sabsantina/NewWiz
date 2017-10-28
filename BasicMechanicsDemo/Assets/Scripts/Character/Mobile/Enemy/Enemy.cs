@@ -2,6 +2,8 @@
 * Unlike the Player class, it's very likely that the Enemy class will only wind up becoming a superclass.
 */
 
+#define TESTING_ALWAYS_DROP_ITEM
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +13,9 @@ public class Enemy : MonoBehaviour {
 	[SerializeField] AudioClip enemyDamaged;
 	public float m_Health;
 
+	[SerializeField] private Spawner m_Spawner;
+
+	/**A float to contain the value of the player's full health*/
     public readonly float ENEMY_FULL_HEALTH = 100.0f;
 	/**The time until the enemy thaws and can move again.*/
 	public float TIME_BEFORE_THAW = 2.5f;
@@ -56,12 +61,19 @@ public class Enemy : MonoBehaviour {
         if(this.m_Health <= 0.0f)
         {
 			string message = "Enemy dead! ";
+
+			#if TESTING_ALWAYS_DROP_ITEM
+			this.m_Spawner.Spawn_Item(ItemName.Mana_Potion, this.transform.position + Vector3.right * 2.0f);
+
+			this.m_Spawner.Spawn_Spell(SpellName.Iceball, this.transform.position + Vector3.left * 2.0f);
+			#else
             /**Check to see if enemy will drop potion at given percentage*/
             if (Utilities.ProbabilityCheck(m_HealthPotionDropPercentage))
             {
                 //Item is spawned at death position.
-                this.gameObject.GetComponent<EnemySpawner>().Spawn_Item_HealthPotion(transform.position);
+				this.m_Spawner.Spawn_Item(ItemName.Health_Potion, this.transform.position);
             }
+			#endif
 			//if the enemy has a parent with a detection area...
 			if (this.gameObject.transform.GetComponentInParent<EnemyDetectionArea> () != null) {
 				message += "Has enemy detection area; therefore destroying parent.";
@@ -182,40 +194,5 @@ public class Enemy : MonoBehaviour {
 			}
 		}
 	}//end f'n void ApplySpellEffects(SpellName)
-
-
-//	private SpellName m_SpellToApply;
-//	private float m_Delay = 0.0f;
-//
-//	private void Apply(SpellName spell_to_apply)
-//	{
-//		switch ((int)spell_to_apply) {
-//		case (int)SpellName.Fireball:
-//			{
-//				//Fireball is instantaneous, as of yet, so the delay doesn't matter so much.
-//				this.AffectHealth(FIREBALL_DAMAGE);
-//				break;
-//			}//end case
-//		case (int)SpellName.Iceball:
-//			{
-//				//Iceball is instantaneous, but freezes the enemy for [TIME_UNTIL_THAW]
-//
-//				//...then stop the animator
-//				this.gameObject.GetComponent<Animator> ().enabled = false;
-//				//...if the enemy is specifically frozen...
-//				if (m_IsFrozen) {
-//					//...then increment the freeze timer and release the enemy after the alloted time.
-//					freeze_Timer += Time.deltaTime;
-//					if (freeze_Timer >= TIME_BEFORE_THAW) {
-//						this.gameObject.GetComponent<Animator> ().enabled = true;
-//						m_IsFrozen = false;
-//					}//end if
-//				}//end if
-//			}
-//		}
-//	}//end f'n void Apply(SpellName spell_to_apply)
-
-
-
 
 }

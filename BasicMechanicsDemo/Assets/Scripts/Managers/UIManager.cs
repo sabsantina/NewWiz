@@ -4,7 +4,7 @@
 * and UIManager::OpenInventoryMenu or UIManager::OpenMapMenu). Dunno why.
 */
 
-//#define TESTING_MENU_OPEN
+#define TESTING_MENU_OPEN
 
 using System.Collections;
 using System.Collections.Generic;
@@ -21,8 +21,11 @@ public class UIManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyDown (KeyCode.M)) {
+		if (Input.GetKeyDown (KeyCode.I)) {
 			this.OpenInventoryMenu ();
+		}
+		if (Input.GetKeyDown (KeyCode.M)) {
+			this.OpenMapMenu ();
 		}
 
 	}
