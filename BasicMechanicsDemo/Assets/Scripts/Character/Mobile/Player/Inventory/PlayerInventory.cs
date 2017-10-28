@@ -19,6 +19,7 @@
 #define START_WITH_HEAL
 
 //Item macros
+
 /*Activating this macro will enable the player to start the game with the health potion item.*/
 #define START_WITH_HEALTH_POTION
 /*Activating this macro will enable the player to start the game with the mana potion item.*/
