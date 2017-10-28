@@ -12468,11 +12468,10 @@ MonoBehaviour:
     type: 2}
   NUMBER_ENEMIES_ROOSTERBANE: 5
   m_QuestGiver_PotionMaster: {fileID: 1580806084}
-  m_DefaultPotionQuestItemPrefab: {fileID: 0}
+  m_DefaultPotionQuestItemPrefab: {fileID: 1126925848709952, guid: 764a4e7ea763941b2a1a14ca27bd3409,
+    type: 2}
   NUMBER_ITEMS_POTIONMASTER: 2
   m_AllQuests: []
-  m_AllQuestGivers:
-  - {fileID: 0}
 --- !u!1 &874569331
 GameObject:
   m_ObjectHideFlags: 0
