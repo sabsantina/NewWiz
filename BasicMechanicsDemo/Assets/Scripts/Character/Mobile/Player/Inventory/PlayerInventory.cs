@@ -59,6 +59,10 @@ public class PlayerInventory : MonoBehaviour {
 
 		this.m_SpellClassList = new List<SpellClass>();
 		SpellClass spell_class_instance = new SpellClass();
+
+//		this.m_DefaultSpellPrefab = GameObject.Instantiate (this.m_DefaultSpellPrefab);
+//		this.m_DefaultSpellPrefab.transform.position = new Vector3 (0.0f, -5.0f, 0.0f);
+//		this.m_DefaultSpellPrefab.GetComponent<MeshRenderer> ().isVisible = false;
 	}
 
 	void Start()
@@ -109,6 +113,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	void Update()
 	{
+		this.m_DefaultSpellPrefab.GetComponent<SpellMovement> ().m_SpellClassToCast = this.m_ActiveSpellClass;
 		//If there's more than one spell in the player's inventory...
 		if (this.m_SpellClassList.Count > 1) {
 			//...then check for player input and switch SpellClass instance on command.
