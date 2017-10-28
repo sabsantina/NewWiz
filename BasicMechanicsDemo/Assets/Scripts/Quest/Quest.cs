@@ -30,7 +30,7 @@ public class Quest {
 
 //	public Fetch m_Fetch;
 
-	/**A function to be overloaded, to initialize an objective type (ideally of type KillEverything)*/
+	/**A function to be overloaded, to initialize an objective type*/
 	public void InitializeObjectiveType()
 	{
 		if (this.m_QuestType == QuestType.KILL_EVERYTHING) {
@@ -39,21 +39,24 @@ public class Quest {
 		}//end if
 	}
 
-	public void KillEverything_SetTargets(List<GameObject> all_targets)
+	/**A function to spawn in whatever is needed for the quest.*/
+	public void SpawnInQuestObjects()
 	{
-		foreach (GameObject obj in all_targets) {
-			//if the object itself doesn't have the enemy component...
-			if (obj.GetComponent<Enemy>() == null) {
-				//...then find it among the children
-				this.m_KillEverything.m_Targets.Add (obj.GetComponentInChildren<Enemy> ());
-			}//end if
-			//else if the object has the enemy component...
-			else {
-				//...then grab it
-				this.m_KillEverything.m_Targets.Add (obj.GetComponent<Enemy> ());
-			}//end else
-		}//end foreach
-	}
+		//if the quest type is KILL EVERYTHING...
+		if (this.m_QuestType == QuestType.KILL_EVERYTHING) {
+			
+//			int random_int = Random.Range (1, this.m_NumberOfEnemiesToKill - 1);
+
+			foreach (GameObject obj in this.m_RequisitePrefabs) {
+				if (this.m_RequisitePrefabs.Count == 1) {
+					this.m_KillEverything.SpawnEnemiesAtPosition (this.m_QuestObjectivePosition, obj, this.m_NumberOfEnemiesToKill);
+				}//end if
+
+				//Dunno how to do this if there's more than one enemy type at a time. Will come back to it later
+			
+			}//end foreach
+		}//end if
+	}//end f'n void SpawnInQuestObjects()
 
 	/**A function to set the location of the quest objective, so we know where to spawn things.*/
 	public void SetQuestGoalLocation(Vector3 location)

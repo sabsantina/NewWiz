@@ -49,9 +49,7 @@ public class QuestManager : MonoBehaviour {
 		rooster_bane.m_NumberOfEnemiesToKill = 5;
 		rooster_bane.SetQuestGoalLocation (new Vector3 (15.74f, 0.55f, -0.43f));
 
-
 		this.m_AllQuests.Add (rooster_bane);
-//		rooster_bane.m_QuestObjective
 	}//end f'n void InitializeAllQuests()
 
 	/**A function to provide each quest giver with their respective quest.*/
@@ -79,12 +77,18 @@ public class QuestManager : MonoBehaviour {
 	/**A function to keep track of whether or not quest objectives are completed; this will only apply to quests whose states are IN_PROCESS*/
 	private void UpdateActiveQuestObjectives()
 	{
+		//for every quest...
 		foreach (Quest quest in this.m_AllQuests) {
+			//...if the quest is in process...
 			if (quest.m_QuestState == QuestState.IN_PROCESS) {
-//				quest.m_QuestObjective.CheckForObjectiveIsMet ();
-			}
-		}
-	}
+				//...then check to see if it's fulfilled the conditions for completion
+				if (quest.CheckQuestObjectiveCompleted ()) {
+					//...if so, then update the quest status
+					this.UpdateQuestState (quest.m_QuestName, QuestState.COMPLETED);
+				}//end if
+			}//end if
+		}//end foreach
+	}//end f'n void UpdateActiveQuestObjectives()
 
 	/**Update quest [quest_name] to have state [quest_state].*/
 	public void UpdateQuestState(QuestName quest_name, QuestState quest_state)

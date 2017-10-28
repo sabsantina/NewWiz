@@ -2256,7 +2256,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &175525042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3798,7 +3798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &273882121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4025,6 +4025,10 @@ Prefab:
       propertyPath: m_Spawner
       value: 
       objectReference: {fileID: 872955989}
+    - target: {fileID: 1299896596757046, guid: c3ea17809bbc64ef89f9abe1ab56cf7f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3ea17809bbc64ef89f9abe1ab56cf7f, type: 2}
   m_IsPrefabParent: 0
@@ -5207,7 +5211,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 368024977}
-  - component: {fileID: 368024978}
   - component: {fileID: 368024979}
   - component: {fileID: 368024980}
   - component: {fileID: 368024981}
@@ -5233,17 +5236,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &368024978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 368024976}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d61f22d0f31374463916513e8f64f3bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &368024979
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -8559,7 +8551,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &603401694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18875,7 +18867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1381424482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21263,7 +21255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1557507308
 MonoBehaviour:
   m_ObjectHideFlags: 0
