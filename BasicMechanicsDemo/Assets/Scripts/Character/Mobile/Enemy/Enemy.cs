@@ -64,9 +64,9 @@ public class Enemy : MonoBehaviour {
 			string message = "Enemy dead! ";
 			this.m_IsAlive = false;
 			#if TESTING_ALWAYS_DROP_ITEM
-//			this.m_Spawner.Spawn_Item(ItemName.Mana_Potion, this.transform.position + Vector3.right * 2.0f);
-//
-//			this.m_Spawner.Spawn_Spell(SpellName.Iceball, this.transform.position + Vector3.left * 2.0f);
+			this.m_Spawner.Spawn_Item(ItemName.Mana_Potion, this.transform.position + Vector3.right * 2.0f);
+
+			this.m_Spawner.Spawn_Spell(SpellName.Iceball, this.transform.position + Vector3.left * 2.0f);
 			#else
             /**Check to see if enemy will drop potion at given percentage*/
             if (Utilities.ProbabilityCheck(m_HealthPotionDropPercentage))

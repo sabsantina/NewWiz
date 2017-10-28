@@ -10,8 +10,8 @@ using UnityEngine;
 public class KillEverything : Objective {
 
 	public List<Enemy> m_Targets = new List<Enemy>();
-
-
+	/**A spawner to spawn loot by the enemy, when they die.*/
+	public Spawner m_EnemyLootSpawner;
 
 	/**A function to check whether every target has been killed.*/
 	public override bool CheckForObjectiveIsMet()
@@ -50,6 +50,7 @@ public class KillEverything : Objective {
 			//if the enemy component isn't in the object, it's in one of the children
 			if (enemy == null) {
 				enemy = enemy_obj.GetComponentInChildren<Enemy> ();
+				enemy.m_Spawner = this.m_EnemyLootSpawner;
 			}
 
 			this.m_Targets.Add (enemy);

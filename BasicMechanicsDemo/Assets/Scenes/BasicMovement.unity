@@ -5282,6 +5282,7 @@ MonoBehaviour:
     m_KillEverything:
       m_QuestObjectiveDialog: 
       m_Targets: []
+      m_EnemyLootSpawner: {fileID: 0}
     m_NumberOfEnemiesToKill: 0
 --- !u!1 &384023766
 GameObject:
@@ -12457,6 +12458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28771e409f2724aeba2c7de0ace837fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Spawner: {fileID: 872955989}
   m_QuestGiver_RoosterBane: {fileID: 368024981}
   m_DefautRoosterPrefab: {fileID: 1299896596757046, guid: c3ea17809bbc64ef89f9abe1ab56cf7f,
     type: 2}

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour {
 
+	[SerializeField] public Spawner m_Spawner;
+
 	/*		For quest Rooster Bane: 	*/
 
 	/**The default rooster prefab for the enemies we'll spawn once the quest is given to the player.*/
@@ -48,8 +50,11 @@ public class QuestManager : MonoBehaviour {
 		rooster_bane.m_RequisitePrefabs.Add (this.m_DefautRoosterPrefab);
 		rooster_bane.m_NumberOfEnemiesToKill = 5;
 		rooster_bane.SetQuestGoalLocation (new Vector3 (15.74f, 0.55f, -0.43f));
+		rooster_bane.m_KillEverything.m_EnemyLootSpawner = this.m_Spawner;
 
 		this.m_AllQuests.Add (rooster_bane);
+
+
 	}//end f'n void InitializeAllQuests()
 
 	/**A function to provide each quest giver with their respective quest.*/
