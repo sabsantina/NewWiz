@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4431182114066536}
   - component: {fileID: 114183343105646356}
   - component: {fileID: 135226295539117192}
-  - component: {fileID: 114168349272079364}
   - component: {fileID: 54862699077050900}
+  - component: {fileID: 114019810740451060}
   - component: {fileID: 95144408624912346}
   m_Layer: 0
   m_Name: Spell_DefaultPrefab
@@ -177,7 +177,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114168349272079364
+--- !u!114 &114019810740451060
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -204,6 +204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MaximalVelocity: 25
   m_SpellToCast: {fileID: 0}
+  m_SpellEffectManager: {fileID: 0}
   m_SpellName: 
 --- !u!135 &135010289913475408
 SphereCollider:
