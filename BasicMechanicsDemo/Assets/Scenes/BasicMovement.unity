@@ -6841,6 +6841,7 @@ MonoBehaviour:
   m_ShockJumpFrequency: 0.0005
   m_HealthPotionDropPercentage: 58
   m_CanMove: 1
+  m_IsAlive: 1
 --- !u!114 &475894579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12403,6 +12404,7 @@ GameObject:
   - component: {fileID: 872955990}
   - component: {fileID: 872955991}
   - component: {fileID: 872955992}
+  - component: {fileID: 872955993}
   m_Layer: 5
   m_Name: SceneManagers
   m_TagString: Untagged
@@ -12512,7 +12514,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Player: {fileID: 1546207769}
-  m_SavedSessions: []
+  m_SavedSessions:
+  - m_ItemNames: []
+    m_ItemQuantities: 
+    m_SpellNames: []
+    m_PlayerPositionInWorld_X: 0
+    m_PlayerPositionInWorld_Y: 0
+    m_PlayerPositionInWorld_Z: 0
+    m_PlayerHealth: 0
+    m_MaxPlayerHealth: 0
+    m_PlayerMana: 0
+    m_MaxPlayerMana: 0
+--- !u!114 &872955993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 872955986}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28771e409f2724aeba2c7de0ace837fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy_list:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &874569331
 GameObject:
   m_ObjectHideFlags: 0
@@ -13687,6 +13715,7 @@ MonoBehaviour:
   m_ShockJumpFrequency: 0.0005
   m_HealthPotionDropPercentage: 58
   m_CanMove: 1
+  m_IsAlive: 1
 --- !u!114 &965130570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15754,6 +15783,7 @@ MonoBehaviour:
   m_ShockJumpFrequency: 0.0005
   m_HealthPotionDropPercentage: 58
   m_CanMove: 1
+  m_IsAlive: 1
 --- !u!114 &1122455707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21067,6 +21097,7 @@ MonoBehaviour:
     type: 2}
   m_InteractionRadius: 5
   m_DialogFitsIntoBubble: 0
+  m_IsTalking: 0
 --- !u!114 &1546207781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21490,6 +21521,7 @@ MonoBehaviour:
   m_ShockJumpFrequency: 0.0005
   m_HealthPotionDropPercentage: 58
   m_CanMove: 1
+  m_IsAlive: 1
 --- !u!65 &1562185629
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22880,6 +22912,7 @@ MonoBehaviour:
   m_ShockJumpFrequency: 0.0005
   m_HealthPotionDropPercentage: 58
   m_CanMove: 1
+  m_IsAlive: 1
 --- !u!114 &1671459860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27407,6 +27440,7 @@ MonoBehaviour:
   m_ShockJumpFrequency: 0.0005
   m_HealthPotionDropPercentage: 58
   m_CanMove: 1
+  m_IsAlive: 1
 --- !u!114 &2073420877
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -45,8 +45,8 @@ public class Enemy : MonoBehaviour {
 
 	/**A bool to let us know whether or not to stop the enemy moving.*/
 	public bool m_CanMove = true;
-
-
+	/**A bool to let us know whether or not the enemy's alive.*/
+	public bool m_IsAlive = true;
 
     void Start()
     {
@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour {
         if(this.m_Health <= 0.0f)
         {
 			string message = "Enemy dead! ";
-
+			this.m_IsAlive = false;
 			#if TESTING_ALWAYS_DROP_ITEM
 			this.m_Spawner.Spawn_Item(ItemName.Mana_Potion, this.transform.position + Vector3.right * 2.0f);
 
