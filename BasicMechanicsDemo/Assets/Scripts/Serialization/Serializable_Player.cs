@@ -38,10 +38,13 @@ public class Serializable_Player {
 		}//end foreach
 	}//end f'n void ParseQuestItemList(GameObject)
 
-	/**A function to set the player inventory quest item list based on saved content*/
+	/**A function to set the player inventory quest item list based on saved content.
+	*Clears player quest item list before adding anything.*/
 	public void SetQuestItemList(GameObject player)
 	{
 		PlayerInventory player_inventory = player.GetComponent<PlayerInventory> ();
+		player_inventory.m_QuestItems.Clear ();
+
 		for (int index = 0; index < this.m_QuestItemNames.Count; index++) {
 			QuestItem item_to_add = new QuestItem ();
 			foreach (QuestItemName name in System.Enum.GetValues(typeof(QuestItemName))) {
@@ -65,10 +68,13 @@ public class Serializable_Player {
 		}//end foreach
 	}//end f'n void ParseItemDictionary(Dictionary<Item, int>)
 
-	/**A function to set the contents of the player inventory item dictionary*/
+	/**A function to set the contents of the player inventory item dictionary.
+	*Clears player item dictionary before adding anything.*/
 	public void SetItemDictionary(GameObject player)
 	{
 		PlayerInventory player_inventory = player.GetComponent<PlayerInventory> ();
+		player_inventory.m_ItemDictionary.Clear ();
+
 		for (int index = 0; index < this.m_ItemNames.Count; index++) {
 			ItemClass item_to_add = new ItemClass ();
 
@@ -95,10 +101,13 @@ public class Serializable_Player {
 		}//end foreach
 	}//end f'n void ParseSpellList(List<SpellClass>)
 
-	/**A function to fill the player spell list according to the save*/
+	/**A function to fill the player spell list according to the save.
+	*Clears player spell list before adding anything.*/
 	public void SetSpellList(GameObject player)
 	{
 		PlayerInventory player_inventory = player.GetComponent<PlayerInventory> ();
+		player_inventory.m_SpellClassList.Clear ();
+
 		for(int index = 0; index < this.m_SpellNames.Count; index++) {
 			SpellClass spell_to_add = new SpellClass ();
 
@@ -112,31 +121,6 @@ public class Serializable_Player {
 				}//end if
 			}//end foreach
 
-//			//If we find spell name Fireball...
-//			if (spell_name == SpellName.Fireball.ToString ()) {
-//				player_inventory.AddSpell (spell_to_add.GenerateInstance (SpellName.Fireball));
-//			}//end if
-//			//If we find spell name Iceball...
-//			else if (spell_name == SpellName.Iceball.ToString ()) {
-//				player_inventory.AddSpell (spell_to_add.GenerateInstance (SpellName.Iceball));
-//			}//end else if
-//			//If we find spell name Thunderball...
-//			else if (spell_name == SpellName.Thunderball.ToString ()) {
-//				player_inventory.AddSpell (spell_to_add.GenerateInstance (SpellName.Thunderball));
-//			}//end else if
-//			//If we find spell name Thunderstorm...
-//			else if (spell_name == SpellName.Thunderstorm.ToString ()) {
-//				player_inventory.AddSpell (spell_to_add.GenerateInstance (SpellName.Thunderstorm));
-//			}//end else if
-//			//If we find spell name Heal...
-//			else if (spell_name == SpellName.Heal.ToString ()) {
-//				player_inventory.AddSpell (spell_to_add.GenerateInstance (SpellName.Heal));
-//			}//end else if
-//			//If we find spell name Shield...
-//			else if (spell_name == SpellName.Shield.ToString ()) {
-//				player_inventory.AddSpell (spell_to_add.GenerateInstance (SpellName.Shield));
-//			}//end else if
-			//***That's all the spells
 		}//end foreach
 	}//end f'n void SetSpellList(GameObject player)
 
@@ -188,8 +172,19 @@ public class Serializable_Player {
 		PlayerInventory inventory = player.GetComponent<PlayerInventory> ();
 		serializable_player.ParseItemDictionary (inventory.m_ItemDictionary);
 		serializable_player.ParseSpellList (inventory.m_SpellClassList);
+		serializable_player.ParseQuestItemList (player);
 		return serializable_player;
 	}//end f'n Serializable_Player GenerateSerializableInstance(GameObject)
+
+	/**A function to set all player information.*/
+	public void SetAllPlayerInformation(GameObject player)
+	{
+		this.SetPlayerPosition (player);
+		this.SetPlayerAttributes (player);
+		this.SetSpellList (player);
+		this.SetItemDictionary (player);
+		this.SetQuestItemList (player);
+	}//end f'n void SetAllPlayerInformation(GameObject)
 
 	/**For testing purposes; a function to use in a debug, to ensure all variables are well-set.*/
 	public string ReturnAllInformation()

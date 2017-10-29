@@ -13896,17 +13896,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Player: {fileID: 1546207769}
-  m_SavedSessions:
-  - m_ItemNames: []
-    m_ItemQuantities: 
-    m_SpellNames: []
-    m_PlayerPositionInWorld_X: 0
-    m_PlayerPositionInWorld_Y: 0
-    m_PlayerPositionInWorld_Z: 0
-    m_PlayerHealth: 0
-    m_MaxPlayerHealth: 0
-    m_PlayerMana: 0
-    m_MaxPlayerMana: 0
+  m_QuestManager: {fileID: 872955993}
+  m_SerializableSession:
+    m_SerializablePlayer:
+      m_ItemNames: []
+      m_ItemQuantities: 
+      m_SpellNames: []
+      m_QuestItemNames: []
+      m_PlayerPositionInWorld_X: 0
+      m_PlayerPositionInWorld_Y: 0
+      m_PlayerPositionInWorld_Z: 0
+      m_PlayerHealth: 0
+      m_MaxPlayerHealth: 0
+      m_PlayerMana: 0
+      m_MaxPlayerMana: 0
 --- !u!114 &872955993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13929,6 +13932,7 @@ MonoBehaviour:
     type: 2}
   NUMBER_ITEMS_POTIONMASTER: 2
   m_AllQuests: []
+  m_AllQuestGivers: []
 --- !u!1 &874569331
 GameObject:
   m_ObjectHideFlags: 0
