@@ -37,13 +37,13 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_Sun: {fileID: 861615654}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -6618,7 +6618,7 @@ Prefab:
     - target: {fileID: 223455455894420788, guid: 44a8ab4090e85432e8caeeb9a5faa5cb,
         type: 2}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114598704864340894, guid: 44a8ab4090e85432e8caeeb9a5faa5cb,
         type: 2}
@@ -13435,6 +13435,8 @@ MonoBehaviour:
   m_InventoryUIPrefab: {fileID: 126802963}
   m_MapUIPrefab: {fileID: 591261408}
   m_OptionsUIPrefab: {fileID: 1736946983}
+  m_MenuOpen_Cursor: {fileID: 2800000, guid: 657b66ffafaf24de09529fac987ede50, type: 3}
+  m_MenuClosed_Cursor: {fileID: 2800000, guid: 1c8702bb4e9c34c1a8c5441e0fa3ced7, type: 3}
 --- !u!224 &872955988
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22785,7 +22787,8 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114799450202402216, guid: 843c5f299227a4b1b857e394021a4fe0, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 843c5f299227a4b1b857e394021a4fe0, type: 2}
   m_IsPrefabParent: 0
 --- !u!224 &1602004525 stripped
