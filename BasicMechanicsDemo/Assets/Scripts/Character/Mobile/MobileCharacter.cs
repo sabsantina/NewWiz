@@ -11,7 +11,7 @@ public class MobileCharacter : MonoBehaviour {
 	public Vector3 m_Direction{ get; protected set; }
 
 	/**A reference to the mobile character's animator.*/
-	private Animator m_Animator; 
+	protected Animator m_Animator; 
 
 	/**A string variable containing the string name of the isMovingLeft parameter in the character animator.*/
 	private readonly string STRINGKEY_PARAM_ISMOVINGLEFT = "isMovingLeft";

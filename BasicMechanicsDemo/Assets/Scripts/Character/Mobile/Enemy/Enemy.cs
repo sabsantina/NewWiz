@@ -180,7 +180,7 @@ public class Enemy : MonoBehaviour {
 			}//end case Thunderball
 		case (int)SpellName.Thunderstorm:
 			{
-				this.AffectHealth (-0.005f);
+				this.AffectHealth (-40.0f);
 				this.m_IsShocked = true;
 				if (this.m_ShockTimerIncrementor > 10) {
 					this.m_ShockTimer = 0.0f;
