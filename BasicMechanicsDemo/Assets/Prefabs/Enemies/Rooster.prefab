@@ -407,7 +407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackSound: {fileID: 8300000, guid: 9bfdc1c089cb3404d98fab6149c6a468, type: 3}
   enemyDamaged: {fileID: 8300000, guid: a01ae7e328e54a941a959d142c40ed17, type: 3}
-  m_Health: 100
+  m_Health: 20
   m_Spawner: {fileID: 0}
   TIME_BEFORE_THAW: 2
   TIME_BEFORE_SHOCK_RELEASE: 1.25
