@@ -8,3 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DemoMainMenu.unity
     guid: 950f3c89a3cba4f56a119b88f8a3114e
+  - enabled: 1
+    path: Assets/Scenes/BasicMovement.unity
+    guid: dde6edabb875241c18c7f84e0262fc94
