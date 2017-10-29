@@ -19,6 +19,10 @@ public class Serializable_QuestManager {
 
 	//The enemies remaining thing is kind of a drag
 
+	/*
+	* 
+	*/
+
 	/**A function to record all quest states and record them to [this.m_AllQuestStates]*/
 	public void ParseAllQuestStates(QuestManager manager)
 	{
