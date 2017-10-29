@@ -220,6 +220,10 @@ public class PlayerInventory : MonoBehaviour {
 		} else {
 			message += this.m_ActiveSpellClass.ReturnSpellInstanceInfo();
 		}
+		message += "\nQuest Items:\n";
+		foreach (QuestItem item in this.m_QuestItems) {
+			message += "\tItem:\t" + item.m_QuestItemName.ToString () + "\tCollected? " + item.m_IsCollected + "\n";
+		}//end foreach
 		Debug.Log(message);
 	}//end f'n void OutputInventoryContents()
 

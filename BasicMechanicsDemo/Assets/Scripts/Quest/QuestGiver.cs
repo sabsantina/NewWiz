@@ -14,6 +14,9 @@ public class QuestGiver : Interactable {
 	public PlayerInventory m_PlayerInventory;
 	/**A bool to let us know whether the player's been rewarded.*/
 	public bool m_RewardHasBeenGiven = false;
+	/**A bool to let us know whether the player's quest items has been reclaimed.*/
+	public bool m_QuestItemsReclaimedFromPlayer = false;
+
 
 	/**A function to return the quest dialog, with respect to quest type and quest state*/
 	public override string ReturnDialog ()
@@ -48,6 +51,25 @@ public class QuestGiver : Interactable {
 			}//end if
 
 			//else if fetch...
+			else if (this.m_QuestToGive.m_QuestType == QuestType.FETCH) {
+				//Fetch ...
+				message += "Fetch ";
+				//...x number ...
+				message += this.m_QuestToGive.m_NumberOfItemsToFind + " ";
+				//... of [ITEM NAME]
+				for (int index = 0; index < this.m_QuestToGive.m_RequisitePrefabs.Count; index++) {
+					//if we're at the last of the item types to find...
+					if (index == this.m_QuestToGive.m_RequisitePrefabs.Count - 1) {
+						//...then just output the name and an "s" to make it plural, with no "and"
+						message += m_QuestToGive.m_RequisitePrefabs [index].name + "s";
+					}//end if
+					//else if we're not at the last of the item types to find...
+					else {
+						//...then output the enemy name with an "s" and an "and," for the sentence to make sense.
+						message += m_QuestToGive.m_RequisitePrefabs [index].name + "s and ";
+					}//end else
+				}//end for
+			}//end else if
 
 			//After the quest has been given, spawn in the quest objects
 			this.m_QuestManager.m_AllQuests[(int)this.m_QuestToGive.m_QuestName].SpawnInQuestObjects();
@@ -69,6 +91,10 @@ public class QuestGiver : Interactable {
 			}//end if
 
 			//else if fetch...
+			else if (this.m_QuestToGive.m_QuestType == QuestType.FETCH) {
+				//...then just tell the player to go fetch the stuff
+				message += "You got the goods?! No?! Go, then!";
+			}//end else if
 
 			return message;
 		}//end if quest state is in process
@@ -98,12 +124,44 @@ public class QuestGiver : Interactable {
 			}//end if
 
 			//else if fetch...
-
+			else if (this.m_QuestToGive.m_QuestType == QuestType.FETCH) {
+				//Fetch ...
+				message += "Finally, my ";
+				//...x number ...
+				message += this.m_QuestToGive.m_NumberOfEnemiesToKill + " ";
+				//...of [ITEM NAME]
+				for (int index = 0; index < this.m_QuestToGive.m_RequisitePrefabs.Count; index++) {
+					//if we're at the last of the enemy types to kill...
+					if (index == this.m_QuestToGive.m_RequisitePrefabs.Count - 1) {
+						//...then just output the name and an "s" to make it plural, with no "and"
+						message += " precious " + m_QuestToGive.m_RequisitePrefabs [index].name + "s!";
+					}//end if
+					//else if we're not at the last of the enemy types to kill...
+					else {
+						//...then output the enemy name with an "s" and an "and," for the sentence to make sense.
+						message += m_QuestToGive.m_RequisitePrefabs [index].name + "s and ";
+					}//end else
+				}//end for
+			}//end else if
 
 			//if the reward's not yet been given...
 			if (!this.m_RewardHasBeenGiven) {
 				//...then reward the player
 				this.RewardPlayer ();
+			}//end if
+
+			//if this is a fetch quest and the player hasn't had the quest items removed from their inventory yet...
+			if (this.m_QuestToGive.m_QuestType == QuestType.FETCH
+			    && !this.m_QuestItemsReclaimedFromPlayer) {
+
+				message += "\n" + "I'll just take those...";
+
+				for (int index = 0; index < this.m_QuestToGive.m_NumberOfItemsToFind; index++) {
+					this.m_PlayerInventory.m_QuestItems.Remove (this.m_QuestToGive.m_ItemInformation);
+				}//end for
+
+				//Update var
+				this.m_QuestItemsReclaimedFromPlayer = true;
 			}//end if
 
 			return message;
