@@ -28,6 +28,16 @@ public class PlayerMovement : MobileCharacter {
 	*Note: Here, "downward" denotes motion out of the scene, toward the camera.*/
 	private readonly string STRINGKEY_INPUT_DOWN = "Down";
 
+	/**A string variable containing the string name of the Animator parameter corresponding to the player facing leftward.*/
+	private readonly string STRINGKEY_PARAM_ISFACINGLEFT = "isFacingLeft";
+	/**A string variable containing the string name of the Animator parameter corresponding to the player facing rightward.*/
+	private readonly string STRINGKEY_PARAM_ISFACINGRIGHT = "isFacingRight";
+	/**A string variable containing the string name of the Animator parameter corresponding to the player facing upward.*/
+	private readonly string STRINGKEY_PARAM_ISFACINGUP = "isFacingUp";
+	/**A string variable containing the string name of the Animator parameter corresponding to the player facing downward.*/
+	private readonly string STRINGKEY_PARAM_ISFACINGDOWN = "isFacingDown";
+
+	/**A bool to tell us whether or not the player can move*/
 	private bool m_CanMove = true;
 
 	void Start()
@@ -44,6 +54,8 @@ public class PlayerMovement : MobileCharacter {
 		player_rigidbody.detectCollisions = true;
 
 		this.m_Direction = Vector3.right;
+
+
 	}//end f'n void Start()
 
 	// Update is called once per frame
@@ -117,10 +129,31 @@ public class PlayerMovement : MobileCharacter {
 				this.transform.position = player_current_position + (translation * Time.deltaTime);
 			}
 		}//end if
-
+		//else if we received absolutely no movement input...
+		else {
+			//...then update which way we're facing, based on the last direction
+			this.UpdateFacingParameters ();
+		}//end else
 		//Update the animator parameters
 		this.UpdateAnimatorParameters();
+
 	}//end f'n void Update
+
+	/**A function to tell the animator which direction the player is facing.*/
+	private void UpdateFacingParameters()
+	{
+		/*
+		* The direction we're facing in is defined as follows:
+		* 	- If we're moving either upward or downward but still going rightward, face rightward on rest
+		* 	- If we're moving either upward or downward but still going leftward, face leftward on rest
+		* 	- If we're only going upward, face upward on rest
+		* 	- If we're only going downward, face downward on rest
+		*/
+		this.m_Animator.SetBool (this.STRINGKEY_PARAM_ISFACINGRIGHT, this.m_Direction.x > 0);
+		this.m_Animator.SetBool (this.STRINGKEY_PARAM_ISFACINGLEFT, this.m_Direction.x < 0);
+		this.m_Animator.SetBool (this.STRINGKEY_PARAM_ISFACINGUP, this.m_Direction.z > 0 && this.m_Direction.x == 0);
+		this.m_Animator.SetBool (this.STRINGKEY_PARAM_ISFACINGDOWN, this.m_Direction.z < 0 && this.m_Direction.x == 0);
+	}//end f'n void UpdateFacingParameters()
 
 	/**A function to disable player movement.*/
 	public void DisableMovement()

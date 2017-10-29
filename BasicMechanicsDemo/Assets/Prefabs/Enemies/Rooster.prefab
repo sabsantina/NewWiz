@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 136392443020849938}
   - component: {fileID: 65585328498424054}
   - component: {fileID: 95873436746667766}
+  - component: {fileID: 114946545717317470}
   - component: {fileID: 114274926540745680}
   - component: {fileID: 114982047679667050}
   - component: {fileID: 114518479549724548}
@@ -42,7 +43,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4088827799841484}
   - component: {fileID: 136725167889748786}
-  - component: {fileID: 114305250745190238}
   - component: {fileID: 114730760652567340}
   m_Layer: 0
   m_Name: Rooster
@@ -383,17 +383,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MaximalVelocity: 2.5
   m_IsChasing: 0
---- !u!114 &114305250745190238
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1299896596757046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b951155be441a4463b10990a08f4f44a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114518479549724548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -432,6 +421,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyMovement: {fileID: 114274926540745680}
+--- !u!114 &114946545717317470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1285787929260958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b951155be441a4463b10990a08f4f44a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114982047679667050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_audioSource: {fileID: 0}
-  m_AttackDamage: -5
+  m_AttackDamage: -1.5
   m_AttackTimer: 0
   m_LastSecond: 0
 --- !u!136 &136392443020849938
