@@ -10,6 +10,8 @@ public class Serialization_Manager : MonoBehaviour {
 
 	public Serializable_Session m_SerializableSession = new Serializable_Session();
 
+	private readonly string FILEPATH_EXTENSION = "/SavedGame.gd";
+
 //	public Serializable_Player m_SerializablePlayer = new Serializable_Player();
 //	public Serializable_QuestManager m_SerializableQuestManager = new Serializable_QuestManager();
 
@@ -20,7 +22,7 @@ public class Serialization_Manager : MonoBehaviour {
 		this.m_SerializableSession.GatherSessionInformation(m_Player, m_QuestManager);
 		BinaryFormatter bf = new BinaryFormatter();
 		Debug.Log (Application.persistentDataPath);
-		FileStream file = File.Create (Application.persistentDataPath + "/savedGames.gd");
+		FileStream file = File.Create (Application.persistentDataPath + FILEPATH_EXTENSION);
 //		bf.Serialize(file, m_SavedSessions);
 //		bf.Serialize(file, this.m_SerializablePlayer);
 //		bf.Serialize(file, this.m_SerializableQuestManager);
@@ -29,9 +31,9 @@ public class Serialization_Manager : MonoBehaviour {
 	}	
 
 	public void Load() {
-		if(File.Exists(Application.persistentDataPath + "/savedGames.gd")) {
+		if(File.Exists(Application.persistentDataPath + FILEPATH_EXTENSION)) {
 			BinaryFormatter bf = new BinaryFormatter();
-			FileStream file = File.Open(Application.persistentDataPath + "/savedGames.gd", FileMode.Open);
+			FileStream file = File.Open(Application.persistentDataPath + FILEPATH_EXTENSION, FileMode.Open);
 //			this.m_SavedSessions = (List<Serializable_Player>)bf.Deserialize(file);
 //			this.m_SerializablePlayer = (Serializable_Player)bf.Deserialize(file);
 //			this.m_SerializableQuestManager = (Serializable_QuestManager)bf.Deserialize(file);
@@ -42,6 +44,7 @@ public class Serialization_Manager : MonoBehaviour {
 			this.m_SerializableSession.SetSessionInformation(this.m_Player, this.m_QuestManager);
 		}
 	}
+
 
 	
 	// Update is called once per frame

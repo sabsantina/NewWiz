@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour {
 
 	[SerializeField] private GameObject m_InventoryUIPrefab;
 	[SerializeField] private GameObject m_MapUIPrefab;
-
+	[SerializeField] private GameObject m_OptionsUIPrefab;
 
 	
 	// Update is called once per frame
@@ -26,6 +26,9 @@ public class UIManager : MonoBehaviour {
 		}
 		if (Input.GetKeyDown (KeyCode.M)) {
 			this.OpenMapMenu ();
+		}
+		if (Input.GetKeyDown (KeyCode.O)) {
+			this.OpenOptionsMenu ();
 		}
 
 	}
@@ -49,9 +52,14 @@ public class UIManager : MonoBehaviour {
 		this.m_MapUIPrefab.GetComponent<MapMenu> ().OpenMenu ();
 	}
 
-//	private IEnumerator Wait()
-//	{
-//		yield return new WaitForEndOfFrame ();
-//	}
+	public void OpenOptionsMenu()
+	{
+		#if TESTING_MENU_OPEN
+		Debug.Log("UIManager::OptionsMenuOpen");
+		#endif
+		this.m_OptionsUIPrefab.gameObject.SetActive (true);
+		this.m_OptionsUIPrefab.GetComponent<OptionsMenu> ().OpenMenu ();
+	}
+
 
 }
