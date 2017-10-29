@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 222947837777416728}
   - component: {fileID: 114158903823202904}
   - component: {fileID: 114839812931254270}
+  - component: {fileID: 65909971726741062}
   m_Layer: 8
   m_Name: Button
   m_TagString: Untagged
@@ -72,6 +73,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224081261245424366}
+  - component: {fileID: 223594233819176708}
   m_Layer: 8
   m_Name: HotkeyedItems
   m_TagString: Untagged
@@ -107,6 +109,7 @@ GameObject:
   - component: {fileID: 222456914714990904}
   - component: {fileID: 114131367344813846}
   - component: {fileID: 114171034123335146}
+  - component: {fileID: 65622408736515864}
   m_Layer: 8
   m_Name: Button (1)
   m_TagString: Untagged
@@ -176,6 +179,7 @@ GameObject:
   - component: {fileID: 222053978254969000}
   - component: {fileID: 114713609376589848}
   - component: {fileID: 114700841228623116}
+  - component: {fileID: 65426332658975016}
   m_Layer: 8
   m_Name: Button (2)
   m_TagString: Untagged
@@ -183,6 +187,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &65426332658975016
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1837403053798384}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 50, y: 50, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65622408736515864
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1611889112989428}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 50, y: 50, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65909971726741062
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1208988340364568}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 50, y: 50, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114119884963156208
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -633,6 +673,26 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1208988340364568}
+--- !u!223 &223594233819176708
+Canvas:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1349724243185146}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 3
+  m_TargetDisplay: 0
 --- !u!224 &224046714905525334
 RectTransform:
   m_ObjectHideFlags: 1
