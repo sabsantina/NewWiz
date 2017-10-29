@@ -133,7 +133,7 @@ public class PlayerMovement : MobileCharacter {
 		else {
 			//...then update which way we're facing, based on the last direction
 			this.UpdateFacingParameters ();
-		}
+		}//end else
 		//Update the animator parameters
 		this.UpdateAnimatorParameters();
 
