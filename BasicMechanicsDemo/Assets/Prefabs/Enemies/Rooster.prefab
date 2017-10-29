@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_audioSource: {fileID: 0}
-  m_AttackDamage: -5
+  m_AttackDamage: -1.5
   m_AttackTimer: 0
   m_LastSecond: 0
 --- !u!136 &136392443020849938
