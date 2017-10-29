@@ -19,6 +19,10 @@ public class Serializable_QuestManager {
 
 	//The enemies remaining thing is kind of a drag
 
+	/*
+	* Basically what's happening now is if we stop the game and load, the quest enemies and items aren't spawning in.
+	*/
+
 	/**A function to record all quest states and record them to [this.m_AllQuestStates]*/
 	public void ParseAllQuestStates(QuestManager manager)
 	{
@@ -60,6 +64,16 @@ public class Serializable_QuestManager {
 			}//end switch
 		}//end for
 	}//end f'n void SetAllQuestStates(QuestManager)
+
+	public void SpawnInQuestObjects(QuestManager manager)
+	{
+		foreach (Quest quest in manager.m_AllQuests) {
+			if (quest.m_QuestState == QuestState.IN_PROCESS) {
+				quest.SpawnInQuestObjects ();
+			}//end if
+		}//end foreach
+	}
+
 
 //	public void SetAllEnemiesRemaining(QuestManager manager)
 //	{

@@ -39,7 +39,7 @@ public class Serialization_Manager : MonoBehaviour {
 			file.Close();
 
 			//Set all player information
-//			this.m_SerializablePlayer.SetAllPlayerInformation (this.m_Player);
+			this.m_SerializableSession.SetSessionInformation(this.m_Player, this.m_QuestManager);
 		}
 	}
 
