@@ -21,6 +21,7 @@ public class MainMenu_UIManager : MonoBehaviour {
 	public void OnClick_StartDemo()
 	{
 		UnityEngine.SceneManagement.SceneManager.LoadScene (1);
+		Time.timeScale = 1.0f;
 	}//end f'n OnClick_StartDemo()
 
 	public void OnClick_LoadGame()
