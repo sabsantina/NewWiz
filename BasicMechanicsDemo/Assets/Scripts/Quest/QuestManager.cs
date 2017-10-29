@@ -33,8 +33,8 @@ public class QuestManager : MonoBehaviour {
 
 	/**A list of all the quests in the game.*/
 	public List<Quest> m_AllQuests = new List<Quest>();
-//	/**A list of all the quest-givers in the game.*/
-//	public List<QuestGiver> m_AllQuestGivers = new List<QuestGiver> ();
+	/**A list of all the quest-givers in the game. We need this for serialization.*/
+	public List<QuestGiver> m_AllQuestGivers = new List<QuestGiver> ();
 
 	// Use this for initialization
 	void Awake () {

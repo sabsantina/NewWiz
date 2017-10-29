@@ -6,6 +6,7 @@ using System.IO;
 
 public class Serialization_Manager : MonoBehaviour {
 	[SerializeField] GameObject m_Player;
+	[SerializeField] QuestManager m_QuestManager;
 
 	public List<Serializable_Player> m_SavedSessions = new List<Serializable_Player>();
 

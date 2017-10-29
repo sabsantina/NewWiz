@@ -21,7 +21,7 @@ public class Menu : MonoBehaviour {
 	/**A function to be called by the button that opens the menu OnClick.*/
 	public void OpenMenu()
 	{
-		this.GetComponentInParent<PlayerCastSpell> ().m_MenuOpen = true;
+//		this.GetComponentInParent<PlayerCastSpell> ().m_MenuOpen = true;
 		#if TESTING_OPEN_MENU
 		Debug.Log("Menu::OpenMenu");
 		#endif
