@@ -90,11 +90,16 @@ public class QuestManager : MonoBehaviour {
 
 		potion_master.InitializeObjectiveType();
 		potion_master.m_RequisitePrefabs.Add (this.m_DefaultPotionQuestItemPrefab);
+		QuestItem potion = new QuestItem(); 
+		potion.GenerateQuestItem (QuestItemName.POTION_OF_WISDOM);
+		potion_master.m_ItemInformation = potion;
+		potion_master.m_Fetch.m_PlayerInventory = this.m_Player.GetComponent<PlayerInventory> ();
 		potion_master.m_NumberOfItemsToFind = NUMBER_ITEMS_POTIONMASTER;
 		potion_master.SetQuestGoalLocation (new Vector3 (15.74f, 0.55f, -0.43f));
 //		potion_master.m_KillEverything.m_EnemyLootSpawner = this.m_Spawner;
 
 		this.m_QuestGiver_PotionMaster.m_PlayerInventory = this.m_Player.GetComponent<PlayerInventory> ();
+
 
 		//Set reward item (as an example)
 //		ItemClass health_potion = new ItemClass();
