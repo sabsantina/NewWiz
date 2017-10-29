@@ -38,7 +38,8 @@ public class PlayerInventory : MonoBehaviour {
 
 	/**A list of all SpellClass instances of spells in the inventory.*/
 	public List<SpellClass> m_SpellClassList;
-
+	/**A list of all quest items*/
+	public List<QuestItem> m_QuestItems;
 
 	/**A reference to a default spell prefab to contain all our active spell information.*/
 	[SerializeField] public GameObject m_DefaultSpellPrefab;
@@ -56,21 +57,15 @@ public class PlayerInventory : MonoBehaviour {
 		//for testing
 		//Initialize Item Dictionary
 		this.m_ItemDictionary = new Dictionary<ItemClass, int>();
-
+		//Initialize spell list
 		this.m_SpellClassList = new List<SpellClass>();
-		SpellClass spell_class_instance = new SpellClass();
-
-//		this.m_DefaultSpellPrefab = GameObject.Instantiate (this.m_DefaultSpellPrefab);
-//		this.m_DefaultSpellPrefab.transform.position = new Vector3 (0.0f, -5.0f, 0.0f);
-//		this.m_DefaultSpellPrefab.GetComponent<MeshRenderer> ().isVisible = false;
+		//Initialize quest item list
+		this.m_QuestItems = new List<QuestItem> ();
 	}
 
 	void Start()
 	{
-//		//Initialize Item Dictionary
-//		this.m_ItemDictionary = new Dictionary<ItemClass, int>();
-//
-//		this.m_SpellClassList = new List<SpellClass>();
+
 		SpellClass spell_class_instance = new SpellClass();
 		#if START_WITH_FIREBALL
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Fireball));

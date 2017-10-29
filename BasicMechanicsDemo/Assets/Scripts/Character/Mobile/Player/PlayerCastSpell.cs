@@ -12,6 +12,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [RequireComponent(typeof(Animator))]
 public class PlayerCastSpell : MonoBehaviour {
 
@@ -67,6 +68,8 @@ public class PlayerCastSpell : MonoBehaviour {
 	public float m_ManaDrainTimer = 0.0f;
 	/**A variable to ensure the spell class instance gameobject is destroyed.*/
 	public float m_ManaToDrain = 0.0f;
+	/**A bool to tell us whether or not a given menu is open; if so, the player shouldn't be able to cast spells.*/
+	public bool m_MenuOpen = false;
 
 	void Start()
 	{
@@ -85,191 +88,215 @@ public class PlayerCastSpell : MonoBehaviour {
 			return;
 		}//end if
 
-//		//Same story if the player's out of mana
-//		if (!this.m_Player.m_CanCastSpells) {
-//			//Quickly update game before returning
-//			this.m_isCastingSpell = false;
-//			//GameObject.Destroy(spellcube instance?)
-//			this.UpdateAnimatorParameters ();
-//			return;
-//		}//end if
+		//Same story if the player is having a conversation...
+		if (this.GetComponent<PlayerInteraction> ().m_IsTalking) {
+			return;
+		}
 
-		if (Input.GetButtonDown (STRINGKEY_INPUT_CASTSPELL) && this.m_Player.m_CanCastSpells) {
-			this.CheckChosenSpell ();
-			//if the spell to fire exists...
-			if (this.m_SpellClassToFire != null) {
+		//And don't cast spells if the player touches a menu button
+		if (this.m_MenuOpen) {
+			return;
+		}
 
-				if (!this.m_SpellClassToFire.m_IsPersistent) {
-					//At this point the user is casting a spell whose mana cost is fixed, so remove the lump sum now.
-					this.m_Player.AffectMana (-this.m_SpellClassToFire.m_ManaCost);
+		if (Input.GetButtonDown (STRINGKEY_INPUT_CASTSPELL)){
+			//First check to see if we're trying to toggle a menu
+			RaycastHit menu_check_hit;
+			Ray menu_check_ray = this.m_MainCamera.ScreenPointToRay (Input.mousePosition);
+			if (Physics.Raycast(menu_check_ray, out menu_check_hit))
+			{
+				if (menu_check_hit.collider.gameObject.GetComponent<UnityEngine.UI.Button> () != null) {
+					this.m_MenuOpen = true;
+					return;
 				}
+			}
 
-				//Update [this.m_isCastingSpell] for the animator
-				this.m_isCastingSpell = true;
+			//else if the player's not toggling a menu and is capable of casting spells...
+			if (this.m_Player.m_CanCastSpells) {
+				this.CheckChosenSpell ();
+				//if the spell to fire exists...
+				if (this.m_SpellClassToFire != null) {
 
-				//if the spell is mobile (meaning it's to be cast somewhere away from the player)...
-				if (this.m_SpellClassToFire.m_IsMobileSpell) {
-					
+					if (!this.m_SpellClassToFire.m_IsPersistent) {
+						//At this point the user is casting a spell whose mana cost is fixed, so remove the lump sum now.
+						this.m_Player.AffectMana (-this.m_SpellClassToFire.m_ManaCost);
+					}
 
-					Ray ray = this.m_MainCamera.ScreenPointToRay (Input.mousePosition);
-					RaycastHit[] targets_hit = Physics.RaycastAll (ray);
-					//We need to find the raycast hit furthest from the camera in the event that none of the raycasthits are 
-					//mobile character as the furthest raycast hit will be the ground.
-					RaycastHit furthest = targets_hit [0];
-					bool any_mobile_characters = false;
-					foreach (RaycastHit hit in targets_hit) {
-						//if the hit's distance is greater than that of the furthest...
-						if (hit.distance > furthest.distance) {
-							//...then update the furthest
-							furthest = hit;
-						}//end if
+					//Update [this.m_isCastingSpell] for the animator
+					this.m_isCastingSpell = true;
 
-						//if the hit has a MobileCharacter component...
-						if (hit.collider.gameObject.GetComponent<MobileCharacter> () != null) {
-							m_Target = hit.collider.gameObject;
+					//if the spell is mobile (meaning it's to be cast somewhere away from the player)...
+					if (this.m_SpellClassToFire.m_IsMobileSpell) {
+
+
+						Ray ray = this.m_MainCamera.ScreenPointToRay (Input.mousePosition);
+						RaycastHit[] targets_hit = Physics.RaycastAll (ray);
+						//We need to find the raycast hit furthest from the camera in the event that none of the raycasthits are 
+						//mobile character as the furthest raycast hit will be the ground.
+						RaycastHit furthest = targets_hit [0];
+						bool any_mobile_characters = false;
+						foreach (RaycastHit hit in targets_hit) {
+
+							//if the hit's distance is greater than that of the furthest...
+							if (hit.distance > furthest.distance) {
+								//...then update the furthest
+								furthest = hit;
+							}//end if
+
+							//if the hit has a MobileCharacter component...
+							if (hit.collider.gameObject.GetComponent<MobileCharacter> () != null) {
+								m_Target = hit.collider.gameObject;
+								this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
+								this.m_Player.m_audioSource.PlayOneShot(m_playerAudio.getAudioForSpell(this.m_SpellClassToFire.m_SpellName));
+								this.m_SpellCubeInstance.transform.position = this.transform.position;
+								SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
+								spell_movement.m_IsMobileCharacter = true;
+								spell_movement.SetTarget (hit);
+								any_mobile_characters = true;
+								spell_movement.SetSpellToCast (this.m_SpellClassToFire);
+
+								this.m_SpellAnimatorManager.SetSpellAnimator (this.m_SpellCubeInstance);
+								//return to ensure we only launch one spell
+								return;
+							}//end if
+						}//end foreach
+
+						//if none of the gameobjects found in the raycastall were mobile characters...
+						if (!any_mobile_characters) {
+							//...then send the spell to the furthest Raycast hit
+							#if TESTING_SPELLMOVEMENT
+							Debug.Log("PlayerCastSpell::Update\tNo mobile characters found\tRay hit\tx: " + furthest.point.x
+							+ " y: " + furthest.point.y + " z: " + furthest.point.z);
+							#endif
 							this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
 							this.m_Player.m_audioSource.PlayOneShot(m_playerAudio.getAudioForSpell(this.m_SpellClassToFire.m_SpellName));
 							this.m_SpellCubeInstance.transform.position = this.transform.position;
 							SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
-							spell_movement.m_IsMobileCharacter = true;
-							spell_movement.SetTarget (hit);
-							any_mobile_characters = true;
+							spell_movement.m_IsMobileCharacter = false;
+							spell_movement.SetTarget (furthest);
+
 							spell_movement.SetSpellToCast (this.m_SpellClassToFire);
 
 							this.m_SpellAnimatorManager.SetSpellAnimator (this.m_SpellCubeInstance);
-							//return to ensure we only launch one spell
-							return;
+
+							GameObject.Destroy (this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
 						}//end if
-					}//end foreach
-
-					//if none of the gameobjects found in the raycastall were mobile characters...
-					if (!any_mobile_characters) {
-						//...then send the spell to the furthest Raycast hit
-						#if TESTING_SPELLMOVEMENT
-						Debug.Log("PlayerCastSpell::Update\tNo mobile characters found\tRay hit\tx: " + furthest.point.x
-							+ " y: " + furthest.point.y + " z: " + furthest.point.z);
-						#endif
-						this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
-						this.m_Player.m_audioSource.PlayOneShot(m_playerAudio.getAudioForSpell(this.m_SpellClassToFire.m_SpellName));
-						this.m_SpellCubeInstance.transform.position = this.transform.position;
-						SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
-						spell_movement.m_IsMobileCharacter = false;
-						spell_movement.SetTarget (furthest);
-
-						spell_movement.SetSpellToCast (this.m_SpellClassToFire);
-
-						this.m_SpellAnimatorManager.SetSpellAnimator (this.m_SpellCubeInstance);
-
-						GameObject.Destroy (this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
 					}//end if
-				}//end if
-			
-				//We don't have a case where the user is clicking and not firing a mobile spell yet
 
+					//We don't have a case where the user is clicking and not firing a mobile spell yet
+
+				}//end if
 			}//end if
 		}//end if
 		//else if the user holds down the mouse...
-		else if (Input.GetButton (STRINGKEY_INPUT_CASTSPELL) && this.m_Player.m_CanCastSpells) {
-			this.CheckChosenSpell ();
-
-			//if the spell to fire exists 
-			if (this.m_SpellClassToFire != null) {
-//				//The spell cube instance shouldn't be here
-//				if (this.m_SpellCubeInstance != null) {
-//					this.m_isCastingSpell = false;
-//					this.UpdateAnimatorParameters ();
-//					GameObject.Destroy (this.m_SpellCubeInstance);
-//					return;
-//				}
-
-				//and is immobile...
-				if (!this.m_SpellClassToFire.m_IsMobileSpell) {
-					//Update [this.m_isCastingSpell] for the animator
-					this.m_isCastingSpell = true;
-
-					//the only reason we want to consistently deduce the player's mana if they're holding the mouse is if the spell is persistent.
-					//Else they're losing mana for nothing.
-					if (this.m_SpellClassToFire.m_IsPersistent) {
-						//At this point the user is casting a spell whose mana cost will grow as it is cast
-						this.m_ManaDrainTimer += Time.deltaTime;
-						this.m_Player.AffectMana (-(this.m_SpellClassToFire.m_ManaCost * this.m_ManaDrainTimer));
-						if (this.m_SpellClassToFire.m_SpellName == SpellName.Heal) {
-							this.m_Player.AffectHealth (this.m_SpellClassToFire.m_ManaCost * 50.0f * Time.deltaTime);
-						}
-					}
-
-
-					//if the spell is not mobile
-					//	AND if the spell cube instance is null (which can only mean the last spell cube was destroyed)...
-					if (!this.m_SpellClassToFire.m_IsMobileSpell && this.m_SpellCubeInstance == null) {
-						//...then create a new spell cube
-						this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
-						this.m_Player.m_audioSource.PlayOneShot(m_playerAudio.getAudioForSpell(this.m_SpellClassToFire.m_SpellName));
-						this.m_SpellCubeInstance.transform.position = this.transform.position;
-						SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
-						spell_movement.SetSpellToCast (this.m_SpellClassToFire);
-						this.m_SpellAnimatorManager.SetSpellAnimator (this.m_SpellCubeInstance);
-
-					}//end if
-					//if the spell cube instance exists (meaning we're in the process of casting a spell)...
-					if (this.m_SpellCubeInstance != null) {
-						//...then ensure the spell's always at our chosen position
-						SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
-						//					//get the position to maintain with respect to the spell to cast.
-
-						//if it's an AOE spell...
-						if (this.m_SpellClassToFire.m_IsAOESpell) {
-							Ray ray = this.m_MainCamera.ScreenPointToRay (Input.mousePosition);
-							RaycastHit[] targets_hit = Physics.RaycastAll (ray);
-
-							RaycastHit target = targets_hit [0];
-							bool any_mobile_characters = false;
-							foreach (RaycastHit hit in targets_hit) {
-								//if the hit's distance is greater than that of the furthest...
-								if (hit.collider.gameObject == this.m_Floor) {
-									target = hit;
-									break;
-								}
-							}//end foreach
-							//Set position of AOE spell animation
-							Vector3 modified_target = new Vector3 (target.point.x, 0.0f, target.point.z);
-							Vector3 position = modified_target + AOE_offset;
-							spell_movement.MaintainPosition (position);
-
-							//If we're just starting to cast the spell...
-							if (this.AOE_Timer == 0.0f) {
-								//... then apply the AOE to the enemies
-								this.ApplyAOEToEnemies (position - AOE_offset);
-								//Then set AOE timer to 1, to avoid repeating the base case
-								this.AOE_Timer = 1.0f;
-							}//end if
-							//else if the AOE timer is greater than or equal to 1 + the time it takes for the specific AOE spell to wear off...
-							else if (this.AOE_Timer >= 1.0f + this.GetAOESpellDuration (this.m_SpellClassToFire.m_SpellName)) {
-								//...then apply damage to the enemies and reset AOE timer to 1.0f
-								this.ApplyAOEToEnemies (position - AOE_offset);
-								this.AOE_Timer = 1.0f;
-							}//end else if
-							//else increment AOE timer by time.delta time
-							else {
-								this.AOE_Timer += Time.deltaTime;
-							}//end else
-						}//end if
-						//else if it isn't an AOE spell...
-						else {
-							spell_movement.MaintainPosition (this.transform.position);
-						}//end else
-
-						//Reset AOE timer
-						this.AOE_Timer = 0.0f;
-					}//end if
-					//else if the spell is not mobile
-					//we have no spells that fit this yet, so do nothing.
-
-				}//end if
+//		else if (Input.GetButton (STRINGKEY_INPUT_CASTSPELL) && this.m_Player.m_CanCastSpells) {
+		else if (Input.GetButton(STRINGKEY_INPUT_CASTSPELL)){
+			//First check to see if we're trying to toggle a menu
+			RaycastHit menu_check_hit;
+			Ray menu_check_ray = this.m_MainCamera.ScreenPointToRay (Input.mousePosition);
+			if (Physics.Raycast(menu_check_ray, out menu_check_hit))
+			{
+				if (menu_check_hit.collider.gameObject.GetComponent<UnityEngine.UI.Button> () != null) {
+					this.m_MenuOpen = true;
+					return;
+				}
 			}
-			//FROM HERE
 
-		}//end if
+			if (this.m_Player.m_CanCastSpells) {
+				this.CheckChosenSpell ();
+
+				//if the spell to fire exists 
+				if (this.m_SpellClassToFire != null) {
+					
+					//and is immobile...
+					if (!this.m_SpellClassToFire.m_IsMobileSpell) {
+						//Update [this.m_isCastingSpell] for the animator
+						this.m_isCastingSpell = true;
+
+						//the only reason we want to consistently deduce the player's mana if they're holding the mouse is if the spell is persistent.
+						//Else they're losing mana for nothing.
+						if (this.m_SpellClassToFire.m_IsPersistent) {
+							//At this point the user is casting a spell whose mana cost will grow as it is cast
+							this.m_ManaDrainTimer += Time.deltaTime;
+							this.m_Player.AffectMana (-(this.m_SpellClassToFire.m_ManaCost * this.m_ManaDrainTimer));
+							if (this.m_SpellClassToFire.m_SpellName == SpellName.Heal
+							    && this.m_Player.m_Health < this.m_Player.PLAYER_FULL_HEALTH) {
+								this.m_Player.AffectHealth (this.m_SpellClassToFire.m_ManaCost * 50.0f * Time.deltaTime);
+							}//end if
+						}//end if
+
+
+						//if the spell is not mobile
+						//	AND if the spell cube instance is null (which can only mean the last spell cube was destroyed)...
+						if (!this.m_SpellClassToFire.m_IsMobileSpell && this.m_SpellCubeInstance == null) {
+							//...then create a new spell cube
+							this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
+							this.m_Player.m_audioSource.PlayOneShot (m_playerAudio.getAudioForSpell (this.m_SpellClassToFire.m_SpellName));
+							this.m_SpellCubeInstance.transform.position = this.transform.position;
+							SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
+							spell_movement.SetSpellToCast (this.m_SpellClassToFire);
+							this.m_SpellAnimatorManager.SetSpellAnimator (this.m_SpellCubeInstance);
+
+						}//end if
+						//if the spell cube instance exists (meaning we're in the process of casting a spell)...
+						if (this.m_SpellCubeInstance != null) {
+							//...then ensure the spell's always at our chosen position
+							SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
+							//					//get the position to maintain with respect to the spell to cast.
+
+							//if it's an AOE spell...
+							if (this.m_SpellClassToFire.m_IsAOESpell) {
+								Ray ray = this.m_MainCamera.ScreenPointToRay (Input.mousePosition);
+								RaycastHit[] targets_hit = Physics.RaycastAll (ray);
+
+								RaycastHit target = targets_hit [0];
+								bool any_mobile_characters = false;
+								foreach (RaycastHit hit in targets_hit) {
+									//if the hit's distance is greater than that of the furthest...
+									if (hit.collider.gameObject == this.m_Floor) {
+										target = hit;
+										break;
+									}
+								}//end foreach
+								//Set position of AOE spell animation
+								Vector3 modified_target = new Vector3 (target.point.x, 0.0f, target.point.z);
+								Vector3 position = modified_target + AOE_offset;
+								spell_movement.MaintainPosition (position);
+
+								//If we're just starting to cast the spell...
+								if (this.AOE_Timer == 0.0f) {
+									//... then apply the AOE to the enemies
+									this.ApplyAOEToEnemies (position - AOE_offset);
+									//Then set AOE timer to 1, to avoid repeating the base case
+									this.AOE_Timer = 1.0f;
+								}//end if
+								//else if the AOE timer is greater than or equal to 1 + the time it takes for the specific AOE spell to wear off...
+								else if (this.AOE_Timer >= 1.0f + this.GetAOESpellDuration (this.m_SpellClassToFire.m_SpellName)) {
+									//...then apply damage to the enemies and reset AOE timer to 1.0f
+									this.ApplyAOEToEnemies (position - AOE_offset);
+									this.AOE_Timer = 1.0f;
+								}//end else if
+								//else increment AOE timer by time.delta time
+								else {
+									this.AOE_Timer += Time.deltaTime;
+								}//end else
+							}//end if
+							//else if it isn't an AOE spell...
+							else {
+								spell_movement.MaintainPosition (this.transform.position);
+							}//end else
+
+							//Reset AOE timer
+							this.AOE_Timer = 0.0f;
+						}//end if
+						//else if the spell is not mobile
+						//we have no spells that fit this yet, so do nothing.
+
+					}//end if
+				}//end if spell exists
+
+			}//end if Player can cast spell
+
+		}//end if player holds down mouse
 		//if the player lets go of the mouse and the spell wasn't a mobile spell (meaning that at this point they're probably still
 			//holding down the mouse...
 		else if (Input.GetButtonUp (STRINGKEY_INPUT_CASTSPELL)

@@ -3,7 +3,7 @@
 * If we make the other menus child classes of this one, things will be easier.
 */
 
-//#define TESTING_OPEN_MENU
+#define TESTING_OPEN_MENU
 
 using System.Collections;
 using System.Collections.Generic;
@@ -15,12 +15,13 @@ public class Menu : MonoBehaviour {
 
 	void Awake()
 	{
-		this.gameObject.SetActive(false);
+		//this.gameObject.SetActive(false);
 	}
 
 	/**A function to be called by the button that opens the menu OnClick.*/
 	public void OpenMenu()
 	{
+		this.GetComponentInParent<PlayerCastSpell> ().m_MenuOpen = true;
 		#if TESTING_OPEN_MENU
 		Debug.Log("Menu::OpenMenu");
 		#endif
@@ -30,6 +31,7 @@ public class Menu : MonoBehaviour {
 	/**A function to be called by the button that closes the menu OnClick.*/
 	public void CloseMenu()
 	{
+		this.GetComponentInParent<PlayerCastSpell> ().m_MenuOpen = false;
 		//disable the menu
 		this.gameObject.SetActive (false);
 		//Reset game time to normal

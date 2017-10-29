@@ -8,12 +8,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Enemy : MonoBehaviour {
 	[SerializeField] public AudioClip attackSound;
 	[SerializeField] AudioClip enemyDamaged;
 	public float m_Health;
 
-	[SerializeField] private Spawner m_Spawner;
+	[SerializeField] public Spawner m_Spawner;
 
 	/**A float to contain the value of the player's full health*/
     public readonly float ENEMY_FULL_HEALTH = 100.0f;
@@ -45,8 +46,8 @@ public class Enemy : MonoBehaviour {
 
 	/**A bool to let us know whether or not to stop the enemy moving.*/
 	public bool m_CanMove = true;
-
-
+	/**A bool to let us know whether or not the enemy's alive.*/
+	public bool m_IsAlive = true;
 
     void Start()
     {
@@ -61,7 +62,7 @@ public class Enemy : MonoBehaviour {
         if(this.m_Health <= 0.0f)
         {
 			string message = "Enemy dead! ";
-
+			this.m_IsAlive = false;
 			#if TESTING_ALWAYS_DROP_ITEM
 			this.m_Spawner.Spawn_Item(ItemName.Mana_Potion, this.transform.position + Vector3.right * 2.0f);
 
