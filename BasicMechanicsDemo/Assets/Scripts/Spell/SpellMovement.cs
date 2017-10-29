@@ -58,7 +58,7 @@ public class SpellMovement : MonoBehaviour {
 	//For testing purposes
 	public string m_SpellName;
 
-	private float m_OnTriggerEnterTimer = 0.0f;
+//	private float m_OnTriggerEnterTimer = 0.0f;
 
 	void Awake()
 	{

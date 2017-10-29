@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33806820664795514}
   - component: {fileID: 65125208514929244}
   - component: {fileID: 23329550406004138}
+  - component: {fileID: 114492728117186652}
   m_Layer: 0
   m_Name: Temp_PotionPrefab
   m_TagString: Untagged
@@ -93,3 +94,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114492728117186652
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1126925848709952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06a4e38deccfc49c1946479f6e04775c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ItemName: 

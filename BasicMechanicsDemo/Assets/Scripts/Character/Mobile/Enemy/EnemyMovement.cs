@@ -157,7 +157,6 @@ public class EnemyMovement : MobileCharacter {
 	private bool IsPlayerAhead()
 	{
 		RaycastHit hit;
-		Ray ray;
 		//Cast a ray out starting from this.transform.position, along this.m_Direction
 		if (Physics.Raycast(this.transform.position, this.m_Direction, out hit, (this.m_ChasingVelocity * 1.5f) * Time.deltaTime)) {
 			//if whatever was hit's collider has an Obstructable component...

@@ -5,6 +5,6 @@
 */
 public enum QuestItemName {
 	/*I dunno, I have roosters on the noodle.*/
-	FEATHER_OF_JUSTICE
+	POTION_OF_WISDOM
 
 }

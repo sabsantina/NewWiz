@@ -30,6 +30,7 @@ public class Quest {
 
 	public Fetch m_Fetch;
 	public int m_NumberOfItemsToFind;
+	public QuestItem m_ItemInformation;
 
 	/**A to initialize an objective type for any quest*/
 	public void InitializeObjectiveType()
@@ -68,7 +69,7 @@ public class Quest {
 			foreach (GameObject obj in this.m_RequisitePrefabs) {
 				
 				if (this.m_RequisitePrefabs.Count == 1) {
-					this.m_Fetch.SpawnQuestItemsAtPosition (this.m_QuestObjectivePosition, obj, this.m_NumberOfItemsToFind);
+					this.m_Fetch.SpawnQuestItemsAtPosition (this.m_QuestObjectivePosition, obj, this.m_ItemInformation, this.m_NumberOfItemsToFind);
 				}//end if
 
 				//Dunno how to do this if there's more than one item type at a time. Will come back to it later
@@ -91,6 +92,11 @@ public class Quest {
 			//...check and return that objective condition
 			return this.m_KillEverything.CheckForObjectiveIsMet ();
 		}//end if
+		//else if the quest is a Fetch...
+		else if (this.m_QuestType == QuestType.FETCH) {
+			//...check and return that objective condition
+			return this.m_Fetch.CheckForObjectiveIsMet ();
+		}//end else if
 
 		return false;
 	}//end f'n bool CheckQuestObjectiveCompleted()

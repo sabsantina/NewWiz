@@ -11,12 +11,15 @@ using UnityEngine;
 //[RequireComponent(typeof(AudioSource))]
 public class QuestItemPickup : MonoBehaviour {
 
-	public QuestItem m_QuestItem;
+	public QuestItem m_QuestItem = new QuestItem ();
 	public string m_ItemName;
 
 	void Awake()
 	{
+		
 		this.gameObject.GetComponent<Collider> ().isTrigger = true;
+		//For testing
+		this.m_ItemName = this.m_QuestItem.m_QuestItemName.ToString ();
 	}
 
 
@@ -24,8 +27,8 @@ public class QuestItemPickup : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		//if the object colliding with the item pickup is the player...
-		if (other.gameObject.GetComponent<PlayerInventory> ()) {
-			//			Debug.Log ("Item picked up: " + this.m_Item.ReturnItemInstanceInfo ());
+		if (other.gameObject.GetComponent<PlayerInventory> () != null) {
+			this.m_QuestItem.m_IsCollected = true;
 
 			other.gameObject.GetComponent<PlayerInventory> ().m_QuestItems.Add (this.m_QuestItem);
 
