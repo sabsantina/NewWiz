@@ -67,6 +67,8 @@ public class PlayerCastSpell : MonoBehaviour {
 	public float m_ManaDrainTimer = 0.0f;
 	/**A variable to ensure the spell class instance gameobject is destroyed.*/
 	public float m_ManaToDrain = 0.0f;
+	/**A bool to tell us whether or not a given menu is open; if so, the player shouldn't be able to cast spells.*/
+	public bool m_MenuOpen = false;
 
 	void Start()
 	{
@@ -87,6 +89,11 @@ public class PlayerCastSpell : MonoBehaviour {
 
 		//Same story if the player is having a conversation...
 		if (this.GetComponent<PlayerInteraction> ().m_IsTalking) {
+			return;
+		}
+
+		//And don't cast spells if the player touches a menu button
+		if (this.m_MenuOpen) {
 			return;
 		}
 
