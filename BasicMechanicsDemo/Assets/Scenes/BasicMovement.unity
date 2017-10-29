@@ -6874,7 +6874,7 @@ Prefab:
       objectReference: {fileID: 1448755375}
     - target: {fileID: 1081634512269034, guid: 44a8ab4090e85432e8caeeb9a5faa5cb, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114960760553677788, guid: 44a8ab4090e85432e8caeeb9a5faa5cb,
         type: 2}
@@ -19931,6 +19931,7 @@ GameObject:
   - component: {fileID: 1221618201}
   - component: {fileID: 1221618200}
   - component: {fileID: 1221618199}
+  - component: {fileID: 1221618202}
   m_Layer: 5
   m_Name: InventoryButton
   m_TagString: Untagged
@@ -20042,6 +20043,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1221618197}
+--- !u!65 &1221618202
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1221618197}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 50, y: 50, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1223140797
 GameObject:
   m_ObjectHideFlags: 0
@@ -24377,6 +24390,7 @@ MonoBehaviour:
   m_Floor: {fileID: 628671963}
   m_ManaDrainTimer: 0
   m_ManaToDrain: 0
+  m_MenuOpen: 0
 --- !u!82 &1546207779
 AudioSource:
   m_ObjectHideFlags: 0
@@ -27127,6 +27141,7 @@ GameObject:
   - component: {fileID: 1726708808}
   - component: {fileID: 1726708807}
   - component: {fileID: 1726708806}
+  - component: {fileID: 1726708809}
   m_Layer: 5
   m_Name: MapButton
   m_TagString: Untagged
@@ -27238,6 +27253,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1726708804}
+--- !u!65 &1726708809
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1726708804}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 50, y: 50, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1730721069
 GameObject:
   m_ObjectHideFlags: 0
