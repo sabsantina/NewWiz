@@ -4134,7 +4134,7 @@ GameObject:
   - component: {fileID: 271684199}
   - component: {fileID: 271684198}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Minimap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4152,7 +4152,7 @@ RectTransform:
   m_Children:
   - {fileID: 1961782633}
   m_Father: {fileID: 1448755376}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5454,7 +5454,7 @@ Prefab:
     - target: {fileID: 224081261245424366, guid: 7ecf0c82c8e39244ba69d149f7af5066,
         type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 224081261245424366, guid: 7ecf0c82c8e39244ba69d149f7af5066,
         type: 2}
@@ -6536,7 +6536,7 @@ Prefab:
       objectReference: {fileID: 1448755375}
     - target: {fileID: 1081634512269034, guid: 44a8ab4090e85432e8caeeb9a5faa5cb, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114960760553677788, guid: 44a8ab4090e85432e8caeeb9a5faa5cb,
         type: 2}
@@ -17480,8 +17480,8 @@ RectTransform:
   - {fileID: 1455930909}
   - {fileID: 1401973408}
   - {fileID: 137870622}
-  - {fileID: 214659317}
   - {fileID: 1166688802}
+  - {fileID: 214659317}
   m_Father: {fileID: 1448755376}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18745,7 +18745,7 @@ Prefab:
     - target: {fileID: 224814038106382964, guid: bd00ad6e0dee943bbbcda11eda700e99,
         type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224814038106382964, guid: bd00ad6e0dee943bbbcda11eda700e99,
         type: 2}
@@ -20657,9 +20657,9 @@ Transform:
   m_Children:
   - {fileID: 1206911150}
   - {fileID: 405551140}
+  - {fileID: 271684197}
   - {fileID: 1602004525}
   - {fileID: 1736946984}
-  - {fileID: 271684197}
   m_Father: {fileID: 1546207770}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
@@ -22719,7 +22719,7 @@ Prefab:
     - target: {fileID: 224279944116692744, guid: 843c5f299227a4b1b857e394021a4fe0,
         type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224279944116692744, guid: 843c5f299227a4b1b857e394021a4fe0,
         type: 2}
@@ -25292,6 +25292,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.56, y: 3.2, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1775904415 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1349724243185146, guid: 7ecf0c82c8e39244ba69d149f7af5066,
+    type: 2}
+  m_PrefabInternal: {fileID: 336069821}
+--- !u!223 &1775904416
+Canvas:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1775904415}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 2
+  m_TargetDisplay: 0
 --- !u!1 &1776060329
 GameObject:
   m_ObjectHideFlags: 0
