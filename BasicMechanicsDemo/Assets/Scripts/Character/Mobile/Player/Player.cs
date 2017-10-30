@@ -14,6 +14,24 @@ public class Player : MonoBehaviour {
 	[SerializeField] public GameObject healthMeter;
 	[SerializeField] public GameObject manaMeter;
 
+	/**A reference to the HotKey button gameobject representative of HotKey1*/
+	[SerializeField] public UnityEngine.UI.Button m_HotKey1_Obj;
+	/**A reference to the HotKey button gameobject representative of HotKey2*/
+	[SerializeField] public UnityEngine.UI.Button m_HotKey2_Obj;
+	/**A reference to the HotKey button gameobject representative of HotKey3*/
+	[SerializeField] public UnityEngine.UI.Button m_HotKey3_Obj;
+
+	/**A string value of the input axis name for HotKey1*/
+	private readonly string STRINGKEY_INPUT_HOTKEY1 = "HotKey1";
+	/**A string value of the input axis name for HotKey2*/
+	private readonly string STRINGKEY_INPUT_HOTKEY2 = "HotKey2";
+	/**A string value of the input axis name for HotKey3*/
+	private readonly string STRINGKEY_INPUT_HOTKEY3 = "HotKey3";
+
+	private HotKeys m_HotKey1;
+	private HotKeys m_HotKey2;
+	private HotKeys m_HotKey3;
+
 	public AudioSource m_audioSource;
 
 	/**A variable to keep track of the player's health.*/
@@ -39,6 +57,13 @@ public class Player : MonoBehaviour {
 	/**A vector to contain the player's respawn position*/
 	public Vector3 m_PlayerRespawnPosition = new Vector3(-6.5f, 0.55f, -0.43f);
 
+	void Awake()
+	{
+		this.m_HotKey1 = this.m_HotKey1_Obj.GetComponentInChildren<HotKeys> ();
+		this.m_HotKey2 = this.m_HotKey2_Obj.GetComponentInChildren<HotKeys> ();
+		this.m_HotKey3 = this.m_HotKey3_Obj.GetComponentInChildren<HotKeys> ();
+	}
+
 	void Start()
 	{
 		this.m_Animator = this.GetComponent<Animator> ();
@@ -56,6 +81,9 @@ public class Player : MonoBehaviour {
 
 	void Update()
 	{
+		//check for input from the player for use of hotkeyed items
+		this.CheckForHotKeyButtonInput ();
+
 		if (this.m_Health <= 0)
 		{
 			#if TESTING_ZERO_HEALTH
@@ -87,8 +115,28 @@ public class Player : MonoBehaviour {
 			this.Resurrect ();
 		}
 
+
+
 		this.UpdateAnimatorParameters ();
 	}//end f'n void Update
+
+	/**A function to check for keyboard input for use of hotkeyed items.*/
+	private void CheckForHotKeyButtonInput()
+	{
+		//if the user hits the input button for HotKey1 item consumption...
+		if (Input.GetButtonDown (STRINGKEY_INPUT_HOTKEY1)) {
+			this.m_HotKey1.useItem ();
+		}//end if
+		//else if the user hits the input button for HotKey2 item consumption...
+		else if (Input.GetButtonDown (STRINGKEY_INPUT_HOTKEY2)) {
+			this.m_HotKey2.useItem ();
+		}//end else if
+		//else if the user hits the input button for HotKey3 item consumption...
+		else if (Input.GetButtonDown (STRINGKEY_INPUT_HOTKEY3)) {
+			this.m_HotKey3.useItem ();
+		}//end else if
+		//else do nothing
+	}//end f'n void CheckForHotKeyButtonInput()
 
 	private void UpdateAnimatorParameters()
 	{

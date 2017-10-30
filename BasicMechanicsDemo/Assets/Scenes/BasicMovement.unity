@@ -5432,6 +5432,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1837403053798384, guid: 7ecf0c82c8e39244ba69d149f7af5066,
     type: 2}
   m_PrefabInternal: {fileID: 336069821}
+--- !u!114 &370770006 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114700841228623116, guid: 7ecf0c82c8e39244ba69d149f7af5066,
+    type: 2}
+  m_PrefabInternal: {fileID: 336069821}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &384023766
 GameObject:
   m_ObjectHideFlags: 0
@@ -6483,6 +6489,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1611889112989428, guid: 7ecf0c82c8e39244ba69d149f7af5066,
     type: 2}
   m_PrefabInternal: {fileID: 336069821}
+--- !u!114 &444082945 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114171034123335146, guid: 7ecf0c82c8e39244ba69d149f7af5066,
+    type: 2}
+  m_PrefabInternal: {fileID: 336069821}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &451835208
 GameObject:
   m_ObjectHideFlags: 0
@@ -19473,6 +19485,9 @@ MonoBehaviour:
   m_DefaultSpellPrefab: {fileID: 1081312389218078, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
     type: 2}
   m_ActiveSpellName: 
+  m_HotKey1_Obj: {fileID: 1811085535}
+  m_HotKey2_Obj: {fileID: 444082945}
+  m_HotKey3_Obj: {fileID: 370770006}
 --- !u!114 &1546207776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19486,6 +19501,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthMeter: {fileID: 1401973407}
   manaMeter: {fileID: 137870621}
+  m_HotKey1_Obj: {fileID: 1811085535}
+  m_HotKey2_Obj: {fileID: 444082945}
+  m_HotKey3_Obj: {fileID: 370770006}
   m_audioSource: {fileID: 0}
   m_Health: 0
   m_Mana: 0
@@ -22484,6 +22502,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1208988340364568, guid: 7ecf0c82c8e39244ba69d149f7af5066,
     type: 2}
   m_PrefabInternal: {fileID: 336069821}
+--- !u!114 &1811085535 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114839812931254270, guid: 7ecf0c82c8e39244ba69d149f7af5066,
+    type: 2}
+  m_PrefabInternal: {fileID: 336069821}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1813774412
 GameObject:
   m_ObjectHideFlags: 0

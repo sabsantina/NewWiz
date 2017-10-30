@@ -52,9 +52,30 @@ public class PlayerInventory : MonoBehaviour {
 	/**A string variable containing the string name of the Input Manager variable responsible for the player switching their active spell.*/
 	private readonly string STRINGKEY_INPUT_SWITCHSPELLS = "Switch Spells";
 
+	/**A reference to the HotKey button gameobject representative of HotKey1*/
+	[SerializeField] public UnityEngine.UI.Button m_HotKey1_Obj;
+	/**A reference to the HotKey button gameobject representative of HotKey2*/
+	[SerializeField] public UnityEngine.UI.Button m_HotKey2_Obj;
+	/**A reference to the HotKey button gameobject representative of HotKey3*/
+	[SerializeField] public UnityEngine.UI.Button m_HotKey3_Obj;
+
+//	private HotKeys m_HotKey1;
+//	private HotKeys m_HotKey2;
+//	private HotKeys m_HotKey3;
+
+	private List<HotKeys> m_HotKeyList = new List<HotKeys>();
+
+
     void Awake()
 	{
-		//for testing
+		//Get a reference to each hotkey slot
+//		this.m_HotKey1 = this.m_HotKey1_Obj.GetComponentInChildren<HotKeys> ();
+		this.m_HotKeyList.Add (this.m_HotKey1_Obj.GetComponentInChildren<HotKeys> ());
+//		this.m_HotKey2 = this.m_HotKey2_Obj.GetComponentInChildren<HotKeys> ();
+		this.m_HotKeyList.Add (this.m_HotKey2_Obj.GetComponentInChildren<HotKeys> ());
+//		this.m_HotKey3 = this.m_HotKey3_Obj.GetComponentInChildren<HotKeys> ();
+		this.m_HotKeyList.Add (this.m_HotKey3_Obj.GetComponentInChildren<HotKeys> ());
+
 		//Initialize Item Dictionary
 		this.m_ItemDictionary = new Dictionary<ItemClass, int>();
 		//Initialize spell list
@@ -230,8 +251,6 @@ public class PlayerInventory : MonoBehaviour {
 	/**A function to add the item to the inventory.*/
 	public void AddItem(ItemClass item_to_add)
 	{
-
-
 		#if TESTING_INVENTORY_ITEMPICKUP
 		string message = "";
 		message += "PlayerInventory::Adding item " + item_to_add.m_ItemName.ToString () +"\t";
@@ -252,6 +271,23 @@ public class PlayerInventory : MonoBehaviour {
 		Debug.Log(message);
 		#endif
 		this.m_ItemDictionary.Add(item_to_add, 1);
+
+		//for each hot key in the hot key list...
+		foreach (HotKeys hot_key in this.m_HotKeyList) {
+			//..if the hot key contains any item...
+			if (hot_key.item != null) {
+				Debug.Log ("Hot key item not null");//<-- this is never being output.
+
+				//...if the hot key contains the specific added item...
+				if (hot_key.ContainItem (item_to_add)) {
+					Debug.Log ("Item " + item_to_add.m_ItemName.ToString () + " contained; quantity: " + this.m_ItemDictionary[item_to_add]);
+					//...then update the HUD display
+					hot_key.UpdateSlotItemCount ();
+				}//end if
+			}//end if
+
+		}//end foreach
+
 	}//end f'n void AddItem(Item)
 
 
