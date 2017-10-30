@@ -20,36 +20,9 @@ public class InventoryMenu : Menu {
 	private ItemIcon m_ItemIcon;
 	public ItemSlot[] itemSlots;
 	/**A boolean to tell us whether or not the inventory menu is active*/
-	private bool notActive;
+	private bool notActive = true;
 
 	public ItemSlot selectedSlot;
-
-
-	/**A function to be called by the button that closes the menu OnClick.*/
-	public void CloseMenu()
-	{
-		base.CloseMenu ();
-		//if it's the first time we close the menu...
-		if (this.m_FirstTimeInventoryMenuClosed) {
-			//...then enable the consume hotkeyed item tutorial
-			this.m_TutorialManager.Enable (TutorialEnum.CONSUME_HOTKEYED_ITEMS);
-			//as of now it won't be the first time the menu closes
-			this.m_FirstTimeInventoryMenuClosed = false;
-		}//end if
-
-		//Update notActive
-		notActive = true;
-	}//end f'n void CloseMenu()
-
-	/**A function to be called by the button that opens the menu OnClick*/
-	public void OpenMenu()
-	{
-		base.OpenMenu ();
-		if (notActive) {
-			updateInventoryMenu ();
-			notActive = false;
-		}//end if
-	}
 
 	void Start()
 	{
@@ -57,12 +30,15 @@ public class InventoryMenu : Menu {
 		itemDic = m_PlayerInventory.m_ItemDictionary;
 		m_ItemIcon = GetComponentInParent<ItemIcon> ();
 		itemSlots = GetComponentsInChildren<ItemSlot> ();
-		notActive = true;
 	}
 		
 	void Update()
 	{
-		
+		if (this.notActive) {
+			this.updateInventoryMenu ();
+			this.notActive = false;
+		}
+
 		if(Input.GetKeyDown(KeyCode.Alpha1))
 		{
 			if(checkTwoOtherHotkeys(hotKey2, hotKey3))
@@ -78,7 +54,26 @@ public class InventoryMenu : Menu {
 			if(checkTwoOtherHotkeys(hotKey1, hotKey2))
 				setHotKeys (hotKey3);
 		}
+	}//end f'n void Update()
+		
+	/**A function to be called by the button that closes the menu OnClick.*/
+	public void CloseMenu()
+	{
+		this.notActive = true;
 
+		base.CloseMenu ();
+		//if it's the first time we close the menu...
+		if (this.m_FirstTimeInventoryMenuClosed) {
+			//...then enable the consume hotkeyed item tutorial
+			this.m_TutorialManager.Enable (TutorialEnum.CONSUME_HOTKEYED_ITEMS);
+			//as of now it won't be the first time the menu closes
+			this.m_FirstTimeInventoryMenuClosed = false;
+		}//end if
+	}//end f'n void CloseMenu()
+
+	/**A function to be called by the button that opens the menu OnClick*/
+	public void OpenMenu()
+	{
 		//if it was the first time that the inventory menu was opened...
 		if (this.m_FirstTimeInventoryMenuOpen) {
 			//...then enable the hotkeys tutorial
@@ -88,10 +83,8 @@ public class InventoryMenu : Menu {
 			//but if it was the first time the menu opened, then this will be the first time it closes.
 			this.m_FirstTimeInventoryMenuClosed = true;
 		}//end if
-	
-	}//end f'n void Update()
-		
-
+		base.OpenMenu ();
+	}//end f'n void OpenMenu()
 
 	public bool checkTwoOtherHotkeys(GameObject hk1, GameObject hk2)
 	{
@@ -161,7 +154,7 @@ public class InventoryMenu : Menu {
 	{
 		foreach (ItemSlot slot in itemSlots) 
 		{
-			if (slot.getText ().text != "") 
+			if (slot != null && slot.getText ().text != "") 
 			{
 				if (slot.item.m_ItemName == current.m_ItemName)
 					return slot;

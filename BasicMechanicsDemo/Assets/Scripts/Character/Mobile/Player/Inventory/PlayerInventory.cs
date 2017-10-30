@@ -21,9 +21,9 @@
 //Item macros
 
 /*Activating this macro will enable the player to start the game with the health potion item.*/
-//#define START_WITH_HEALTH_POTION
+#define START_WITH_HEALTH_POTION
 /*Activating this macro will enable the player to start the game with the mana potion item.*/
-//#define START_WITH_MANA_POTION
+#define START_WITH_MANA_POTION
 
 using System.Collections;
 using System.Collections.Generic;
