@@ -14,6 +14,24 @@ public class Player : MonoBehaviour {
 	[SerializeField] public GameObject healthMeter;
 	[SerializeField] public GameObject manaMeter;
 
+	/**A reference to the HotKey button gameobject representative of HotKey1*/
+	[SerializeField] public UnityEngine.UI.Button m_HotKey1_Obj;
+	/**A reference to the HotKey button gameobject representative of HotKey2*/
+	[SerializeField] public UnityEngine.UI.Button m_HotKey2_Obj;
+	/**A reference to the HotKey button gameobject representative of HotKey3*/
+	[SerializeField] public UnityEngine.UI.Button m_HotKey3_Obj;
+
+	/**A string value of the input axis name for HotKey1*/
+	private readonly string STRINGKEY_INPUT_HOTKEY1 = "HotKey1";
+	/**A string value of the input axis name for HotKey2*/
+	private readonly string STRINGKEY_INPUT_HOTKEY2 = "HotKey2";
+	/**A string value of the input axis name for HotKey3*/
+	private readonly string STRINGKEY_INPUT_HOTKEY3 = "HotKey3";
+
+	private HotKeys m_HotKey1;
+	private HotKeys m_HotKey2;
+	private HotKeys m_HotKey3;
+
 	public AudioSource m_audioSource;
 
 	/**A variable to keep track of the player's health.*/
@@ -38,6 +56,15 @@ public class Player : MonoBehaviour {
 	public readonly string STRINGKEY_PARAM_ISALIVE = "isAlive";
 	/**A vector to contain the player's respawn position*/
 	public Vector3 m_PlayerRespawnPosition = new Vector3(-6.5f, 0.55f, -0.43f);
+    /**The string value of the name of the sorting layer*/
+    public string sortingLayerName;
+
+	void Awake()
+	{
+		this.m_HotKey1 = this.m_HotKey1_Obj.GetComponentInChildren<HotKeys> ();
+		this.m_HotKey2 = this.m_HotKey2_Obj.GetComponentInChildren<HotKeys> ();
+		this.m_HotKey3 = this.m_HotKey3_Obj.GetComponentInChildren<HotKeys> ();
+	}
 
 	void Start()
 	{
@@ -52,12 +79,19 @@ public class Player : MonoBehaviour {
 		this.m_Mana = PLAYER_FULL_MANA;
 		setMaxMeter (manaMeter, this.m_Mana);
 		setMeterValue (manaMeter, this.m_Mana);
-	}
+        //The sorting layer name is retrieved from unity
+        this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingLayerName = sortingLayerName;
+    }
 
 	void Update()
 	{
-		if (this.m_Health <= 0)
-		{
+		//check for input from the player for use of hotkeyed items
+		this.CheckForHotKeyButtonInput ();
+        
+        //This line calculates the sorting order value for the sprite renderer while in play.
+        this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(this.GetComponent<Transform>().transform.position.z * 100f) * -1;
+        if (this.m_Health <= 0)
+        {
 			#if TESTING_ZERO_HEALTH
 			Debug.Log("Zero health; player dead\tResurrection time!");
 			this.m_Health = PLAYER_FULL_HEALTH;
@@ -87,8 +121,28 @@ public class Player : MonoBehaviour {
 			this.Resurrect ();
 		}
 
+
+
 		this.UpdateAnimatorParameters ();
 	}//end f'n void Update
+
+	/**A function to check for keyboard input for use of hotkeyed items.*/
+	private void CheckForHotKeyButtonInput()
+	{
+		//if the user hits the input button for HotKey1 item consumption...
+		if (Input.GetButtonDown (STRINGKEY_INPUT_HOTKEY1)) {
+			this.m_HotKey1.useItem ();
+		}//end if
+		//else if the user hits the input button for HotKey2 item consumption...
+		else if (Input.GetButtonDown (STRINGKEY_INPUT_HOTKEY2)) {
+			this.m_HotKey2.useItem ();
+		}//end else if
+		//else if the user hits the input button for HotKey3 item consumption...
+		else if (Input.GetButtonDown (STRINGKEY_INPUT_HOTKEY3)) {
+			this.m_HotKey3.useItem ();
+		}//end else if
+		//else do nothing
+	}//end f'n void CheckForHotKeyButtonInput()
 
 	private void UpdateAnimatorParameters()
 	{
