@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Item
   - Spell
+  - SlotImage
+  - SlotNumber
   layers:
   - Default
   - TransparentFX
