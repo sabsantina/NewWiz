@@ -32,7 +32,6 @@ public class HotKeys : MonoBehaviour {
 	*This is intended to be called from the player inventory on item pickup, in the event that a hotkeyed item be picked up.*/
 	public void UpdateSlotItemCount()
 	{
-		
 		int numberOfItem = GetComponentInParent<PlayerInventory> ().getNumberItem (item);
 		gameObject.transform.parent.GetComponentInChildren<Text> ().text = "" + numberOfItem;
 	}//end f'n UpdateSlotItemCount()
