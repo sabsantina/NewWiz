@@ -9,7 +9,7 @@
 
 
 	/**A function to compare items. Returns true if they both have the same name, as that's all we need to differentiate items.*/
-	public bool isEqual(Item other)
+	public bool isEqual(ItemClass other)
 	{
 		return (this.m_ItemName.ToString () == other.m_ItemName.ToString ());
 	}//
