@@ -7,15 +7,49 @@ public class InventoryMenu : Menu {
 	[SerializeField] GameObject hotKey1;
 	[SerializeField] GameObject hotKey2;
 	[SerializeField] GameObject hotKey3;
+	/**A reference to the tutorial manager.*/
+	[SerializeField] TutorialManager m_TutorialManager;
+	/**A boolean telling us whether or not it's the first time the inventory menu was opened.*/
+	public bool m_FirstTimeInventoryMenuOpen = true;
+	/**A boolean telling us whether or not it's the first time the inventory menu was closed.*/
+	public bool m_FirstTimeInventoryMenuClosed = false;
 
 	/**A reference to the player's inventory*/
 	public PlayerInventory m_PlayerInventory;
 	public Dictionary<ItemClass, int> itemDic;
 	private ItemIcon m_ItemIcon;
 	public ItemSlot[] itemSlots;
+	/**A boolean to tell us whether or not the inventory menu is active*/
 	private bool notActive;
 
 	public ItemSlot selectedSlot;
+
+
+	/**A function to be called by the button that closes the menu OnClick.*/
+	public void CloseMenu()
+	{
+		base.CloseMenu ();
+		//if it's the first time we close the menu...
+		if (this.m_FirstTimeInventoryMenuClosed) {
+			//...then enable the consume hotkeyed item tutorial
+			this.m_TutorialManager.Enable (TutorialEnum.CONSUME_HOTKEYED_ITEMS);
+			//as of now it won't be the first time the menu closes
+			this.m_FirstTimeInventoryMenuClosed = false;
+		}//end if
+
+		//Update notActive
+		notActive = true;
+	}//end f'n void CloseMenu()
+
+	/**A function to be called by the button that opens the menu OnClick*/
+	public void OpenMenu()
+	{
+		base.OpenMenu ();
+		if (notActive) {
+			updateInventoryMenu ();
+			notActive = false;
+		}//end if
+	}
 
 	void Start()
 	{
@@ -28,33 +62,36 @@ public class InventoryMenu : Menu {
 		
 	void Update()
 	{
-		if (gameObject.activeSelf) {
-			if (notActive) {
-				updateInventoryMenu ();
-				notActive = false;
-			}
-			if(Input.GetKeyDown(KeyCode.Alpha1))
-			{
-				if(checkTwoOtherHotkeys(hotKey2, hotKey3))
-					setHotKeys (hotKey1);
-			}
-			if(Input.GetKeyDown(KeyCode.Alpha2))
-			{
-				if(checkTwoOtherHotkeys(hotKey1, hotKey3))
-					setHotKeys (hotKey2);
-			}
-			if(Input.GetKeyDown(KeyCode.Alpha3))
-			{
-				if(checkTwoOtherHotkeys(hotKey1, hotKey2))
-					setHotKeys (hotKey3);
-			}
-		}
-		else
-		{
-			notActive = true;
-		}
 		
-	}
+		if(Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			if(checkTwoOtherHotkeys(hotKey2, hotKey3))
+				setHotKeys (hotKey1);
+		}
+		if(Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			if(checkTwoOtherHotkeys(hotKey1, hotKey3))
+				setHotKeys (hotKey2);
+		}
+		if(Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			if(checkTwoOtherHotkeys(hotKey1, hotKey2))
+				setHotKeys (hotKey3);
+		}
+
+		//if it was the first time that the inventory menu was opened...
+		if (this.m_FirstTimeInventoryMenuOpen) {
+			//...then enable the hotkeys tutorial
+			this.m_TutorialManager.Enable (TutorialEnum.HOTKEYS);
+			//as of now it won't be the first time the menu opens
+			this.m_FirstTimeInventoryMenuOpen = false;
+			//but if it was the first time the menu opened, then this will be the first time it closes.
+			this.m_FirstTimeInventoryMenuClosed = true;
+		}//end if
+	
+	}//end f'n void Update()
+		
+
 
 	public bool checkTwoOtherHotkeys(GameObject hk1, GameObject hk2)
 	{

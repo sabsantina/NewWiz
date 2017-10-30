@@ -17,7 +17,7 @@ public class HotKeys : MonoBehaviour {
 		
 	}
 
-	/**A function to */
+	/**A function to consume the item in the current hotkey slot*/
 	public void useItem()
 	{
 		if (item != null) {
@@ -29,7 +29,8 @@ public class HotKeys : MonoBehaviour {
 	}
 
 	/**A function to call to update the number of a given item in the slot.
-	*This is intended to be called from the player inventory on item pickup, in the event that a hotkeyed item be picked up.*/
+	*This is intended to be called from the player inventory on item pickup, in the event that a hotkeyed item be picked up.
+	*Assumes that [this.item] is not null.*/
 	public void UpdateSlotItemCount()
 	{
 		int numberOfItem = GetComponentInParent<PlayerInventory> ().getNumberItem (item);

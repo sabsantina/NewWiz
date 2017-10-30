@@ -21,9 +21,9 @@
 //Item macros
 
 /*Activating this macro will enable the player to start the game with the health potion item.*/
-#define START_WITH_HEALTH_POTION
+//#define START_WITH_HEALTH_POTION
 /*Activating this macro will enable the player to start the game with the mana potion item.*/
-#define START_WITH_MANA_POTION
+//#define START_WITH_MANA_POTION
 
 using System.Collections;
 using System.Collections.Generic;
@@ -316,13 +316,14 @@ public class PlayerInventory : MonoBehaviour {
 
 	}//end f'n void AddSpell(SpellClass)
 
+	/**A function to decrement the item dictionary entry with key [item]; returns false if the entry can't be decremented and elsewis returns true.*/
 	public bool useItem(ItemClass item)
 	{
 		foreach (KeyValuePair<ItemClass, int> entry in m_ItemDictionary) 
 		{
 			if (entry.Key.m_ItemName == item.m_ItemName) 
 			{
-				if (entry.Value != 0) 
+				if (entry.Value > 0) 
 				{
 					m_ItemDictionary [entry.Key]--;
 					return true;
@@ -334,6 +335,7 @@ public class PlayerInventory : MonoBehaviour {
 		return false;
 	}
 
+	/**A function to apply the effects of consuming an item, after having checked if consumption of that item is possible, and then subtracting from the item quantity to show the item's been consumed.*/
 	public void itemEffectUsage(ItemClass item)
 	{
 		if (useItem (item)) 
@@ -346,10 +348,11 @@ public class PlayerInventory : MonoBehaviour {
 			case ItemEffect.Gain_Mana:
 				gameObject.GetComponent<Player> ().AffectMana (item.effectAmount);
 				break;
-			}
-		}
+			}//end switch
+		}//end if
 	}
 
+	/**A function to return the number of the given item in the item dictionary.*/
 	public int getNumberItem(ItemClass item)
 	{
 		return m_ItemDictionary [item];
