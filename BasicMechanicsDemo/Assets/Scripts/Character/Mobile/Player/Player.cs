@@ -56,6 +56,8 @@ public class Player : MonoBehaviour {
 	public readonly string STRINGKEY_PARAM_ISALIVE = "isAlive";
 	/**A vector to contain the player's respawn position*/
 	public Vector3 m_PlayerRespawnPosition = new Vector3(-6.5f, 0.55f, -0.43f);
+    /**The string value of the name of the sorting layer*/
+    public string sortingLayerName;
 
 	void Awake()
 	{
@@ -77,15 +79,19 @@ public class Player : MonoBehaviour {
 		this.m_Mana = PLAYER_FULL_MANA;
 		setMaxMeter (manaMeter, this.m_Mana);
 		setMeterValue (manaMeter, this.m_Mana);
-	}
+        //The sorting layer name is retrieved from unity
+        this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingLayerName = sortingLayerName;
+    }
 
 	void Update()
 	{
 		//check for input from the player for use of hotkeyed items
 		this.CheckForHotKeyButtonInput ();
-
-		if (this.m_Health <= 0)
-		{
+        
+        //This line calculates the sorting order value for the sprite renderer while in play.
+        this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(this.GetComponent<Transform>().transform.position.z * 100f) * -1;
+        if (this.m_Health <= 0)
+        {
 			#if TESTING_ZERO_HEALTH
 			Debug.Log("Zero health; player dead\tResurrection time!");
 			this.m_Health = PLAYER_FULL_HEALTH;
