@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour 
 {
 	public ItemClass item;
-	private GameObject itemImage;
+	public GameObject itemImage;
 	private Text itemNumber;
 	// Use this for initialization
 	void Start () {
@@ -33,6 +33,11 @@ public class ItemSlot : MonoBehaviour
 	public void setItemSprite(Sprite s)
 	{
 		itemImage.GetComponent<Image> ().sprite = s;
+	}
+
+	public Sprite getItemSprite()
+	{
+		return itemImage.GetComponent<Image> ().sprite;
 	}
 
 	public Text getText()
