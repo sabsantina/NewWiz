@@ -87,11 +87,11 @@ public class Player : MonoBehaviour {
 	{
 		//check for input from the player for use of hotkeyed items
 		this.CheckForHotKeyButtonInput ();
-
-		if (this.m_Health <= 0)
+        
         //This line calculates the sorting order value for the sprite renderer while in play.
         this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(this.GetComponent<Transform>().transform.position.z * 100f) * -1;
-		{
+        if (this.m_Health <= 0)
+        {
 			#if TESTING_ZERO_HEALTH
 			Debug.Log("Zero health; player dead\tResurrection time!");
 			this.m_Health = PLAYER_FULL_HEALTH;
