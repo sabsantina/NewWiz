@@ -280,4 +280,44 @@ public class PlayerInventory : MonoBehaviour {
 
 	}//end f'n void AddSpell(SpellClass)
 
+	public bool useItem(ItemClass item)
+	{
+		foreach (KeyValuePair<ItemClass, int> entry in m_ItemDictionary) 
+		{
+			if (entry.Key.m_ItemName == item.m_ItemName) 
+			{
+				if (entry.Value != 0) 
+				{
+					m_ItemDictionary [entry.Key]--;
+					return true;
+				} 
+				else
+					return false;
+			}
+		}
+		return false;
+	}
+
+	public void itemEffectUsage(ItemClass item)
+	{
+		if (useItem (item)) 
+		{
+			switch (item.m_ItemEffect) 
+			{
+			case ItemEffect.Gain_Health:
+				gameObject.GetComponent<Player> ().AffectHealth (item.effectAmount);
+				break;
+			case ItemEffect.Gain_Mana:
+				gameObject.GetComponent<Player> ().AffectMana (item.effectAmount);
+				break;
+			}
+		}
+	}
+
+	public int getNumberItem(ItemClass item)
+	{
+		return m_ItemDictionary [item];
+	}
+
+
 }//end class PlayerInventory
