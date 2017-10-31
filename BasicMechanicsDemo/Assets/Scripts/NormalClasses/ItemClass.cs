@@ -7,6 +7,7 @@
 
 	public int effectAmount;
 
+	public string description;
 
 	/**A function to compare items. Returns true if they both have the same name, as that's all we need to differentiate items.*/
 	public bool isEqual(ItemClass other)
@@ -23,6 +24,8 @@
 				this.m_ItemEffect = ItemEffect.Gain_Health;
 				this.m_ItemName = ItemName.Health_Potion;
 				this.effectAmount = 30;
+				description = m_ItemName.ToString () + ": Restores " + effectAmount + " HP.";
+				description.Replace ("_", " ");
 				break;
 			}//end case Health Potion
 		case (int)ItemName.Mana_Potion:
@@ -30,6 +33,8 @@
 				this.m_ItemEffect = ItemEffect.Gain_Mana;
 				this.m_ItemName = ItemName.Mana_Potion;
 				this.effectAmount = 20;
+				description = m_ItemName.ToString () + ": Restores " + effectAmount + " MP.";
+				description.Replace ("_", " ");
 				break;
 			}//end case Health Potion
 		default:

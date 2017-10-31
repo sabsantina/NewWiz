@@ -19,8 +19,12 @@ public class InventoryMenu : Menu {
 	public Dictionary<ItemClass, int> itemDic;
 	private ItemIcon m_ItemIcon;
 	public ItemSlot[] itemSlots;
+
+	public Text itemDescription;
+
 	/**A boolean to tell us whether or not the inventory menu is active*/
 	private bool notActive = true;
+
 
 	public ItemSlot selectedSlot;
 
@@ -30,6 +34,7 @@ public class InventoryMenu : Menu {
 		itemDic = m_PlayerInventory.m_ItemDictionary;
 		m_ItemIcon = GetComponentInParent<ItemIcon> ();
 		itemSlots = GetComponentsInChildren<ItemSlot> ();
+		itemDescription = GameObject.Find ("Description").GetComponent<Text>();
 	}
 		
 	void Update()
@@ -110,6 +115,10 @@ public class InventoryMenu : Menu {
 	public void setSelectedSlot(ItemSlot slot)
 	{
 		selectedSlot = slot;
+		if (slot.item != null) {
+			itemDescription.text = slot.item.description;
+		} else
+			itemDescription.text = "No item in slot.";
 	}
 
 	public void updateInventoryMenu()
