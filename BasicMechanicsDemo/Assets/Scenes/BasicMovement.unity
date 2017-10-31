@@ -6182,64 +6182,6 @@ Prefab:
       propertyPath: m_TutorialManager
       value: 
       objectReference: {fileID: 672067014}
-    - target: {fileID: 114871045499413872, guid: 44a8ab4090e85432e8caeeb9a5faa5cb,
-        type: 2}
-      propertyPath: m_FontData.m_FontSize
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 114871045499413872, guid: 44a8ab4090e85432e8caeeb9a5faa5cb,
-        type: 2}
-      propertyPath: m_FontData.m_MinSize
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114871045499413872, guid: 44a8ab4090e85432e8caeeb9a5faa5cb,
-        type: 2}
-      propertyPath: m_FontData.m_FontStyle
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114871045499413872, guid: 44a8ab4090e85432e8caeeb9a5faa5cb,
-        type: 2}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: af5af7f893df38249a57ed45baad01d8,
-        type: 3}
-    - target: {fileID: 224819351678181550, guid: 44a8ab4090e85432e8caeeb9a5faa5cb,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -40
-      objectReference: {fileID: 0}
-    - target: {fileID: 114871045499413872, guid: 44a8ab4090e85432e8caeeb9a5faa5cb,
-        type: 2}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1565106543877620, guid: 44a8ab4090e85432e8caeeb9a5faa5cb, type: 2}
-      propertyPath: m_Name
-      value: Description
-      objectReference: {fileID: 0}
-    - target: {fileID: 1081634512269034, guid: 44a8ab4090e85432e8caeeb9a5faa5cb, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1565106543877620, guid: 44a8ab4090e85432e8caeeb9a5faa5cb, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224819351678181550, guid: 44a8ab4090e85432e8caeeb9a5faa5cb,
-        type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 600
-      objectReference: {fileID: 0}
-    - target: {fileID: 224819351678181550, guid: 44a8ab4090e85432e8caeeb9a5faa5cb,
-        type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224819351678181550, guid: 44a8ab4090e85432e8caeeb9a5faa5cb,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 350
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 44a8ab4090e85432e8caeeb9a5faa5cb, type: 2}
   m_IsPrefabParent: 0
