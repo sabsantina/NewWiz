@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: af5af7f893df38249a57ed45baad01d8
+timeCreated: 1509409358
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Cardo
+  fontNames:
+  - Cardo
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
