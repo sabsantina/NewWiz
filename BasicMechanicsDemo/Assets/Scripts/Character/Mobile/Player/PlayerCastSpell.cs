@@ -103,15 +103,11 @@ public class PlayerCastSpell : MonoBehaviour {
 		}
 
 		if (Input.GetButtonDown (STRINGKEY_INPUT_CASTSPELL)){
-			//First check to see if we're trying to toggle a menu
-			RaycastHit menu_check_hit;
-			Ray menu_check_ray = this.m_MainCamera.ScreenPointToRay (Input.mousePosition);
-			if (Physics.Raycast(menu_check_ray, out menu_check_hit))
-			{
-				if (menu_check_hit.collider.gameObject.GetComponent<UnityEngine.UI.Button> () != null) {
-					this.m_MenuOpen = true;
-					return;
-				}
+			//if the player's clicking on a UI button...
+			if (this.PlayerIsClickingUIButton ()) {
+				//...then update the corresponding bool, and break us out of here.
+				this.m_MenuOpen = true;
+				return;
 			}
 
 			//else if the player's not toggling a menu and is capable of casting spells...
@@ -192,17 +188,13 @@ public class PlayerCastSpell : MonoBehaviour {
 			}//end if
 		}//end if
 		//else if the user holds down the mouse...
-//		else if (Input.GetButton (STRINGKEY_INPUT_CASTSPELL) && this.m_Player.m_CanCastSpells) {
 		else if (Input.GetButton(STRINGKEY_INPUT_CASTSPELL)){
-			//First check to see if we're trying to toggle a menu
-			RaycastHit menu_check_hit;
-			Ray menu_check_ray = this.m_MainCamera.ScreenPointToRay (Input.mousePosition);
-			if (Physics.Raycast(menu_check_ray, out menu_check_hit))
-			{
-				if (menu_check_hit.collider.gameObject.GetComponent<UnityEngine.UI.Button> () != null) {
-					this.m_MenuOpen = true;
-					return;
-				}
+
+			//if the player's clicking on a UI button...
+			if (this.PlayerIsClickingUIButton ()) {
+				//...then update the corresponding bool, and break us out of here.
+				this.m_MenuOpen = true;
+				return;
 			}
 
 			if (this.m_Player.m_CanCastSpells) {
@@ -342,6 +334,21 @@ public class PlayerCastSpell : MonoBehaviour {
 
 		this.UpdateAnimatorParameters ();
 	}//end f'n void Update()
+
+	/**A private helper function to tell us whether or not when the user clicks they are in fact clicking on a UI button*/
+	private bool PlayerIsClickingUIButton()
+	{
+		//First check to see if we're trying to toggle a menu
+		RaycastHit menu_check_hit;
+		Ray menu_check_ray = this.m_MainCamera.ScreenPointToRay (Input.mousePosition);
+		if (Physics.Raycast(menu_check_ray, out menu_check_hit))
+		{
+			if (menu_check_hit.collider.gameObject.GetComponent<UnityEngine.UI.Button> () != null) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	/**A function to return an AOE spell's duration*/
 	private float GetAOESpellDuration(SpellName spell_name)
