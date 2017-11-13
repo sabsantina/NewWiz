@@ -102,6 +102,43 @@ public class PlayerCastSpell : MonoBehaviour {
 			return;
 		}
 
+		//If the player at all touches the spell-casting input button...
+		if (Input.GetButton (STRINGKEY_INPUT_CASTSPELL)) {
+			//...and so long as the player wasn't clicking a UI button...
+			if (!this.PlayerIsClickingUIButton ()) {
+				//...if no spell is currently active...
+				if (this.m_SpellClassToFire == null) {
+					//...then update the currently chosen spell
+					this.UpdateChosenSpell ();
+				}//end if no spell is active
+
+				//It may be that this UpdateChosenSpell() sets the chosen spell, so the next if should NOT be an else
+
+				//...and if the player has a currently active spell at this point...
+				if (this.m_SpellClassToFire != null) {
+					//...and if the player is capable of casting a spell mana-wise...
+					if (this.m_Player.m_CanCastSpells) {
+						//...then cast the current spell
+						this.CastSpell ();
+					}//end if player has mana
+
+				}//end if active spell exists
+			
+			}//end if player isn't clicking UI button
+			//else if the player is clicking on a UI button...
+			else {
+				//...then update the corresponding bool and break us out of here
+				this.m_MenuOpen = true;
+				return;
+			}
+		}//end if player touched mouse input
+
+
+
+
+
+
+
 		if (Input.GetButtonDown (STRINGKEY_INPUT_CASTSPELL)){
 			//if the player's clicking on a UI button...
 			if (this.PlayerIsClickingUIButton ()) {
@@ -112,7 +149,7 @@ public class PlayerCastSpell : MonoBehaviour {
 
 			//else if the player's not toggling a menu and is capable of casting spells...
 			if (this.m_Player.m_CanCastSpells) {
-				this.CheckChosenSpell ();
+				this.UpdateChosenSpell ();
 				//if the spell to fire exists...
 				if (this.m_SpellClassToFire != null) {
 
@@ -198,7 +235,7 @@ public class PlayerCastSpell : MonoBehaviour {
 			}
 
 			if (this.m_Player.m_CanCastSpells) {
-				this.CheckChosenSpell ();
+				this.UpdateChosenSpell ();
 
 				//if the spell to fire exists 
 				if (this.m_SpellClassToFire != null) {
@@ -370,6 +407,12 @@ public class PlayerCastSpell : MonoBehaviour {
 		return value_to_return;
 	}//end f'n float GetAOESpellDuration(SpellName)
 
+	/**A function to be called */
+	private void CastSpell()
+	{
+		//
+	}
+
 	/**A function to apply AOE spells effects to all nearby enemies in a given radius.*/
 	private void ApplyAOEToEnemies(Vector3 position)
 	{
@@ -428,42 +471,15 @@ public class PlayerCastSpell : MonoBehaviour {
 										this.m_SpellClassToFire.m_SpellName == SpellName.Shield) ? true : false;
 	}//end f'n void ApplyPlayerAttributesAsResultOfMagic()
 
-//	/**A function to return the medium-most time for a clip in the animator.
-//	*This is to help us know when to destroy the gameobject such that the fade-out animation can play.*/
-//	private float TimeOfEndClip()
-//	{
-//		float shortest_clip_time = 1000.0f, medium_clip_time = 0.0f, longest_clip_time = 0.0f;
-//		foreach(AnimationClip clip in this.m_Animator.runtimeAnimatorController.animationClips)
-//		{
-//			//...if a given clip's length is greater than that of the longest clip's length...
-//			if (clip.length > longest_clip_time) {
-//				//...then update the longest clip
-//				longest_clip_time = clip.length;
-//			}//end if
-//			//...if a given clip's length is less than that of the shortest clip's length...
-//			if (clip.length < shortest_clip_time) {
-//				//...then update the shortest clip
-//				shortest_clip_time = clip.length;
-//			}//end if
-//			//...if a given clip's length is greater-than or equal to the shortest clip length
-//			//		AND that same given clip's length is less-than or equal to the longest clip length...
-//			if (clip.length >= shortest_clip_time && clip.length <= longest_clip_time) {
-//				//...then update the medium clip
-//				medium_clip_time = clip.length;
-//			}//end if
-//		}//end foreach
-//		Debug.Log(medium_clip_time);
-//		return medium_clip_time + 0.1f;
-//	}//end f'n float TimeOfEndClip()
 
 	/**Used to retrieve the current spell from the inventory.*/
-	private void CheckChosenSpell()
+	private void UpdateChosenSpell()
 	{
 		this.m_SpellClassToFire = this.gameObject.GetComponent<PlayerInventory>().m_ActiveSpellClass;
 		this.m_SpellName = this.m_SpellClassToFire.m_SpellName.ToString ();
 			
 
-	}//end f'n void CheckChosenSpell()
+	}//end f'n void UpdateChosenSpell()
 
 	/**A function to update the player animator with regards to the player spell casting animations.*/
 	private void UpdateAnimatorParameters()
