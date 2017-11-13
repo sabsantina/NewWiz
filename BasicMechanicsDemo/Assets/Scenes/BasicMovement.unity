@@ -11039,7 +11039,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &672067010
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13656,7 +13656,6 @@ MonoBehaviour:
   m_InventoryUIPrefab: {fileID: 126802963}
   m_MapUIPrefab: {fileID: 591261408}
   m_OptionsUIPrefab: {fileID: 1736946983}
-  m_TutorialManager: {fileID: 0}
   m_MenuOpen_Cursor: {fileID: 2800000, guid: 657b66ffafaf24de09529fac987ede50, type: 3}
   m_MenuClosed_Cursor: {fileID: 2800000, guid: 1c8702bb4e9c34c1a8c5441e0fa3ced7, type: 3}
 --- !u!224 &872955988
