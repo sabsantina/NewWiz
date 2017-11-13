@@ -97,7 +97,9 @@ public class SpellClass {
 				spellinstance_to_return.m_SpellName = SpellName.Thunderstorm;
 				spellinstance_to_return.m_SpellEffect = SpellEffect.AOE_Shock;
 				spellinstance_to_return.m_SpellType = SpellType.AOE_ON_TARGET;
-				spellinstance_to_return.m_EffectDuration = 0.0f;
+				//While it is true that thunderstorm can be used indefinitely, the effects of this spell are electrocution for a given 
+				//time; it therefore has a duration value 
+				spellinstance_to_return.m_EffectDuration = 1.25f;
 				spellinstance_to_return.m_IsMobileSpell = false;
 				spellinstance_to_return.m_IsAOESpell = true;
 				spellinstance_to_return.m_ManaCost = THUNDERSTORM_MANA_COST;
