@@ -9,7 +9,6 @@ public class TutorialManager : MonoBehaviour {
 	[SerializeField] private GameObject m_HotKeysTutorial;
 	[SerializeField] private GameObject m_ConsumeHotKeyedItemTutorial;
 
-
 	void Awake()
 	{
 		this.Enable (TutorialEnum.MOVEMENT);

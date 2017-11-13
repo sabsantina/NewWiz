@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour {
 
 	void Awake()
 	{
-//		this.m_MenuClosed_Cursor.Resize (this.m_CursorWidth, this.m_CursorHeight);
+		//		this.m_TutorialManager.Enable(TutorialEnum.)
 	}
 
 	// Update is called once per frame
