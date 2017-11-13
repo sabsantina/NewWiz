@@ -69,7 +69,7 @@ public class PlayerCastSpell : MonoBehaviour {
 	/**A variable to ensure the spell class instance gameobject is destroyed.*/
 	public float m_ManaToDrain = 0.0f;
 	/**A bool to tell us whether or not a given menu is open; if so, the player shouldn't be able to cast spells.*/
-	public bool m_MenuOpen = false;
+	public bool m_MenuOpen = true;
 
 	void Start()
 	{
@@ -81,6 +81,10 @@ public class PlayerCastSpell : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+//		if (this.m_MenuOpen) {
+//			Debug.Log ("A menu is open");
+//		}
 
 		//If the player has no active spell...
 		if (this.GetComponent<PlayerInventory> ().m_ActiveSpellClass == null) {

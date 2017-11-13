@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour {
 	[SerializeField] private GameObject m_MapUIPrefab;
 	[SerializeField] private GameObject m_OptionsUIPrefab;
 
-	[SerializeField] private TutorialManager m_TutorialManager;
+//	[SerializeField] private TutorialManager m_TutorialManager;
 
 	//Set the cursor to be a hand
 	[SerializeField] private Texture2D m_MenuOpen_Cursor;

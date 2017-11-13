@@ -11134,6 +11134,7 @@ MonoBehaviour:
   m_FireSpellTutorial: {fileID: 1840072595}
   m_HotKeysTutorial: {fileID: 606001684}
   m_ConsumeHotKeyedItemTutorial: {fileID: 245296058}
+  m_PlayerCastSpell: {fileID: 1546207778}
 --- !u!1 &674570319
 GameObject:
   m_ObjectHideFlags: 0
@@ -21843,9 +21844,9 @@ GameObject:
   - component: {fileID: 1546207778}
   - component: {fileID: 1546207780}
   - component: {fileID: 1546207782}
+  - component: {fileID: 1546207781}
   - component: {fileID: 1546207777}
   - component: {fileID: 1546207773}
-  - component: {fileID: 1546207781}
   - component: {fileID: 1546207779}
   m_Layer: 0
   m_Name: Player
