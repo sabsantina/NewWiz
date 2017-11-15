@@ -34,7 +34,7 @@ public class EnemyAttack : MonoBehaviour {
 	private bool CanDamageOther(GameObject other)
 	{
 		//if THIS enemy is frozen...
-		if (this.m_THIS_Enemy.m_IsFrozen) {
+		if (!this.m_THIS_Enemy.m_CanMove) {
 			//...then the enemy cannot damage [other].
 			return false;
 		}//end if

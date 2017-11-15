@@ -4264,7 +4264,12 @@ Prefab:
       objectReference: {fileID: 872955989}
     - target: {fileID: 1299896596757046, guid: c3ea17809bbc64ef89f9abe1ab56cf7f, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 65585328498424054, guid: c3ea17809bbc64ef89f9abe1ab56cf7f,
+        type: 2}
+      propertyPath: m_Center.y
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3ea17809bbc64ef89f9abe1ab56cf7f, type: 2}
@@ -22002,6 +22007,7 @@ MonoBehaviour:
   m_SpellAnimatorManager: {fileID: 872955990}
   m_SpellEffectManager: {fileID: 872955991}
   m_MainCamera: {fileID: 1448755375}
+  m_isCastingSpell: 0
   m_playerAudio: {fileID: 0}
   m_SpellName: 
   AOE_offset: {x: 0, y: 2.8, z: 4.2}
@@ -24106,7 +24112,7 @@ Prefab:
         type: 2}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: aca82ae3d59444c02b05a69f62cf3b0e, type: 2}
+      objectReference: {fileID: 9100000, guid: 919c3ca06200343ec8d97e72a6893fb0, type: 2}
     - target: {fileID: 212307006107648292, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
         type: 2}
       propertyPath: m_Size.x

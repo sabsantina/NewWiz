@@ -1,0 +1,36 @@
+Spell Making Guide:
+This is a guide to how to create and add spells to our game.
+1. Create an animator controller in Animator Controllers > Spell Animator Controllers and name it with the following convention:
+    SpellName_AnimatorController
+This is not terribly relevant, I'm just really anal about naming stuff.
+2. Look at the project view, in the list of gameobjects in the scene. You should see a Spell_DefaultPrefab gameobject that's just chilling in the demo scene. Make it active and change its animator controller to the one you just made.
+3. From there, go to the animations panel and make your spell animations. Try and keep stuff as simple as you can, and ensure everything's the right size (check your spell from the Game view). 
+    - NOTE: if your spell is something that, like Thunderball, has only one animation state, then don't bother first making an idle state and then a new animation. The idle (or default) animator state should be whatever the spell animation is. If you are at all confused by what I mean, go look at the Thunderball animator controller.
+    - NOTE 2: For things to work properly, you should (possibly must) add the following boolean parameters to your animator controller:
+        - isMovingLeft
+        - isMovingRight
+        - isMovingUp
+        - isMovingDown
+        - isMoving
+    You don't NEED to use them, just have them there.    
+    - NOTE 3: If your spell looks different with respect to the direction it's moving in, use the above direction parameters accordingly to plan your animation. Just ensure the leftward animation is playing when isMovingLeft is true, and so on for every direction. 
+    - NOTE 4: If your animation is too small or large with respect to the game scene, adjust the animation sprite itself in its local scale component in the animation tab, while making the animation (Add Property > SpellSprite > Transform > Scale). Ensure the desired scale is maintained throughout the animation.
+4. Then, add your new spell name to the SpellName.cs enum list, found in Scripts > Enums > SpellName.cs
+5. Next go to the SpellClass.cs, you'll find it in Scripts > NormalClasses > SpellClass.cs
+    Find the GenerateInstance(SpellName) function, and add your new spell name to the bottom of the switch.
+    Assign the following parameters to your spell:
+        - Spell name
+        - Spell type (which, really, is more Spell Movement Type)
+        - Effect Duration (where duration is defined as being the time for which the spell lingers actively affecting the enemy after hitting them. For instance, for Iceball, the enemy takes 2.5 seconds to thaw after being frozen, so its duration is of 2.5f)
+        - Mana cost (and add that cost as a public readonly variable above, where all the others are)
+        - [m_IsPersistent], which is defined by the following: can the user hold down the mouse to cast the spell? For instance, does the effect linger similarly to Shield or Heal, if the mouse is held? If so, then the spell is persistent.
+            NOTE: As of right now, here's what we have cases of:
+                - Non-persistent basic projectile spells
+                - Persistent AOE on target spells
+                - Persistent on-player spells
+            So these are the only cases we can super-easily implement right now, as of 15/11/2017 0300. 
+6. Find the Animator Controller manager, in Scripts > Managers > SpellAnimatorManager.cs and add your animator controller there as a [SerializeField] and make sure SpellAnimatorManager::SetSpell(GameObject)'s switch has a case covering your spell. Just copy the same format as the other cases.
+    NOTE: The SpellAnimatorManager script is found on the SceneManagers gameobject in the scene, for when you need to drag your animator controller onto the script component as the serialized field.
+7. Manage spell effects through Enemy::ApplySpellEffects(SpellName) and Enemy::ExecuteExtraInfliction(). Find the Enemy.cs script in Scripts > Character > Mobile > Enemy > Enemy.cs
+
+I'm PRETTY sure that's it.
