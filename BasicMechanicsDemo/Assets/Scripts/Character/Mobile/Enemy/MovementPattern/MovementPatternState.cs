@@ -5,6 +5,7 @@
 public enum MovementPatternState {
 	ROAM = 0,
 	MOVE_TOWARDS_PLAYER,
+	CHASE_PLAYER,
 	STAY_STILL
 
 }

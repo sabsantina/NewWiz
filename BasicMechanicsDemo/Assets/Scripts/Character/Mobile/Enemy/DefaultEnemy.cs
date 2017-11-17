@@ -5,8 +5,11 @@ using UnityEngine;
 public abstract class DefaultEnemy : MonoBehaviour, IEnemy {
 
 	public MovementPattern m_MovementPattern;
-
+	/**A float to keep track of health*/
 	public float m_Health;
+	/**A bool to let us know whether or not the player is in range of the given enemy's attacks.
+	* For example, for ranged units, if the player is at all detected then the player is in range. For infantry units, if the player is within a given distance, then the player is in range.*/
+	public bool m_PlayerIsInRange = false;
 
 	/**A function to regulate the enemy's movement and tell the enemy to move about the scene.*/
 	public virtual void Move ()
