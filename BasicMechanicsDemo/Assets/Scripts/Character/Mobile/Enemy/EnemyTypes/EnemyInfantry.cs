@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyInfantry : DefaultEnemy {
 
+	public MeleeAttackPattern m_AttackPattern;
+
 	/**A function to regulate the enemy's movement and tell the enemy to move about the scene.
 	* Note that in the MovementPattern class, we have a function executing movement executing in Update, and what it does depends on the MovementPatternState. So all we need do to affect movement is change the value of the movement pattern state.*/
 	public override void Move ()

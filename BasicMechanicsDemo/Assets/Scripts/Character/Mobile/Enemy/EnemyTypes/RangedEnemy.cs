@@ -9,6 +9,8 @@ public class RangedEnemy : DefaultEnemy {
 	*To be set in children classes.*/
 	public SpellClass m_SpellToCast;
 
+	public RangedAttackPattern m_AttackPattern;
+
 	protected GameObject m_GeneratedSpellCubeInstance;
 
 	/**A function to regulate the enemy's movement and tell the enemy to move about the scene.

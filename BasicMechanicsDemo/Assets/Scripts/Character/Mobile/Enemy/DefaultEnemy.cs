@@ -7,7 +7,7 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy {
 	/**A MovementPattern to control the enemy's movement*/
 	public MovementPattern m_MovementPattern;
 	/**An AttackPattern to control the enemy's attacks*/
-	public AttackPattern m_AttackPattern;
+//	public AttackPattern m_AttackPattern;
 	/**A float to keep track of health.
 	*To be overridden, or set, in children classes.*/
 	public float m_Health;
