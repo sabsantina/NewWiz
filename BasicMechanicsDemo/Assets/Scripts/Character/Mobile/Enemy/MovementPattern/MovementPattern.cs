@@ -138,7 +138,8 @@ public class MovementPattern : MobileCharacter {
 			displacement = Vector3.Normalize(Vector3.Cross(displacement, this.transform.up)) * this.m_MaximalVelocity;
 			this.m_Direction = displacement;
 		}
-		if (this.MovingLeadsToPlayer (displacement * Time.deltaTime)) {
+		//if moving leads to the enemy running into the player
+		if (this.MovingLeadsToPlayer (displacement * 2.0f * Time.deltaTime)) {
 			//don't move
 			displacement = Vector3.zero;
 		}
