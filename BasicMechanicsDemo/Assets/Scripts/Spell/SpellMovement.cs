@@ -198,8 +198,10 @@ public class SpellMovement : MonoBehaviour {
 			if (other is CapsuleCollider) {
 				return;
 			}
-			//if we hit the target and specifically NOT the enemy's detection collider...
-			if (other.gameObject == this.m_TargetedObj)
+            m_IsMovingDown = m_IsMovingLeft = m_IsMovingRight = m_IsMovingUp = false;
+            UpdateAnimatorParameters();
+            //if we hit the target and specifically NOT the enemy's detection collider...
+            if (other.gameObject == this.m_TargetedObj)
 			{
 
 				#if TESTING_SPELLCOLLISION
@@ -219,7 +221,7 @@ public class SpellMovement : MonoBehaviour {
 					message += "Subtracting enemy health...\n";
 					#endif
 				}//end if
-				//Destroy the spell
+                 //Destroy the spell
 				GameObject.Destroy(this.gameObject);
 				#if TESTING_SPELLCOLLISION
 				message += "GameObject destroyed";
