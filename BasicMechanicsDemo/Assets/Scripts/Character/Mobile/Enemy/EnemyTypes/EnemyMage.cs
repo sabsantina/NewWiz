@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyInfantry : DefaultEnemy {
+public class EnemyMage : DefaultEnemy {
 
 	// Use this for initialization
 	void Start () {
-		
+
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		this.Move ();
@@ -22,7 +22,7 @@ public class EnemyInfantry : DefaultEnemy {
 		//If the player is detected...
 		if (this.m_MovementPattern.IsPlayerDetectedInPatrolRegion ()) {
 			//...then an infantry enemy should chase the player
-			this.m_MovementPattern.m_MovementPatternState = MovementPatternState.CHASE_PLAYER;
+			this.m_MovementPattern.m_MovementPatternState = MovementPatternState.STAY_STILL;
 		} 
 		//else if the player isn't detected...
 		else {

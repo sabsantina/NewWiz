@@ -71,6 +71,16 @@ public class MovementPattern : MobileCharacter {
 		return false;
 	}
 
+	private bool MovingLeadsToPlayer(Vector3 displacement)
+	{
+		foreach (RaycastHit hit in Physics.RaycastAll(this.transform.position, displacement, displacement.magnitude)) {
+			if (hit.collider.gameObject.GetComponent<Player> () != null) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 	/**Move the gameobject with respect to the current movement pattern.
 	*Note: Updates animator parameters immediately following execution of the actual movement.*/
@@ -124,7 +134,12 @@ public class MovementPattern : MobileCharacter {
 		}
 		//if moving leads to the enemy running into an Obstructable...
 		if (this.MovingLeadsToObstructable (displacement * Time.deltaTime)) {
-			//Don't move
+			//move in some other direction
+			displacement = Vector3.Normalize(Vector3.Cross(displacement, this.transform.up)) * this.m_MaximalVelocity;
+			this.m_Direction = displacement;
+		}
+		if (this.MovingLeadsToPlayer (displacement * Time.deltaTime)) {
+			//don't move
 			displacement = Vector3.zero;
 		}
 
@@ -133,6 +148,18 @@ public class MovementPattern : MobileCharacter {
 
 		//Update animator parameters
 		this.UpdateAnimatorParameters();
+	}
+
+	/**A function to set the new values of the animator bools and update the animator parameters.*/
+	private void UpdateAnimatorParameters()
+	{
+		this.m_IsMovingLeft = this.m_Direction.x < 0;
+		this.m_IsMovingRight = this.m_Direction.x > 0;
+		this.m_IsMovingUp = this.m_Direction.z > 0;
+		this.m_IsMovingDown = this.m_Direction.z < 0;
+
+		//The function in MobileCharacter
+		base.UpdateAnimatorParameters ();
 	}
 
 
