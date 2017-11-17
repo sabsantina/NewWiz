@@ -32,6 +32,15 @@ public class RangedEnemy : DefaultEnemy {
 		}
 	}//end f'n void Move()
 
+	/**A function to establish whether or not the player is in range of the enemy, for the specific enemy. 
+	 * - Sets this.mPlayerIsInRange as well as returns a bool*/
+	protected override bool IsPlayerInRangeOfAttack()
+	{
+
+
+		return false;
+	}
+
 	/**A function to have the enemy apply their given attack on the player.*/
 	public override void Attack()
 	{

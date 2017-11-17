@@ -4,12 +4,23 @@ using UnityEngine;
 
 public abstract class DefaultEnemy : MonoBehaviour, IEnemy {
 
+	/**A MovementPattern to control the enemy's movement*/
 	public MovementPattern m_MovementPattern;
+	/**An AttackPattern to control the enemy's attacks*/
+	public AttackPattern m_AttackPattern;
 	/**A float to keep track of health*/
 	public float m_Health;
-	/**A bool to let us know whether or not the player is in range of the given enemy's attacks.
+	/**A bool to let us know whether or not the player is in range of the given enemy's attacks. Probably more for testing than anything else
 	* For example, for ranged units, if the player is at all detected then the player is in range. For infantry units, if the player is within a given distance, then the player is in range.*/
 	public bool m_PlayerIsInRange = false;
+
+	/**A function to establish whether or not the player is in range of the enemy, for the specific enemy. 
+	 * - Sets this.mPlayerIsInRange as well as returns a bool*/
+	protected virtual bool IsPlayerInRangeOfAttack()
+	{
+		//To be overridden in children classes
+		return false;
+	}
 
 	/**A function to regulate the enemy's movement and tell the enemy to move about the scene.*/
 	public virtual void Move ()
@@ -40,15 +51,5 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy {
 	{
 		//To be overridden in children classes
 		//Note: this is virtual because certain spells may affect certain enemies differently
-	}
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 }
