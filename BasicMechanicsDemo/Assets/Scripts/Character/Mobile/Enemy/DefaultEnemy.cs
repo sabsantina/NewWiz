@@ -8,8 +8,12 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy {
 	public MovementPattern m_MovementPattern;
 	/**An AttackPattern to control the enemy's attacks*/
 	public AttackPattern m_AttackPattern;
-	/**A float to keep track of health*/
+	/**A float to keep track of health.
+	*To be overridden, or set, in children classes.*/
 	public float m_Health;
+	/**A float to represent the enemy's attack damage.
+	*To be overridden, or set, in children classes.*/
+	public float m_AttackDamageValue;
 	/**A bool to let us know whether or not the player is in range of the given enemy's attacks. Probably more for testing than anything else
 	* For example, for ranged units, if the player is at all detected then the player is in range. For infantry units, if the player is within a given distance, then the player is in range.*/
 	public bool m_PlayerIsInRange = false;
@@ -52,4 +56,22 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy {
 		//To be overridden in children classes
 		//Note: this is virtual because certain spells may affect certain enemies differently
 	}
+
+	/**A function to set the enemy's health; virtual so we make sure to only set it later, at its proper time*/
+	public virtual void SetHealth(float health)
+	{
+		//To be overridden in children classes
+	}
+
+	public virtual float GetAttackDamageValue()
+	{
+		//To be overridden in children classes
+		return 0.0f;
+	}
+
+//	/**A function to set the enemy that's attacking, so we can apply the specific damage to the target*/
+//	public virtual void SetAttacker(DefaultEnemy enemy)
+//	{
+//		//To be overridden in children classes
+//	}
 }

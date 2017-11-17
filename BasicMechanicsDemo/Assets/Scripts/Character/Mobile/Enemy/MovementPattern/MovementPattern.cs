@@ -5,15 +5,13 @@ using UnityEngine;
 public class MovementPattern : MobileCharacter {
 
 	/**The enemy patrol and detection radius*/
-	[SerializeField] EnemyPatrolRegion m_PatrolRegion;
+	[SerializeField] EnemyDetectionRegion m_PatrolRegion;
 
 
 	/**The state of the movement pattern.*/
 	public MovementPatternState m_MovementPatternState = MovementPatternState.ROAM;
 	/**A reference to the player, so we know whose gameobject to move towards.*/
 	public Player m_Player;
-	/**A bool to let us know whether or not the player's been detected.*/
-//	public bool m_PlayerDetected;
 	/**The velocity at which an enemy chases a player.*/
 	public float m_ChaseVelocity = 200.0f;
 
@@ -29,9 +27,6 @@ public class MovementPattern : MobileCharacter {
 	// Update is called once per frame
 	void Update () {
 		this.ExecutePatternState ();
-
-		this.m_CurrentVelocity = this.m_Direction.magnitude;
-		Debug.Log (m_CurrentVelocity);
 	}
 
 	/**A function to check whether or not the player was detected within the enemy's patrol area*/
@@ -148,11 +143,11 @@ public class MovementPattern : MobileCharacter {
 		this.transform.position = current_position + (displacement * Time.deltaTime);
 
 		//Update animator parameters
-		this.UpdateAnimatorParameters();
+		this.ProperlyUpdateAnimatorParameters();
 	}
 
 	/**A function to set the new values of the animator bools and update the animator parameters.*/
-	private void UpdateAnimatorParameters()
+	private void ProperlyUpdateAnimatorParameters()
 	{
 		this.m_IsMovingLeft = this.m_Direction.x < 0;
 		this.m_IsMovingRight = this.m_Direction.x > 0;

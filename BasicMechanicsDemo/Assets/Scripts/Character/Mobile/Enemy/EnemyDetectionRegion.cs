@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPatrolRegion : MonoBehaviour {
+public class EnemyDetectionRegion : MonoBehaviour {
 
 	/**A bool telling us whether or not the player's in the given patrol region*/
 	public bool m_PlayerInRegion = false;

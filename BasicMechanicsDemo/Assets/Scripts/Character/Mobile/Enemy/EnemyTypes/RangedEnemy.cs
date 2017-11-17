@@ -36,7 +36,10 @@ public class RangedEnemy : DefaultEnemy {
 	 * - Sets this.mPlayerIsInRange as well as returns a bool*/
 	protected override bool IsPlayerInRangeOfAttack()
 	{
-
+		//if the player is at all detected in the patrol region, they're in range of the enemy's attacks.
+		if (this.m_MovementPattern.IsPlayerDetectedInPatrolRegion ()) {
+			return true;
+		}
 
 		return false;
 	}
