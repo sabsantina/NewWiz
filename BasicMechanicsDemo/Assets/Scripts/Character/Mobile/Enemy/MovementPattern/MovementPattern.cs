@@ -7,14 +7,13 @@ public class MovementPattern : MobileCharacter {
 	/**The enemy patrol and detection radius*/
 	[SerializeField] EnemyPatrolRegion m_PatrolRegion;
 
-//	[SerializeField] Animator m_EnemyAnimator;
 
 	/**The state of the movement pattern.*/
 	public MovementPatternState m_MovementPatternState = MovementPatternState.ROAM;
 	/**A reference to the player, so we know whose gameobject to move towards.*/
 	public Player m_Player;
 	/**A bool to let us know whether or not the player's been detected.*/
-	public bool m_PlayerDetected;
+//	public bool m_PlayerDetected;
 	/**The velocity at which an enemy chases a player.*/
 	public float m_ChaseVelocity = 200.0f;
 
@@ -22,14 +21,15 @@ public class MovementPattern : MobileCharacter {
 
 	// Use this for initialization
 	void Start () {
-		this.m_Direction = new Vector3(Random.Range(-100.0f, 100.0f), 0.0f, Random.Range(-100.0f, 100.0f));
-		this.m_MaximalVelocity = 7.5f;
-//		this.m_Animator = this.m_EnemyAnimator;
+		this.m_MaximalVelocity = 2.5f;
+		this.m_Direction = Vector3.Normalize(new Vector3(Random.Range(-100.0f, 100.0f), 0.0f, Random.Range(-100.0f, 100.0f))) * this.m_MaximalVelocity;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		this.ExecutePatternState ();
+
 		this.m_CurrentVelocity = this.m_Direction.magnitude;
 		Debug.Log (m_CurrentVelocity);
 	}
@@ -60,23 +60,32 @@ public class MovementPattern : MobileCharacter {
 		}//end else
 	}//end f'n bool isLeavingDetectionArea()
 
+	/**A function to return true if the enemy is moving in the direction of an obstructable body*/
+	private bool MovingLeadsToObstructable(Vector3 displacement)
+	{
+		foreach (RaycastHit hit in Physics.RaycastAll(this.transform.position, displacement, displacement.magnitude)) {
+			if (hit.collider.gameObject.GetComponent<Obstructable> () != null) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 	/**Move the gameobject with respect to the current movement pattern.
 	*Note: Updates animator parameters immediately following execution of the actual movement.*/
 	private void ExecutePatternState()
 	{
+		Vector3 displacement = Vector3.zero;
+		Vector3 current_position = this.transform.position;
+
 		switch ((int)this.m_MovementPatternState) {
 		//If the enemy's movement pattern is set to roam...
 		case (int)MovementPatternState.ROAM:
 			{
-				Vector3 current_position = this.transform.position;
-				Vector3 displacement = Vector3.Normalize (this.m_Direction) * this.m_MaximalVelocity * Time.deltaTime;
-				if (this.MovingLeavesPatrolRegion (displacement)) {
-					displacement = Vector3.Normalize (this.m_PatrolRegion.transform.position - this.transform.position) * this.m_MaximalVelocity;
-					//Update direction
-					this.m_Direction = displacement;
-				}
-				this.transform.position = current_position + displacement;
+//				Vector3 current_position = this.transform.position;
+				displacement = Vector3.Normalize (this.m_Direction) * this.m_MaximalVelocity;
+//				this.transform.position = current_position + (displacement * Time.deltaTime);
 				break;
 			}
 		//If the enemy's movement pattern is set to stay still...
@@ -88,22 +97,40 @@ public class MovementPattern : MobileCharacter {
 		//If the enemy's movement pattern is set to follow the player, at normal velocity
 		case (int)MovementPatternState.MOVE_TOWARDS_PLAYER:
 			{
-				Vector3 current_position = this.transform.position;
-				Vector3 vector_to_player = Vector3.Normalize (this.m_Player.gameObject.transform.position - current_position) * this.m_MaximalVelocity;
-				this.m_Direction = vector_to_player;
-				this.transform.position = current_position + (this.m_Direction * Time.deltaTime);
+//				Vector3 current_position = this.transform.position;
+				displacement = Vector3.Normalize (this.m_Player.gameObject.transform.position - current_position) * this.m_MaximalVelocity;
+				//Update direction
+				this.m_Direction = displacement;
+//				this.transform.position = current_position + (displacement * Time.deltaTime);
 				break;
 			}
 		//If the enemy's movement pattern is set to chase the player, at a greater-than-normal velocity
 		case (int)MovementPatternState.CHASE_PLAYER:
 			{
-				Vector3 current_position = this.transform.position;
-				Vector3 vector_to_player = Vector3.Normalize (this.m_Player.gameObject.transform.position - current_position) * this.m_ChaseVelocity;
-				this.m_Direction = vector_to_player;
-				this.transform.position = current_position + (this.m_Direction * Time.deltaTime);
+//				Vector3 current_position = this.transform.position;
+				displacement = Vector3.Normalize (this.m_Player.gameObject.transform.position - current_position) * this.m_ChaseVelocity;
+				//Update direction
+				this.m_Direction = displacement;
+//				this.transform.position = current_position + (displacement * Time.deltaTime);
 				break;
 			}
 		}//end switch
+
+		//if moving leads to the enemy leaving the patrol region...
+		if (this.MovingLeavesPatrolRegion (displacement * Time.deltaTime)) {
+			displacement = Vector3.Normalize (this.m_PatrolRegion.transform.position - this.transform.position) * this.m_MaximalVelocity;
+			//Update direction
+			this.m_Direction = displacement;
+		}
+		//if moving leads to the enemy running into an Obstructable...
+		if (this.MovingLeadsToObstructable (displacement * Time.deltaTime)) {
+			//Don't move
+			displacement = Vector3.zero;
+		}
+
+		//Apply movement
+		this.transform.position = current_position + (displacement * Time.deltaTime);
+
 		//Update animator parameters
 		this.UpdateAnimatorParameters();
 	}
