@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Rooster : EnemyInfantry {
 
+	/**The damage a Rooster enemy does on attack.*/
 	public float m_RoosterAttackDamage = 2.5f;
-
+	/**The amount of health a Rooster enemy has.*/
 	public float m_RoosterHealth = 20.0f;
 
 	// Use this for initialization
 	void Start () {
-		this.SetAttackDamage (this.m_RoosterAttackDamage);
-		this.SetHealth (this.m_RoosterHealth);
+		this.SetAttackDamageValue ();
+		this.SetHealth ();
 	}
 	
 	// Update is called once per frame
@@ -31,14 +32,19 @@ public class Rooster : EnemyInfantry {
 		//Note: this is virtual because certain spells may affect certain enemies differently
 	}
 
-	public override void SetAttackDamage(float attack_damage)
+	public override void Die ()
 	{
-		this.m_AttackDamageValue = attack_damage;
+		
 	}
 
-	public override void SetHealth(float health)
+	public override void SetAttackDamageValue()
 	{
-		this.m_Health = health;
+		this.m_AttackDamageValue = this.m_RoosterAttackDamage;
+	}
+
+	public override void SetHealth ()
+	{
+		this.m_Health = this.m_RoosterHealth;
 	}
 
 	public override float GetAttackDamageValue ()

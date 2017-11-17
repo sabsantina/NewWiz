@@ -58,7 +58,12 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy {
 	}
 
 	/**A function to set the enemy's health; virtual so we make sure to only set it later, at its proper time*/
-	public virtual void SetHealth(float health)
+	public virtual void SetHealth()
+	{
+		//To be overridden in children classes
+	}
+
+	public virtual void SetAttackDamageValue()
 	{
 		//To be overridden in children classes
 	}

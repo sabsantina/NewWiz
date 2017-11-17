@@ -5,15 +5,11 @@ using UnityEngine;
 
 public class RangedEnemy : DefaultEnemy {
 
-	// Use this for initialization
-	void Start () {
+	/**The spell the ranged enemy will be casting.
+	*To be set in children classes.*/
+	public SpellClass m_SpellToCast;
 
-	}
-
-	// Update is called once per frame
-	void Update () {
-		this.Move ();
-	}
+	protected GameObject m_GeneratedSpellCubeInstance;
 
 	/**A function to regulate the enemy's movement and tell the enemy to move about the scene.
 	* Note that in the MovementPattern class, we have a function executing movement executing in Update, and what it does depends on the MovementPatternState. So all we need do to affect movement is change the value of the movement pattern state.*/
@@ -22,44 +18,49 @@ public class RangedEnemy : DefaultEnemy {
 		//		Debug.Log (this.m_MovementPattern.IsPlayerDetectedInPatrolRegion ());
 		//If the player is detected...
 		if (this.m_MovementPattern.IsPlayerDetectedInPatrolRegion ()) {
-			//...then an infantry enemy should chase the player
+			//...then a ranged enemy should stay still to attack the player from afar
 			this.m_MovementPattern.m_MovementPatternState = MovementPatternState.STAY_STILL;
 		} 
 		//else if the player isn't detected...
 		else {
-			//...then an infantry enemy should just roam
+			//...then an enemy should just roam
 			this.m_MovementPattern.m_MovementPatternState = MovementPatternState.ROAM;
 		}
 	}//end f'n void Move()
+
+	/**A function to more easily manage our attack pattern.
+	*To be expanded upon in child classes.*/
+	protected void ManageAttack()
+	{
+		if (this.IsPlayerInRangeOfAttack ()) {
+			this.Attack ();
+		} else {
+			this.m_AttackPattern.m_AttackPatternState = AttackPatternState.DO_NOTHING;
+		}
+	}
 
 	/**A function to establish whether or not the player is in range of the enemy, for the specific enemy. 
 	 * - Sets this.mPlayerIsInRange as well as returns a bool*/
 	protected override bool IsPlayerInRangeOfAttack()
 	{
-		//if the player is at all detected in the patrol region, they're in range of the enemy's attacks.
-		if (this.m_MovementPattern.IsPlayerDetectedInPatrolRegion ()) {
-			return true;
-		}
-
-		return false;
+		this.m_PlayerIsInRange = this.m_AttackPattern.PlayerIsDetectedInAttackDetectionRegion ();
+		Debug.Log ("Player detected for attack region? " + this.m_PlayerIsInRange);
+		return this.m_PlayerIsInRange;
 	}
 
 	/**A function to have the enemy apply their given attack on the player.*/
 	public override void Attack()
 	{
-		//To be overridden in children classes
+		this.m_AttackPattern.m_AttackPatternState = AttackPatternState.RANGED;
 	}
 
-	/**A function to execute and control the enemy's death animation*/
-	public override void Die()
+	public virtual void SetSpellToCast(SpellName spell)
 	{
 		//To be overridden in children classes
 	}
 
-	/**A function to apply a given spell's effects on the enemy, including damage.*/
-	public override void ApplySpellEffect (SpellClass spell)
+	protected virtual void SetGeneratedSpellInstance()
 	{
 		//To be overridden in children classes
-		//Note: this is virtual because certain spells may affect certain enemies differently
 	}
 }

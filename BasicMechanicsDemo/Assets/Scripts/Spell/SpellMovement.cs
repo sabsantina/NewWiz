@@ -42,7 +42,7 @@ public class SpellMovement : MonoBehaviour {
 	/**A reference to the target the spell is being cast at. Set using SpellMovement::SetTarget(GameObject).*/
     public RaycastHit m_Target { get; private set; }
 	/**A reference to the gameobject of [this.m_Target] - this will be for the spells to lock on in case the enemy or target is moving.*/
-	private GameObject m_TargetedObj;
+	public GameObject m_TargetedObj;
 	/**The direction in which the spell is moving.*/
 	private Vector3 m_Direction = new Vector3();
 	/**A bool to let us know whether the target is a mobile character. 
@@ -143,7 +143,8 @@ public class SpellMovement : MonoBehaviour {
 			this.m_Direction = Vector3.Normalize(this.m_Target.point - this.transform.position) * this.m_MaximalVelocity;
 			this.m_Direction.y = 0.0f;
 		}
-	}//end f'n void SetTarget(GameObject)
+	}//end f'n void SetTarget(RaycastHit)
+
 
 	/**A function to tell the spells where to go from another class; this will be helpful for those spells who aren't mobile, where the player may move.*/
 	public void MaintainPosition(Vector3 position)
@@ -206,19 +207,21 @@ public class SpellMovement : MonoBehaviour {
 				string message = "SpellMovement::OnTriggerEnter(Collider)\tTarget " + this.m_Target.collider.gameObject.name + " hit!\n";
 				#endif
 				//if the other is an enemy...
-				if (other.gameObject.GetComponent<Enemy>() != null)
-				{
+				if (other.gameObject.GetComponent<Enemy> () != null) {
 //					Debug.Log("Am I running twice?\t" + "other: " + other.name + "\t" + this.m_SpellClassToCast.ReturnSpellInstanceInfo());
 
 
-					Enemy enemy = other.gameObject.GetComponent<Enemy>();
-					enemy.ApplySpellEffects(this.m_SpellClassToCast.m_SpellName);
-					Debug.Log (this.m_SpellClassToCast.ReturnSpellInstanceInfo ());
+					Enemy enemy = other.gameObject.GetComponent<Enemy> ();
+					enemy.ApplySpellEffects (this.m_SpellClassToCast.m_SpellName);
+//					Debug.Log (this.m_SpellClassToCast.ReturnSpellInstanceInfo ());
 //					this.m_SpellEffectManager.SetSpellToApply(this.m_SpellClassToCast, enemy);
 					#if TESTING_SPELLCOLLISION
 					message += "Subtracting enemy health...\n";
 					#endif
 				}//end if
+				else if (other.gameObject.GetComponent<Player> () != null) {
+					other.gameObject.GetComponent<Player> ().AffectHealth (this.m_SpellClassToCast.m_SpellDamage);
+				}
 				//Destroy the spell
 				GameObject.Destroy(this.gameObject);
 				#if TESTING_SPELLCOLLISION
