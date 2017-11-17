@@ -18,11 +18,16 @@ public class RangedEnemy : DefaultEnemy {
 	public override void Move ()
 	{
 		//		Debug.Log (this.m_MovementPattern.IsPlayerDetectedInPatrolRegion ());
-		//If the player is detected...
-		if (this.m_MovementPattern.IsPlayerDetectedInPatrolRegion ()) {
+		//If the player is detected in the patrol region but not in the attack region...
+		if (this.m_MovementPattern.IsPlayerDetectedInPatrolRegion () && !this.m_AttackPattern.PlayerIsDetectedInAttackDetectionRegion ()) {
+			//...then a ranged enemy should edge closer to the player
+			this.m_MovementPattern.m_MovementPatternState = MovementPatternState.MOVE_TOWARDS_PLAYER;
+		} 
+		//else if the player is detected in the attack region...
+		else if (this.m_AttackPattern.PlayerIsDetectedInAttackDetectionRegion ()) {
 			//...then a ranged enemy should stay still to attack the player from afar
 			this.m_MovementPattern.m_MovementPatternState = MovementPatternState.STAY_STILL;
-		} 
+		}
 		//else if the player isn't detected...
 		else {
 			//...then an enemy should just roam
