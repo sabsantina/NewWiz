@@ -13439,6 +13439,8 @@ MonoBehaviour:
   m_Enemy: {fileID: 838317598}
   m_Player: {fileID: 1546207776}
   m_DefaultSpellPrefab: {fileID: 0}
+  m_GeneratedSpellInstance: {fileID: 0}
+  m_SpellAnimatorManager: {fileID: 0}
   m_AttackTimer: 0
   m_IntervalBetweenAttacks: 1
   m_IsAttacking: 0
@@ -27916,6 +27918,8 @@ MonoBehaviour:
   m_Player: {fileID: 1546207776}
   m_DefaultSpellPrefab: {fileID: 1081312389218078, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
     type: 2}
+  m_GeneratedSpellInstance: {fileID: 0}
+  m_SpellAnimatorManager: {fileID: 872955990}
   m_AttackTimer: 0
   m_IntervalBetweenAttacks: 1
   m_IsAttacking: 0

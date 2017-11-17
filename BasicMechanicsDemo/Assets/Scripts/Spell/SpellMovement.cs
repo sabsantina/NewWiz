@@ -196,15 +196,15 @@ public class SpellMovement : MonoBehaviour {
 		}//end if
 		//else if the spell we're casting is a basic projectile...
 		else {
-			if (other is CapsuleCollider) {
-				return;
-			}
+//			if (other is CapsuleCollider) {
+//				return;
+//			}
 			//if we hit the target and specifically NOT the enemy's detection collider...
 			if (other.gameObject == this.m_TargetedObj)
 			{
 
 				#if TESTING_SPELLCOLLISION
-				string message = "SpellMovement::OnTriggerEnter(Collider)\tTarget " + this.m_Target.collider.gameObject.name + " hit!\n";
+				string message = "SpellMovement::OnTriggerEnter(Collider)\tTarget " + this.m_TargetedObj.name + " hit!\n";
 				#endif
 				//if the other is an enemy...
 				if (other.gameObject.GetComponent<Enemy> () != null) {
@@ -220,7 +220,7 @@ public class SpellMovement : MonoBehaviour {
 					#endif
 				}//end if
 				else if (other.gameObject.GetComponent<Player> () != null) {
-					other.gameObject.GetComponent<Player> ().AffectHealth (this.m_SpellClassToCast.m_SpellDamage);
+					other.gameObject.GetComponent<Player> ().AffectHealth (-this.m_SpellClassToCast.m_SpellDamage);
 				}
 				//Destroy the spell
 				GameObject.Destroy(this.gameObject);
