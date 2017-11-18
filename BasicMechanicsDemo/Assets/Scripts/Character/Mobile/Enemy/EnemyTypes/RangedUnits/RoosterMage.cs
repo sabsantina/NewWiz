@@ -17,18 +17,17 @@ public class RoosterMage : RangedEnemy {
 		this.SetSpellToCast (this.m_AttackSpell);
 		this.SetAttackDamageValue ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (this.m_IsAffectedBySpell) {
-			this.ApplySpellEffect (this.m_SpellToApply);
-		}
 
-		this.Move ();
-		this.ManageAttack ();
-		#if TESTING_SPELL_SELECTION
-		this.SetSpellToCast (this.m_AttackSpell);
-		#endif
+
+	// Update is called once per frame
+	protected override void Update () {
+		base.Update ();
+
+//		this.Move ();
+//		this.ManageAttack ();
+//		#if TESTING_SPELL_SELECTION
+//		this.SetSpellToCast (this.m_AttackSpell);
+//		#endif
 	}
 
 	/**A function to set the spell to cast in our parent classes*/

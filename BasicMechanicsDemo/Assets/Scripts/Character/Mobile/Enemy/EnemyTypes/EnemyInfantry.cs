@@ -47,6 +47,15 @@ public class EnemyInfantry : DefaultEnemy {
 		}
 	}
 
+	protected virtual void Update()
+	{
+		base.Update ();
+		if (this.IsPlayerInRangeOfAttack ()) {
+			this.Attack ();
+		} else {
+			this.m_AttackPattern.m_AttackPatternState = AttackPatternState.DO_NOTHING;
+		}
+	}
 
 //	public virtual void SetAttackDamage(float attack_damage)
 //	{

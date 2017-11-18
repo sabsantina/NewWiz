@@ -66,6 +66,14 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 		this.m_Health += effect;
 	}
 
+	protected virtual void Update()
+	{
+		if (this.m_IsAffectedBySpell) {
+			this.ApplySpellEffect (this.m_SpellToApply);
+		}
+		this.Move ();
+	}
+
 	/**A function to apply a given hostile spell's effects on the enemy, including damage.*/
 	public virtual void ApplySpellEffect (SpellClass spell)
 	{

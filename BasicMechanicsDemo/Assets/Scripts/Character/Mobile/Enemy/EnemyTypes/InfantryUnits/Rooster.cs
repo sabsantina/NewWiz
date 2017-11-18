@@ -14,15 +14,13 @@ public class Rooster : EnemyInfantry {
 		this.SetAttackDamageValue ();
 		this.SetHealth ();
 	}
-	
+
+
 	// Update is called once per frame
-	void Update () {
+	protected override void Update () {
+		base.Update ();
 
-		if (this.m_IsAffectedBySpell) {
-			this.ApplySpellEffect (this.m_SpellToApply);
-		}
-
-		this.Move ();
+//		this.Move ();
 
 		if (this.IsPlayerInRangeOfAttack ()) {
 			this.Attack ();

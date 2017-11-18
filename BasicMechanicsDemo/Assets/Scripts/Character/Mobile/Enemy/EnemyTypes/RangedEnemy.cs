@@ -79,4 +79,10 @@ public class RangedEnemy : DefaultEnemy {
 	{
 		//To be overridden in children classes
 	}
+
+	protected virtual void Update()
+	{
+		base.Update ();
+		this.ManageAttack ();
+	}
 }
