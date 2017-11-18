@@ -145,6 +145,14 @@ public class SpellMovement : MonoBehaviour {
 		}
 	}//end f'n void SetTarget(RaycastHit)
 
+	/**A function to be called from the RangedEnemy's AttackPattern, to set the position of the target of magic.*/
+	public void SetEnemyTarget(GameObject spell_target)
+	{
+		this.m_TargetedObj = null;
+		//...then send the spell in the direction of wherever the cursor was clicked
+		this.m_Direction = Vector3.Normalize(spell_target.transform.position - this.transform.position) * this.m_MaximalVelocity;
+		this.m_Direction.y = 0.0f;
+	}//end f'n void SetTarget(RaycastHit)
 
 	/**A function to tell the spells where to go from another class; this will be helpful for those spells who aren't mobile, where the player may move.*/
 	public void MaintainPosition(Vector3 position)
@@ -200,7 +208,21 @@ public class SpellMovement : MonoBehaviour {
 //				return;
 //			}
 			//if we hit the target and specifically NOT the enemy's detection collider...
-			if (other.gameObject == this.m_TargetedObj)
+//			if (other.gameObject == this.m_TargetedObj)
+			if (other.gameObject.GetComponent<ICanBeDamagedByMagic> () != null) {
+				Vector3 vector_from_other_to_spell_instance = (this.transform.position - other.transform.position);
+				//if the vector from the other to the spell is in roughly the same direction as the spell is moving, then other is the one casting the spell
+				//else odds are other is the target of the spell
+				if (Vector3.Dot (this.m_Direction, vector_from_other_to_spell_instance) < 0) {
+					Debug.Log (other.gameObject.name + " is target");
+					other.gameObject.GetComponent<ICanBeDamagedByMagic> ().ApplySpellEffect (this.m_SpellClassToCast);
+					GameObject.Destroy (this.gameObject);
+				}
+//				Debug.Log (other.gameObject.name + " detected as can be damaged by magic");
+//				other.gameObject.GetComponent<ICanBeDamagedByMagic> ().ApplySpellEffect (this.m_SpellClassToCast);
+//				GameObject.Destroy (this.gameObject);
+			}
+			else if (other.gameObject == this.m_TargetedObj)
 			{
 
 				#if TESTING_SPELLCOLLISION
