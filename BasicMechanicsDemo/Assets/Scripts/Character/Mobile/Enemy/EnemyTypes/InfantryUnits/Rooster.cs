@@ -32,10 +32,6 @@ public class Rooster : EnemyInfantry {
 		//Note: this is virtual because certain spells may affect certain enemies differently
 	}
 
-	public override void Die ()
-	{
-		
-	}
 
 	public override void SetAttackDamageValue()
 	{

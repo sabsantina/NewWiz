@@ -17,6 +17,8 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	/**A bool to let us know whether or not the player is in range of the given enemy's attacks. Probably more for testing than anything else
 	* For example, for ranged units, if the player is at all detected then the player is in range. For infantry units, if the player is within a given distance, then the player is in range.*/
 	public bool m_PlayerIsInRange = false;
+	/**A stringkey for the isDead parameter in the movement pattern animator*/
+	private readonly string STRINGKEY_PARAM_ISDEAD = "IsDead";
 
 	/**A function to establish whether or not the player is in range of the enemy, for the specific enemy. 
 	 * - Sets this.mPlayerIsInRange as well as returns a bool*/
@@ -39,9 +41,12 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	}
 
 	/**A function to execute and control the enemy's death animation*/
-	public virtual void Die()
+	public void Die()
 	{
-		//To be overridden in children classes
+		this.m_MovementPattern.m_Animator.SetBool (STRINGKEY_PARAM_ISDEAD, this.m_Health <= 0.0f);
+		//Destroy gameobject after the death animation
+//		float animation_length = 0.0f;
+//		GameObject.Destroy(this.gameObject, animation_length);
 	}
 
 	/**A function to affect the enemy's health; damage should be fed as a negative number.*/
@@ -50,10 +55,16 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 		this.m_Health += effect;
 	}
 
-	/**A function to apply a given spell's effects on the enemy, including damage.*/
+	/**A function to apply a given hostile spell's effects on the enemy, including damage.*/
 	public virtual void ApplySpellEffect (SpellClass spell)
 	{
-		//To be overridden in children classes
+		this.AffectHealth (-spell.m_SpellDamage);
+
+//		switch((int)spell.m_SpellName)
+//		{
+//		case 
+//		}
+		//To be overridden in children classes. We'll keep a default version here, though.
 		//Note: this is virtual because certain spells may affect certain enemies differently
 	}
 
