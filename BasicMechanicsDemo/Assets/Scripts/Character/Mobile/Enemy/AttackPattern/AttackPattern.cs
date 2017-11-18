@@ -11,7 +11,7 @@ public class AttackPattern : MonoBehaviour {
 	/**We need a reference to the actual enemy to be able to inflict their specific damage.*/
 	[SerializeField] protected DefaultEnemy m_Enemy;
 	/**A reference to the player so we can apply the damage to them.*/
-	public Player m_Player;
+//	[SerializeField] public Player m_Player;
 
 //	/**A reference to the default spell prefab*/
 //	[SerializeField] GameObject m_DefaultSpellPrefab;
