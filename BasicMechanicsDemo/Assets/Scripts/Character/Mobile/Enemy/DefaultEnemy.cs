@@ -145,7 +145,7 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 				break;
 			}//end case Iceball
 			//Let thunderstorm case fall to thunderball
-//		case (int)SpellName.Thunderstorm:
+		case (int)SpellName.Thunderstorm:
 		case (int)SpellName.Thunderball:
 			{
 				//Shock the enemy for Thunderball.duration and let them go
