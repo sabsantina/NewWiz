@@ -13,11 +13,14 @@ public class EnemyDetectionRegion : MonoBehaviour {
 	public bool m_PlayerInRegion = false;
 	/**Interior padding to prevent the enemy from leaving the patrol region a little bit earlier*/
 	public float m_InteriorPadding = 1.0f;
+	/**A reference to the player entering the detection region*/
+	public Player m_Player;
 
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.GetComponent<Player> () != null) {
 			this.m_PlayerInRegion = true;
+			this.m_Player = other.GetComponent<Player>();
 		}
 	}
 

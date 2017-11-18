@@ -12,7 +12,7 @@ public class MeleeAttackPattern : AttackPattern {
 				if (this.m_AttackTimer == 0.0f) {
 					this.m_IsAttacking = true;
 					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
-					this.m_Player.AffectHealth (-this.m_Enemy.GetAttackDamageValue ());
+					this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player.AffectHealth(-this.m_Enemy.GetAttackDamageValue ());
 					this.m_AttackTimer += Time.deltaTime;
 					this.m_IsAttacking = false;
 					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);

@@ -30,7 +30,7 @@ public class RangedAttackPattern : AttackPattern {
 						{
 							this.m_GeneratedSpellInstance.transform.position = this.transform.position;
 							SpellMovement spell_movement = this.m_GeneratedSpellInstance.GetComponent<SpellMovement> ();
-							spell_movement.SetEnemyTarget (this.m_Player.gameObject);
+							spell_movement.SetEnemyTarget (this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player.gameObject);
 							spell_movement.SetSpellToCast (this.m_SpellToCast);
 
 							StartCoroutine (this.DestroySpellAfterTime (3.0f));
