@@ -22,11 +22,11 @@ public class Rooster : EnemyInfantry {
 
 //		this.Move ();
 
-		if (this.IsPlayerInRangeOfAttack ()) {
-			this.Attack ();
-		} else {
-			this.m_AttackPattern.m_AttackPatternState = AttackPatternState.DO_NOTHING;
-		}
+//		if (this.IsPlayerInRangeOfAttack ()) {
+//			this.Attack ();
+//		} else {
+//			this.m_AttackPattern.m_AttackPatternState = AttackPatternState.DO_NOTHING;
+//		}
 	}
 
 	/**A function to apply a given spell's effects on the enemy, including damage.*/

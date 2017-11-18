@@ -82,6 +82,7 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 			this.AffectHealth (-spell.m_SpellDamage);
 			this.m_IsAffectedBySpell = true;
 			this.m_SpellToApply = spell;
+
 		}
 
 		/*
