@@ -1,10 +1,17 @@
 fileFormatVersion: 2
 guid: b23987fb161f84fa5b62da001f558d9b
-timeCreated: 1508825207
+timeCreated: 1510884424
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_FireballAnimator: {instanceID: 0}
+  - m_IceballAnimator: {instanceID: 0}
+  - m_ShieldAnimator: {instanceID: 0}
+  - m_ThunderballAnimator: {instanceID: 0}
+  - m_ThunderStormAnimator: {instanceID: 0}
+  - m_HealAnimator: {instanceID: 0}
+  - m_TornadoAnimator: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

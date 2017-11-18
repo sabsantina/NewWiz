@@ -151,7 +151,7 @@ public class PlayerCastSpell : MonoBehaviour {
 //						switch ((int)this.m_SpellClassToFire.m_SpellName) {
 //						case (int)SpellName.Fireball:
 //							{
-//								this.m_Player.AffectMana (-this.m_SpellClassToFire.FIREBALL_MANA_COST);
+//							this.m_Player.AffectMana (-this.m_SpellClassToFire.m_ManaCost);
 //								break;
 //							}//end case Fireball
 //						case (int)SpellName.Iceball:

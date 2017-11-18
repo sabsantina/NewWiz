@@ -38,9 +38,15 @@ public class SpellClass {
 	/**A variable to represent the mana cost of the heal spell. This is a persisting spell, so the player will be expending 0.5 mana * a value increasing by Time.deltatime every frame.
 	*At starting mana of 100, the player can cast this for several seconds before needing a mana refill.*/
 	public readonly float HEAL_MANA_COST = 0.5f;
+    /**A variable to represent the mana cost of the tornado spell.
+     *At starting mana of 100, the player can cast 14 of these before needing a mana refill.*/
+    public readonly float TORNADO_MANA_COST = 7.0f;
+    /**A variable to represent the mana cost of the water bubble spell.
+     *At starting mana of 100, the player can cast 25 of these before needing a mana refill.*/
+    public readonly float WATER_BUBBLE_MANA_COST = 4.0f;
 
-	/**A function to return a SpellClass instance based on the spell name, from the SpellName enum, in its enum form.*/
-	public SpellClass GenerateInstance(SpellName spell_name)
+    /**A function to return a SpellClass instance based on the spell name, from the SpellName enum, in its enum form.*/
+    public SpellClass GenerateInstance(SpellName spell_name)
 	{
 		SpellClass spellinstance_to_return = new SpellClass ();
 		switch ((int)spell_name) {
@@ -111,6 +117,26 @@ public class SpellClass {
 				spellinstance_to_return.m_IsPersistent = true;
 				break;
 			}//end case Heal
+        case (int)SpellName.Tornado:
+            {
+                spellinstance_to_return.m_SpellName = SpellName.Tornado;
+                spellinstance_to_return.m_SpellEffect = SpellEffect.Knockback;
+                spellinstance_to_return.m_SpellType = SpellType.BASIC_PROJECTILE_ON_TARGET;
+                spellinstance_to_return.m_EffectDuration = 0.5f;
+                spellinstance_to_return.m_ManaCost = TORNADO_MANA_COST;
+                spellinstance_to_return.m_IsPersistent = false;
+                break;
+            }//end case Tornado
+        case (int)SpellName.WaterBubble:
+            {
+                spellinstance_to_return.m_SpellName = SpellName.WaterBubble;
+                spellinstance_to_return.m_SpellEffect = SpellEffect.Water_Damage;
+                spellinstance_to_return.m_SpellType = SpellType.BASIC_PROJECTILE_ON_TARGET;
+                spellinstance_to_return.m_EffectDuration = 0.0f;
+                spellinstance_to_return.m_ManaCost = WATER_BUBBLE_MANA_COST;
+                spellinstance_to_return.m_IsPersistent = false;
+                break;
+            }//end case Tornado
 		default:
 			{
 				//Impossible
