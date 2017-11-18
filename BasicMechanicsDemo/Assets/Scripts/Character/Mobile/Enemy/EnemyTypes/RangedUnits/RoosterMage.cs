@@ -20,6 +20,10 @@ public class RoosterMage : RangedEnemy {
 	
 	// Update is called once per frame
 	void Update () {
+		if (this.m_IsAffectedBySpell) {
+			this.ApplySpellEffect (this.m_SpellToApply);
+		}
+
 		this.Move ();
 		this.ManageAttack ();
 		#if TESTING_SPELL_SELECTION

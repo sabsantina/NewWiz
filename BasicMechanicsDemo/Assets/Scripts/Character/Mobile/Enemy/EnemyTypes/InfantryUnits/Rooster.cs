@@ -17,7 +17,13 @@ public class Rooster : EnemyInfantry {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (this.m_IsAffectedBySpell) {
+			this.ApplySpellEffect (this.m_SpellToApply);
+		}
+
 		this.Move ();
+
 		if (this.IsPlayerInRangeOfAttack ()) {
 			this.Attack ();
 		} else {
@@ -28,6 +34,7 @@ public class Rooster : EnemyInfantry {
 	/**A function to apply a given spell's effects on the enemy, including damage.*/
 	public override void ApplySpellEffect (SpellClass spell)
 	{
+		base.ApplySpellEffect (spell);
 		//To be overridden in children classes
 		//Note: this is virtual because certain spells may affect certain enemies differently
 	}

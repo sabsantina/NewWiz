@@ -18,8 +18,12 @@ public class RangedEnemy : DefaultEnemy {
 	public override void Move ()
 	{
 		//		Debug.Log (this.m_MovementPattern.IsPlayerDetectedInPatrolRegion ());
+		if (this.m_InhibitMovement) {
+			//			Debug.Log ("Inhibit movement");
+			this.m_MovementPattern.m_MovementPatternState = MovementPatternState.STAY_STILL;
+		}
 		//If the player is detected in the patrol region but not in the attack region...
-		if (this.m_MovementPattern.IsPlayerDetectedInPatrolRegion () && !this.m_AttackPattern.PlayerIsDetectedInAttackDetectionRegion ()) {
+		else if (this.m_MovementPattern.IsPlayerDetectedInPatrolRegion () && !this.m_AttackPattern.PlayerIsDetectedInAttackDetectionRegion ()) {
 			//...then a ranged enemy should edge closer to the player
 			this.m_MovementPattern.m_MovementPatternState = MovementPatternState.MOVE_TOWARDS_PLAYER;
 		} 
@@ -39,6 +43,11 @@ public class RangedEnemy : DefaultEnemy {
 	*To be expanded upon in child classes.*/
 	protected void ManageAttack()
 	{
+		if (this.m_InhibitAttack) {
+			//			Debug.Log ("Inhibit Attack");
+			this.m_AttackPattern.m_AttackPatternState = AttackPatternState.DO_NOTHING;
+			return;
+		}
 		if (this.IsPlayerInRangeOfAttack ()) {
 			this.Attack ();
 		} else {
