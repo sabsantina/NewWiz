@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour {
 	[SerializeField] private GameObject m_MapUIPrefab;
 	[SerializeField] private GameObject m_OptionsUIPrefab;
 
-	[SerializeField] private TutorialManager m_TutorialManager;
+//	[SerializeField] private TutorialManager m_TutorialManager;
 
 	//Set the cursor to be a hand
 	[SerializeField] private Texture2D m_MenuOpen_Cursor;
@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour {
 
 	void Awake()
 	{
-//		this.m_MenuClosed_Cursor.Resize (this.m_CursorWidth, this.m_CursorHeight);
+		//		this.m_TutorialManager.Enable(TutorialEnum.)
 	}
 
 	// Update is called once per frame

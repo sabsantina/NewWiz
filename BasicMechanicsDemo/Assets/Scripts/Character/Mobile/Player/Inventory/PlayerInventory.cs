@@ -219,7 +219,7 @@ public class PlayerInventory : MonoBehaviour {
 	{
 		string all_messages = "";
 		foreach (SpellClass spell_class in this.m_SpellClassList) {
-			all_messages += spell_class.ReturnSpellInstanceInfo () + "\n";
+//			all_messages += spell_class.ReturnSpellInstanceInfo () + "\n";
 		}
 		return all_messages;
 	}
@@ -239,7 +239,7 @@ public class PlayerInventory : MonoBehaviour {
 		if (this.m_ActiveSpellClass == null) {
 			message += "None";
 		} else {
-			message += this.m_ActiveSpellClass.ReturnSpellInstanceInfo();
+//			message += this.m_ActiveSpellClass.ReturnSpellInstanceInfo();
 		}
 		message += "\nQuest Items:\n";
 		foreach (QuestItem item in this.m_QuestItems) {

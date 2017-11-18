@@ -42,14 +42,15 @@ public class SpellMovement : MonoBehaviour {
 	/**A reference to the target the spell is being cast at. Set using SpellMovement::SetTarget(GameObject).*/
     public RaycastHit m_Target { get; private set; }
 	/**A reference to the gameobject of [this.m_Target] - this will be for the spells to lock on in case the enemy or target is moving.*/
-	private GameObject m_TargetedObj;
+	public GameObject m_TargetedObj;
 	/**The direction in which the spell is moving.*/
 	private Vector3 m_Direction = new Vector3();
-	/**A bool to let us know whether the target is a mobile character.*/
+	/**A bool to let us know whether the target is a mobile character. 
+	 * This variable essentially decides whether or not a basic projectile spell locks on to a given target */
 	public bool m_IsMobileCharacter { get; set;}
 
 	/**The spell we're currently casting.*/
-	public Spell m_SpellToCast;
+//	public Spell m_SpellToCast;
 	/**The SpellClass spell we're currently casting.*/
 	public SpellClass m_SpellClassToCast;
 
@@ -104,9 +105,9 @@ public class SpellMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
-		//if the spell we want to cast exists and is a mobile spell...
+		//if the spell we want to cast exists and is a basic projectile spell...
 		if (this.m_SpellClassToCast != null 
-			&& this.m_SpellClassToCast.m_IsMobileSpell) {
+			&& this.m_SpellClassToCast.m_SpellType == SpellType.BASIC_PROJECTILE_ON_TARGET) {
 			//...if our target is mobile...
 			if (this.m_IsMobileCharacter) {
 				//Update direction
@@ -121,7 +122,7 @@ public class SpellMovement : MonoBehaviour {
 
 
 			Rigidbody rigidbody = this.GetComponent<Rigidbody> ();
-			rigidbody.velocity = Vector3.ClampMagnitude (this.m_Direction, this.m_MaximalVelocity);
+			rigidbody.velocity = Vector3.Normalize (this.m_Direction) * this.m_MaximalVelocity;
 
 			this.UpdateAnimatorParameters ();
 		}//end if
@@ -142,7 +143,8 @@ public class SpellMovement : MonoBehaviour {
 			this.m_Direction = Vector3.Normalize(this.m_Target.point - this.transform.position) * this.m_MaximalVelocity;
 			this.m_Direction.y = 0.0f;
 		}
-	}//end f'n void SetTarget(GameObject)
+	}//end f'n void SetTarget(RaycastHit)
+
 
 	/**A function to tell the spells where to go from another class; this will be helpful for those spells who aren't mobile, where the player may move.*/
 	public void MaintainPosition(Vector3 position)
@@ -182,36 +184,44 @@ public class SpellMovement : MonoBehaviour {
 //		if (other is BoxCollider) {
 //			Debug.Log ("Other is BoxCollider");
 //		}
-		//if the spell we're casting isn't mobile...
-		if (this.m_SpellClassToCast != null && !this.m_SpellClassToCast.m_IsMobileSpell) {
+//		//if the spell we're casting isn't mobile...
+//		if (this.m_SpellClassToCast != null && !this.m_SpellClassToCast.m_IsMobileSpell) {
+//			//...then we don't really care about collisions
+//			return;
+//		}//end if
+		//if the spell we're casting exists but isn't a basic projectile...
+		if (this.m_SpellClassToCast != null && this.m_SpellClassToCast.m_SpellType != SpellType.BASIC_PROJECTILE_ON_TARGET) {
 			//...then we don't really care about collisions
 			return;
 		}//end if
-		//else if the spell we're casting is mobile...
+		//else if the spell we're casting is a basic projectile...
 		else {
-			if (other is CapsuleCollider) {
-				return;
-			}
+//			if (other is CapsuleCollider) {
+//				return;
+//			}
 			//if we hit the target and specifically NOT the enemy's detection collider...
 			if (other.gameObject == this.m_TargetedObj)
 			{
 
 				#if TESTING_SPELLCOLLISION
-				string message = "SpellMovement::OnTriggerEnter(Collider)\tTarget " + this.m_Target.collider.gameObject.name + " hit!\n";
+				string message = "SpellMovement::OnTriggerEnter(Collider)\tTarget " + this.m_TargetedObj.name + " hit!\n";
 				#endif
 				//if the other is an enemy...
-				if (other.gameObject.GetComponent<Enemy>() != null)
-				{
+				if (other.gameObject.GetComponent<Enemy> () != null) {
 //					Debug.Log("Am I running twice?\t" + "other: " + other.name + "\t" + this.m_SpellClassToCast.ReturnSpellInstanceInfo());
 
 
-					Enemy enemy = other.gameObject.GetComponent<Enemy>();
-					enemy.ApplySpellEffects(this.m_SpellClassToCast.m_SpellName);
+					Enemy enemy = other.gameObject.GetComponent<Enemy> ();
+					enemy.ApplySpellEffects (this.m_SpellClassToCast.m_SpellName);
+//					Debug.Log (this.m_SpellClassToCast.ReturnSpellInstanceInfo ());
 //					this.m_SpellEffectManager.SetSpellToApply(this.m_SpellClassToCast, enemy);
 					#if TESTING_SPELLCOLLISION
 					message += "Subtracting enemy health...\n";
 					#endif
 				}//end if
+				else if (other.gameObject.GetComponent<Player> () != null) {
+					other.gameObject.GetComponent<Player> ().AffectHealth (-this.m_SpellClassToCast.m_SpellDamage);
+				}
 				//Destroy the spell
 				GameObject.Destroy(this.gameObject);
 				#if TESTING_SPELLCOLLISION

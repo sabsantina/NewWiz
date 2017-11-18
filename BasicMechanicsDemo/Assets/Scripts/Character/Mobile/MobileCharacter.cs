@@ -67,4 +67,9 @@ public class MobileCharacter : MonoBehaviour {
 		}//end if
 		return false;
 	}//end f'n bool IsObstructableAhead()
+
+	void Awake()
+	{
+		this.m_Animator = this.GetComponent<Animator> ();
+	}
 }//end class MobileCharacter
