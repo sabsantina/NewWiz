@@ -199,6 +199,11 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 
 				break;
 			}//end case thunderball
+		case (int)SpellName.WaterBubble:
+			{
+				//Do nothing
+				break;
+			}
 		}//end switch
 			
 		//if this is the last iteration of the function, no matter the spell...
