@@ -33,7 +33,7 @@ public class RangedAttackPattern : AttackPattern {
 							spell_movement.SetEnemyTarget (this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player.gameObject);
 							spell_movement.SetSpellToCast (this.m_SpellToCast);
 
-							StartCoroutine (this.DestroySpellAfterTime (3.0f));
+							StartCoroutine (this.DestroySpellAfterTime (2.0f));
 							break;
 						}
 					}
