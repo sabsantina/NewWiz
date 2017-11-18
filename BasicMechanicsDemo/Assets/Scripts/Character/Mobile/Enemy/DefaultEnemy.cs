@@ -28,6 +28,17 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 
 	public float m_ExtraEffectTimer = 0.0f;
 
+	/**A variable to keep track of how many times we've incremented the shock timer by units of 0.5.
+	*The plan is for the enemy to move up/down every 0.5 seconds. So if the time before shock release is 3.0, the enemy should move a grand total of 6 times; three times upward, and three times downward.*/
+	public int m_ShockTimerIncrementor = 1;
+	/**A variable to keep track of the enemy start height, to ensure we don't wind up leaving them somewhere floating after shocking them.*/
+	private float m_EnemyStartHeight;
+	/**A variable to manage the distance of the height increase the enemy undergoes while shocked.*/
+	public float m_ShockJumpDistance = 0.25f;
+	/**A variable to manage the frequency of the shock stutters the enemies go through (the lower this value, the more frequent the stutters will be).*/
+	public float m_ShockJumpFrequency = 0.0005f;
+
+
 	/**A function to establish whether or not the player is in range of the enemy, for the specific enemy. 
 	 * - Sets this.mPlayerIsInRange as well as returns a bool*/
 	protected virtual bool IsPlayerInRangeOfAttack()
@@ -135,57 +146,59 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 			}//end case Iceball
 			//Let thunderstorm case fall to thunderball
 //		case (int)SpellName.Thunderstorm:
-//		case (int)SpellName.Thunderball:
-//			{
-//				//Shock the enemy for Thunderball.duration and let them go
-//
-//				//Phase 1
-//				if (this.m_ExtraEffectTimer == 0.0f) {
-//					//Stop the enemy moving
-//					//...stop the enemy from moving
-//					this.m_InhibitMovement = true;
-//					//...and stop the animator
-//					this.gameObject.GetComponent<Animator> ().enabled = false;
-//					this.m_ExtraEffectTimer += Time.deltaTime;
-//				} 
-//				//Phase 2
-//				else if (0.0f < this.m_ExtraEffectTimer && this.m_ExtraEffectTimer < spell.m_EffectDuration) {
-//					//if the shock timer is greater-than or equal to the shock incrementor * shock jump frequency...
-//					if (this.m_ExtraEffectTimer >= this.m_ShockTimerIncrementor * this.m_ShockJumpFrequency) {
-//						//...then move the enemy either up or down
-//
-//						Vector3 position = this.transform.position;
-//						//...where if the shock timer incrementor is odd, we move the enemy up
-//						//...and if the shock timer incrementor is even, we move the enemy back down
-//						position.y += (this.m_ShockTimerIncrementor % 2 == 1) ? this.m_ShockJumpDistance : -(this.m_ShockJumpDistance);
-//						this.transform.position = position;
-//
-//						this.m_ShockTimerIncrementor++;
-//					}
-//					this.m_ExtraEffectTimer += Time.deltaTime;
-//				}
-//				//Phase 3
-//				//if the spell effect duration <= the spell effect timer
-//				else
-//				{
-//					//...then release the enemy
-//					this.gameObject.GetComponent<Animator> ().enabled = true;
-//					this.m_CanMove = true;
-//					//...ensure the enemy is at the proper height
-//					Vector3 position = this.transform.position;
-//					position.y = this.m_EnemyStartHeight;
-//					this.transform.position = position;
-//
-//					//Reset the shock timer incrementor
-//					this.m_ShockTimerIncrementor = 1;
-//					//Reset the effect timer
-//					this.m_ExtraEffectTimer = 0.0f;
-//					//Reset the spell we were hit with
-//					this.m_SpellHittingEnemy = null;
-//				}//end if
-//
-//				break;
-//			}//end case thunderball
+		case (int)SpellName.Thunderball:
+			{
+				//Shock the enemy for Thunderball.duration and let them go
+
+				//Phase 1
+				if (this.m_ExtraEffectTimer == 0.0f) {
+					this.m_EnemyStartHeight = this.transform.position.y;
+					//Stop the enemy moving
+					//...stop the enemy from moving
+					this.m_InhibitMovement = true;
+					this.m_InhibitAttack = true;
+					//...and stop the animator
+					this.gameObject.GetComponent<Animator> ().enabled = false;
+					this.m_ExtraEffectTimer += Time.deltaTime;
+				} 
+				//Phase 2
+				else if (0.0f < this.m_ExtraEffectTimer && this.m_ExtraEffectTimer < spell.m_EffectDuration) {
+					//if the shock timer is greater-than or equal to the shock incrementor * shock jump frequency...
+					if (this.m_ExtraEffectTimer >= this.m_ShockTimerIncrementor * this.m_ShockJumpFrequency) {
+						//...then move the enemy either up or down
+
+						Vector3 position = this.transform.position;
+						//...where if the shock timer incrementor is odd, we move the enemy up
+						//...and if the shock timer incrementor is even, we move the enemy back down
+						position.y += (this.m_ShockTimerIncrementor % 2 == 1) ? this.m_ShockJumpDistance : -(this.m_ShockJumpDistance);
+						this.transform.position = position;
+
+						this.m_ShockTimerIncrementor++;
+					}
+					this.m_ExtraEffectTimer += Time.deltaTime;
+				}
+				//Phase 3
+				//if the spell effect duration <= the spell effect timer
+				else
+				{
+					this.m_IsAffectedBySpell = false;
+					//...then release the enemy
+					this.gameObject.GetComponent<Animator> ().enabled = true;
+					this.m_InhibitAttack = false;
+					this.m_InhibitMovement = false;
+					//...ensure the enemy is at the proper height
+					Vector3 position = this.transform.position;
+					position.y = this.m_EnemyStartHeight;
+					this.transform.position = position;
+
+					//Reset the shock timer incrementor
+					this.m_ShockTimerIncrementor = 1;
+					//Reset the effect timer
+					this.m_ExtraEffectTimer = 0.0f;
+				}//end if
+
+				break;
+			}//end case thunderball
 		}//end switch
 			
 		//if this is the last iteration of the function, no matter the spell...

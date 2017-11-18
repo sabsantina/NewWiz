@@ -1,4 +1,4 @@
-﻿//Uncommnt this macro to be able to switch the spell the RoosterMage casts in real time, from the inspector.
+﻿////Uncommnt this macro to be able to switch the spell the RoosterMage casts in real time, from the inspector.
 #define TESTING_SPELL_SELECTION
 
 using System.Collections;
@@ -8,8 +8,6 @@ using UnityEngine;
 public class RoosterMage : RangedEnemy {
 	/**The health of a RoosterMage*/
 	public float m_RoosterMageHealth = 25.0f;
-	/**A public SpellName, to set our attack spell, with default value Fireball*/
-	public SpellName m_AttackSpell = SpellName.Fireball;
 
 	// Use this for initialization
 	void Start () {
@@ -23,11 +21,9 @@ public class RoosterMage : RangedEnemy {
 	protected override void Update () {
 		base.Update ();
 
-//		this.Move ();
-//		this.ManageAttack ();
-//		#if TESTING_SPELL_SELECTION
-//		this.SetSpellToCast (this.m_AttackSpell);
-//		#endif
+		#if TESTING_SPELL_SELECTION
+		this.SetSpellToCast (this.m_AttackSpell);
+		#endif
 	}
 
 	/**A function to set the spell to cast in our parent classes*/
@@ -54,9 +50,4 @@ public class RoosterMage : RangedEnemy {
 		this.m_GeneratedSpellCubeInstance = this.m_AttackPattern.m_GeneratedSpellInstance;
 	}
 
-//	protected override void ManageAttack ()
-//	{
-//		base.ManageAttack ();
-//		Debug.Log ("Child");
-//	}
 }

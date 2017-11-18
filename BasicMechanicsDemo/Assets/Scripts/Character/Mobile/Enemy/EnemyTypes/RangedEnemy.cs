@@ -1,4 +1,5 @@
 ﻿
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class RangedEnemy : DefaultEnemy {
 	/**The spell the ranged enemy will be casting.
 	*To be set in children classes.*/
 	public SpellClass m_SpellToCast;
+	/**A public SpellName, to set our attack spell, with default value Fireball*/
+	public SpellName m_AttackSpell = SpellName.Fireball;
 
 	public RangedAttackPattern m_AttackPattern;
 

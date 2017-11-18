@@ -20,13 +20,6 @@ public class Rooster : EnemyInfantry {
 	protected override void Update () {
 		base.Update ();
 
-//		this.Move ();
-
-//		if (this.IsPlayerInRangeOfAttack ()) {
-//			this.Attack ();
-//		} else {
-//			this.m_AttackPattern.m_AttackPatternState = AttackPatternState.DO_NOTHING;
-//		}
 	}
 
 	/**A function to apply a given spell's effects on the enemy, including damage.*/
