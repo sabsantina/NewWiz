@@ -123,8 +123,6 @@ public class SpellClass {
                 spellinstance_to_return.m_SpellEffect = SpellEffect.Knockback;
                 spellinstance_to_return.m_SpellType = SpellType.BASIC_PROJECTILE_ON_TARGET;
                 spellinstance_to_return.m_EffectDuration = 0.5f;
-                spellinstance_to_return.m_IsMobileSpell = true;
-                spellinstance_to_return.m_IsAOESpell = true;
                 spellinstance_to_return.m_ManaCost = TORNADO_MANA_COST;
                 spellinstance_to_return.m_IsPersistent = false;
                 break;
@@ -135,8 +133,6 @@ public class SpellClass {
                 spellinstance_to_return.m_SpellEffect = SpellEffect.Water_Damage;
                 spellinstance_to_return.m_SpellType = SpellType.BASIC_PROJECTILE_ON_TARGET;
                 spellinstance_to_return.m_EffectDuration = 0.0f;
-                spellinstance_to_return.m_IsMobileSpell = true;
-                spellinstance_to_return.m_IsAOESpell = false;
                 spellinstance_to_return.m_ManaCost = WATER_BUBBLE_MANA_COST;
                 spellinstance_to_return.m_IsPersistent = false;
                 break;
