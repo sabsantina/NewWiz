@@ -94,35 +94,35 @@ public class PlayerInventory : MonoBehaviour {
 		SpellClass spell_class_instance = new SpellClass();
 		#if START_WITH_FIREBALL
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Fireball));
-		this.m_ActiveSpellClass = this.m_SpellClassList[0];
+		this.AssignDefaultActiveSpell();
 		#endif
 		#if START_WITH_ICEBALL
 		this.AddSpell (spell_class_instance.GenerateInstance(SpellName.Iceball));
-		this.m_ActiveSpellClass = this.m_SpellClassList[0];
+		this.AssignDefaultActiveSpell();
 		#endif
 		#if START_WITH_SHIELD
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Shield));
-		this.m_ActiveSpellClass = this.m_SpellClassList[0];
+		this.AssignDefaultActiveSpell();
 		#endif
 		#if START_WITH_THUNDERBALL
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Thunderball));
-		this.m_ActiveSpellClass = this.m_SpellClassList[0];
+		this.AssignDefaultActiveSpell();
 		#endif
 		#if START_WITH_THUNDERSTORM
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Thunderstorm));
-		this.m_ActiveSpellClass = this.m_SpellClassList[0];
+		this.AssignDefaultActiveSpell();
 		#endif
 		#if START_WITH_HEAL
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Heal));
-		this.m_ActiveSpellClass = this.m_SpellClassList[0];
+		this.AssignDefaultActiveSpell();
         #endif
         #if START_WITH_TORNADO
         this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Tornado));
-        this.m_ActiveSpellClass = this.m_SpellClassList[0];
+		this.AssignDefaultActiveSpell();
         #endif
         #if START_WITH_WATERBUBBLE
         this.AddSpell(spell_class_instance.GenerateInstance(SpellName.WaterBubble));
-        this.m_ActiveSpellClass = this.m_SpellClassList[0];
+		this.AssignDefaultActiveSpell();
         #endif
 
 
@@ -224,6 +224,7 @@ public class PlayerInventory : MonoBehaviour {
 		this.m_ActiveSpellName = this.m_ActiveSpellClass.m_SpellName.ToString ();
 
 		this.GetComponent<PlayerCastSpell> ().m_SpellClassToFire = this.m_ActiveSpellClass;
+//		Debug.Log ("Spell to fire " + this.GetComponent<PlayerCastSpell> ().m_SpellClassToFire.m_SpellName.ToString ());
 	}//end f'n void AssignDefaultActiveSpell()
 
 	/**A function to return the string containing all of the SpellClass instances of the [this.m_SpellClassList]*/

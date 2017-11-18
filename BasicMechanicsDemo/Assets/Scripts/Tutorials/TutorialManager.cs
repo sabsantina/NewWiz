@@ -14,7 +14,7 @@ public class TutorialManager : MonoBehaviour {
 
 	void Awake()
 	{
-		//this.Enable (TutorialEnum.MOVEMENT);
+		this.Enable (TutorialEnum.MOVEMENT);
 	}
 
 	/**A function to enable a given tutorial. Disables all other tutorials.*/
