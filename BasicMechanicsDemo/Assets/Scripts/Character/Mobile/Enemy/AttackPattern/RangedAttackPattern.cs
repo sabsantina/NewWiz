@@ -24,13 +24,19 @@ public class RangedAttackPattern : AttackPattern {
 					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
 					this.GenerateSpellPrefabInstance();
 					//					this.m_Player.m_audioSource.PlayOneShot(m_playerAudio.getAudioForSpell(this.m_SpellClassToFire.m_SpellName));
-					this.m_GeneratedSpellInstance.transform.position = this.transform.position;
-					SpellMovement spell_movement = this.m_GeneratedSpellInstance.GetComponent<SpellMovement> ();
-					spell_movement.m_IsMobileCharacter = true;
-					spell_movement.m_TargetedObj = this.m_Player.gameObject;
-					spell_movement.SetSpellToCast (this.m_SpellToCast);
 
-					StartCoroutine (this.DestroySpellAfterTime (2.0f));
+					switch ((int)this.m_SpellToCast.m_SpellType) {
+					case (int)SpellType.BASIC_PROJECTILE_ON_TARGET:
+						{
+							this.m_GeneratedSpellInstance.transform.position = this.transform.position;
+							SpellMovement spell_movement = this.m_GeneratedSpellInstance.GetComponent<SpellMovement> ();
+							spell_movement.SetEnemyTarget (this.m_Player.gameObject);
+							spell_movement.SetSpellToCast (this.m_SpellToCast);
+
+							StartCoroutine (this.DestroySpellAfterTime (3.0f));
+							break;
+						}
+					}
 
 					this.m_AttackTimer += Time.deltaTime;
 					this.m_IsAttacking = false;

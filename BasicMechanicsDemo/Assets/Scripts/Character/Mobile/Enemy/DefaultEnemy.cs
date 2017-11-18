@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class DefaultEnemy : MonoBehaviour, IEnemy {
+public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic {
 
 	/**A MovementPattern to control the enemy's movement*/
 	public MovementPattern m_MovementPattern;

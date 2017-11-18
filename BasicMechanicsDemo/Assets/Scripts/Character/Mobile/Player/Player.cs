@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 	[SerializeField] public GameObject healthMeter;
 	[SerializeField] public GameObject manaMeter;
 
@@ -183,6 +183,11 @@ public class Player : MonoBehaviour {
 	public void setMeterValue(GameObject meter, float value)
 	{
 		meter.GetComponent<Slider> ().value = value;
+	}
+
+	public void ApplySpellEffect (SpellClass spell)
+	{
+		this.AffectHealth (-spell.m_SpellDamage);
 	}
 }
 
