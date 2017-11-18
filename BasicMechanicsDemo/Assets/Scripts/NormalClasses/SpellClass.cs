@@ -12,13 +12,9 @@ public class SpellClass {
 	*So in the case of a spell like Iceball, we ask ourselves "For how long is the enemy frozen after being hit?".
 	*Also note that in the context of spells that are held down, like Shield or Heal, this parameter is infinite and has no real relevance. We therefore set it to 0 in those cases.*/
 	public float m_EffectDuration = 0.0f;
-
-	/**A bool to tell us whether or not a spellclass instance is mobile.
-	*A mobile spell is a spell that is cast by the player at an enemy (i.e. Fireball), that moves around.
-	*An immobile spell is a spell that is cast by the player on the player (i.e. Heal, Shield), that stays fixed on the player.*/
-	public bool m_IsMobileSpell;
-	/**A bool to tell us whether or not a spell is an AOE spell.*/
-	public bool m_IsAOESpell = false;
+	/**A float to denote the spell damage.
+	*If a spell is persistent, this should be the initial damage dealt by the spell, while the other damage will be dealt with respect to time..*/
+	public float m_SpellDamage = 0.0f;
 	/**A float to manage the spell's mana cost*/
 	public float m_ManaCost = 0.0f;
 	/**A bool to tell us whether or not the player can hold down the mouse to cast the spell. This is important for mana.*/
@@ -60,7 +56,7 @@ public class SpellClass {
 				spellinstance_to_return.m_SpellEffect = SpellEffect.Fire_Damage;
 				spellinstance_to_return.m_SpellType = SpellType.BASIC_PROJECTILE_ON_TARGET;
 				spellinstance_to_return.m_EffectDuration = 0.0f;
-				spellinstance_to_return.m_IsMobileSpell = true;
+				spellinstance_to_return.m_SpellDamage = 10.0f;
 				spellinstance_to_return.m_ManaCost = FIREBALL_MANA_COST;
 				spellinstance_to_return.m_IsPersistent = false;
 				break;
@@ -71,7 +67,7 @@ public class SpellClass {
 				spellinstance_to_return.m_SpellEffect = SpellEffect.Damage_Resistance;
 				spellinstance_to_return.m_SpellType = SpellType.ON_PLAYER;
 				spellinstance_to_return.m_EffectDuration = 0.0f;
-				spellinstance_to_return.m_IsMobileSpell = false;
+				//No damage
 				spellinstance_to_return.m_ManaCost = SHIELD_MANA_COST;
 				spellinstance_to_return.m_IsPersistent = true;
 				break;
@@ -82,7 +78,7 @@ public class SpellClass {
 				spellinstance_to_return.m_SpellEffect = SpellEffect.Ice_Freeze;
 				spellinstance_to_return.m_SpellType = SpellType.BASIC_PROJECTILE_ON_TARGET;
 				spellinstance_to_return.m_EffectDuration = 2.5f;
-				spellinstance_to_return.m_IsMobileSpell = true;
+				spellinstance_to_return.m_SpellDamage = 7.5f;
 				spellinstance_to_return.m_ManaCost = ICEBALL_MANA_COST;
 				spellinstance_to_return.m_IsPersistent = false;
 				break;
@@ -93,7 +89,7 @@ public class SpellClass {
 				spellinstance_to_return.m_SpellEffect = SpellEffect.Shock_Damage;
 				spellinstance_to_return.m_SpellType = SpellType.BASIC_PROJECTILE_ON_TARGET;
 				spellinstance_to_return.m_EffectDuration = 1.25f;
-				spellinstance_to_return.m_IsMobileSpell = true;
+				spellinstance_to_return.m_SpellDamage = 15.0f;
 				spellinstance_to_return.m_ManaCost = THUNDERBALL_MANA_COST;
 				spellinstance_to_return.m_IsPersistent = false;
 				break;
@@ -106,8 +102,7 @@ public class SpellClass {
 				//While it is true that thunderstorm can be used indefinitely, the effects of this spell are electrocution for a given 
 				//time; it therefore has a duration value 
 				spellinstance_to_return.m_EffectDuration = 1.25f;
-				spellinstance_to_return.m_IsMobileSpell = false;
-				spellinstance_to_return.m_IsAOESpell = true;
+				spellinstance_to_return.m_SpellDamage = 40.0f;
 				spellinstance_to_return.m_ManaCost = THUNDERSTORM_MANA_COST;
 				spellinstance_to_return.m_IsPersistent = true;
 				break;
@@ -118,8 +113,6 @@ public class SpellClass {
 				spellinstance_to_return.m_SpellEffect = SpellEffect.Heal_Player;
 				spellinstance_to_return.m_SpellType = SpellType.ON_PLAYER;
 				spellinstance_to_return.m_EffectDuration = 0.0f;
-				spellinstance_to_return.m_IsMobileSpell = false;
-				spellinstance_to_return.m_IsAOESpell = false;
 				spellinstance_to_return.m_ManaCost = HEAL_MANA_COST;
 				spellinstance_to_return.m_IsPersistent = true;
 				break;
@@ -163,8 +156,7 @@ public class SpellClass {
 	public string ReturnSpellInstanceInfo()
 	{
 		string message = "SpellClass::ReturnSpellInstanceInfo()\t:\tSpell Name: " + this.m_SpellName.ToString ()
-			+ "\tSpell Effect: " + this.m_SpellEffect.ToString () + "\tisMobile? " + this.m_IsMobileSpell + "\tisAOE? " 
-			+ this.m_IsAOESpell + " Spell type: " + this.m_SpellType.ToString();
+			+ "\tSpell Effect: " + this.m_SpellEffect.ToString () + " Spell type: " + this.m_SpellType.ToString();
 		return message;
 	}//end f'n string ReturnSpellInstanceInfo()
 }//end class SpellClass
