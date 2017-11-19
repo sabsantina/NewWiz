@@ -27,9 +27,25 @@ public class EnemyInfantry : DefaultEnemy {
 		}
 	}//end f'n void Move()
 
-	/**A function to establish whether or not the player is in range of the enemy, for the specific enemy. 
+
+
+    /**A function to more easily manage our attack pattern.
+	*To be expanded upon in child classes.*/
+    protected void ManageAttack()
+    {
+        if (this.IsPlayerInRangeOfAttack())
+        {
+            this.Attack();
+        }
+        else
+        {
+            this.m_AttackPattern.m_AttackPatternState = AttackPatternState.DO_NOTHING;
+        }
+    }
+
+    /**A function to establish whether or not the player is in range of the enemy, for the specific enemy. 
 	 * - Sets this.mPlayerIsInRange as well as returns a bool*/
-	protected override bool IsPlayerInRangeOfAttack()
+    protected override bool IsPlayerInRangeOfAttack()
 	{
 		this.m_PlayerIsInRange = this.m_AttackPattern.PlayerIsDetectedInAttackDetectionRegion ();
 //		Debug.Log ("Player detected for attack region? " + this.m_PlayerIsInRange);

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedAttackPattern : AttackPattern {
+public class RangedAttackPattern : AttackPattern
+{
 
 	/**The sound the enemy makes on ranged attack*/
 	public AudioClip m_EnemyMeleeAttackSound;
@@ -15,12 +16,12 @@ public class RangedAttackPattern : AttackPattern {
 	public SpellClass m_SpellToCast;
 	[SerializeField] SpellAnimatorManager m_SpellAnimatorManager;
 
-	/**A vector to help us know what the offset is for a given AOE animation, with respect to the player click position.*/
-	public Vector3 AOE_offset = new Vector3(0.0f, 2.8f, 4.20f);
-	/**A variable to keep track of the AOE radius.*/
-	public float AOE_Radius = 15.0f;
-	/**A variable to ensure AOE attacks don't apply themselves to the enemy for every frame.*/
-	public float AOE_Timer = 0.0f;
+    /**A vector to help us know what the offset is for a given AOE animation, with respect to the player click position.*/
+    public Vector3 AOE_offset = new Vector3(0.0f, 2.8f, 4.20f);
+    /**A variable to keep track of the AOE radius.*/
+    public float AOE_Radius = 15.0f;
+    /**A variable to ensure AOE attacks don't apply themselves to the enemy for every frame.*/
+    public float AOE_Timer = 0.0f;
 
 	public float m_EffectManagerTimer = 0.0f;
 
@@ -193,26 +194,50 @@ public class RangedAttackPattern : AttackPattern {
 		}//end foreach
 	}//end f'n void ApplyAOEToEnemies(Vector3)
 
-	private IEnumerator DestroySpellAfterTime(float time)
-	{
-		yield return new WaitForSeconds (time);
-		if (this.m_GeneratedSpellInstance != null) {
-			this.DestroySpellPrefabInstance ();
-		}
-	}
+    /**A function to apply AOE spells effects to all nearby enemies in a given radius.*/
+    private void ApplyAOEToEnemies(Vector3 position)
+    {
+        //Kind of a cool effect?
+        //		GameObject test = GameObject.Instantiate (this.m_SpellCube);
+        //		test.transform.position = position;
+        //		GameObject.Destroy (test, 2.0f);
 
-	private void GenerateSpellPrefabInstance()
-	{
-		this.m_GeneratedSpellInstance = GameObject.Instantiate (this.m_DefaultSpellPrefab);
-		this.m_GeneratedSpellInstance.GetComponent<SpellMovement> ().m_SpellClassToCast = this.m_SpellToCast;
-		this.m_SpellAnimatorManager.SetSpellAnimator (this.m_GeneratedSpellInstance);
-	}
+        //Get all nearby collisions in a sphere at the specified position, in a radius [this.AOE_Radius]
+        Collider[] all_hit = Physics.OverlapSphere(position, this.AOE_Radius);
+        foreach (Collider hit in all_hit)
+        {
 
-	public void DestroySpellPrefabInstance()
-	{
-		if (this.m_GeneratedSpellInstance != null) {
-			GameObject.Destroy (this.m_GeneratedSpellInstance);
-			this.m_GeneratedSpellInstance = null;
-		}
-	}
+            if (hit is BoxCollider
+                && hit.gameObject.GetComponent<ICanBeDamagedByMagic>() != null
+                && hit.gameObject.GetComponent<Player>() != null)
+            {
+                hit.gameObject.GetComponent<Player>().ApplySpellEffect(this.m_SpellToCast);
+            }
+        }//end foreach
+    }//end f'n void ApplyAOEToEnemies(Vector3)
+
+    private IEnumerator DestroySpellAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        if (this.m_GeneratedSpellInstance != null)
+        {
+            this.DestroySpellPrefabInstance();
+        }
+    }
+
+    private void GenerateSpellPrefabInstance()
+    {
+        this.m_GeneratedSpellInstance = GameObject.Instantiate(this.m_DefaultSpellPrefab);
+        this.m_GeneratedSpellInstance.GetComponent<SpellMovement>().m_SpellClassToCast = this.m_SpellToCast;
+        this.m_SpellAnimatorManager.SetSpellAnimator(this.m_GeneratedSpellInstance);
+    }
+
+    public void DestroySpellPrefabInstance()
+    {
+        if (this.m_GeneratedSpellInstance != null)
+        {
+            GameObject.Destroy(this.m_GeneratedSpellInstance);
+            this.m_GeneratedSpellInstance = null;
+        }
+    }
 }
