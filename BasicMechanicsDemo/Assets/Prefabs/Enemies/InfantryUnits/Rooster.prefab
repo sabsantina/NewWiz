@@ -44,7 +44,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1518378627134774
 GameObject:
   m_ObjectHideFlags: 1
@@ -329,10 +329,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 172a5fe05acd04094ae935fb0b83d078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_EnemyDamagedSound: {fileID: 8300000, guid: a01ae7e328e54a941a959d142c40ed17, type: 3}
   m_MovementPattern: {fileID: 114228099796298782}
   m_Health: 0
   m_AttackDamageValue: 0
   m_PlayerIsInRange: 0
+  m_IsAffectedBySpell: 0
+  m_InhibitMovement: 0
+  m_InhibitAttack: 0
+  m_ExtraEffectTimer: 0
+  m_ShockTimerIncrementor: 1
+  m_ShockJumpDistance: 0.25
+  m_ShockJumpFrequency: 0.0005
   m_AttackPattern: {fileID: 114757115359749616}
   m_RoosterAttackDamage: 2.5
   m_RoosterHealth: 20
@@ -412,6 +420,8 @@ MonoBehaviour:
   m_AttackTimer: 0
   m_IntervalBetweenAttacks: 1
   m_IsAttacking: 0
+  m_EnemyMeleeAttackSound: {fileID: 8300000, guid: 9bfdc1c089cb3404d98fab6149c6a468,
+    type: 3}
 --- !u!135 &135095123133712408
 SphereCollider:
   m_ObjectHideFlags: 1

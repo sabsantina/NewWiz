@@ -63,7 +63,7 @@ public class RangedEnemy : DefaultEnemy {
 	protected override bool IsPlayerInRangeOfAttack()
 	{
 		this.m_PlayerIsInRange = this.m_AttackPattern.PlayerIsDetectedInAttackDetectionRegion ();
-		Debug.Log ("Player detected for attack region? " + this.m_PlayerIsInRange);
+//		Debug.Log ("Player detected for attack region? " + this.m_PlayerIsInRange);
 		return this.m_PlayerIsInRange;
 	}
 
