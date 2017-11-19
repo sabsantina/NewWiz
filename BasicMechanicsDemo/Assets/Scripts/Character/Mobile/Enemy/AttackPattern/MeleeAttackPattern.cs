@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MeleeAttackPattern : AttackPattern {
 
+	/**The sound the enemy makes on melee attack*/
 	[SerializeField] public AudioClip m_EnemyMeleeAttackSound;
 
 	protected override void ExecutePatternState ()

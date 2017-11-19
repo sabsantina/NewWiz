@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//A boxcollider for spell collisions
+[RequireComponent(typeof(BoxCollider))]
+//An audiosource for the sounds
+[RequireComponent(typeof(AudioSource))]
 public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic {
-
+	/**The sound the enemy makes when damaged.
+	*To be set in the inspector; respective attack sounds are found in the corresponding attack patterns*/
 	[SerializeField] public AudioClip m_EnemyDamagedSound;
 
 	/**A MovementPattern to control the enemy's movement*/
@@ -19,15 +24,15 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	public bool m_PlayerIsInRange = false;
 	/**A stringkey for the isDead parameter in the movement pattern animator*/
 	private readonly string STRINGKEY_PARAM_ISDEAD = "IsDead";
-
+	/**A bool to tell us whether or not the enemy's affected by a spell*/
 	public bool m_IsAffectedBySpell = false;
-
+	/**The spell we need to damage the enemy with*/
 	protected SpellClass m_SpellToApply = new SpellClass ();
-
+	/**A bool to help us inhibit movement*/
 	public bool m_InhibitMovement = false;
-
+	/**A bool to help us inhibit attack*/
 	public bool m_InhibitAttack = false;
-
+	/**A timer to help implement the spell effects*/
 	public float m_ExtraEffectTimer = 0.0f;
 
 	/**A variable to keep track of how many times we've incremented the shock timer by units of 0.5.

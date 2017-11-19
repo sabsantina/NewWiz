@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class RangedAttackPattern : AttackPattern {
 
+	/**The sound the enemy makes on ranged attack*/
+	public AudioClip m_EnemyMeleeAttackSound;
+
 	/**A reference to the default spell prefab*/
 	[SerializeField] GameObject m_DefaultSpellPrefab;
 	/**A reference to the spell instance we generate from the default spell prefab.*/
@@ -37,7 +40,9 @@ public class RangedAttackPattern : AttackPattern {
 				switch ((int)this.m_SpellToCast.m_SpellType) {
 				case (int)SpellType.BASIC_PROJECTILE_ON_TARGET:
 					{
-						
+//						Player player_detected = this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player;
+//						this.m_EnemyMeleeAttackSound = player_detected.m_PlayerAudio.getAudioForSpell (this.m_SpellToCast.m_SpellName);
+
 						if (this.m_AttackTimer == 0.0f) {
 							this.m_GeneratedSpellInstance.transform.position = this.transform.position;
 							SpellMovement spell_movement = this.m_GeneratedSpellInstance.GetComponent<SpellMovement> ();
@@ -46,6 +51,7 @@ public class RangedAttackPattern : AttackPattern {
 								//...then continue with the spell casting
 								spell_movement.SetEnemyTarget (this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player.gameObject);
 								spell_movement.SetSpellToCast (this.m_SpellToCast);
+
 
 							}
 							//Worst-case, destroy the generated spell instance after given time

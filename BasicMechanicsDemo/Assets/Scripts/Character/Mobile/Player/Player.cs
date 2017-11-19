@@ -34,6 +34,8 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 
 	public AudioSource m_audioSource;
 
+	[SerializeField] public PlayerAudio m_PlayerAudio;
+
 	/**A variable to keep track of the player's health.*/
 	public float m_Health;
 	/**A variable to keep track of the player's mana.*/
