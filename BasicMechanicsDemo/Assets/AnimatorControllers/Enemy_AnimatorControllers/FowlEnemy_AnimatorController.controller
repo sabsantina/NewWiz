@@ -8,6 +8,24 @@ AnimatorController:
   m_Name: FowlEnemy_AnimatorController
   serializedVersion: 5
   m_AnimatorParameters:
+  - m_Name: isDead
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: isAttacking_Melee
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: isAttacking_Ranged
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   - m_Name: isMovingLeft
     m_Type: 4
     m_DefaultFloat: 0
@@ -33,24 +51,6 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: isFrozen
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: isDead
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: isAttacking_Ranged
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: isAttacking_Melee
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -2144,13 +2144,13 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
+  - {fileID: 1101805129405163196}
+  - {fileID: 1101818797217192104}
+  - {fileID: 1101814321538120586}
   - {fileID: 1101430604712119740}
   - {fileID: 1101790912428307040}
   - {fileID: 1101305912339588682}
   - {fileID: 1101234476276697366}
-  - {fileID: 1101805129405163196}
-  - {fileID: 1101818797217192104}
-  - {fileID: 1101814321538120586}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0

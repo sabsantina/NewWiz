@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class RangedAttackPattern : AttackPattern {
 
-	/**The sound the enemy makes on ranged attack*/
+	/**The sound the enemy makes on melee attack*/
 	[SerializeField] public AudioClip m_EnemyMeleeAttackSound;
+	/**The sound the enemy makes on ranged attack*/
 	private AudioClip m_EnemySpellSound;
 
 	public AudioSource m_AudioSource;
+
+	[SerializeField] public EnemyDetectionRegion m_MeleeDetectionRegion;
 
 	/**A reference to the default spell prefab*/
 	[SerializeField] GameObject m_DefaultSpellPrefab;
@@ -36,17 +39,44 @@ public class RangedAttackPattern : AttackPattern {
 	{
 		switch((int)this.m_AttackPatternState)
 		{
+		case (int)AttackPatternState.MELEE:
+			{
+				if (this.m_AttackTimer == 0.0f) {
+					//					this.m_IsAttacking_Melee = true;
+					this.m_Enemy.SetAttackDamageValue();
+//					Debug.Log (this.gameObject.name + " melee damage: " + this.m_Enemy.m_AttackDamageValue);
+					this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_MELEE, true);
+
+					this.gameObject.GetComponent<AudioSource>().PlayOneShot(this.m_EnemyMeleeAttackSound);
+					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
+					this.m_MeleeDetectionRegion.m_Player.AffectHealth(-this.m_Enemy.m_AttackDamageValue);
+					this.m_AttackTimer += Time.deltaTime;
+					//					this.m_IsAttacking_Melee = false;
+					this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_MELEE, false);
+					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
+				} else if (0.0f < this.m_AttackTimer && this.m_AttackTimer < this.m_IntervalBetweenAttacks) {
+					this.m_AttackTimer += Time.deltaTime;
+				} else if (this.m_AttackTimer >= this.m_IntervalBetweenAttacks) {
+					this.m_AttackTimer = 0.0f;
+				}
+				break;
+			}
 		case (int)AttackPatternState.RANGED:
 			{
 //				Debug.Log ("Am I running?");
 
-				
+
 				if (this.m_AttackTimer == 0.0f) {
-					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, true);
+					this.m_Enemy.SetAttackDamageValue ();
+//					Debug.Log (this.gameObject.name + " ranged damage: " + this.m_Enemy.m_AttackDamageValue);
+					this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, true);
+
 					this.GenerateSpellPrefabInstance ();
 					Player player_detected = this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player;
-					this.m_EnemySpellSound = player_detected.m_PlayerAudio.getAudioForSpell (this.m_SpellToCast.m_SpellName);
-					this.m_AudioSource.PlayOneShot(this.m_EnemySpellSound);
+					if (player_detected != null) {
+						this.m_EnemySpellSound = player_detected.m_PlayerAudio.getAudioForSpell (this.m_SpellToCast.m_SpellName);
+						this.m_AudioSource.PlayOneShot(this.m_EnemySpellSound);
+					}
 				}
 				switch ((int)this.m_SpellToCast.m_SpellType) {
 				case (int)SpellType.BASIC_PROJECTILE_ON_TARGET:
@@ -138,7 +168,7 @@ public class RangedAttackPattern : AttackPattern {
 			}
 		}//end switch
 
-		this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, false);
+		this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, false);
 	}
 
 	private float FindFloorDistance(Vector3 position)

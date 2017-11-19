@@ -16,6 +16,12 @@ public class RangedEnemy : DefaultEnemy {
 
 	protected GameObject m_GeneratedSpellCubeInstance;
 
+	protected float m_MeleeDamage;
+
+	public float m_MeleeAttackInterval;
+
+	public float m_RangedAttackInterval;
+
 	/**A function to regulate the enemy's movement and tell the enemy to move about the scene.
 	* Note that in the MovementPattern class, we have a function executing movement executing in Update, and what it does depends on the MovementPatternState. So all we need do to affect movement is change the value of the movement pattern state.*/
 	public override void Move ()
@@ -51,9 +57,15 @@ public class RangedEnemy : DefaultEnemy {
 			this.m_AttackPattern.m_AttackPatternState = AttackPatternState.DO_NOTHING;
 			return;
 		}
-		if (this.IsPlayerInRangeOfAttack ()) {
+		if (this.m_AttackPattern.m_MeleeDetectionRegion.m_PlayerInRegion) {
+			this.m_AttackPattern.m_IntervalBetweenAttacks = this.m_MeleeAttackInterval;
+			this.m_AttackPattern.m_AttackPatternState = AttackPatternState.MELEE;
+		}
+		else if (this.IsPlayerInRangeOfAttack ()) {
+			this.m_AttackPattern.m_IntervalBetweenAttacks = this.m_RangedAttackInterval;
 			this.Attack ();
-		} else {
+		} 
+		else if (!this.IsPlayerInRangeOfAttack()) {
 			this.m_AttackPattern.m_AttackPatternState = AttackPatternState.DO_NOTHING;
 		}
 	}
@@ -87,5 +99,17 @@ public class RangedEnemy : DefaultEnemy {
 	{
 		base.Update ();
 		this.ManageAttack ();
+	}
+
+	/**A function to set different intervals between each successive strike of a type of attack*/
+	protected virtual void SetIntervalsBetweenAttacks()
+	{
+		//To be overridden in children classes
+	}
+
+	/**A function to be defined in ranged enemies, since what is called "melee damage" to them is just called regular dmaage in the infantry units*/
+	protected virtual void SetMeleeDamage()
+	{
+		//To be overridden in children classes
 	}
 }
