@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeAttackPattern : AttackPattern {
-	
+
+	[SerializeField] public AudioClip m_EnemyMeleeAttackSound;
+
 	protected override void ExecutePatternState ()
 	{
 		switch ((int)this.m_AttackPatternState) {
@@ -11,6 +13,7 @@ public class MeleeAttackPattern : AttackPattern {
 			{
 				if (this.m_AttackTimer == 0.0f) {
 					this.m_IsAttacking = true;
+					this.gameObject.GetComponent<AudioSource>().PlayOneShot(this.m_EnemyMeleeAttackSound);
 					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
 					this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player.AffectHealth(-this.m_Enemy.GetAttackDamageValue ());
 					this.m_AttackTimer += Time.deltaTime;

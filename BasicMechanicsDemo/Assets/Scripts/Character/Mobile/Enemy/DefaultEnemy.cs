@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic {
 
+	[SerializeField] public AudioClip m_EnemyDamagedSound;
+
 	/**A MovementPattern to control the enemy's movement*/
 	public MovementPattern m_MovementPattern;
 	/**A float to keep track of health.
@@ -79,11 +81,14 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	public void AffectHealth (float effect)
 	{
 		this.m_Health += effect;
+		if (effect < 0.0f) {
+			this.gameObject.GetComponent<AudioSource> ().PlayOneShot (this.m_EnemyDamagedSound);
+		}
 	}
 
 	protected virtual void Update()
 	{
-		if (this.m_IsAffectedBySpell) {
+		if (this.m_IsAffectedBySpell && this.m_ExtraEffectTimer > 0.0f) {
 			this.ApplySpellEffect (this.m_SpellToApply);
 		}
 		this.Move ();
@@ -94,7 +99,9 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	{
 		//If this is the first iteration through this function, no matter the spell...
 		if (this.m_ExtraEffectTimer == 0.0f) {
-			this.AffectHealth (-spell.m_SpellDamage);
+			if (!spell.m_IsPersistent) {
+				this.AffectHealth (-spell.m_SpellDamage);
+			}
 			this.m_IsAffectedBySpell = true;
 			this.m_SpellToApply = spell;
 
@@ -109,6 +116,8 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 		switch ((int)spell.m_SpellName) {
 		case (int)SpellName.Fireball:
 			{
+				//Damage is already applied, so just 
+				this.m_IsAffectedBySpell = false;
 				//do nothing
 				break;
 			}
@@ -150,6 +159,12 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 			}//end case Iceball
 			//Let thunderstorm case fall to thunderball
 		case (int)SpellName.Thunderstorm:
+			{
+				//Thunderstorm is persistent, so affect differently with respect to damage
+				this.AffectHealth(-spell.m_SpellDamage * Time.deltaTime);
+				//Transfer flow of control to case Thunderball
+				goto case (int)SpellName.Thunderball;
+			}
 		case (int)SpellName.Thunderball:
 			{
 				//Shock the enemy for Thunderball.duration and let them go

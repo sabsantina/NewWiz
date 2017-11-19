@@ -188,7 +188,7 @@ public class PlayerCastSpell : MonoBehaviour {
 
 
 						//However, most (if not all) on-player spells have different effects on both enemies and player mana.
-						this.m_Player.AffectMana(-this.m_SpellClassToFire.m_ManaCost);
+						this.m_Player.AffectMana(-this.m_SpellClassToFire.m_ManaCost * Time.deltaTime);
 						switch ((int)this.m_SpellClassToFire.m_SpellName) {
 						case (int)SpellName.Shield:
 							{
