@@ -184,6 +184,14 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 	/**A function to add [effect] to the player's health.*/
 	public void AffectHealth(float effect)
 	{
+		//if the player's receiving damage...
+		if (effect < 0.0f) {
+			//...and if the player's shielded...
+			if (this.m_IsShielded) {
+				//...then nullify damage
+				return;
+			}
+		}
 		this.m_Health += effect;
 		setMeterValue (healthMeter, this.m_Health);
 
@@ -210,12 +218,8 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 		if (this.m_ExtraEffectsTimer == 0.0f) {
 			this.m_IsAffectedBySpell = true;
 			this.m_SpellAffectingPlayer = spell;
-			switch ((int)spell.m_SpellType) {
-			case (int)SpellType.BASIC_PROJECTILE_ON_TARGET:
-				{
-					this.AffectHealth (-spell.m_SpellDamage);
-					break;
-				}
+			if (!spell.m_IsPersistent) {
+				this.AffectHealth (-spell.m_SpellDamage);
 			}
 			this.m_ExtraEffectsTimer += Time.deltaTime;
 
@@ -224,7 +228,9 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 			switch ((int)spell.m_SpellType) {
 			case (int)SpellType.AOE_ON_TARGET:
 				{
-					this.AffectHealth ((-spell.m_SpellDamage / spell.m_EffectDuration) * Time.deltaTime);
+					if (spell.m_IsPersistent) {
+						this.AffectHealth ((-spell.m_SpellDamage / spell.m_EffectDuration) * Time.deltaTime);
+					}
 					break;
 				}
 			}
