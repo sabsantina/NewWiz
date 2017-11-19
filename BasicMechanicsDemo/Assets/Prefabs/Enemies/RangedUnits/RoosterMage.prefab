@@ -367,6 +367,10 @@ MonoBehaviour:
     type: 2}
   m_GeneratedSpellInstance: {fileID: 0}
   m_SpellAnimatorManager: {fileID: 0}
+  AOE_offset: {x: 0, y: 2.8, z: 4.2}
+  AOE_Radius: 15
+  AOE_Timer: 0
+  m_EffectManagerTimer: 0
 --- !u!114 &114619115795665358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -394,7 +398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MaximalVelocity: 0
   m_Animator: {fileID: 0}
-  m_PatrolRegion: {fileID: 0}
+  m_PatrolRegion: {fileID: 114331303626207752}
   m_MovementPatternState: 0
   m_ChaseVelocity: 10
   m_CurrentVelocity: 0
@@ -413,9 +417,16 @@ MonoBehaviour:
   m_Health: 0
   m_AttackDamageValue: 0
   m_PlayerIsInRange: 0
+  m_IsAffectedBySpell: 0
+  m_InhibitMovement: 0
+  m_InhibitAttack: 0
+  m_ExtraEffectTimer: 0
+  m_ShockTimerIncrementor: 1
+  m_ShockJumpDistance: 0.25
+  m_ShockJumpFrequency: 0.0005
+  m_AttackSpell: 0
   m_AttackPattern: {fileID: 114362496863020502}
   m_RoosterMageHealth: 25
-  m_AttackSpell: 0
 --- !u!135 &135464182048750286
 SphereCollider:
   m_ObjectHideFlags: 1

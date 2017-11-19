@@ -38,6 +38,10 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	/**A variable to manage the frequency of the shock stutters the enemies go through (the lower this value, the more frequent the stutters will be).*/
 	public float m_ShockJumpFrequency = 0.0005f;
 
+	public bool IsAffectedByMagic()
+	{
+		return this.m_IsAffectedBySpell;
+	}
 
 	/**A function to establish whether or not the player is in range of the enemy, for the specific enemy. 
 	 * - Sets this.mPlayerIsInRange as well as returns a bool*/
@@ -205,10 +209,11 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 				break;
 			}
 		}//end switch
-			
+	
 		//if this is the last iteration of the function, no matter the spell...
 		if (!this.m_IsAffectedBySpell) {
 			this.m_SpellToApply = null;
+
 		}
 
 		//To be overridden in children classes. We'll keep a default version here, though.
@@ -230,6 +235,11 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	{
 		//To be overridden in children classes
 		return 0.0f;
+	}
+
+	public SpellClass SpellAffectingCharacter ()
+	{
+		return this.m_SpellToApply;
 	}
 
 //	/**A function to set the enemy that's attacking, so we can apply the specific damage to the target*/

@@ -13908,6 +13908,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 1295592544126026, guid: 9053599dd27ba439eb6fd4c325a8ccde, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9053599dd27ba439eb6fd4c325a8ccde, type: 2}
   m_IsPrefabParent: 0
@@ -16055,11 +16059,11 @@ Prefab:
       propertyPath: m_SpellAnimatorManager
       value: 
       objectReference: {fileID: 872955990}
-    - target: {fileID: 114713015403242892, guid: fb40b1c67ec6442da995f37b80648cc3,
+    - target: {fileID: 114913391888084722, guid: fb40b1c67ec6442da995f37b80648cc3,
         type: 2}
-      propertyPath: m_PatrolRegion
-      value: 
-      objectReference: {fileID: 1542613686}
+      propertyPath: m_AttackSpell
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb40b1c67ec6442da995f37b80648cc3, type: 2}
   m_IsPrefabParent: 0
@@ -17507,12 +17511,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.21, y: 1, z: 1.03}
   m_Center: {x: 0, y: 0.4, z: 0}
---- !u!114 &1542613686 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114360776064021256, guid: 9053599dd27ba439eb6fd4c325a8ccde,
-    type: 2}
-  m_PrefabInternal: {fileID: 1138443753}
-  m_Script: {fileID: 11500000, guid: cd7c5acebf2c3454891505f407fc2751, type: 3}
 --- !u!1 &1544211829
 GameObject:
   m_ObjectHideFlags: 0

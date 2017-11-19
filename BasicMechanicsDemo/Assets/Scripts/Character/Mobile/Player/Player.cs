@@ -59,6 +59,17 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
     /**The string value of the name of the sorting layer*/
     public string sortingLayerName;
 
+	public bool m_IsAffectedBySpell = false;
+
+	public float m_ExtraEffectsTimer = 0.0f;
+	/**The spell we need to apply to the player (the spell affecting the player if they get hit by a hostile spell)*/
+	protected SpellClass m_SpellAffectingPlayer = new SpellClass ();
+
+	public bool IsAffectedByMagic()
+	{
+		return this.m_IsAffectedBySpell;
+	}
+
 	void Awake()
 	{
 		this.m_HotKey1 = this.m_HotKey1_Obj.GetComponentInChildren<HotKeys> ();
@@ -85,6 +96,10 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 
 	void Update()
 	{
+		if (this.m_IsAffectedBySpell) {
+			this.ApplySpellEffect (this.m_SpellAffectingPlayer);
+		}
+
 		//check for input from the player for use of hotkeyed items
 		this.CheckForHotKeyButtonInput ();
         
@@ -152,6 +167,7 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 	/**A function to resurrect the player to their respawn point*/
 	private void Resurrect()
 	{
+		this.m_IsAffectedBySpell = false;
 		this.m_IsAlive = true;
 //		this.UpdateAnimatorParameters ();
 		this.m_Health = this.PLAYER_FULL_HEALTH;
@@ -187,7 +203,39 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 
 	public void ApplySpellEffect (SpellClass spell)
 	{
-		this.AffectHealth (-spell.m_SpellDamage);
+		if (this.m_ExtraEffectsTimer == 0.0f) {
+			this.m_IsAffectedBySpell = true;
+			this.m_SpellAffectingPlayer = spell;
+			switch ((int)spell.m_SpellType) {
+			case (int)SpellType.BASIC_PROJECTILE_ON_TARGET:
+				{
+					this.AffectHealth (-spell.m_SpellDamage);
+					break;
+				}
+			}
+			this.m_ExtraEffectsTimer += Time.deltaTime;
+
+		} else if (0.0f < this.m_ExtraEffectsTimer && this.m_ExtraEffectsTimer < spell.m_EffectDuration) {
+			//Apply whatever needs to happen here
+			switch ((int)spell.m_SpellType) {
+			case (int)SpellType.AOE_ON_TARGET:
+				{
+					this.AffectHealth ((-spell.m_SpellDamage / spell.m_EffectDuration) * Time.deltaTime);
+					break;
+				}
+			}
+			this.m_ExtraEffectsTimer += Time.deltaTime;
+		} else if (this.m_ExtraEffectsTimer >= spell.m_EffectDuration) {
+			this.m_IsAffectedBySpell = false;
+			this.m_SpellAffectingPlayer = null;
+			this.m_ExtraEffectsTimer = 0.0f;
+		}
+
+	}
+
+	public SpellClass SpellAffectingCharacter ()
+	{
+		return m_SpellAffectingPlayer;
 	}
 }
 
