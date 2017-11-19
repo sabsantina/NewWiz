@@ -13,10 +13,8 @@ public class ActiveSpellIcon : MonoBehaviour {
 	[SerializeField] private Sprite m_ShieldSprite;
 	[SerializeField] private Sprite m_HealSprite;
 	[SerializeField] private Sprite m_ThunderstormSprite;
-    [SerializeField] private Sprite m_TornadoSprite;
-    [SerializeField] private Sprite m_WaterBubbleSprite;
 
-    private Sprite m_ActiveSpellSprite;
+	private Sprite m_ActiveSpellSprite;
 
 	void Update()
 	{
@@ -62,22 +60,10 @@ public class ActiveSpellIcon : MonoBehaviour {
 				this.m_ActiveSpellSprite = this.m_HealSprite;
 				break;
 			}
-        case (int)SpellName.Tornado:
-            {
-                //Set active spell sprite to heal
-                this.m_ActiveSpellSprite = this.m_TornadoSprite;
-                break;
-            }
-        case (int)SpellName.WaterBubble:
-            {
-                //Set active spell sprite to heal
-                this.m_ActiveSpellSprite = this.m_WaterBubbleSprite;
-                break;
-            }
-        default:
-        {
-			break;
-		}
+		default:
+			{
+				break;
+			}
 		}//end switch
 		this.GetComponent<Image>().sprite = this.m_ActiveSpellSprite;
 	}//end f'n void UpdateActiveSpellSprite()
