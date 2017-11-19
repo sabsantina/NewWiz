@@ -2,7 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//A boxcollider for spell collisions
+[RequireComponent(typeof(BoxCollider))]
+//An audiosource for the sounds
+[RequireComponent(typeof(AudioSource))]
 public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic {
+	/**The sound the enemy makes when damaged.
+	*To be set in the inspector; respective attack sounds are found in the corresponding attack patterns*/
+	[SerializeField] public AudioClip m_EnemyDamagedSound;
 
 	/**A MovementPattern to control the enemy's movement*/
 	public MovementPattern m_MovementPattern;
@@ -17,15 +24,15 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	public bool m_PlayerIsInRange = false;
 	/**A stringkey for the isDead parameter in the movement pattern animator*/
 	private readonly string STRINGKEY_PARAM_ISDEAD = "IsDead";
-
+	/**A bool to tell us whether or not the enemy's affected by a spell*/
 	public bool m_IsAffectedBySpell = false;
-
+	/**The spell we need to damage the enemy with*/
 	protected SpellClass m_SpellToApply = new SpellClass ();
-
+	/**A bool to help us inhibit movement*/
 	public bool m_InhibitMovement = false;
-
+	/**A bool to help us inhibit attack*/
 	public bool m_InhibitAttack = false;
-
+	/**A timer to help implement the spell effects*/
 	public float m_ExtraEffectTimer = 0.0f;
 
 	/**A variable to keep track of how many times we've incremented the shock timer by units of 0.5.
@@ -38,6 +45,10 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	/**A variable to manage the frequency of the shock stutters the enemies go through (the lower this value, the more frequent the stutters will be).*/
 	public float m_ShockJumpFrequency = 0.0005f;
 
+	public bool IsAffectedByMagic()
+	{
+		return this.m_IsAffectedBySpell;
+	}
 
 	/**A function to establish whether or not the player is in range of the enemy, for the specific enemy. 
 	 * - Sets this.mPlayerIsInRange as well as returns a bool*/
@@ -75,11 +86,14 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	public void AffectHealth (float effect)
 	{
 		this.m_Health += effect;
+		if (effect < 0.0f) {
+			this.gameObject.GetComponent<AudioSource> ().PlayOneShot (this.m_EnemyDamagedSound);
+		}
 	}
 
 	protected virtual void Update()
 	{
-		if (this.m_IsAffectedBySpell) {
+		if (this.m_IsAffectedBySpell && this.m_ExtraEffectTimer > 0.0f) {
 			this.ApplySpellEffect (this.m_SpellToApply);
 		}
 		this.Move ();
@@ -90,7 +104,9 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	{
 		//If this is the first iteration through this function, no matter the spell...
 		if (this.m_ExtraEffectTimer == 0.0f) {
-			this.AffectHealth (-spell.m_SpellDamage);
+			if (!spell.m_IsPersistent) {
+				this.AffectHealth (-spell.m_SpellDamage);
+			}
 			this.m_IsAffectedBySpell = true;
 			this.m_SpellToApply = spell;
 
@@ -105,6 +121,8 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 		switch ((int)spell.m_SpellName) {
 		case (int)SpellName.Fireball:
 			{
+				//Damage is already applied, so just 
+				this.m_IsAffectedBySpell = false;
 				//do nothing
 				break;
 			}
@@ -146,6 +164,12 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 			}//end case Iceball
 			//Let thunderstorm case fall to thunderball
 		case (int)SpellName.Thunderstorm:
+			{
+				//Thunderstorm is persistent, so affect differently with respect to damage
+				this.AffectHealth(-spell.m_SpellDamage * Time.deltaTime);
+				//Transfer flow of control to case Thunderball
+				goto case (int)SpellName.Thunderball;
+			}
 		case (int)SpellName.Thunderball:
 			{
 				//Shock the enemy for Thunderball.duration and let them go
@@ -205,10 +229,11 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 				break;
 			}
 		}//end switch
-			
+	
 		//if this is the last iteration of the function, no matter the spell...
 		if (!this.m_IsAffectedBySpell) {
 			this.m_SpellToApply = null;
+
 		}
 
 		//To be overridden in children classes. We'll keep a default version here, though.
@@ -230,6 +255,11 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	{
 		//To be overridden in children classes
 		return 0.0f;
+	}
+
+	public SpellClass SpellAffectingCharacter ()
+	{
+		return this.m_SpellToApply;
 	}
 
 //	/**A function to set the enemy that's attacking, so we can apply the specific damage to the target*/

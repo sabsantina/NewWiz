@@ -114,7 +114,7 @@ public class PlayerCastSpell : MonoBehaviour {
 							if (hit.collider.gameObject.GetComponent<MobileCharacter> () != null) {
 								m_Target = hit.collider.gameObject;
 								this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
-								this.m_Player.m_audioSource.PlayOneShot(m_playerAudio.getAudioForSpell(this.m_SpellClassToFire.m_SpellName));
+								this.m_Player.m_audioSource.PlayOneShot(this.m_Player.m_PlayerAudio.getAudioForSpell(this.m_SpellClassToFire.m_SpellName));
 								this.m_SpellCubeInstance.transform.position = this.transform.position;
 								SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
 								spell_movement.m_IsMobileCharacter = true;
@@ -136,7 +136,7 @@ public class PlayerCastSpell : MonoBehaviour {
 							+ " y: " + furthest.point.y + " z: " + furthest.point.z);
 							#endif
 							this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
-							this.m_Player.m_audioSource.PlayOneShot(m_playerAudio.getAudioForSpell(this.m_SpellClassToFire.m_SpellName));
+							this.m_Player.m_audioSource.PlayOneShot(this.m_Player.m_PlayerAudio.getAudioForSpell(this.m_SpellClassToFire.m_SpellName));
 							this.m_SpellCubeInstance.transform.position = this.transform.position;
 							SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
 							spell_movement.m_IsMobileCharacter = false;
@@ -172,7 +172,7 @@ public class PlayerCastSpell : MonoBehaviour {
 						if (this.m_SpellCubeInstance == null) {
 							//...then create a new spell cube
 							this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
-							this.m_Player.m_audioSource.PlayOneShot (m_playerAudio.getAudioForSpell (this.m_SpellClassToFire.m_SpellName));
+							this.m_Player.m_audioSource.PlayOneShot (this.m_Player.m_PlayerAudio.getAudioForSpell (this.m_SpellClassToFire.m_SpellName));
 							this.m_SpellCubeInstance.transform.position = this.transform.position;
 							SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
 							spell_movement.SetSpellToCast (this.m_SpellClassToFire);
@@ -188,7 +188,7 @@ public class PlayerCastSpell : MonoBehaviour {
 
 
 						//However, most (if not all) on-player spells have different effects on both enemies and player mana.
-						this.m_Player.AffectMana(-this.m_SpellClassToFire.m_ManaCost);
+						this.m_Player.AffectMana(-this.m_SpellClassToFire.m_ManaCost * Time.deltaTime);
 						switch ((int)this.m_SpellClassToFire.m_SpellName) {
 						case (int)SpellName.Shield:
 							{
@@ -215,7 +215,7 @@ public class PlayerCastSpell : MonoBehaviour {
 						if (this.m_SpellCubeInstance == null) {
 							//...then create a new spell cube
 							this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
-							this.m_Player.m_audioSource.PlayOneShot (m_playerAudio.getAudioForSpell (this.m_SpellClassToFire.m_SpellName));
+							this.m_Player.m_audioSource.PlayOneShot (this.m_Player.m_PlayerAudio.getAudioForSpell (this.m_SpellClassToFire.m_SpellName));
 							this.m_SpellCubeInstance.transform.position = this.transform.position;
 							SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
 							spell_movement.SetSpellToCast (this.m_SpellClassToFire);
@@ -262,7 +262,7 @@ public class PlayerCastSpell : MonoBehaviour {
 						}//end if the spell cube instance exists
 
 						//However, most (if not all) AOE on-target spells have different effects on both enemies and player mana.
-						this.m_Player.AffectMana (-this.m_SpellClassToFire.m_ManaCost);
+						this.m_Player.AffectMana (-this.m_SpellClassToFire.m_ManaCost * Time.deltaTime);
 						switch ((int)this.m_SpellClassToFire.m_SpellName) {
 						case (int)SpellName.Thunderstorm:
 							{

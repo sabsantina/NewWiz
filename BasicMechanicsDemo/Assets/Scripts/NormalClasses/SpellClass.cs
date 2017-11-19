@@ -31,13 +31,13 @@ public class SpellClass {
 	public readonly float THUNDERBALL_MANA_COST = 5.0f;
 	/**A variable to represent the mana cost of the shield spell. This is a persisting spell, so the player will be expending 15 mana * a value increasing by Time.deltatime every frame.
 	*At starting mana of 100, the player can cast this for a couple of seconds before needing a mana refill.*/
-	public readonly float SHIELD_MANA_COST = 0.75f;
+	public readonly float SHIELD_MANA_COST = 20.0f;
 	/**A variable to represent the mana cost of the thunderstorm spell. This is a persisting spell, so the player will be expending 10 mana * a value increasing by Time.deltatime every frame.
 	*At starting mana of 100, the player can cast this for a couple of seconds before needing a mana refill.*/
-	public readonly float THUNDERSTORM_MANA_COST = 10.0f;
+	public readonly float THUNDERSTORM_MANA_COST = 40.0f;
 	/**A variable to represent the mana cost of the heal spell. This is a persisting spell, so the player will be expending 0.5 mana * a value increasing by Time.deltatime every frame.
 	*At starting mana of 100, the player can cast this for several seconds before needing a mana refill.*/
-	public readonly float HEAL_MANA_COST = 0.5f;
+	public readonly float HEAL_MANA_COST = 15.0f;
     /**A variable to represent the mana cost of the tornado spell.
      *At starting mana of 100, the player can cast 14 of these before needing a mana refill.*/
     public readonly float TORNADO_MANA_COST = 7.0f;
