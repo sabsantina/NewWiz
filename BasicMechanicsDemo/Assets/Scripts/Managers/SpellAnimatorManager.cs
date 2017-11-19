@@ -1,4 +1,4 @@
-﻿#define TESTING_SUCCESSFUL_ANIMATOR_ASSIGNMENT
+﻿//#define TESTING_SUCCESSFUL_ANIMATOR_ASSIGNMENT
 
 using System.Collections;
 using System.Collections.Generic;
