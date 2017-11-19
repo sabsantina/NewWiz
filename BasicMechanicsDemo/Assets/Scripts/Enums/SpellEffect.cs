@@ -13,5 +13,7 @@ public enum  SpellEffect
     Ice_Freeze,
 	Shock_Damage,
 	AOE_Shock,
-	Heal_Player
+	Heal_Player,
+    Knockback,
+    Water_Damage
 }

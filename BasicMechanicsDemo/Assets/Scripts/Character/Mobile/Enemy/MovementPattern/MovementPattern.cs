@@ -5,16 +5,15 @@ using UnityEngine;
 public class MovementPattern : MobileCharacter {
 
 	/**The enemy patrol and detection radius*/
-	[SerializeField] EnemyDetectionRegion m_PatrolRegion;
+	[SerializeField] public EnemyDetectionRegion m_PatrolRegion;
 
 
 	/**The state of the movement pattern.*/
 	public MovementPatternState m_MovementPatternState = MovementPatternState.ROAM;
-	/**A reference to the player, so we know whose gameobject to move towards.*/
-	public Player m_Player;
+
 	/**The velocity at which an enemy chases a player.*/
 	public float m_ChaseVelocity = 200.0f;
-
+	//for testing
 	public float m_CurrentVelocity = 0.0f;
 
 	// Use this for initialization
@@ -103,7 +102,7 @@ public class MovementPattern : MobileCharacter {
 		case (int)MovementPatternState.MOVE_TOWARDS_PLAYER:
 			{
 //				Vector3 current_position = this.transform.position;
-				displacement = Vector3.Normalize (this.m_Player.gameObject.transform.position - current_position) * this.m_MaximalVelocity;
+				displacement = Vector3.Normalize (this.m_PatrolRegion.m_Player.gameObject.transform.position - current_position) * this.m_MaximalVelocity;
 				//Update direction
 				this.m_Direction = displacement;
 //				this.transform.position = current_position + (displacement * Time.deltaTime);
@@ -113,7 +112,7 @@ public class MovementPattern : MobileCharacter {
 		case (int)MovementPatternState.CHASE_PLAYER:
 			{
 //				Vector3 current_position = this.transform.position;
-				displacement = Vector3.Normalize (this.m_Player.gameObject.transform.position - current_position) * this.m_ChaseVelocity;
+				displacement = Vector3.Normalize (this.m_PatrolRegion.m_Player.gameObject.transform.position - current_position) * this.m_ChaseVelocity;
 				//Update direction
 				this.m_Direction = displacement;
 //				this.transform.position = current_position + (displacement * Time.deltaTime);
@@ -149,10 +148,10 @@ public class MovementPattern : MobileCharacter {
 	/**A function to set the new values of the animator bools and update the animator parameters.*/
 	private void ProperlyUpdateAnimatorParameters()
 	{
-		this.m_IsMovingLeft = this.m_Direction.x < 0;
-		this.m_IsMovingRight = this.m_Direction.x > 0;
-		this.m_IsMovingUp = this.m_Direction.z > 0;
-		this.m_IsMovingDown = this.m_Direction.z < 0;
+		this.m_IsMovingLeft = this.m_Direction.x < 0 && this.m_MovementPatternState != MovementPatternState.STAY_STILL;
+		this.m_IsMovingRight = this.m_Direction.x > 0 && this.m_MovementPatternState != MovementPatternState.STAY_STILL;
+		this.m_IsMovingUp = this.m_Direction.z > 0 && this.m_MovementPatternState != MovementPatternState.STAY_STILL;
+		this.m_IsMovingDown = this.m_Direction.z < 0 && this.m_MovementPatternState != MovementPatternState.STAY_STILL;
 
 		//The function in MobileCharacter
 		base.UpdateAnimatorParameters ();

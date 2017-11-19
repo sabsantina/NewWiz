@@ -12,5 +12,7 @@ public enum SpellName {
     Iceball,
 	Thunderball,
 	Thunderstorm,
-	Heal
+	Heal,
+    Tornado,
+    WaterBubble
 }
