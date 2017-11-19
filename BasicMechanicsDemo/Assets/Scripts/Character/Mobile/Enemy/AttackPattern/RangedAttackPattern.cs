@@ -6,7 +6,7 @@ public class RangedAttackPattern : AttackPattern {
 
 	/**The sound the enemy makes on ranged attack*/
 	[SerializeField] public AudioClip m_EnemyMeleeAttackSound;
-	[SerializeField] public AudioClip m_EnemySpellSound;
+	private AudioClip m_EnemySpellSound;
 
 	public AudioSource m_AudioSource;
 
