@@ -96,7 +96,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4346944031711414}
-  - component: {fileID: 114900916736003738}
   m_Layer: 0
   m_Name: ArmoredSoldier
   m_TagString: Untagged
@@ -490,18 +489,6 @@ MonoBehaviour:
   m_IsAttacking: 0
   m_EnemyMeleeAttackSound: {fileID: 8300000, guid: 4994260d8347e7d42a94b37a486e058e,
     type: 3}
---- !u!114 &114900916736003738
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1969390417771952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c0362170e67824479a7b4374dc89004, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sortingLayerName: 
 --- !u!135 &135221556874408484
 SphereCollider:
   m_ObjectHideFlags: 1

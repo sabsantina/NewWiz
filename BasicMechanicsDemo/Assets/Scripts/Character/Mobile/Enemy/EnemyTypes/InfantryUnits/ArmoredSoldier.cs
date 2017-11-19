@@ -19,10 +19,9 @@ public class ArmoredSoldier : EnemyInfantry {
 	
 	// Update is called once per frame
 	void Update () {
+        base.Update();
         //This line of code is used to get the correct draw order.
         this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(this.GetComponent<Transform>().transform.position.z * 100f) * -1;
-        this.Move();
-        ManageAttack();
     }
     /**A function to set the enemy health in our parent classes*/
     public override void SetHealth()
