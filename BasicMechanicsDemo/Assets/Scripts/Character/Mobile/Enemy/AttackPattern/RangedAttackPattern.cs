@@ -36,13 +36,14 @@ public class RangedAttackPattern : AttackPattern {
 				if (this.m_AttackTimer == 0.0f) {
 					this.m_IsAttacking = true;
 					this.GenerateSpellPrefabInstance ();
+					Player player_detected = this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player;
+					this.m_EnemyMeleeAttackSound = player_detected.m_PlayerAudio.getAudioForSpell (this.m_SpellToCast.m_SpellName);
+					player_detected.m_audioSource.PlayOneShot (player_detected.m_PlayerAudio.getAudioForSpell (this.m_SpellToCast.m_SpellName));
 				}
 				switch ((int)this.m_SpellToCast.m_SpellType) {
 				case (int)SpellType.BASIC_PROJECTILE_ON_TARGET:
 					{
-//						Player player_detected = this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player;
-//						this.m_EnemyMeleeAttackSound = player_detected.m_PlayerAudio.getAudioForSpell (this.m_SpellToCast.m_SpellName);
-
+						
 						if (this.m_AttackTimer == 0.0f) {
 							this.m_GeneratedSpellInstance.transform.position = this.transform.position;
 							SpellMovement spell_movement = this.m_GeneratedSpellInstance.GetComponent<SpellMovement> ();

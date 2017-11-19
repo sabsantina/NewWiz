@@ -16072,7 +16072,7 @@ Prefab:
     - target: {fileID: 114913391888084722, guid: fb40b1c67ec6442da995f37b80648cc3,
         type: 2}
       propertyPath: m_AttackSpell
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1530564148805280, guid: fb40b1c67ec6442da995f37b80648cc3, type: 2}
       propertyPath: m_IsActive
