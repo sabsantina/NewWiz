@@ -28,7 +28,7 @@ public class MeleeAttackPattern : AttackPattern {
 				//Do nothing
 
 				//In case the player is slipping in and out of the enemy's detection region, make the timer run its course anyway
-				if (0.0f < this.m_AttackTimer) {
+				if (0.0f < this.m_AttackTimer && !(this.m_AttackTimer >= this.m_IntervalBetweenAttacks)) {
 					this.m_AttackTimer += Time.deltaTime;
 				} else if (this.m_AttackTimer >= this.m_IntervalBetweenAttacks) {
 					this.m_AttackTimer = 0.0f;

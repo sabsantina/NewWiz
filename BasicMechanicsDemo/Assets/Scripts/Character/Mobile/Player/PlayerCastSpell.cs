@@ -87,6 +87,8 @@ public class PlayerCastSpell : MonoBehaviour {
 	{
 		//If the input button is tapped
 		if (Input.GetButtonDown (STRINGKEY_INPUT_CASTSPELL)) {
+//			Debug.Log ("Active spell: " + this.m_Player.GetComponent<PlayerInventory> ().m_ActiveSpellClass.m_SpellName.ToString ());
+
 			if (!this.m_SpellClassToFire.m_IsPersistent) {
 //				Debug.Log ("The mouse was pressed");
 				switch ((int)this.m_SpellClassToFire.m_SpellType) {
@@ -146,25 +148,7 @@ public class PlayerCastSpell : MonoBehaviour {
 
 							GameObject.Destroy (this.m_SpellCubeInstance, TIME_UNTIL_DESTROY);
 						}//end if
-
-//						//However, most (if not all) basic projectile spells have different effects on both enemies and player mana.
-//						switch ((int)this.m_SpellClassToFire.m_SpellName) {
-//						case (int)SpellName.Fireball:
-//							{
-//							this.m_Player.AffectMana (-this.m_SpellClassToFire.m_ManaCost);
-//								break;
-//							}//end case Fireball
-//						case (int)SpellName.Iceball:
-//							{
-//								this.m_Player.AffectMana (-this.m_SpellClassToFire.ICEBALL_MANA_COST);
-//								break;
-//							}//end case Iceball
-//						case (int)SpellName.Thunderball:
-//							{
-//								this.m_Player.AffectMana (-this.m_SpellClassToFire.THUNDERBALL_MANA_COST);
-//								break;
-//							}//end case Thunderball
-//						}//end switch
+							
 
 						this.m_Player.AffectMana (-this.m_SpellClassToFire.m_ManaCost);
 
@@ -319,6 +303,7 @@ public class PlayerCastSpell : MonoBehaviour {
 		//If the player has no active spell...
 		if (this.GetComponent<PlayerInventory> ().m_ActiveSpellClass == null) {
 			//don't waste your time executing further
+//			Debug.Log("Active spell is null");
 			return;
 		}//end if
 
@@ -449,12 +434,18 @@ public class PlayerCastSpell : MonoBehaviour {
 			//detection regions. We only want this to apply to the box collider
 			//So if the hit collider is a box collider
 				//AND the hit collider has an Enemy component...
+//			if (hit is BoxCollider
+//			    && hit.gameObject.GetComponent<Enemy> () != null) {
+//				Debug.Log ("Enemy Collider hit");
+//				//...then apply the spell damage to that enemy
+//				hit.gameObject.GetComponent<Enemy>().ApplySpellEffects(this.m_SpellClassToFire.m_SpellName);
+//			}//end if
+
 			if (hit is BoxCollider
-			    && hit.gameObject.GetComponent<Enemy> () != null) {
-				Debug.Log ("Enemy Collider hit");
-				//...then apply the spell damage to that enemy
-				hit.gameObject.GetComponent<Enemy>().ApplySpellEffects(this.m_SpellClassToFire.m_SpellName);
-			}//end if
+			    && hit.gameObject.GetComponent<ICanBeDamagedByMagic> () != null
+				&& hit.gameObject.GetComponent<Player>() == null) {
+				hit.gameObject.GetComponent<DefaultEnemy>().ApplySpellEffect(this.m_SpellClassToFire);
+			}
 		}//end foreach
 	}//end f'n void ApplyAOEToEnemies(Vector3)
 
