@@ -42,7 +42,7 @@ public class RangedAttackPattern : AttackPattern {
 
 				
 				if (this.m_AttackTimer == 0.0f) {
-					this.m_IsAttacking = true;
+					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, true);
 					this.GenerateSpellPrefabInstance ();
 					Player player_detected = this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player;
 					this.m_EnemySpellSound = player_detected.m_PlayerAudio.getAudioForSpell (this.m_SpellToCast.m_SpellName);
@@ -138,7 +138,7 @@ public class RangedAttackPattern : AttackPattern {
 			}
 		}//end switch
 
-		this.m_IsAttacking = false;
+		this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, false);
 	}
 
 	private float FindFloorDistance(Vector3 position)

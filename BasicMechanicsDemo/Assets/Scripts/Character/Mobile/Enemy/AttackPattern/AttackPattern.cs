@@ -26,12 +26,17 @@ public class AttackPattern : MonoBehaviour {
 	/**The time in seconds between each attack.*/
 	public float m_IntervalBetweenAttacks = 1.0f;
 
-	/**A bool for the enemy animator, to let us know whether or not we're attacking.*/
-	public bool m_IsAttacking = false;
+	/**A bool for the enemy animator, to let us know whether or not we're attacking via melee.*/
+	public bool m_IsAttacking_Melee = false;
+	/**A bool for the enemy animator, to let us know whether or not we're attacking via ranged attack.*/
+	public bool m_IsAttacking_Ranged = false;
 	/**The enemy's given animator*/
-	private Animator m_Animator;
-	/**The string value of the parameter responsible for demonstrating attacking on the enemy's behalf*/
-	private readonly string STRINGKEY_PARAM_ISATTACKING = "isAttacking";
+	protected Animator m_Animator;
+
+	/**The string value of our isAttacking_Melee animator parameter*/
+	protected readonly string STRINGKEY_PARAM_ISATTACKING_MELEE = "isAttacking_Melee";
+	/**The string value of our isAttacking_Ranged animator parameter*/
+	protected readonly string STRINGKEY_PARAM_ISATTACKING_RANGED = "isAttacking_Ranged";
 
 	// Use this for initialization
 	void Start () {
@@ -48,6 +53,11 @@ public class AttackPattern : MonoBehaviour {
 		return this.m_AttackDetectionRegion.m_PlayerInRegion;
 	}
 
+	protected void UpdateAnimatorParameters_Attack()
+	{
+		this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING_MELEE, this.m_IsAttacking_Melee);
+		this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, this.m_IsAttacking_Ranged);
+	}
 
 	protected virtual void ExecutePatternState()
 	{}

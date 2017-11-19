@@ -45,6 +45,19 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	/**A variable to manage the frequency of the shock stutters the enemies go through (the lower this value, the more frequent the stutters will be).*/
 	public float m_ShockJumpFrequency = 0.0005f;
 
+	protected Animator m_Animator;
+
+	/**The string value of our isAttacking_Melee animator parameter*/
+	protected readonly string STRINGKEY_PARAM_ISATTACKING_MELEE = "isAttacking_Melee";
+	/**The string value of our isAttacking_Ranged animator parameter*/
+	protected readonly string STRINGKEY_PARAM_ISATTACKING_RANGED = "isAttacking_Ranged";
+
+	void Start()
+	{
+		this.m_Animator = this.GetComponent<Animator> ();
+	}
+
+
 	public bool IsAffectedByMagic()
 	{
 		return this.m_IsAffectedBySpell;

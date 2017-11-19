@@ -13,12 +13,15 @@ public class MeleeAttackPattern : AttackPattern {
 		case (int)AttackPatternState.MELEE:
 			{
 				if (this.m_AttackTimer == 0.0f) {
-					this.m_IsAttacking = true;
+//					this.m_IsAttacking_Melee = true;
+					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING_MELEE, true);
 					this.gameObject.GetComponent<AudioSource>().PlayOneShot(this.m_EnemyMeleeAttackSound);
 					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
 					this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player.AffectHealth(-this.m_Enemy.GetAttackDamageValue ());
 					this.m_AttackTimer += Time.deltaTime;
-					this.m_IsAttacking = false;
+//					this.m_IsAttacking_Melee = false;
+					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING_MELEE, false);
+					this.UpdateAnimatorParameters_Attack ();
 					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
 				} else if (0.0f < this.m_AttackTimer && this.m_AttackTimer < this.m_IntervalBetweenAttacks) {
 					this.m_AttackTimer += Time.deltaTime;
