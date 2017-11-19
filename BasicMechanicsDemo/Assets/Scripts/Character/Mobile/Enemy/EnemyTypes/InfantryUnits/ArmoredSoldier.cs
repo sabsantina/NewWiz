@@ -19,6 +19,7 @@ public class ArmoredSoldier : EnemyInfantry {
 	
 	// Update is called once per frame
 	void Update () {
+        //This line of code is used to get the correct draw order.
         this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(this.GetComponent<Transform>().transform.position.z * 100f) * -1;
         this.Move();
         if (this.IsPlayerInRangeOfAttack())
@@ -30,7 +31,7 @@ public class ArmoredSoldier : EnemyInfantry {
             this.m_AttackPattern.m_AttackPatternState = AttackPatternState.DO_NOTHING;
         }
     }
-
+    /**A function to set the enemy health in our parent classes*/
     public override void SetHealth()
     {
         this.m_Health = this.m_ArmoredSoldierHealth;
