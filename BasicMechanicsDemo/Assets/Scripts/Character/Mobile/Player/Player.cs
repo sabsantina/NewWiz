@@ -115,14 +115,8 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 			setMeterValue(healthMeter, this.m_Health);
 			this.m_IsAlive = false;
 		}//end if
-		//if the player runs out of mana, they can't cast spells anymore
-		if (this.m_Mana <= 0
-		    || this.GetComponent<PlayerInventory> ().m_ActiveSpellClass.m_ManaCost > this.m_Mana) {
-			this.m_CanCastSpells = false;
-		}//end if
-		else {
-			this.m_CanCastSpells = true;
-		}
+
+		this.UpdateCanCastSpell ();
 
 		if (this.m_Mana < PLAYER_FULL_MANA) {
 			this.m_Mana += Time.deltaTime * this.m_ManaRegenMultiplier;
@@ -140,6 +134,16 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 
 		this.UpdateAnimatorParameters ();
 	}//end f'n void Update
+
+	private void UpdateCanCastSpell()
+	{
+		SpellClass active_spell = this.GetComponent<PlayerInventory> ().m_ActiveSpellClass;
+		if (active_spell.m_IsPersistent) {
+			this.m_CanCastSpells = (this.m_Mana >= active_spell.m_ManaCost * Time.deltaTime);
+		} else {
+			this.m_CanCastSpells = this.m_Mana >= active_spell.m_ManaCost;
+		}
+	}
 
 	/**A function to check for keyboard input for use of hotkeyed items.*/
 	private void CheckForHotKeyButtonInput()
