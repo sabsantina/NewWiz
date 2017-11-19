@@ -22,14 +22,7 @@ public class ArmoredSoldier : EnemyInfantry {
         //This line of code is used to get the correct draw order.
         this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(this.GetComponent<Transform>().transform.position.z * 100f) * -1;
         this.Move();
-        if (this.IsPlayerInRangeOfAttack())
-        {
-            this.Attack();
-        }
-        else
-        {
-            this.m_AttackPattern.m_AttackPatternState = AttackPatternState.DO_NOTHING;
-        }
+        ManageAttack();
     }
     /**A function to set the enemy health in our parent classes*/
     public override void SetHealth()
