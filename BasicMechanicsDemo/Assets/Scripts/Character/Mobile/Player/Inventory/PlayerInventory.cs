@@ -17,10 +17,6 @@
 #define START_WITH_THUNDERSTORM
 /*Activating this macro will enable the player to start the game with the Heal spell*/
 #define START_WITH_HEAL
-/*Activating this macro will enable the player to start the game with the Tornado spell*/
-#define START_WITH_TORNADO
-/*Activating this macro will enable the player to start the game with the Waterbubble spell*/
-#define START_WITH_WATERBUBBLE
 
 //Item macros
 
@@ -94,40 +90,32 @@ public class PlayerInventory : MonoBehaviour {
 		SpellClass spell_class_instance = new SpellClass();
 		#if START_WITH_FIREBALL
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Fireball));
-		this.AssignDefaultActiveSpell();
+		this.m_ActiveSpellClass = this.m_SpellClassList[0];
 		#endif
 		#if START_WITH_ICEBALL
 		this.AddSpell (spell_class_instance.GenerateInstance(SpellName.Iceball));
-		this.AssignDefaultActiveSpell();
+		this.m_ActiveSpellClass = this.m_SpellClassList[0];
 		#endif
 		#if START_WITH_SHIELD
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Shield));
-		this.AssignDefaultActiveSpell();
+		this.m_ActiveSpellClass = this.m_SpellClassList[0];
 		#endif
 		#if START_WITH_THUNDERBALL
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Thunderball));
-		this.AssignDefaultActiveSpell();
+		this.m_ActiveSpellClass = this.m_SpellClassList[0];
 		#endif
 		#if START_WITH_THUNDERSTORM
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Thunderstorm));
-		this.AssignDefaultActiveSpell();
+		this.m_ActiveSpellClass = this.m_SpellClassList[0];
 		#endif
 		#if START_WITH_HEAL
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Heal));
-		this.AssignDefaultActiveSpell();
-        #endif
-        #if START_WITH_TORNADO
-        this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Tornado));
-		this.AssignDefaultActiveSpell();
-        #endif
-        #if START_WITH_WATERBUBBLE
-        this.AddSpell(spell_class_instance.GenerateInstance(SpellName.WaterBubble));
-		this.AssignDefaultActiveSpell();
-        #endif
+		this.m_ActiveSpellClass = this.m_SpellClassList[0];
+		#endif
 
 
-        #if START_WITH_HEALTH_POTION
-        ItemClass health_potion = new ItemClass ();
+		#if START_WITH_HEALTH_POTION
+		ItemClass health_potion = new ItemClass ();
 		health_potion.GenerateInstance(ItemName.Health_Potion);
 		this.AddItem(health_potion);
 		#endif
@@ -224,7 +212,6 @@ public class PlayerInventory : MonoBehaviour {
 		this.m_ActiveSpellName = this.m_ActiveSpellClass.m_SpellName.ToString ();
 
 		this.GetComponent<PlayerCastSpell> ().m_SpellClassToFire = this.m_ActiveSpellClass;
-//		Debug.Log ("Spell to fire " + this.GetComponent<PlayerCastSpell> ().m_SpellClassToFire.m_SpellName.ToString ());
 	}//end f'n void AssignDefaultActiveSpell()
 
 	/**A function to return the string containing all of the SpellClass instances of the [this.m_SpellClassList]*/

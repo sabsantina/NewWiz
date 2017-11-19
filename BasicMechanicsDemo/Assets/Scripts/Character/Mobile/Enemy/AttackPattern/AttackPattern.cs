@@ -10,8 +10,8 @@ public class AttackPattern : MonoBehaviour {
 	[SerializeField] protected EnemyDetectionRegion m_AttackDetectionRegion;
 	/**We need a reference to the actual enemy to be able to inflict their specific damage.*/
 	[SerializeField] protected DefaultEnemy m_Enemy;
-//	/**A reference to the player so we can apply the damage to them.*/
-//	[SerializeField] public Player m_Player;
+	/**A reference to the player so we can apply the damage to them.*/
+	public Player m_Player;
 
 //	/**A reference to the default spell prefab*/
 //	[SerializeField] GameObject m_DefaultSpellPrefab;
@@ -26,20 +26,15 @@ public class AttackPattern : MonoBehaviour {
 	/**The time in seconds between each attack.*/
 	public float m_IntervalBetweenAttacks = 1.0f;
 
-//	/**A bool for the enemy animator, to let us know whether or not we're attacking via melee.*/
-//	public bool m_IsAttacking_Melee = false;
-//	/**A bool for the enemy animator, to let us know whether or not we're attacking via ranged attack.*/
-//	public bool m_IsAttacking_Ranged = false;
+	/**A bool for the enemy animator, to let us know whether or not we're attacking.*/
+	public bool m_IsAttacking = false;
 	/**The enemy's given animator*/
-	protected Animator m_Animator;
-
-	/**The string value of our isAttacking_Melee animator parameter*/
-	protected readonly string STRINGKEY_PARAM_ISATTACKING_MELEE = "isAttacking_Melee";
-	/**The string value of our isAttacking_Ranged animator parameter*/
-	protected readonly string STRINGKEY_PARAM_ISATTACKING_RANGED = "isAttacking_Ranged";
+	private Animator m_Animator;
+	/**The string value of the parameter responsible for demonstrating attacking on the enemy's behalf*/
+	private readonly string STRINGKEY_PARAM_ISATTACKING = "isAttacking";
 
 	// Use this for initialization
-	void Awake () {
+	void Start () {
 		this.m_Animator = this.GetComponent<Animator> ();
 	}
 	
@@ -53,13 +48,145 @@ public class AttackPattern : MonoBehaviour {
 		return this.m_AttackDetectionRegion.m_PlayerInRegion;
 	}
 
-//	protected void UpdateAnimatorParameters_Attack()
+//	private void ExecutePatternState()
 //	{
-//		this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING_MELEE, this.m_IsAttacking_Melee);
-//		this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, this.m_IsAttacking_Ranged);
-//	}
+//		switch ((int)this.m_AttackPatternState) {
+//		case (int)AttackPatternState.MELEE:
+//			{
+//				if (this.m_AttackTimer == 0.0f) {
+//					this.m_IsAttacking = true;
+////					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
+//					this.m_Player.AffectHealth (-this.m_Enemy.GetAttackDamageValue ());
+//					this.m_AttackTimer += Time.deltaTime;
+//					this.m_IsAttacking = false;
+////					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
+//				} else if (0.0f < this.m_AttackTimer && this.m_AttackTimer < this.m_IntervalBetweenAttacks) {
+//					this.m_AttackTimer += Time.deltaTime;
+//				} else if (this.m_AttackTimer >= this.m_IntervalBetweenAttacks) {
+//					this.m_AttackTimer = 0.0f;
+//				}
+//				break;
+//			}
+//		case (int)AttackPatternState.RANGED:
+//			{
+//				if (this.m_AttackTimer == 0.0f) {
+//					this.m_IsAttacking = true;
+//					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
+//					this.GenerateSpellPrefabInstance();
+////					this.m_Player.m_audioSource.PlayOneShot(m_playerAudio.getAudioForSpell(this.m_SpellClassToFire.m_SpellName));
+//					this.m_GeneratedSpellInstance.transform.position = this.transform.position;
+//					SpellMovement spell_movement = this.m_GeneratedSpellInstance.GetComponent<SpellMovement> ();
+//					spell_movement.m_IsMobileCharacter = true;
+//					spell_movement.m_TargetedObj = this.m_Player.gameObject;
+//					spell_movement.SetSpellToCast (this.m_SpellToCast);
+//
+//					StartCoroutine (this.DestroySpellAfterTime (2.0f));
+//
+//					this.m_AttackTimer += Time.deltaTime;
+//					this.m_IsAttacking = false;
+//					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
+//				} else if (0.0f < this.m_AttackTimer && this.m_AttackTimer < this.m_IntervalBetweenAttacks) {
+//					this.m_AttackTimer += Time.deltaTime;
+//				} else if (this.m_AttackTimer >= this.m_IntervalBetweenAttacks) {
+//					this.m_AttackTimer = 0.0f;
+//				}
+//				break;
+//			}
+//		case (int)AttackPatternState.DO_NOTHING:
+//			{
+//				//Do nothing
+//
+//				//In case the player is slipping in and out of the enemy's detection region, make the timer run its course anyway
+//				if (0.0f < this.m_AttackTimer) {
+//					this.m_AttackTimer += Time.deltaTime;
+//				} else if (this.m_AttackTimer >= this.m_IntervalBetweenAttacks) {
+//					this.m_AttackTimer = 0.0f;
+//				}
+//				break;
+//			}
+//		}//end switch
+//	}//end f'n ExecutePatternState()
 
 	protected virtual void ExecutePatternState()
 	{}
-
+//	{
+//		switch ((int)this.m_AttackPatternState) {
+//		case (int)AttackPatternState.MELEE:
+//			{
+//				if (this.m_AttackTimer == 0.0f) {
+//					this.m_IsAttacking = true;
+//					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
+//					this.m_Player.AffectHealth (-this.m_Enemy.GetAttackDamageValue ());
+//					this.m_AttackTimer += Time.deltaTime;
+//					this.m_IsAttacking = false;
+//					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
+//				} else if (0.0f < this.m_AttackTimer && this.m_AttackTimer < this.m_IntervalBetweenAttacks) {
+//					this.m_AttackTimer += Time.deltaTime;
+//				} else if (this.m_AttackTimer >= this.m_IntervalBetweenAttacks) {
+//					this.m_AttackTimer = 0.0f;
+//				}
+//				break;
+//			}
+//		case (int)AttackPatternState.RANGED:
+//			{
+//				if (this.m_AttackTimer == 0.0f) {
+//					this.m_IsAttacking = true;
+//					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
+//					this.GenerateSpellPrefabInstance();
+//					//					this.m_Player.m_audioSource.PlayOneShot(m_playerAudio.getAudioForSpell(this.m_SpellClassToFire.m_SpellName));
+//					this.m_GeneratedSpellInstance.transform.position = this.transform.position;
+//					SpellMovement spell_movement = this.m_GeneratedSpellInstance.GetComponent<SpellMovement> ();
+//					spell_movement.m_IsMobileCharacter = true;
+//					spell_movement.m_TargetedObj = this.m_Player.gameObject;
+//					spell_movement.SetSpellToCast (this.m_SpellToCast);
+//
+//					StartCoroutine (this.DestroySpellAfterTime (2.0f));
+//
+//					this.m_AttackTimer += Time.deltaTime;
+//					this.m_IsAttacking = false;
+//					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
+//				} else if (0.0f < this.m_AttackTimer && this.m_AttackTimer < this.m_IntervalBetweenAttacks) {
+//					this.m_AttackTimer += Time.deltaTime;
+//				} else if (this.m_AttackTimer >= this.m_IntervalBetweenAttacks) {
+//					this.m_AttackTimer = 0.0f;
+//				}
+//				break;
+//			}
+//		case (int)AttackPatternState.DO_NOTHING:
+//			{
+//				//Do nothing
+//
+//				//In case the player is slipping in and out of the enemy's detection region, make the timer run its course anyway
+//				if (0.0f < this.m_AttackTimer) {
+//					this.m_AttackTimer += Time.deltaTime;
+//				} else if (this.m_AttackTimer >= this.m_IntervalBetweenAttacks) {
+//					this.m_AttackTimer = 0.0f;
+//				}
+//				break;
+//			}
+//		}//end switch
+//	}//end f'n ExecutePatternState()
+//
+//	private IEnumerator DestroySpellAfterTime(float time)
+//	{
+//		yield return new WaitForSeconds (time);
+//		if (this.m_GeneratedSpellInstance != null) {
+//			this.DestroySpellPrefabInstance ();
+//		}
+//	}
+//
+//	private void GenerateSpellPrefabInstance()
+//	{
+//		this.m_GeneratedSpellInstance = GameObject.Instantiate (this.m_DefaultSpellPrefab);
+//		this.m_GeneratedSpellInstance.GetComponent<SpellMovement> ().m_SpellClassToCast = this.m_SpellToCast;
+//		this.m_SpellAnimatorManager.SetSpellAnimator (this.m_GeneratedSpellInstance);
+//	}
+//
+//	public void DestroySpellPrefabInstance()
+//	{
+//		if (this.m_GeneratedSpellInstance != null) {
+//			GameObject.Destroy (this.m_GeneratedSpellInstance);
+//			this.m_GeneratedSpellInstance = null;
+//		}
+//	}
 }

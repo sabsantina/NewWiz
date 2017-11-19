@@ -22,8 +22,6 @@ public class PlayerAudio : MonoBehaviour
 	[SerializeField] AudioClip shieldCastSound;
 	/**A sound to be played when the water spell is being cast*/
 	[SerializeField] AudioClip waterCastSound;
-    /**A sound to be played when the tornado spell is being cast*/
-    [SerializeField] AudioClip tornadoCastSound;
 
 	//***		Pick-up related sounds...
 
@@ -61,8 +59,6 @@ public class PlayerAudio : MonoBehaviour
 		case SpellName.Thunderstorm:
 			return thunderStormSound; //will change it later
 		//Add more as new spells are created
-        case SpellName.Tornado:
-            return tornadoCastSound;//At the moment is the same as the shield sound.
 		}
 		return shieldCastSound;
 	}//end f'n AudioClip getAudioForSpell(SpellName)
