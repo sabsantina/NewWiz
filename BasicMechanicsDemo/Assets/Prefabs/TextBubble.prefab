@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224689359451520388}
   - component: {fileID: 222143853869512198}
   - component: {fileID: 114252483942745146}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4084175997166080}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: TextBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 224628150845831106}
   - component: {fileID: 222359496533329654}
   - component: {fileID: 114170425082850178}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 223561818893506358}
   - component: {fileID: 114122647931959104}
   - component: {fileID: 114579567153366914}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

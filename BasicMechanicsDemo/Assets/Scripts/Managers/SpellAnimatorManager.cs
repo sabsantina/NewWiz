@@ -20,10 +20,13 @@ public class SpellAnimatorManager : MonoBehaviour {
 	[SerializeField] private AnimatorController m_ThunderStormAnimator;
 	/**The animator containing the animations and bools for the healing spell.*/
 	[SerializeField] private AnimatorController m_HealAnimator;
+    /**The animator containing the animations and bools for the tornado spell.*/
+    [SerializeField] private AnimatorController m_TornadoAnimator;
+    /**The animator containing the animations and bools for the water bubble spell.*/
+    [SerializeField] private AnimatorController m_WaterBubbleAnimator;
 
-
-	/**A function to set a spell animator with respect to the spell*/
-	public void SetSpellAnimator(GameObject spell_default_prefab)
+    /**A function to set a spell animator with respect to the spell*/
+    public void SetSpellAnimator(GameObject spell_default_prefab)
 	{
 		SpellName spell_class_name = spell_default_prefab.GetComponent<SpellMovement>().m_SpellClassToCast.m_SpellName;
 		SpellMovement spell_movement_component = spell_default_prefab.GetComponent<SpellMovement> ();
@@ -77,9 +80,25 @@ public class SpellAnimatorManager : MonoBehaviour {
 				spell_movement_component.SetAnimatorController (this.m_HealAnimator);
 				break;
 			}
+        case (int)SpellName.Tornado:
+            {
+                #if TESTING_SUCCESSFUL_ANIMATOR_ASSIGNMENT
+				Debug.Log ("Tornado animator controller assigned");
+                #endif
+                spell_movement_component.SetAnimatorController (this.m_TornadoAnimator);
+                break;
+            }
+        case (int)SpellName.WaterBubble:
+            {
+                #if TESTING_SUCCESSFUL_ANIMATOR_ASSIGNMENT
+				Debug.Log ("Water bubble animator controller assigned");
+                #endif
+                spell_movement_component.SetAnimatorController (this.m_WaterBubbleAnimator);
+                break;
+            }
 		default:
 			{
-				//Impossible
+                //Impossible
 				break;
 			}
 		}//end switch
