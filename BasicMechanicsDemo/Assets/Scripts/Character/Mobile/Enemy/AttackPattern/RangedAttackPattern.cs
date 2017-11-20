@@ -52,9 +52,13 @@ public class RangedAttackPattern : AttackPattern {
 					this.m_MeleeDetectionRegion.m_Player.AffectHealth(-this.m_Enemy.m_AttackDamageValue);
 					this.m_AttackTimer += Time.deltaTime;
 					//					this.m_IsAttacking_Melee = false;
-					this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_MELEE, false);
 					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
-				} else if (0.0f < this.m_AttackTimer && this.m_AttackTimer < this.m_IntervalBetweenAttacks) {
+				} 
+				else if (0.0f < this.m_AttackTimer && this.m_AttackTimer < 2.0f * Time.deltaTime) {
+					this.GetComponent<Animator> ().SetBool (STRINGKEY_PARAM_ISATTACKING_MELEE, false);
+					this.m_AttackTimer += Time.deltaTime;
+				}
+				else if (0.0f < this.m_AttackTimer && this.m_AttackTimer < this.m_IntervalBetweenAttacks) {
 					this.m_AttackTimer += Time.deltaTime;
 				} else if (this.m_AttackTimer >= this.m_IntervalBetweenAttacks) {
 					this.m_AttackTimer = 0.0f;
@@ -97,7 +101,11 @@ public class RangedAttackPattern : AttackPattern {
 							StartCoroutine (this.DestroySpellAfterTime (2.0f));
 
 							this.m_AttackTimer += Time.deltaTime;
-						} else if (0.0f < this.m_AttackTimer && this.m_AttackTimer < this.m_IntervalBetweenAttacks) {
+						} else if (0.0f < this.m_AttackTimer && this.m_AttackTimer < 2.0f * Time.deltaTime) {
+							this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, false);
+							this.m_AttackTimer += Time.deltaTime;
+						}
+						else if (0.0f < this.m_AttackTimer && this.m_AttackTimer < this.m_IntervalBetweenAttacks) {
 							this.m_AttackTimer += Time.deltaTime;
 						} else if (this.m_AttackTimer >= this.m_IntervalBetweenAttacks) {
 							this.m_AttackTimer = 0.0f;
@@ -158,7 +166,7 @@ public class RangedAttackPattern : AttackPattern {
 					this.m_AttackTimer += Time.deltaTime;
 				} else if (this.m_AttackTimer >= this.m_IntervalBetweenAttacks) {
 					this.m_AttackTimer = 0.0f;
-
+					this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, false);
 					//Ensure generated spell instance is nullified
 					if (this.m_GeneratedSpellInstance != null) {
 						GameObject.Destroy (this.m_GeneratedSpellInstance);
@@ -168,7 +176,7 @@ public class RangedAttackPattern : AttackPattern {
 			}
 		}//end switch
 
-		this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, false);
+//		this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, false);
 	}
 
 	private float FindFloorDistance(Vector3 position)
