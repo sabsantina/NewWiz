@@ -176,6 +176,7 @@ public class RangedAttackPattern : AttackPattern {
 			}
 		}//end switch
 
+
 //		this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, false);
 	}
 
