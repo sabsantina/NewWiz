@@ -13,49 +13,49 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isAttacking_Melee
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isAttacking_Ranged
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isMovingLeft
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isMovingRight
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isMovingUp
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isMovingDown
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isFrozen
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -1933,6 +1933,9 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
+  - {fileID: 1101090003630878818}
+  - {fileID: 1101273456500921642}
+  - {fileID: 1101008518331622926}
   - {fileID: 1101773771717443224}
   - {fileID: 1101931589427277288}
   - {fileID: 1101451344199172212}
@@ -1963,6 +1966,9 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
+  - {fileID: 1101641497266667456}
+  - {fileID: 1101169064089107228}
+  - {fileID: 1101534926591458670}
   - {fileID: 1101857753496893558}
   - {fileID: 1101601461820841652}
   - {fileID: 1101219669122674140}
@@ -1993,6 +1999,9 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
+  - {fileID: 1101940611276974788}
+  - {fileID: 1101031389857393978}
+  - {fileID: 1101117862578972830}
   - {fileID: 1101270621449470292}
   - {fileID: 1101833790613431142}
   - {fileID: 1101503676259347746}
@@ -2023,6 +2032,9 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
+  - {fileID: 1101063621884807914}
+  - {fileID: 1101741130272600146}
+  - {fileID: 1101782067393795546}
   - {fileID: 1101570585972431578}
   - {fileID: 1101739105436130008}
   - {fileID: 1101603595073030476}
@@ -2084,6 +2096,9 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
+  - {fileID: 1101279056103332564}
+  - {fileID: 1101992790828368426}
+  - {fileID: 1101236876205553752}
   - {fileID: 1101756401451363404}
   - {fileID: 1101084643146180274}
   - {fileID: 1101528967094307804}
@@ -2114,6 +2129,9 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
+  - {fileID: 1101101724486598360}
+  - {fileID: 1101607973519689690}
+  - {fileID: 1101127298711862796}
   - {fileID: 1101178275427809060}
   - {fileID: 1101289511220378290}
   - {fileID: 1101853810620506104}
@@ -2174,6 +2192,9 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
+  - {fileID: 1101864519479567776}
+  - {fileID: 1101934551847729826}
+  - {fileID: 1101415731237560612}
   - {fileID: 1101280583539005898}
   - {fileID: 1101726695661892100}
   - {fileID: 1101758421727237516}

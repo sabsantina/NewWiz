@@ -14,16 +14,19 @@ public class MeleeAttackPattern : AttackPattern {
 			{
 				if (this.m_AttackTimer == 0.0f) {
 //					this.m_IsAttacking_Melee = true;
-					this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_MELEE, true);
+					this.GetComponent<Animator> ().SetBool (STRINGKEY_PARAM_ISATTACKING_MELEE, true);
 
-					this.gameObject.GetComponent<AudioSource>().PlayOneShot(this.m_EnemyMeleeAttackSound);
+					this.gameObject.GetComponent<AudioSource> ().PlayOneShot (this.m_EnemyMeleeAttackSound);
 					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
-					this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player.AffectHealth(-this.m_Enemy.GetAttackDamageValue ());
+					this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player.AffectHealth (-this.m_Enemy.GetAttackDamageValue ());
 					this.m_AttackTimer += Time.deltaTime;
 //					this.m_IsAttacking_Melee = false;
-					this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_MELEE, false);
 					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
-				} else if (0.0f < this.m_AttackTimer && this.m_AttackTimer < this.m_IntervalBetweenAttacks) {
+				} else if (0.0f < this.m_AttackTimer && this.m_AttackTimer < 2.0f * Time.deltaTime) {
+					this.GetComponent<Animator> ().SetBool (STRINGKEY_PARAM_ISATTACKING_MELEE, false);
+					this.m_AttackTimer += Time.deltaTime;
+				}
+				else if (0.0f < this.m_AttackTimer && this.m_AttackTimer < this.m_IntervalBetweenAttacks) {
 					this.m_AttackTimer += Time.deltaTime;
 				} else if (this.m_AttackTimer >= this.m_IntervalBetweenAttacks) {
 					this.m_AttackTimer = 0.0f;
