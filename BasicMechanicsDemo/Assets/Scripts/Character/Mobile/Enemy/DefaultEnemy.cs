@@ -10,6 +10,8 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	/**The sound the enemy makes when damaged.
 	*To be set in the inspector; respective attack sounds are found in the corresponding attack patterns*/
 	[SerializeField] public AudioClip m_EnemyDamagedSound;
+	/**A reference to the player, so we can get the player's position.*/
+	[SerializeField] protected Player m_Player;
 
 	/**A MovementPattern to control the enemy's movement*/
 	public MovementPattern m_MovementPattern;
@@ -52,11 +54,22 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	/**The string value of our isAttacking_Ranged animator parameter*/
 	protected readonly string STRINGKEY_PARAM_ISATTACKING_RANGED = "isAttacking_Ranged";
 
-	void Start()
+	protected float m_ChasePlayerTimer;
+	/**The time for this the enemy chases the player if the player attacks the enemy outside of their detection regions.
+	*Set to arbitrary value 2.0f; can be modified in child classes.*/
+	protected float m_ChasePlayerDuration;
+
+	protected virtual void Start()
 	{
 		this.m_Animator = this.GetComponent<Animator> ();
+		this.GetComponent<AudioSource> ().volume = 0.25f;
 	}
 
+	protected void SetChasePlayerSettings(float chase_player_duration)
+	{
+		this.m_ChasePlayerDuration = chase_player_duration;
+		this.m_ChasePlayerTimer = this.m_ChasePlayerDuration;
+	}
 
 	public bool IsAffectedByMagic()
 	{
@@ -93,6 +106,9 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 //			float animation_length = 0.0f;
 //			GameObject.Destroy(this.gameObject, animation_length);
 //		}
+		if (is_dead) {
+			GameObject.Destroy(this.transform.parent.gameObject);
+		}
 	}
 
 	/**A function to affect the enemy's health; damage should be fed as a negative number.*/
@@ -109,7 +125,32 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 		if (this.m_IsAffectedBySpell && this.m_ExtraEffectTimer > 0.0f) {
 			this.ApplySpellEffect (this.m_SpellToApply);
 		}
+		//
+		if (this.m_ChasePlayerTimer < this.m_ChasePlayerDuration) {
+			this.ChasePlayerForSeconds ();
+		}
 		this.Move ();
+	}
+
+	/**A function to tell us if the player is detected in either the attack or the movement region.*/
+	protected virtual bool IsPlayerAtAllDetected()
+	{
+		return false;
+		//A function to be overridden in children
+	}
+
+	/**A function that executes once the chase player timer's been set to less than the chase player duration.
+	*Updates the movement pattern patrol region to the player's position until the duration is reached by the chase player timer.*/
+	private void ChasePlayerForSeconds()
+	{
+		//Set movement pattern patrol region to be at player's position for duration time
+		this.m_MovementPattern.m_PatrolRegion.transform.position = this.m_Player.transform.position;
+		this.m_ChasePlayerTimer += Time.deltaTime;
+
+		if (this.m_ChasePlayerTimer >= this.m_ChasePlayerDuration) {
+			//Set timer to a case wherein the loop will only trigger if set to 0 again
+			this.m_ChasePlayerTimer = this.m_ChasePlayerDuration;
+		}
 	}
 
 	/**A function to apply a given hostile spell's effects on the enemy, including damage.*/
@@ -123,6 +164,14 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 			this.m_IsAffectedBySpell = true;
 			this.m_SpellToApply = spell;
 
+			//Also, if the enemy is being attacked by the player, but the player hasn't been detected in either the movement or attack region
+			//then move the region 
+
+			//If this function is called, the enemy is necessarily being attacked, so just check for player detection
+			if (!this.IsPlayerAtAllDetected ()) {
+				//if not detected then set chase player timer to 0 to tell enemy to chase player
+				this.m_ChasePlayerTimer = 0.0f;
+			}
 		}
 
 		/*
@@ -242,7 +291,7 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 				break;
 			}
 		}//end switch
-	
+		
 		//if this is the last iteration of the function, no matter the spell...
 		if (!this.m_IsAffectedBySpell) {
 			this.m_SpellToApply = null;
@@ -253,15 +302,19 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 		//Note: this is virtual because certain spells may affect certain enemies differently
 	}
 
-	/**A function to set the enemy's health; virtual so we make sure to only set it later, at its proper time*/
-	public virtual void SetHealth()
+	public void SetHealth(float health)
 	{
-		//To be overridden in children classes
+		this.m_Health = health;
 	}
 
 	public virtual void SetAttackDamageValue()
 	{
 		//To be overridden in children classes
+	}
+
+	public void SetAttackDamageValue(float damage)
+	{
+		this.m_AttackDamageValue = damage;
 	}
 
 	public virtual float GetAttackDamageValue()

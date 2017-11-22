@@ -112,4 +112,10 @@ public class RangedEnemy : DefaultEnemy {
 	{
 		//To be overridden in children classes
 	}
+
+	/**A function to tell us if the player is detected in either the attack or the movement region.*/
+	protected override bool IsPlayerAtAllDetected()
+	{
+		return this.m_MovementPattern.IsPlayerDetectedInPatrolRegion() || this.m_AttackPattern.PlayerIsDetectedInAttackDetectionRegion();
+	}
 }

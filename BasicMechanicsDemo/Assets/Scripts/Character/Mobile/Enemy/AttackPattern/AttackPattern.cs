@@ -10,26 +10,12 @@ public class AttackPattern : MonoBehaviour {
 	[SerializeField] protected EnemyDetectionRegion m_AttackDetectionRegion;
 	/**We need a reference to the actual enemy to be able to inflict their specific damage.*/
 	[SerializeField] protected DefaultEnemy m_Enemy;
-//	/**A reference to the player so we can apply the damage to them.*/
-//	[SerializeField] public Player m_Player;
-
-//	/**A reference to the default spell prefab*/
-//	[SerializeField] GameObject m_DefaultSpellPrefab;
-//	/**A reference to the spell instance we generate from the default spell prefab.*/
-//	public GameObject m_GeneratedSpellInstance;
-//	/**To be set from the children classes*/
-//	public SpellClass m_SpellToCast;
-//	[SerializeField] SpellAnimatorManager m_SpellAnimatorManager;
 
 	/**The timer to intersperse the attacks.*/
 	public float m_AttackTimer = 0.0f;
 	/**The time in seconds between each attack.*/
 	public float m_IntervalBetweenAttacks = 1.0f;
 
-//	/**A bool for the enemy animator, to let us know whether or not we're attacking via melee.*/
-//	public bool m_IsAttacking_Melee = false;
-//	/**A bool for the enemy animator, to let us know whether or not we're attacking via ranged attack.*/
-//	public bool m_IsAttacking_Ranged = false;
 	/**The enemy's given animator*/
 	protected Animator m_Animator;
 
@@ -52,12 +38,6 @@ public class AttackPattern : MonoBehaviour {
 	{
 		return this.m_AttackDetectionRegion.m_PlayerInRegion;
 	}
-
-//	protected void UpdateAnimatorParameters_Attack()
-//	{
-//		this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING_MELEE, this.m_IsAttacking_Melee);
-//		this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, this.m_IsAttacking_Ranged);
-//	}
 
 	protected virtual void ExecutePatternState()
 	{}

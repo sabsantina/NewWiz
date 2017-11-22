@@ -27,11 +27,12 @@ public class EnemyInfantry : DefaultEnemy {
 		}
 	}//end f'n void Move()
 
+	/**A function to tell us if the player is detected in either the attack or the movement region.*/
+	protected override bool IsPlayerAtAllDetected()
+	{
+		return this.m_MovementPattern.IsPlayerDetectedInPatrolRegion() || this.m_AttackPattern.PlayerIsDetectedInAttackDetectionRegion();
+	}
 
-//	protected void UpdateAnimator_MeleeParameter()
-//	{
-//		this.m_Animator.SetBool (this.STRINGKEY_PARAM_ISATTACKING_MELEE, this.m_AttackPattern.m_AttackPatternState == AttackPatternState.MELEE);
-//	}
 
     /**A function to more easily manage our attack pattern.
 	*To be expanded upon in child classes.*/
@@ -75,16 +76,5 @@ public class EnemyInfantry : DefaultEnemy {
 	}
 
 
-
-//	public virtual void SetAttackDamage(float attack_damage)
-//	{
-//		//To be overridden in child classes
-//	}
-//
-//	/**A function to set the enemy's health; virtual so we make sure to only set it later, at its proper time*/
-//	public virtual void SetHealth(float health)
-//	{
-//		//To be overridden in children classes
-//	}
 
 }
