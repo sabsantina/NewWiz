@@ -28,6 +28,10 @@ public class EnemyInfantry : DefaultEnemy {
 	}//end f'n void Move()
 
 
+//	protected void UpdateAnimator_MeleeParameter()
+//	{
+//		this.m_Animator.SetBool (this.STRINGKEY_PARAM_ISATTACKING_MELEE, this.m_AttackPattern.m_AttackPatternState == AttackPatternState.MELEE);
+//	}
 
     /**A function to more easily manage our attack pattern.
 	*To be expanded upon in child classes.*/
@@ -42,6 +46,7 @@ public class EnemyInfantry : DefaultEnemy {
             this.m_AttackPattern.m_AttackPatternState = AttackPatternState.DO_NOTHING;
         }
     }
+
 
     /**A function to establish whether or not the player is in range of the enemy, for the specific enemy. 
 	 * - Sets this.mPlayerIsInRange as well as returns a bool*/
@@ -66,12 +71,10 @@ public class EnemyInfantry : DefaultEnemy {
 	protected virtual void Update()
 	{
 		base.Update ();
-		if (this.IsPlayerInRangeOfAttack ()) {
-			this.Attack ();
-		} else {
-			this.m_AttackPattern.m_AttackPatternState = AttackPatternState.DO_NOTHING;
-		}
+		this.ManageAttack ();
 	}
+
+
 
 //	public virtual void SetAttackDamage(float attack_damage)
 //	{

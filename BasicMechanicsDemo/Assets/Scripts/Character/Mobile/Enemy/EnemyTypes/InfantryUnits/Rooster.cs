@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿#define TESTING_MELEE_PARAM
+#define TESTING_RANGED_PARAM
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +16,8 @@ public class Rooster : EnemyInfantry {
 	void Start () {
 		this.SetAttackDamageValue ();
 		this.SetHealth ();
+
+		this.m_Animator = this.GetComponent<Animator> ();
 	}
 
 
@@ -20,6 +25,12 @@ public class Rooster : EnemyInfantry {
 	protected override void Update () {
 		base.Update ();
 
+		#if TESTING_MELEE_PARAM
+		Debug.Log("Rooster attacking Melee? " + this.m_Animator.GetBool("isAttacking_Melee"));
+		#endif
+		#if TESTING_RANGED_PARAM
+		Debug.Log("Rooster attacking Ranged? " + this.m_Animator.GetBool("isAttacking_Ranged"));
+		#endif
 	}
 
 	/**A function to apply a given spell's effects on the enemy, including damage.*/
