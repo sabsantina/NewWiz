@@ -24,11 +24,14 @@ public class PlayerAudio : MonoBehaviour
 	[SerializeField] AudioClip waterCastSound;
     /**A sound to be played when the tornado spell is being cast*/
     [SerializeField] AudioClip tornadoCastSound;
+    /**A sound to be played when the waterBubble spell is being cast*/
+    [SerializeField] AudioClip waterBubbleCastSound;
 
-	//***		Pick-up related sounds...
 
-	/**An audio clip to tell us an item got picked up*/
-	[SerializeField] private AudioClip m_ItemPickedUpSound;
+    //***		Pick-up related sounds...
+
+    /**An audio clip to tell us an item got picked up*/
+    [SerializeField] private AudioClip m_ItemPickedUpSound;
 	/**An audio clip to tell us a spell got picked up/acquired*/
 	[SerializeField] private AudioClip m_SpellPickedUpSound;
 	/**A player-audio for pickups; we might be picking something up while casting a spell, or being attacked, so keeping them separate is good.*/
@@ -62,8 +65,11 @@ public class PlayerAudio : MonoBehaviour
 			return thunderStormSound; //will change it later
 		//Add more as new spells are created
         case SpellName.Tornado:
-            return tornadoCastSound;//At the moment is the same as the shield sound.
+            return tornadoCastSound;
+        case SpellName.WaterBubble:
+            return waterBubbleCastSound;
 		}
+        
 		return shieldCastSound;
 	}//end f'n AudioClip getAudioForSpell(SpellName)
 
