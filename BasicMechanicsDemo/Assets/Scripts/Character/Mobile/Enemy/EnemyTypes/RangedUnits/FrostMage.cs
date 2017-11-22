@@ -12,16 +12,19 @@ public class FrostMage : RangedEnemy {
 
     public float m_IntervalBetweenMeleeAttacks = 2.5f;
 
+	public float m_FrostMageChasePlayerDuration = 1.5f;
+
 	// Use this for initialization
-	void Start () {
+	protected override void Start () {
+		base.Start ();
+
         this.SetIntervalsBetweenAttacks();
-        this.SetHealth();
+		this.SetHealth(this.m_FrostMageHealth);
         this.SetMeleeDamage();
         this.SetSpellToCast(this.m_AttackSpell);
         this.SetAttackDamageValue();
 
-        //???
-        this.m_Animator = this.GetComponent<Animator>();
+		this.SetChasePlayerSettings (this.m_FrostMageChasePlayerDuration);
     }
 	
 	// Update is called once per frame
@@ -34,11 +37,6 @@ public class FrostMage : RangedEnemy {
         SpellClass spell_instance = new SpellClass();
         this.m_SpellToCast = spell_instance.GenerateInstance(spell);
         this.m_AttackPattern.m_SpellToCast = this.m_SpellToCast;
-    }
-
-    public override void SetHealth()
-    {
-        this.m_Health = this.m_FrostMageHealth;
     }
 
     public override void SetAttackDamageValue()

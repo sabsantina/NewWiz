@@ -30,6 +30,8 @@ public class RangedAttackPattern : AttackPattern {
 
 	public float m_EffectManagerTimer = 0.0f;
 
+	private Player m_PlayerInstance = new Player();
+
 	void Start()
 	{
 		this.m_AudioSource = this.GetComponent<AudioSource> ();
@@ -44,15 +46,11 @@ public class RangedAttackPattern : AttackPattern {
 				if (this.m_AttackTimer == 0.0f) {
 					//					this.m_IsAttacking_Melee = true;
 					this.m_Enemy.SetAttackDamageValue();
-//					Debug.Log (this.gameObject.name + " melee damage: " + this.m_Enemy.m_AttackDamageValue);
 					this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_MELEE, true);
 
 					this.gameObject.GetComponent<AudioSource>().PlayOneShot(this.m_EnemyMeleeAttackSound);
-					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
 					this.m_MeleeDetectionRegion.m_Player.AffectHealth(-this.m_Enemy.m_AttackDamageValue);
 					this.m_AttackTimer += Time.deltaTime;
-					//					this.m_IsAttacking_Melee = false;
-					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
 				} 
 				else if (0.0f < this.m_AttackTimer && this.m_AttackTimer < 2.0f * Time.deltaTime) {
 					this.GetComponent<Animator> ().SetBool (STRINGKEY_PARAM_ISATTACKING_MELEE, false);
@@ -72,15 +70,26 @@ public class RangedAttackPattern : AttackPattern {
 
 				if (this.m_AttackTimer == 0.0f) {
 					this.m_Enemy.SetAttackDamageValue ();
-//					Debug.Log (this.gameObject.name + " ranged damage: " + this.m_Enemy.m_AttackDamageValue);
 					this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, true);
 
 					this.GenerateSpellPrefabInstance ();
 					Player player_detected = this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player;
+					//if the player was detected in the movement region...
 					if (player_detected != null) {
 						this.m_EnemySpellSound = player_detected.m_PlayerAudio.getAudioForSpell (this.m_SpellToCast.m_SpellName);
-						this.m_AudioSource.PlayOneShot(this.m_EnemySpellSound);
+						this.m_AudioSource.PlayOneShot (this.m_EnemySpellSound);
 					}
+					//in the event that the player wasn't actually detected in the movement region but was detected from the attack region
+					else {
+						//...then get the attack region's player instance
+						player_detected = this.m_AttackDetectionRegion.m_Player;
+						if (player_detected != null) {
+							this.m_EnemySpellSound = player_detected.m_PlayerAudio.getAudioForSpell (this.m_SpellToCast.m_SpellName);
+							this.m_AudioSource.PlayOneShot (this.m_EnemySpellSound);
+						}
+					}
+
+					this.m_PlayerInstance = player_detected;
 				}
 				switch ((int)this.m_SpellToCast.m_SpellType) {
 				case (int)SpellType.BASIC_PROJECTILE_ON_TARGET:
@@ -90,15 +99,16 @@ public class RangedAttackPattern : AttackPattern {
 							this.m_GeneratedSpellInstance.transform.position = this.transform.position;
 							SpellMovement spell_movement = this.m_GeneratedSpellInstance.GetComponent<SpellMovement> ();
 							//if the player reference exists...
-							if (this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player != null) {
+							if (this.m_PlayerInstance != null) {
 								//...then continue with the spell casting
-								spell_movement.SetEnemyTarget (this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player.gameObject);
+//								spell_movement.SetEnemyTarget (this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player.gameObject);
+								spell_movement.SetEnemyTarget (this.m_PlayerInstance.gameObject);
 								spell_movement.SetSpellToCast (this.m_SpellToCast);
 
 
 							}
 							//Worst-case, destroy the generated spell instance after given time
-							StartCoroutine (this.DestroySpellAfterTime (2.0f));
+							this.DestroySpellAfterTime(1.5f);
 
 							this.m_AttackTimer += Time.deltaTime;
 						} else if (0.0f < this.m_AttackTimer && this.m_AttackTimer < 2.0f * Time.deltaTime) {
@@ -109,6 +119,7 @@ public class RangedAttackPattern : AttackPattern {
 							this.m_AttackTimer += Time.deltaTime;
 						} else if (this.m_AttackTimer >= this.m_IntervalBetweenAttacks) {
 							this.m_AttackTimer = 0.0f;
+
 						}
 
 						break;
@@ -116,13 +127,12 @@ public class RangedAttackPattern : AttackPattern {
 				case (int)SpellType.AOE_ON_TARGET:
 					{
 						Player player = this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player;
+						if (player == null) {
+							player = this.m_AttackDetectionRegion.m_Player;
+						}
 						if (this.m_AttackTimer == 0.0f) {
 							if (player != null) {
-								//Spawn AOE halfway to player
-								Vector3 halfway_to_player = player.gameObject.transform.position - this.transform.position;
-								halfway_to_player.x /= 2.0f;
-								halfway_to_player.z /= 2.0f;
-//								this.m_GeneratedSpellInstance.transform.position = this.transform.position + halfway_to_player;
+								//Spawn AOE at caster's position
 								this.m_GeneratedSpellInstance.transform.position = this.transform.position;
 							}
 							SpellMovement spell_movement = this.m_GeneratedSpellInstance.GetComponent<SpellMovement> ();
@@ -147,8 +157,6 @@ public class RangedAttackPattern : AttackPattern {
 							this.m_AttackTimer += Time.deltaTime;
 						}
 
-						//***********
-
 						break;
 					}//end case AOE_ON_TARGET
 				}//end switch spelltype
@@ -167,17 +175,13 @@ public class RangedAttackPattern : AttackPattern {
 				} else if (this.m_AttackTimer >= this.m_IntervalBetweenAttacks) {
 					this.m_AttackTimer = 0.0f;
 					this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, false);
-					//Ensure generated spell instance is nullified
-					if (this.m_GeneratedSpellInstance != null) {
-						GameObject.Destroy (this.m_GeneratedSpellInstance);
-					}
+
+					this.DestroySpellAfterTime (1.5f);
 				}
 				break;
 			}
 		}//end switch
 
-
-//		this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, false);
 	}
 
 	private float FindFloorDistance(Vector3 position)
@@ -240,11 +244,11 @@ public class RangedAttackPattern : AttackPattern {
 		}//end foreach
 	}//end f'n void ApplyAOEToEnemies(Vector3)
 
-	private IEnumerator DestroySpellAfterTime(float time)
+	private void DestroySpellAfterTime(float time)
 	{
-		yield return new WaitForSeconds (time);
 		if (this.m_GeneratedSpellInstance != null) {
-			this.DestroySpellPrefabInstance ();
+			GameObject.Destroy (this.m_GeneratedSpellInstance, time);
+			this.m_GeneratedSpellInstance = null;
 		}
 	}
 
