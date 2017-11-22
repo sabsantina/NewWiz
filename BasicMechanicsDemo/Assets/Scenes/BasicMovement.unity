@@ -6432,14 +6432,20 @@ Prefab:
       propertyPath: m_RootOrder
       value: 19
       objectReference: {fileID: 0}
+    - target: {fileID: 114549434490359252, guid: fa18a4496dab99a4f97920714279d1ac,
+        type: 2}
+      propertyPath: m_Player
+      value: 
+      objectReference: {fileID: 1546207776}
     - target: {fileID: 114890958031938934, guid: fa18a4496dab99a4f97920714279d1ac,
         type: 2}
       propertyPath: m_SpellAnimatorManager
       value: 
       objectReference: {fileID: 872955990}
-    - target: {fileID: 1802743614864824, guid: fa18a4496dab99a4f97920714279d1ac, type: 2}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 114819796290340496, guid: fa18a4496dab99a4f97920714279d1ac,
+        type: 2}
+      propertyPath: m_MaximalVelocity
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fa18a4496dab99a4f97920714279d1ac, type: 2}

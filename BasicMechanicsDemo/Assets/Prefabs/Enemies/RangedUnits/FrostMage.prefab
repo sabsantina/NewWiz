@@ -122,7 +122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4116023088184474
 Transform:
   m_ObjectHideFlags: 1
@@ -384,7 +384,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.167
   m_Pitch: 1
   Loop: 0
@@ -483,7 +483,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerInRegion: 0
-  m_InteriorPadding: 1
   m_Player: {fileID: 0}
 --- !u!114 &114147500137764432
 MonoBehaviour:
@@ -497,7 +496,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerInRegion: 0
-  m_InteriorPadding: 1
   m_Player: {fileID: 0}
 --- !u!114 &114405670193005850
 MonoBehaviour:
@@ -523,6 +521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyDamagedSound: {fileID: 0}
+  m_Player: {fileID: 0}
   m_MovementPattern: {fileID: 114819796290340496}
   m_Health: 0
   m_AttackDamageValue: 0
@@ -542,6 +541,7 @@ MonoBehaviour:
   m_FrostMageMeleeDamage: 2
   m_IntervalBetweenRangedAttacks: 3
   m_IntervalBetweenMeleeAttacks: 2.5
+  m_FrostMageChasePlayerDuration: 1.5
 --- !u!114 &114804589704829408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -554,7 +554,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerInRegion: 0
-  m_InteriorPadding: 1
   m_Player: {fileID: 0}
 --- !u!114 &114819796290340496
 MonoBehaviour:

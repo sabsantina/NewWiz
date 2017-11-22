@@ -62,6 +62,7 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	protected virtual void Start()
 	{
 		this.m_Animator = this.GetComponent<Animator> ();
+		this.GetComponent<AudioSource> ().volume = 0.25f;
 	}
 
 	protected void SetChasePlayerSettings(float chase_player_duration)
