@@ -42,7 +42,7 @@ public class MovementPattern : MobileCharacter {
 		float detection_area_radius = this.m_PatrolRegion.GetComponent<SphereCollider> ().radius * this.m_PatrolRegion.transform.lossyScale.x;
 		//if the distance between the enemy and the center of the detection area is greater than the radius of the
 		//detection area (minus a little extra interior padding)...
-		if (distance_from_center > (detection_area_radius - this.m_PatrolRegion.m_InteriorPadding)) {
+		if (distance_from_center > detection_area_radius) {
 			//...then the enemy is beyond the detection area
 			return true;
 		}//end if

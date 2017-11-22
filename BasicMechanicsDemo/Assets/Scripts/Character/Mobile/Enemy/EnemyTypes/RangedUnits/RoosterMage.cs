@@ -14,9 +14,12 @@ public class RoosterMage : RangedEnemy {
 
 	public float m_RoosterMageMeleeDamage = 1.5f;
 
+	public float m_RoosterMageChasePlayerDuration = 1.5f;
+
 	public float m_IntervalBetweenRangedAttacks = 2.5f;
 
 	public float m_IntervalBetweenMeleeAttacks = 1.0f;
+
 
 	// Use this for initialization
 	void Start () {
@@ -28,6 +31,7 @@ public class RoosterMage : RangedEnemy {
 		this.SetSpellToCast (this.m_AttackSpell);
 		this.SetAttackDamageValue ();
 
+		this.SetChasePlayerSettings (this.m_RoosterMageChasePlayerDuration);
 	}
 
 
