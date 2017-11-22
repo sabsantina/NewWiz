@@ -12,21 +12,20 @@ public class ArmoredSoldier : EnemyInfantry {
 
     // Use this for initialization
     void Start () {
-        this.SetHealth();
+		this.SetHealth(this.m_ArmoredSoldierHealth);
         this.SetAttackDamageValue();
         this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingLayerName = sortingLayerName;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        base.Update();
+		//Take care of movement and attack patterns
+		base.Update ();
+		//Manage death
+		this.Die ();
+
         //This line of code is used to get the correct draw order.
         this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(this.GetComponent<Transform>().transform.position.z * 100f) * -1;
-    }
-    /**A function to set the enemy health in our parent classes*/
-    public override void SetHealth()
-    {
-        this.m_Health = this.m_ArmoredSoldierHealth;
     }
 
     public override void SetAttackDamageValue()

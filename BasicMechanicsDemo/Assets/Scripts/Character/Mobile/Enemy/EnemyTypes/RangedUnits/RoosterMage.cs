@@ -1,5 +1,5 @@
 ﻿////Uncommnt this macro to be able to switch the spell the RoosterMage casts in real time, from the inspector.
-#define TESTING_SPELL_SELECTION
+//#define TESTING_SPELL_SELECTION
 
 //#define TESTING_MELEE_PARAM
 //#define TESTING_RANGED_PARAM
@@ -20,22 +20,23 @@ public class RoosterMage : RangedEnemy {
 
 	// Use this for initialization
 	void Start () {
+		base.Start ();
+
 		this.SetIntervalsBetweenAttacks ();
-		this.SetHealth ();
+		this.SetHealth (this.m_RoosterMageHealth);
 		this.SetMeleeDamage ();
 		this.SetSpellToCast (this.m_AttackSpell);
 		this.SetAttackDamageValue ();
 
-		//???
-		this.m_Animator = this.GetComponent<Animator> ();
 	}
 
 
 	// Update is called once per frame
 	protected override void Update () {
+		//Take care of movement and attack patterns
 		base.Update ();
-
-//		Debug.Log ("Interval between attacks: " + this.m_AttackPattern.m_IntervalBetweenAttacks);
+		//Manage death
+		this.Die ();
 
 		#if TESTING_SPELL_SELECTION
 		this.SetSpellToCast (this.m_AttackSpell);
@@ -54,12 +55,6 @@ public class RoosterMage : RangedEnemy {
 		SpellClass spell_instance = new SpellClass ();
 		this.m_SpellToCast = spell_instance.GenerateInstance (spell);
 		this.m_AttackPattern.m_SpellToCast = this.m_SpellToCast;
-	}
-
-	/**A function to set the enemy health in our parent classes*/
-	public override void SetHealth ()
-	{
-		this.m_Health = this.m_RoosterMageHealth;
 	}
 
 	public override void SetAttackDamageValue ()

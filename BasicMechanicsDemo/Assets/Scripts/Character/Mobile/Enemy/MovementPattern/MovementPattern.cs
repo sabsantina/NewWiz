@@ -7,7 +7,6 @@ public class MovementPattern : MobileCharacter {
 	/**The enemy patrol and detection radius*/
 	[SerializeField] public EnemyDetectionRegion m_PatrolRegion;
 
-
 	/**The state of the movement pattern.*/
 	public MovementPatternState m_MovementPatternState = MovementPatternState.ROAM;
 
@@ -18,6 +17,7 @@ public class MovementPattern : MobileCharacter {
 
 	// Use this for initialization
 	void Start () {
+		//Default value
 		this.m_MaximalVelocity = 2.5f;
 		this.m_Direction = Vector3.Normalize(new Vector3(Random.Range(-100.0f, 100.0f), 0.0f, Random.Range(-100.0f, 100.0f))) * this.m_MaximalVelocity;
 
@@ -77,6 +77,7 @@ public class MovementPattern : MobileCharacter {
 
 
 	/**Move the gameobject with respect to the current movement pattern.
+	 * 
 	*Note: Updates animator parameters immediately following execution of the actual movement.*/
 	private void ExecutePatternState()
 	{
@@ -128,7 +129,7 @@ public class MovementPattern : MobileCharacter {
 		}
 		//if moving leads to the enemy running into an Obstructable...
 		if (this.MovingLeadsToObstructable (displacement * Time.deltaTime)) {
-			//move in some other direction
+			//move in a direction perpendicular to wherever the obstructable is
 			displacement = Vector3.Normalize(Vector3.Cross(displacement, this.transform.up)) * this.m_MaximalVelocity;
 			this.m_Direction = displacement;
 		}

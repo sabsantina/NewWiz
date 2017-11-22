@@ -44,15 +44,11 @@ public class RangedAttackPattern : AttackPattern {
 				if (this.m_AttackTimer == 0.0f) {
 					//					this.m_IsAttacking_Melee = true;
 					this.m_Enemy.SetAttackDamageValue();
-//					Debug.Log (this.gameObject.name + " melee damage: " + this.m_Enemy.m_AttackDamageValue);
 					this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_MELEE, true);
 
 					this.gameObject.GetComponent<AudioSource>().PlayOneShot(this.m_EnemyMeleeAttackSound);
-					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
 					this.m_MeleeDetectionRegion.m_Player.AffectHealth(-this.m_Enemy.m_AttackDamageValue);
 					this.m_AttackTimer += Time.deltaTime;
-					//					this.m_IsAttacking_Melee = false;
-					//					this.m_Animator.SetBool (STRINGKEY_PARAM_ISATTACKING, this.m_IsAttacking);
 				} 
 				else if (0.0f < this.m_AttackTimer && this.m_AttackTimer < 2.0f * Time.deltaTime) {
 					this.GetComponent<Animator> ().SetBool (STRINGKEY_PARAM_ISATTACKING_MELEE, false);
@@ -72,7 +68,6 @@ public class RangedAttackPattern : AttackPattern {
 
 				if (this.m_AttackTimer == 0.0f) {
 					this.m_Enemy.SetAttackDamageValue ();
-//					Debug.Log (this.gameObject.name + " ranged damage: " + this.m_Enemy.m_AttackDamageValue);
 					this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, true);
 
 					this.GenerateSpellPrefabInstance ();
@@ -118,11 +113,7 @@ public class RangedAttackPattern : AttackPattern {
 						Player player = this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player;
 						if (this.m_AttackTimer == 0.0f) {
 							if (player != null) {
-								//Spawn AOE halfway to player
-								Vector3 halfway_to_player = player.gameObject.transform.position - this.transform.position;
-								halfway_to_player.x /= 2.0f;
-								halfway_to_player.z /= 2.0f;
-//								this.m_GeneratedSpellInstance.transform.position = this.transform.position + halfway_to_player;
+								//Spawn AOE at caster's position
 								this.m_GeneratedSpellInstance.transform.position = this.transform.position;
 							}
 							SpellMovement spell_movement = this.m_GeneratedSpellInstance.GetComponent<SpellMovement> ();
@@ -146,8 +137,6 @@ public class RangedAttackPattern : AttackPattern {
 
 							this.m_AttackTimer += Time.deltaTime;
 						}
-
-						//***********
 
 						break;
 					}//end case AOE_ON_TARGET
@@ -176,8 +165,6 @@ public class RangedAttackPattern : AttackPattern {
 			}
 		}//end switch
 
-
-//		this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, false);
 	}
 
 	private float FindFloorDistance(Vector3 position)
