@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: a9d4a7d40918e1045a749e3b5226b617
+timeCreated: 1511400164
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Heavy Gothik
+  fontNames:
+  - Heavy Gothik
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
