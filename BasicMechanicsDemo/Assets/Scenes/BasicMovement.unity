@@ -13804,7 +13804,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1295592544126026, guid: 9053599dd27ba439eb6fd4c325a8ccde, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114757115359749616, guid: 9053599dd27ba439eb6fd4c325a8ccde,
         type: 2}
@@ -15971,8 +15971,14 @@ Prefab:
       objectReference: {fileID: 872955990}
     - target: {fileID: 1530564148805280, guid: fb40b1c67ec6442da995f37b80648cc3, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114362496863020502, guid: fb40b1c67ec6442da995f37b80648cc3,
+        type: 2}
+      propertyPath: m_EnemyHitAnimation
+      value: 
+      objectReference: {fileID: 1253389617355122, guid: b972a545bdc16ee46b5695a641c65c8d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb40b1c67ec6442da995f37b80648cc3, type: 2}
   m_IsPrefabParent: 0
@@ -17581,7 +17587,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1320668033185592, guid: 00cdbe88ede784e4ca0102b3375fcae0, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00cdbe88ede784e4ca0102b3375fcae0, type: 2}
