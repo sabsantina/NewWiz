@@ -429,6 +429,7 @@ MonoBehaviour:
   m_IntervalBetweenAttacks: 1
   m_EnemyMeleeAttackSound: {fileID: 8300000, guid: 8ab6e052eed3c8942ac40c3bdde8eedb,
     type: 3}
+  m_EnemyAttackHitAnimation: {fileID: 0}
 --- !u!114 &114460349228667514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -484,9 +485,10 @@ MonoBehaviour:
   m_ShockJumpDistance: 0.25
   m_ShockJumpFrequency: 0.0005
   m_AttackPattern: {fileID: 114274738053832088}
-  m_WolfAttackDamage: 2.5
+  m_WolfAttackDamage: 10
   m_WolfHealth: 40
-  m_WolfChasePlayerDuration: 2
+  m_WolfChasePlayerDuration: 3
+  sortingLayerName: Objects
 --- !u!135 &135305273075454592
 SphereCollider:
   m_ObjectHideFlags: 1

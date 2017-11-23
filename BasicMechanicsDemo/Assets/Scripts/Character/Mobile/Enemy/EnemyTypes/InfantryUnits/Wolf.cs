@@ -5,11 +5,11 @@ using UnityEngine;
 public class Wolf : EnemyInfantry {
 
     /**The damage a Wolf enemy does on attack.*/
-    public float m_WolfAttackDamage = 2.5f;
+    public float m_WolfAttackDamage = 10.0f;
     /**The amount of health a Wolf enemy has.*/
-    public float m_WolfHealth = 20.0f;
-    /**Length of time for which the rooster will chase the player if the player attacks the rooster without being detected first*/
-    public float m_WolfChasePlayerDuration = 2.0f;
+    public float m_WolfHealth = 40.0f;
+    /**Length of time for which the wolf will chase the player if the player attacks the wolf without being detected first*/
+    public float m_WolfChasePlayerDuration = 3.0f;
     /**The string value of the name of the sorting layer*/
     public string sortingLayerName;
 
@@ -31,7 +31,7 @@ public class Wolf : EnemyInfantry {
         //Take care of movement and attack patterns
         base.Update();
         //Manage death
-        //this.Die();
+        this.Die();
         this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(this.GetComponent<Transform>().transform.position.z * 100f) * -1;
 
 
