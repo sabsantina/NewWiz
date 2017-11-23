@@ -541,7 +541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64744d5a7dc224b4aab7f5a812668b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaximalVelocity: 0
+  m_MaximalVelocity: 5
   m_Animator: {fileID: 0}
   m_PatrolRegion: {fileID: 114844251246729604}
   m_MovementPatternState: 0

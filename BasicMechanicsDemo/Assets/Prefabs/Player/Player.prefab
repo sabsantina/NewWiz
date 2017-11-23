@@ -9262,7 +9262,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 224016551436307416}
   m_Direction: 2
   m_Value: 0.88526493
-  m_Size: 0.1415
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10040,7 +10040,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 224541459575794778}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -13811,6 +13811,7 @@ MonoBehaviour:
   sortingLayerName: Objects
   m_IsAffectedBySpell: 0
   m_ExtraEffectsTimer: 0
+  m_MagicAffinity: 1
 --- !u!114 &114895016287083824
 MonoBehaviour:
   m_ObjectHideFlags: 1
