@@ -158,6 +158,8 @@ public class SpellMovement : MonoBehaviour {
 	{
 		this.m_SpellClassToCast = spell;
 		this.m_SpellName = this.m_SpellClassToCast.m_SpellName.ToString ();
+		this.m_MaximalVelocity = this.m_SpellClassToCast.m_SpellVelocity;
+		Debug.Log (m_MaximalVelocity);
 	}
 
     /**A function to be called whenever something enters a spellmovement collider; in terms of functionality, we'll use this function to destroy the spell object prefab after it strikes with something's collider.*/

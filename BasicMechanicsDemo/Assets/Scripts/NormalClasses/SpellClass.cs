@@ -19,31 +19,52 @@ public class SpellClass {
 	public float m_ManaCost = 0.0f;
 	/**A bool to tell us whether or not the player can hold down the mouse to cast the spell. This is important for mana.*/
 	public bool m_IsPersistent = false;
+	public float m_SpellVelocity = 0.0f;
 
+	//the following variables to help for spell testing and balancing from the inspector.
+	//Fireball
 	/**A variable to represent the mana cost of the fireball spell.
 	*At starting mana of 100, the player can cast 50 of these before needing a mana refill.*/
-	public readonly float FIREBALL_MANA_COST = 2.0f;
+	public float FIREBALL_MANA_COST = 2.0f;
+	public float FIREBALL_DAMAGE = 10.0f;
+	public float FIREBALL_VELOCITY = 15.0f;
+	//Iceball
 	/**A variable to represent the mana cost of the iceball spell.
 	*At starting mana of 100, the player can cast 33 of these before needing a mana refill.*/
-	public readonly float ICEBALL_MANA_COST = 3.0f;
+	public float ICEBALL_MANA_COST = 3.0f;
+	public float ICEBALL_DAMAGE = 7.5f;
+	public float ICEBALL_VELOCITY = 20.0f;
+	//Thunderball
 	/**A variable to represent the mana cost of the thunderball spell.
 	*At starting mana of 100, the player can cast 20 of these before needing a mana refill.*/
-	public readonly float THUNDERBALL_MANA_COST = 5.0f;
+	public float THUNDERBALL_MANA_COST = 5.0f;
+	public float THUNDERBALL_DAMAGE = 17.5f;
+	public float THUNDERBALL_VELOCITY = 25.0f;
+	//Shield
 	/**A variable to represent the mana cost of the shield spell. This is a persisting spell, so the player will be expending 15 mana * a value increasing by Time.deltatime every frame.
 	*At starting mana of 100, the player can cast this for a couple of seconds before needing a mana refill.*/
-	public readonly float SHIELD_MANA_COST = 20.0f;
+	public float SHIELD_MANA_COST = 50.0f;
+	//Thunderstorm
 	/**A variable to represent the mana cost of the thunderstorm spell. This is a persisting spell, so the player will be expending 10 mana * a value increasing by Time.deltatime every frame.
 	*At starting mana of 100, the player can cast this for a couple of seconds before needing a mana refill.*/
-	public readonly float THUNDERSTORM_MANA_COST = 40.0f;
+	public float THUNDERSTORM_MANA_COST = 40.0f;
+	public float THUNDERSTORM_DAMAGE = 40.0f;
+	//velocity?
+	//Heal
 	/**A variable to represent the mana cost of the heal spell. This is a persisting spell, so the player will be expending 0.5 mana * a value increasing by Time.deltatime every frame.
 	*At starting mana of 100, the player can cast this for several seconds before needing a mana refill.*/
-	public readonly float HEAL_MANA_COST = 15.0f;
+	public float HEAL_MANA_COST = 15.0f;
+	//Tornado
     /**A variable to represent the mana cost of the tornado spell.
      *At starting mana of 100, the player can cast 14 of these before needing a mana refill.*/
-    public readonly float TORNADO_MANA_COST = 7.0f;
+    public float TORNADO_MANA_COST = 4.0f;
+	public float TORNADO_DAMAGE = 10.0f;
+	public float TORNADO_VELOCITY = 15.0f;
     /**A variable to represent the mana cost of the water bubble spell.
      *At starting mana of 100, the player can cast 25 of these before needing a mana refill.*/
-    public readonly float WATER_BUBBLE_MANA_COST = 4.0f;
+    public float WATER_BUBBLE_MANA_COST = 4.0f;
+	public float WATER_BUBBLE_DAMAGE = 8.0f;
+	public float WATER_BUBBLE_VELOCITY = 25.0f;
 
     /**A function to return a SpellClass instance based on the spell name, from the SpellName enum, in its enum form.*/
     public SpellClass GenerateInstance(SpellName spell_name)
@@ -56,8 +77,9 @@ public class SpellClass {
 				spellinstance_to_return.m_SpellEffect = SpellEffect.Fire_Damage;
 				spellinstance_to_return.m_SpellType = SpellType.BASIC_PROJECTILE_ON_TARGET;
 				spellinstance_to_return.m_EffectDuration = 0.0f;
-				spellinstance_to_return.m_SpellDamage = 10.0f;
+				spellinstance_to_return.m_SpellDamage = FIREBALL_DAMAGE;
 				spellinstance_to_return.m_ManaCost = FIREBALL_MANA_COST;
+				spellinstance_to_return.m_SpellVelocity = FIREBALL_VELOCITY;
 				spellinstance_to_return.m_IsPersistent = false;
 				break;
 			}//end case Fireball
@@ -78,7 +100,8 @@ public class SpellClass {
 				spellinstance_to_return.m_SpellEffect = SpellEffect.Ice_Freeze;
 				spellinstance_to_return.m_SpellType = SpellType.BASIC_PROJECTILE_ON_TARGET;
 				spellinstance_to_return.m_EffectDuration = 2.5f;
-				spellinstance_to_return.m_SpellDamage = 7.5f;
+				spellinstance_to_return.m_SpellDamage = ICEBALL_DAMAGE;
+				spellinstance_to_return.m_SpellVelocity = ICEBALL_VELOCITY;
 				spellinstance_to_return.m_ManaCost = ICEBALL_MANA_COST;
 				spellinstance_to_return.m_IsPersistent = false;
 				break;
@@ -89,7 +112,8 @@ public class SpellClass {
 				spellinstance_to_return.m_SpellEffect = SpellEffect.Shock_Damage;
 				spellinstance_to_return.m_SpellType = SpellType.BASIC_PROJECTILE_ON_TARGET;
 				spellinstance_to_return.m_EffectDuration = 1.25f;
-				spellinstance_to_return.m_SpellDamage = 15.0f;
+				spellinstance_to_return.m_SpellDamage = THUNDERBALL_DAMAGE;
+				spellinstance_to_return.m_SpellVelocity = THUNDERBALL_VELOCITY;
 				spellinstance_to_return.m_ManaCost = THUNDERBALL_MANA_COST;
 				spellinstance_to_return.m_IsPersistent = false;
 				break;
@@ -102,7 +126,7 @@ public class SpellClass {
 				//While it is true that thunderstorm can be used indefinitely, the effects of this spell are electrocution for a given 
 				//time; it therefore has a duration value 
 				spellinstance_to_return.m_EffectDuration = 1.25f;
-				spellinstance_to_return.m_SpellDamage = 40.0f;
+				spellinstance_to_return.m_SpellDamage = THUNDERSTORM_DAMAGE;
 				spellinstance_to_return.m_ManaCost = THUNDERSTORM_MANA_COST;
 				spellinstance_to_return.m_IsPersistent = true;
 				break;
@@ -124,6 +148,8 @@ public class SpellClass {
                 spellinstance_to_return.m_SpellType = SpellType.BASIC_PROJECTILE_ON_TARGET;
                 spellinstance_to_return.m_EffectDuration = 0.5f;
                 spellinstance_to_return.m_ManaCost = TORNADO_MANA_COST;
+				spellinstance_to_return.m_SpellDamage = TORNADO_DAMAGE;
+				spellinstance_to_return.m_SpellVelocity = TORNADO_VELOCITY;
                 spellinstance_to_return.m_IsPersistent = false;
                 break;
             }//end case Tornado
@@ -134,6 +160,8 @@ public class SpellClass {
                 spellinstance_to_return.m_SpellType = SpellType.BASIC_PROJECTILE_ON_TARGET;
                 spellinstance_to_return.m_EffectDuration = 0.0f;
                 spellinstance_to_return.m_ManaCost = WATER_BUBBLE_MANA_COST;
+				spellinstance_to_return.m_SpellDamage = WATER_BUBBLE_DAMAGE;
+				spellinstance_to_return.m_SpellVelocity = WATER_BUBBLE_VELOCITY;
                 spellinstance_to_return.m_IsPersistent = false;
                 break;
             }//end case Tornado
