@@ -37,4 +37,9 @@ public class ArmoredSoldier : EnemyInfantry {
     {
         return this.m_AttackDamageValue;
     }
+
+	public override void ApplySpellEffect (SpellClass spell)
+	{
+		base.ApplySpellEffect (spell);
+	}
 }
