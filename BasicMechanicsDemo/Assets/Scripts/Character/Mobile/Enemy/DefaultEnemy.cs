@@ -159,7 +159,7 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 		//If this is the first iteration through this function, no matter the spell...
 		if (this.m_ExtraEffectTimer == 0.0f) {
 			if (!spell.m_IsPersistent) {
-				this.AffectHealth (-spell.m_SpellDamage);
+				this.AffectHealth (-spell.m_SpellDamage * this.m_Player.m_MagicAffinity);
 			}
 			this.m_IsAffectedBySpell = true;
 			this.m_SpellToApply = spell;
@@ -172,6 +172,10 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 				//if not detected then set chase player timer to 0 to tell enemy to chase player
 				this.m_ChasePlayerTimer = 0.0f;
 			}
+		}
+
+		if (this.m_SpellToApply.m_IsPersistent) {
+			this.AffectHealth (-spell.m_SpellDamage * this.m_Player.m_MagicAffinity * Time.deltaTime);
 		}
 
 		/*
@@ -227,8 +231,8 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 			//Let thunderstorm case fall to thunderball
 		case (int)SpellName.Thunderstorm:
 			{
-				//Thunderstorm is persistent, so affect differently with respect to damage
-				this.AffectHealth(-spell.m_SpellDamage * Time.deltaTime);
+//				//Thunderstorm is persistent, so affect differently with respect to damage
+//				this.AffectHealth(-spell.m_SpellDamage * Time.deltaTime);
 				//Transfer flow of control to case Thunderball
 				goto case (int)SpellName.Thunderball;
 			}

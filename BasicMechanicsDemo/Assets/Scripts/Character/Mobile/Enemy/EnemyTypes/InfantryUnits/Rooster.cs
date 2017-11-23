@@ -44,8 +44,6 @@ public class Rooster : EnemyInfantry {
 	public override void ApplySpellEffect (SpellClass spell)
 	{
 		base.ApplySpellEffect (spell);
-		//To be overridden in children classes
-		//Note: this is virtual because certain spells may affect certain enemies differently
 	}
 
 
@@ -58,6 +56,4 @@ public class Rooster : EnemyInfantry {
 	{
 		return this.m_AttackDamageValue;
 	}
-
-
 }

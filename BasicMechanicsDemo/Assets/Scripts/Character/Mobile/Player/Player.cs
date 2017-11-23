@@ -60,12 +60,14 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 	public Vector3 m_PlayerRespawnPosition = new Vector3(-6.5f, 0.55f, -0.43f);
     /**The string value of the name of the sorting layer*/
     public string sortingLayerName;
-
+	/**A bool to tell us whether or not the player is currently affected by a spell.*/
 	public bool m_IsAffectedBySpell = false;
-
+	/**A timer to keep track of the active spell effects. Should be made private in final iteration.*/
 	public float m_ExtraEffectsTimer = 0.0f;
 	/**The spell we need to apply to the player (the spell affecting the player if they get hit by a hostile spell)*/
 	protected SpellClass m_SpellAffectingPlayer = new SpellClass ();
+	/**A multiplier to influence magic damage as the player gets stronger.*/
+	public float m_MagicAffinity = 1.0f;
 
 	public bool IsAffectedByMagic()
 	{
@@ -128,13 +130,11 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 			setMeterValue (manaMeter, this.m_Mana);
 		}//end if
 
+		this.UpdateAnimatorParameters ();
+
 		if (!this.m_IsAlive) {
 			this.Resurrect ();
 		}
-
-
-
-		this.UpdateAnimatorParameters ();
 	}//end f'n void Update
 
 	private void UpdateCanCastSpell()
@@ -145,6 +145,12 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 		} else {
 			this.m_CanCastSpells = this.m_Mana >= active_spell.m_ManaCost;
 		}
+	}
+
+	/**A function to increase the player's magic affinity*/
+	public void AddToMagicAffinity(float addition)
+	{
+		this.m_MagicAffinity += addition;
 	}
 
 	/**A function to check for keyboard input for use of hotkeyed items.*/
@@ -175,7 +181,6 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 	{
 		this.m_IsAffectedBySpell = false;
 		this.m_IsAlive = true;
-//		this.UpdateAnimatorParameters ();
 		this.m_Health = this.PLAYER_FULL_HEALTH;
 		this.setMeterValue(healthMeter, this.m_Health);
 		this.m_Mana = this.PLAYER_FULL_MANA;
