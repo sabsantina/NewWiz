@@ -29,7 +29,10 @@ public class FrostMage : RangedEnemy {
 	
 	// Update is called once per frame
 	void Update () {
-        base.Update();
+		//Take care of movement and attack patterns
+		base.Update ();
+		//Manage death
+		this.Die ();
 	}
 
     public override void SetSpellToCast(SpellName spell)
