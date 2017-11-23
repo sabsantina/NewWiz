@@ -150,7 +150,7 @@ public class PlayerCastSpell : MonoBehaviour {
 						}//end if
 							
 
-						this.m_Player.AffectMana (-this.m_SpellClassToFire.m_ManaCost);
+						this.m_Player.AffectMana (-this.m_SpellClassToFire.m_ManaCost / this.m_Player.m_MagicAffinity);
 
 						break;
 					}//end case basic projectile on target
@@ -188,7 +188,7 @@ public class PlayerCastSpell : MonoBehaviour {
 
 
 						//However, most (if not all) on-player spells have different effects on both enemies and player mana.
-						this.m_Player.AffectMana(-this.m_SpellClassToFire.m_ManaCost * Time.deltaTime);
+						this.m_Player.AffectMana(-(this.m_SpellClassToFire.m_ManaCost / this.m_Player.m_MagicAffinity) * Time.deltaTime);
 						switch ((int)this.m_SpellClassToFire.m_SpellName) {
 						case (int)SpellName.Shield:
 							{
@@ -262,7 +262,7 @@ public class PlayerCastSpell : MonoBehaviour {
 						}//end if the spell cube instance exists
 
 						//However, most (if not all) AOE on-target spells have different effects on both enemies and player mana.
-						this.m_Player.AffectMana (-this.m_SpellClassToFire.m_ManaCost * Time.deltaTime);
+						this.m_Player.AffectMana (-(this.m_SpellClassToFire.m_ManaCost / this.m_Player.m_MagicAffinity) * Time.deltaTime);
 						switch ((int)this.m_SpellClassToFire.m_SpellName) {
 						case (int)SpellName.Thunderstorm:
 							{
