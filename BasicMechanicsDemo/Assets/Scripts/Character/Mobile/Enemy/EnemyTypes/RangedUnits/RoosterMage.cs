@@ -87,4 +87,9 @@ public class RoosterMage : RangedEnemy {
 		this.m_RangedAttackInterval = this.m_IntervalBetweenRangedAttacks;
 	}
 
+	public override void ApplySpellEffect (SpellClass spell)
+	{
+		base.ApplySpellEffect (spell);
+	}
+
 }

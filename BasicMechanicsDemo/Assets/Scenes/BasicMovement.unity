@@ -6353,6 +6353,10 @@ Prefab:
       propertyPath: m_MaximalVelocity
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1802743614864824, guid: fa18a4496dab99a4f97920714279d1ac, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fa18a4496dab99a4f97920714279d1ac, type: 2}
   m_IsPrefabParent: 0

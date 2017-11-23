@@ -71,4 +71,9 @@ public class FrostMage : RangedEnemy {
         this.m_MeleeAttackInterval = this.m_IntervalBetweenMeleeAttacks;
         this.m_RangedAttackInterval = this.m_IntervalBetweenRangedAttacks;
     }
+
+	public override void ApplySpellEffect (SpellClass spell)
+	{
+		base.ApplySpellEffect (spell);
+	}
 }

@@ -141,7 +141,7 @@ public class PlayerCastSpell : MonoBehaviour {
 							SpellMovement spell_movement = this.m_SpellCubeInstance.GetComponent<SpellMovement> ();
 							spell_movement.m_IsMobileCharacter = false;
 							spell_movement.SetTarget (furthest);
-
+//							spell_movement.m_MaximalVelocity = 10.0f;
 							spell_movement.SetSpellToCast (this.m_SpellClassToFire);
 
 							this.m_SpellAnimatorManager.SetSpellAnimator (this.m_SpellCubeInstance);
