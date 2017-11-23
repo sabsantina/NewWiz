@@ -65,6 +65,12 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 		this.GetComponent<AudioSource> ().volume = 0.25f;
 	}
 
+	/**A function to be called from the spawner when spawning enemies.*/
+	protected void SetPlayer(Player player)
+	{
+		this.m_Player = player;
+	}
+
 	protected void SetChasePlayerSettings(float chase_player_duration)
 	{
 		this.m_ChasePlayerDuration = chase_player_duration;
@@ -144,12 +150,16 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	private void ChasePlayerForSeconds()
 	{
 		//Set movement pattern patrol region to be at player's position for duration time
-		this.m_MovementPattern.m_PatrolRegion.transform.position = this.m_Player.transform.position;
+		Vector3 vector_to_player = this.m_Player.transform.position - this.transform.position;
+		float magnitude = vector_to_player.magnitude;
+		vector_to_player = Vector3.ClampMagnitude (vector_to_player, magnitude * 0.65f);
+		this.m_MovementPattern.m_PatrolRegion.transform.position = this.transform.position + vector_to_player;
 		this.m_ChasePlayerTimer += Time.deltaTime;
 
 		if (this.m_ChasePlayerTimer >= this.m_ChasePlayerDuration) {
 			//Set timer to a case wherein the loop will only trigger if set to 0 again
 			this.m_ChasePlayerTimer = this.m_ChasePlayerDuration;
+			this.m_MovementPattern.m_MaximalVelocity /= 2.5f;
 		}
 	}
 
@@ -171,6 +181,7 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 			if (!this.IsPlayerAtAllDetected ()) {
 				//if not detected then set chase player timer to 0 to tell enemy to chase player
 				this.m_ChasePlayerTimer = 0.0f;
+				this.m_MovementPattern.m_MaximalVelocity *= 2.5f;
 			}
 		}
 

@@ -6,6 +6,8 @@ public class RangedAttackPattern : AttackPattern {
 
 	/**The sound the enemy makes on melee attack*/
 	[SerializeField] public AudioClip m_EnemyMeleeAttackSound;
+
+	[SerializeField] public GameObject m_EnemyHitAnimation;
 	/**The sound the enemy makes on ranged attack*/
 	private AudioClip m_EnemySpellSound;
 
@@ -50,6 +52,8 @@ public class RangedAttackPattern : AttackPattern {
 
 					this.gameObject.GetComponent<AudioSource>().PlayOneShot(this.m_EnemyMeleeAttackSound);
 					this.m_MeleeDetectionRegion.m_Player.AffectHealth(-this.m_Enemy.m_AttackDamageValue);
+					// This line instantiates the animation for a the attack hit of the enemy.
+					GameObject attackHit = Instantiate(this.m_EnemyHitAnimation, this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player.transform.position, Quaternion.identity);
 					this.m_AttackTimer += Time.deltaTime;
 				} 
 				else if (0.0f < this.m_AttackTimer && this.m_AttackTimer < 2.0f * Time.deltaTime) {
