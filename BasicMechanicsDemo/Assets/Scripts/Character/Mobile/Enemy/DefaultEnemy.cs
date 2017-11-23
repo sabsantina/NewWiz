@@ -65,6 +65,12 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 		this.GetComponent<AudioSource> ().volume = 0.25f;
 	}
 
+	/**A function to be called from the spawner when spawning enemies.*/
+	protected void SetPlayer(Player player)
+	{
+		this.m_Player = player;
+	}
+
 	protected void SetChasePlayerSettings(float chase_player_duration)
 	{
 		this.m_ChasePlayerDuration = chase_player_duration;
