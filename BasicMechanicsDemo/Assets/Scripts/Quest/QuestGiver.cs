@@ -72,7 +72,8 @@ public class QuestGiver : Interactable {
 			}//end else if
 
 			//After the quest has been given, spawn in the quest objects
-			this.m_QuestManager.m_AllQuests[(int)this.m_QuestToGive.m_QuestName].SpawnInQuestObjects();
+//			this.m_QuestManager.m_AllQuests[(int)this.m_QuestToGive.m_QuestName].SpawnInQuestObjects();
+			this.m_QuestManager.SpawnInQuestObjects(this.m_QuestToGive);
 
 			//Then we know that the quest's been given now, so update the status to check for completion
 			this.m_QuestManager.UpdateQuestState (this.m_QuestToGive.m_QuestName, QuestState.IN_PROCESS);

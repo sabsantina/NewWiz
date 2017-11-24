@@ -13,13 +13,19 @@ public class QuestItemPickup : MonoBehaviour {
 
 	public QuestItem m_QuestItem = new QuestItem ();
 	public string m_ItemName;
+	public string m_SpriteName;
 
 	void Awake()
 	{
 		
 		this.gameObject.GetComponent<Collider> ().isTrigger = true;
+	}
+
+	void Start()
+	{
 		//For testing
 		this.m_ItemName = this.m_QuestItem.m_QuestItemName.ToString ();
+		this.m_SpriteName = this.m_QuestItem.m_QuestItemSprite.name;
 	}
 
 

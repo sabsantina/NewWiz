@@ -7,7 +7,8 @@ public class MeleeAttackPattern : AttackPattern {
 	/**The sound the enemy makes on melee attack*/
 	[SerializeField] public AudioClip m_EnemyMeleeAttackSound;
 
-    [SerializeField] public GameObject m_EnemyAttackHitAnimation;
+//    [SerializeField] public GameObject m_EnemyAttackHitAnimation;
+	public GameObject m_EnemyAttackHitAnimation;
 
 	protected override void ExecutePatternState ()
 	{
