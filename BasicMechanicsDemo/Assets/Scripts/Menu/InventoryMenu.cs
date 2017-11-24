@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿//#define WITH_TUTORIALS
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -71,8 +73,10 @@ public class InventoryMenu : Menu {
 		base.CloseMenu ();
 		//if it's the first time we close the menu...
 		if (this.m_FirstTimeInventoryMenuClosed) {
+			#if WITH_TUTORIALS
 			//...then enable the consume hotkeyed item tutorial
 			this.m_TutorialManager.Enable (TutorialEnum.CONSUME_HOTKEYED_ITEMS);
+			#endif
 			//as of now it won't be the first time the menu closes
 			this.m_FirstTimeInventoryMenuClosed = false;
 		}//end if
@@ -83,8 +87,10 @@ public class InventoryMenu : Menu {
 	{
 		//if it was the first time that the inventory menu was opened...
 		if (this.m_FirstTimeInventoryMenuOpen) {
+			#if WITH_TUTORIALS
 			//...then enable the hotkeys tutorial
 			this.m_TutorialManager.Enable (TutorialEnum.HOTKEYS);
+			#endif
 			//as of now it won't be the first time the menu opens
 			this.m_FirstTimeInventoryMenuOpen = false;
 			//but if it was the first time the menu opened, then this will be the first time it closes.

@@ -15,6 +15,8 @@ public class BioButton : MonoBehaviour {
 	void Start () 
 	{
 		biobtn = GetComponent<Button> ();
+		//Without this line, the bio button won't open on first click.
+		buttonImage = biobtn.image.sprite;
 	}
 	
 	// Update is called once per frame
@@ -24,6 +26,7 @@ public class BioButton : MonoBehaviour {
 
 	public void buttonClick()
 	{
+//		Debug.Log ("Button image " + buttonImage.name + " == bio sprite " + bioSprite.name + "? " + (buttonImage == bioSprite));
 		if (buttonImage == bioSprite) 
 		{
 			bioCanvas.SetActive (true);

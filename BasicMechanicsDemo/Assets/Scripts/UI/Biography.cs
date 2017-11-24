@@ -1,4 +1,5 @@
 ﻿#define testing
+#define TESTING_JACQUES
 
 using System.Collections;
 using System.Collections.Generic;
@@ -40,6 +41,13 @@ public class Biography : MonoBehaviour
 		{
 			appendBioText(testText[currentIndex]);
 			currentIndex++;
+		}
+		#endif
+		#if TESTING_JACQUES
+		if(Input.GetKeyDown(KeyCode.DownArrow) && currentIndex < testText.Length)
+		{
+		appendBioText(testText[currentIndex]);
+		currentIndex++;
 		}
 		#endif
 	}
