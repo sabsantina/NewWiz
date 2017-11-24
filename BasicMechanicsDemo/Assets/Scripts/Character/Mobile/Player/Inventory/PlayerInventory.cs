@@ -63,6 +63,7 @@ public class PlayerInventory : MonoBehaviour {
 	/**A reference to the HotKey button gameobject representative of HotKey3*/
 	[SerializeField] public UnityEngine.UI.Button m_HotKey3_Obj;
 
+
 //	private HotKeys m_HotKey1;
 //	private HotKeys m_HotKey2;
 //	private HotKeys m_HotKey3;
