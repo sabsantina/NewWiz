@@ -25,6 +25,8 @@ public class FrostMage : RangedEnemy {
         this.SetAttackDamageValue();
 
 		this.SetChasePlayerSettings (this.m_FrostMageChasePlayerDuration);
+
+		this.m_EnemyName = EnemyName.FROST_MAGE;
     }
 	
 	// Update is called once per frame

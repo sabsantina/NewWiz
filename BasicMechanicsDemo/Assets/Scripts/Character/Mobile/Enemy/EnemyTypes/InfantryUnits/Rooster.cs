@@ -21,6 +21,7 @@ public class Rooster : EnemyInfantry {
 		this.SetHealth (this.m_RoosterHealth);
 
 		this.SetChasePlayerSettings (this.m_RoosterChasePlayerDuration);
+		this.m_EnemyName = EnemyName.ROOSTER;
 	}
 
 

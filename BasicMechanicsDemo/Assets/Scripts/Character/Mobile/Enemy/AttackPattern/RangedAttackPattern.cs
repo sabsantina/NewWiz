@@ -21,7 +21,8 @@ public class RangedAttackPattern : AttackPattern {
 	public GameObject m_GeneratedSpellInstance;
 	/**To be set from the children classes*/
 	public SpellClass m_SpellToCast;
-	[SerializeField] SpellAnimatorManager m_SpellAnimatorManager;
+//	[SerializeField] SpellAnimatorManager m_SpellAnimatorManager;
+	public SpellAnimatorManager m_SpellAnimatorManager;
 
 	/**A vector to help us know what the offset is for a given AOE animation, with respect to the player click position.*/
 	public Vector3 AOE_offset = new Vector3(0.0f, 2.8f, 4.20f);

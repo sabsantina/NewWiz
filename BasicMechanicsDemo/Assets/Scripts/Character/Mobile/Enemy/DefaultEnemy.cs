@@ -12,6 +12,8 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	[SerializeField] public AudioClip m_EnemyDamagedSound;
 	/**A reference to the player, so we can get the player's position.*/
 	[SerializeField] protected Player m_Player;
+	/**When we spawn in an enemy, we'll just say [enemy.m_Spawner = this], or whatever.*/
+	public Spawner m_Spawner;
 
 	/**A MovementPattern to control the enemy's movement*/
 	public MovementPattern m_MovementPattern;
@@ -59,6 +61,8 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	*Set to arbitrary value 2.0f; can be modified in child classes.*/
 	protected float m_ChasePlayerDuration;
 
+	public EnemyName m_EnemyName;
+
 	protected virtual void Start()
 	{
 		this.m_Animator = this.GetComponent<Animator> ();
@@ -66,7 +70,7 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	}
 
 	/**A function to be called from the spawner when spawning enemies.*/
-	protected void SetPlayer(Player player)
+	public void SetPlayer(Player player)
 	{
 		this.m_Player = player;
 	}
