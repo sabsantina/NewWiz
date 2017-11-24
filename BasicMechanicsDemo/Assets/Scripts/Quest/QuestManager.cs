@@ -139,7 +139,7 @@ public class QuestManager : MonoBehaviour
         hot_chicks.SetQuestGoalLocation(new Vector3(5.74f, 0.55f, 2f));
         hot_chicks.m_KillEverything.m_EnemyLootSpawner = m_Spawner;
 
-        this.m_QuestGiver_RoosterBane.m_PlayerInventory = this.m_Player.GetComponent<PlayerInventory>();
+		this.m_QuestGiver_HotChicks.m_PlayerInventory = this.m_Player.GetComponent<PlayerInventory>();
 
         //Set reward item
         ItemClass mana_potion = new ItemClass();

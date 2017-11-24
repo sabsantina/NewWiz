@@ -9,7 +9,8 @@ using UnityEngine;
 [System.Serializable]
 public class KillEverything : Objective {
 	/**A list of quest targets; once they're all dead, the player's completed the quest.*/
-	public List<Enemy> m_Targets = new List<Enemy>();
+//	public List<Enemy> m_Targets = new List<Enemy>();
+	public List<DefaultEnemy> m_Targets = new List<DefaultEnemy>();
 	/**A spawner to spawn loot by the enemy, when they die.*/
 	public Spawner m_EnemyLootSpawner;
 
@@ -19,9 +20,9 @@ public class KillEverything : Objective {
 		//if the target count is greater than or equal to 1
 		if (this.m_Targets.Count >= 1) {
 			//foreach enemy in the target list...
-			foreach (Enemy enemy in this.m_Targets) {
+			foreach (DefaultEnemy enemy in this.m_Targets) {
 				//...if any one enemy is alive...
-				if (enemy != null) {
+				if (enemy != null || enemy.m_Health > 0.0f) {
 					//return false
 					return false;
 				}//end if
@@ -46,10 +47,10 @@ public class KillEverything : Objective {
 
 
 			//Then extract the Enemy component and store it in the target list, to be checked later
-			Enemy enemy = enemy_obj.GetComponent<Enemy>();
+			DefaultEnemy enemy = enemy_obj.GetComponent<DefaultEnemy>();
 			//if the enemy component isn't in the object, it's in one of the children
 			if (enemy == null) {
-				enemy = enemy_obj.GetComponentInChildren<Enemy> ();
+				enemy = enemy_obj.GetComponentInChildren<DefaultEnemy> ();
 				enemy.m_Spawner = this.m_EnemyLootSpawner;
 			}
 
