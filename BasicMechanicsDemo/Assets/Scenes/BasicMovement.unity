@@ -9840,6 +9840,11 @@ Prefab:
       propertyPath: m_QuestToGive.m_KillEverything.m_EnemyLootSpawner
       value: 
       objectReference: {fileID: 872955989}
+    - target: {fileID: 114367588201746196, guid: a47e411fb48644dedbc8d5c5e7f9ff0e,
+        type: 2}
+      propertyPath: m_QuestToGive.m_QuestState
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a47e411fb48644dedbc8d5c5e7f9ff0e, type: 2}
   m_IsPrefabParent: 0
