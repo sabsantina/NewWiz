@@ -63,6 +63,8 @@ public class PlayerInventory : MonoBehaviour {
 	/**A reference to the HotKey button gameobject representative of HotKey3*/
 	[SerializeField] public UnityEngine.UI.Button m_HotKey3_Obj;
 
+	private PlayerCastSpell m_PlayerCastSpell;
+
 //	private HotKeys m_HotKey1;
 //	private HotKeys m_HotKey2;
 //	private HotKeys m_HotKey3;
@@ -72,6 +74,7 @@ public class PlayerInventory : MonoBehaviour {
 
     void Awake()
 	{
+		this.m_PlayerCastSpell = this.GetComponent<PlayerCastSpell> ();
 		//Get a reference to each hotkey slot
 //		this.m_HotKey1 = this.m_HotKey1_Obj.GetComponentInChildren<HotKeys> ();
 		this.m_HotKeyList.Add (this.m_HotKey1_Obj.GetComponentInChildren<HotKeys> ());
@@ -90,6 +93,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	void Start()
 	{
+
 
 		SpellClass spell_class_instance = new SpellClass();
 		#if START_WITH_FIREBALL
@@ -143,7 +147,7 @@ public class PlayerInventory : MonoBehaviour {
 	{
 //		this.m_DefaultSpellPrefab.GetComponent<SpellMovement> ().m_SpellClassToCast = this.m_ActiveSpellClass;
 		//If there's more than one spell in the player's inventory...
-		if (this.m_SpellClassList.Count > 1) {
+		if (this.m_SpellClassList.Count > 1 && !this.m_PlayerCastSpell.m_MenuOpen) {
 			//...then check for player input and switch SpellClass instance on command.
 			this.UpdateActiveSpell ();
 		} //end if
