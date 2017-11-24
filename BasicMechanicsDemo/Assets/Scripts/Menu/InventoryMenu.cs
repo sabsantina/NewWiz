@@ -25,6 +25,7 @@ public class InventoryMenu : Menu {
 	/**A boolean to tell us whether or not the inventory menu is active*/
 	private bool notActive = true;
 
+	AudioSource m_audioSource;
 
 	public ItemSlot selectedSlot;
 
@@ -35,6 +36,7 @@ public class InventoryMenu : Menu {
 		m_ItemIcon = GetComponentInParent<ItemIcon> ();
 		itemSlots = GetComponentsInChildren<ItemSlot> ();
 		itemDescription = GameObject.Find ("Description").GetComponent<Text>();
+		m_audioSource = GetComponentInChildren<AudioSource> ();
 	}
 		
 	void Update()
@@ -100,6 +102,7 @@ public class InventoryMenu : Menu {
 	public void setHotKeys(GameObject hotkey)
 	{
 		if (selectedSlot.item != null) {
+			Debug.Log ("Set HotKey");
 			ItemSlot currentSlot = selectedSlot.GetComponent<ItemSlot> ();
 			hotkey.GetComponentInChildren<HotKeys> ().item = currentSlot.item;
 			GameObject imageUI = hotkey.GetComponentInChildren<HotKeys> ().gameObject;
@@ -109,6 +112,7 @@ public class InventoryMenu : Menu {
 		else 
 		{
 			Debug.Log ("This slot is empty");
+			m_audioSource.PlayOneShot (GetComponent<MenuSounds> ().getErrorSound ());
 		}
 	}
 

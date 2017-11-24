@@ -9,7 +9,6 @@ public class HotKeys : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
@@ -24,8 +23,9 @@ public class HotKeys : MonoBehaviour {
 			GetComponentInParent<PlayerInventory> ().itemEffectUsage (item);
 			int numberOfItem = GetComponentInParent<PlayerInventory> ().getNumberItem (item);
 			gameObject.transform.parent.GetComponentInChildren<Text> ().text = "" + numberOfItem;
-		} else
+		} else {
 			Debug.Log ("No item in hotkey");
+		}
 	}
 
 	/**A function to call to update the number of a given item in the slot.
