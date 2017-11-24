@@ -70,6 +70,39 @@ public class KillEverything : Objective {
 
 	}//end f'n void SpawnEnemiesAtPosition(Vector3, GameObject, int)
 
+	/**A function to spawn the given enemy [prefab] at the given position; if there are more */
+	public void SpawnEnemiesAtPosition (Spawner enemy_spawner, Vector3 position, EnemyName enemy_name, int number_of_enemies)
+	{
+		if (this.m_EnemyContainer == null) {
+			this.m_EnemyContainer = new GameObject ();
+			//			this.m_EnemyContainer.name = "KE_EnemyContainer";
+		}
+		//For consistency, though the empty's position really doesn't matter.
+		this.m_EnemyContainer.transform.position = position;
+		//for however many enemies are needed...
+		for (int index = 0; index < number_of_enemies; index++) {
+			//Spawn the enemy
+//			GameObject enemy_obj = GameObject.Instantiate(prefab, this.m_EnemyContainer.transform);
+			GameObject enemy_obj = enemy_spawner.SpawnEnemy(enemy_name);
+			//Position the enemy
+			enemy_obj.transform.position = position;
+			//			this.m_EnemyContainer.transform.enemy_obj
+			//Adjust position with respect to number of enemies
+			//?
+
+			//Then extract the Enemy component and store it in the target list, to be checked later
+			DefaultEnemy enemy = enemy_obj.GetComponent<DefaultEnemy>();
+			//if the enemy component isn't in the object, it's in one of the children
+			if (enemy == null) {
+				enemy = enemy_obj.GetComponentInChildren<DefaultEnemy> ();
+				enemy.m_Spawner = this.m_EnemyLootSpawner;
+			}
+
+			this.m_Targets.Add (enemy);
+		}//end for
+
+	}//end f'n void SpawnEnemiesAtPosition(Spawner, Vector3, EnemyName, int)
+
 	private void UpdateObjectiveIsMet()
 	{
 		this.m_QuestObjectiveIsMet = true;

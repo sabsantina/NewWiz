@@ -213,4 +213,48 @@ public class QuestManager : MonoBehaviour
     {
         this.m_AllQuests[(int) quest_name].m_QuestState = quest_state;
     }
+
+	/**A function to spawn in whatever is needed for the quest; to be called from the quest giver on giving the quest.*/
+	public void SpawnInQuestObjects(Quest quest)
+	{
+		switch ((int)quest.m_QuestType) {
+		case (int)QuestType.KILL_EVERYTHING:
+			{
+				//for each enemy type (though I'm not really sure this would work for more than one enemy type)
+				for (int enemy_type = 0; enemy_type < quest.m_RequisitePrefabs.Count; enemy_type++) 
+				{
+					//get the default enemy component and get 
+					DefaultEnemy enemy_component = quest.m_RequisitePrefabs [enemy_type].GetComponent<DefaultEnemy> ();
+					quest.m_KillEverything.SpawnEnemiesAtPosition (this.m_Spawner, quest.m_QuestObjectivePosition, enemy_component.m_EnemyName, quest.m_NumberOfEnemiesToKill);
+				}//end for 
+				break;
+			}//end case kill everything
+		case (int)QuestType.FETCH:
+			{
+				//for each item type (though I'm not really sure this would work for more than one item type)
+				for (int item_type = 0; item_type < quest.m_RequisitePrefabs.Count; item_type++) 
+				{
+					//get the default enemy component and get 
+					QuestItemPickup quest_item_pickup = quest.m_RequisitePrefabs [item_type].GetComponent<QuestItemPickup> ();
+					QuestItemName = quest_item_pickup.m_QuestItem.m_QuestItemName;
+					quest_item_pickup.m_KillEverything.SpawnEnemiesAtPosition (this.m_Spawner, quest.m_QuestObjectivePosition, enemy_component.m_EnemyName, quest.m_NumberOfEnemiesToKill);
+				}//end for 
+				break;
+			}
+		}
+
+//		switch ((int)quest.m_QuestName) {
+//		case (int)QuestName.ROOSTER_BANE:
+//			{
+//				//for each enemy type (though I'm not really sure this would work for more than one enemy type)
+//				for (int enemy = 0; enemy < quest.m_RequisitePrefabs.Count; enemy++) 
+//				{
+//					//get the default enemy component and get 
+//					DefaultEnemy enemy_component = quest.m_RequisitePrefabs [enemy].GetComponent<DefaultEnemy> ();
+//					quest.m_KillEverything.SpawnEnemiesAtPosition (this.m_Spawner, quest.m_QuestObjectivePosition, enemy_component.m_EnemyName, quest.m_NumberOfEnemiesToKill);
+//				}//end for 
+//				break;
+//			}
+//		}
+	}
 }

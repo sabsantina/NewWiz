@@ -45,30 +45,31 @@ public class Quest {
 			this.m_KillEverything = null;
 		}
 	}
+		
 
-	/**A function to spawn in whatever is needed for the quest.*/
-	public void SpawnInQuestObjects()
+	/**A function to spawn in whatever is needed for the quest; to be called from the quest giver on giving the quest.*/
+	public void SpawnInQuestObjects(Spawner spawner)
 	{
 		//if the quest type is KILL EVERYTHING...
 		if (this.m_QuestType == QuestType.KILL_EVERYTHING) {
-			
-//			int random_int = Random.Range (1, this.m_NumberOfEnemiesToKill - 1);
+			//then odds are the objects we need to spawn have a DefaultEnemy component
 
 			foreach (GameObject obj in this.m_RequisitePrefabs) {
 				if (this.m_RequisitePrefabs.Count == 1) {
-					this.m_KillEverything.SpawnEnemiesAtPosition (this.m_QuestObjectivePosition, obj, this.m_NumberOfEnemiesToKill);
+					DefaultEnemy enemy_component = obj.GetComponent<DefaultEnemy> ();
+					this.m_KillEverything.SpawnEnemiesAtPosition(;
 					this.m_KillEverything.m_EnemyContainer.name = this.m_QuestName.ToString();
 				}//end if
 
 				//Dunno how to do this if there's more than one enemy type at a time. Will come back to it later
-			
+
 			}//end foreach
 		}//end if
 		//else if the quest type is FETCH...
 		else if (this.m_QuestType == QuestType.FETCH) {
-			
+
 			foreach (GameObject obj in this.m_RequisitePrefabs) {
-				
+
 				if (this.m_RequisitePrefabs.Count == 1) {
 					this.m_Fetch.SpawnQuestItemsAtPosition (this.m_QuestObjectivePosition, obj, this.m_ItemInformation, this.m_NumberOfItemsToFind);
 					this.m_Fetch.m_ItemContainer.name = this.m_QuestName.ToString();
@@ -79,6 +80,39 @@ public class Quest {
 			}//end foreach
 		}
 	}//end f'n void SpawnInQuestObjects()
+
+//	/**A function to spawn in whatever is needed for the quest.*/
+//	public void SpawnInQuestObjects()
+//	{
+//		//if the quest type is KILL EVERYTHING...
+//		if (this.m_QuestType == QuestType.KILL_EVERYTHING) {
+//			//then odds are the objects we need to spawn have a DefaultEnemy component
+//
+//			foreach (GameObject obj in this.m_RequisitePrefabs) {
+//				if (this.m_RequisitePrefabs.Count == 1) {
+//					this.m_KillEverything.SpawnEnemiesAtPosition (this.m_QuestObjectivePosition, obj, this.m_NumberOfEnemiesToKill);
+//					this.m_KillEverything.m_EnemyContainer.name = this.m_QuestName.ToString();
+//				}//end if
+//
+//				//Dunno how to do this if there's more than one enemy type at a time. Will come back to it later
+//			
+//			}//end foreach
+//		}//end if
+//		//else if the quest type is FETCH...
+//		else if (this.m_QuestType == QuestType.FETCH) {
+//			
+//			foreach (GameObject obj in this.m_RequisitePrefabs) {
+//				
+//				if (this.m_RequisitePrefabs.Count == 1) {
+//					this.m_Fetch.SpawnQuestItemsAtPosition (this.m_QuestObjectivePosition, obj, this.m_ItemInformation, this.m_NumberOfItemsToFind);
+//					this.m_Fetch.m_ItemContainer.name = this.m_QuestName.ToString();
+//				}//end if
+//
+//				//Dunno how to do this if there's more than one item type at a time. Will come back to it later
+//
+//			}//end foreach
+//		}
+//	}//end f'n void SpawnInQuestObjects()
 
 	/**A function to set the location of the quest objective, so we know where to spawn things.*/
 	public void SetQuestGoalLocation(Vector3 location)

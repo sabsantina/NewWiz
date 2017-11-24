@@ -15,7 +15,6 @@ public class RoosterKing : BossEnemy {
 
 	public float m_IntervalBetweenMeleeAttacks = 0.5f;
 
-
 	// Use this for initialization
 	void Start () {
 		base.Start ();
@@ -27,6 +26,7 @@ public class RoosterKing : BossEnemy {
 		this.SetAttackDamageValue ();
 
 		this.SetChasePlayerSettings (this.m_RoosterKingChasePlayerDuration);
+		this.m_EnemyName = EnemyName.ROOSTER_KING;
 	}
 
 

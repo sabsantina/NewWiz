@@ -36,14 +36,29 @@ public class Spawner : MonoBehaviour {
 	/**The sprite to be used for the thunderstorm spell when it is a pickup*/
 	[SerializeField] private Sprite m_ThunderstormSprite;
 
+	//*** Quest Item spawning requisites
+	//Pretty sure all we need is the prefabs
+	/**Quest item potion of wisdom prefab; for quest POTION_MASTER*/
+	[SerializeField] private GameObject m_PotionOfWisdomPrefab;
+
+
 
 	//*** Enemy-spawning requisites
+	//Every enemy needs a reference to the player
+	/**A reference to the player, to pass to the enemy classes on creation.*/
+	[SerializeField] private Player m_Player;
 	//**Infantry units
 	//*Rooster
 	/**Rooster gameobject prefab*/
 	[SerializeField] private GameObject m_RoosterPrefab;
 	/**Rooster melee animation gameobject*/
 	[SerializeField] private GameObject m_RoosterAnimationPrefab;
+	//*Armored Soldier
+	/**Armored soldier gameobject prefab*/
+	[SerializeField] private GameObject m_ArmoredSoldierPrefab;
+	/**Armored soldier melee animation gameobject
+	*Note: as of yet, no proper animation for this guy's melee. Setting to rooster's as default.*/
+	[SerializeField] private GameObject m_ArmoredSoldierAnimationPrefab = m_RoosterAnimationPrefab;
 
 
 	private Sprite m_SpriteToBeUsed;
@@ -179,7 +194,53 @@ public class Spawner : MonoBehaviour {
 		obj.transform.position = position;
 	}
 
+	/**A function to be called from the Quest Manager class, to return an instance of a given quest item, to be spawned from the quest manager on quest start.*/
+	public GameObject SpawnQuestItem(QuestItemName quest_item_name)
+	{
+		GameObject generated_instance;
+		switch ((int)quest_item_name) {
+		case (int)QuestItemName.POTION_OF_WISDOM:
+			{
+				generated_instance = GameObject.Instantiate (this.m_PotionOfWisdomPrefab);
+				QuestItemPickup quest_item_pickup = generated_instance.GetComponent<QuestItemPickup> ();
+				quest_item_pickup.m_QuestItem.m_QuestItemName = QuestItemName.POTION_OF_WISDOM;
+				break;
+			}//end case Potion of wisdom (POTION MASTER quest)
+		}//end switch
+		return generated_instance;
+	}//end f'n SpawnQuestItem)QuestItemName)
 
+	/**A function to be called from the Quest Manager class, to return an instance of a given enemy, to be spawned from the quest manager on quest start.*/
+	public GameObject SpawnEnemy(EnemyName enemy_name)
+	{
+		GameObject generated_instance;
+
+		//Every enemy instance needs a reference to the player
+//		Player player_component
+
+		switch ((int)enemy_name) {
+		//Infantry Units
+		//Case Rooster
+		case (int)EnemyName.ROOSTER:
+			{
+				generated_instance = GameObject.Instantiate (this.m_RoosterPrefab);
+				Rooster rooster_component = generated_instance.GetComponent<Rooster> ();
+				rooster_component.m_AttackPattern.m_EnemyAttackHitAnimation = this.m_RoosterAnimationPrefab;
+				rooster_component.SetPlayer (this.m_Player);
+				break;
+			}//end case Rooster
+		case (int)EnemyName.ARMORED_SOLDIER:
+			{
+				generated_instance = GameObject.Instantiate (this.m_ArmoredSoldierPrefab);
+				ArmoredSoldier AS_component = generated_instance.GetComponent<Rooster> ();
+				AS_component.m_AttackPattern.m_EnemyAttackHitAnimation = this.m_ArmoredSoldierAnimationPrefab;
+				AS_component.SetPlayer (this.m_Player);
+				break;
+			}
+//		case 
+		}//end switch
+		return generated_instance;
+	}//end f'n SpawnEnemy(EnemyName)
 
 
 }
