@@ -360,7 +360,7 @@ public class PlayerCastSpell : MonoBehaviour {
 			//else if the player is clicking on a UI button...
 			else {
 				//...then update the corresponding bool and break us out of here
-				this.m_MenuOpen = true;
+//				this.m_MenuOpen = true;
 				return;
 			}
 		}//end if player touched mouse input
