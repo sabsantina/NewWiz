@@ -3585,6 +3585,7 @@ GameObject:
   - component: {fileID: 222713056224788176}
   - component: {fileID: 114992811057190504}
   - component: {fileID: 114591870322923168}
+  - component: {fileID: 114123586695579374}
   m_Layer: 5
   m_Name: Biography
   m_TagString: Untagged
@@ -4081,6 +4082,7 @@ GameObject:
   - component: {fileID: 224842503249698894}
   - component: {fileID: 222046492603502334}
   - component: {fileID: 114587101113923932}
+  - component: {fileID: 114701607829066122}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -5795,6 +5797,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
+--- !u!114 &114123586695579374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1811365871093142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938f452ee38db124092011958f71733a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bioSprite: {fileID: 21300000, guid: b92a2939034504c419bf3f21663ce5cd, type: 3}
+  inventorySprite: {fileID: 21300000, guid: c4a5f9cb97aca6b40ac90153c7ea9bcb, type: 3}
+  bioCanvas: {fileID: 1840824099759724}
 --- !u!114 &114132142791363510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9262,7 +9278,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 224016551436307416}
   m_Direction: 2
   m_Value: 0.88526493
-  m_Size: 0.1415
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10040,7 +10056,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 224541459575794778}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10634,7 +10650,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114992811057190504}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114123586695579374}
+        m_MethodName: buttonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114597186265324098
@@ -11803,6 +11830,17 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114701607829066122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1953528133929318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecafb24503afb4f418496aa51c0e4a17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114701712993457820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13811,6 +13849,7 @@ MonoBehaviour:
   sortingLayerName: Objects
   m_IsAffectedBySpell: 0
   m_ExtraEffectsTimer: 0
+  m_MagicAffinity: 1
 --- !u!114 &114895016287083824
 MonoBehaviour:
   m_ObjectHideFlags: 1
