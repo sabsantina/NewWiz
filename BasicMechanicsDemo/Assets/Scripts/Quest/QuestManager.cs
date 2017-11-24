@@ -94,7 +94,6 @@ public class QuestManager : MonoBehaviour
         SpellClass iceball = new SpellClass();
         iceball = iceball.GenerateInstance(SpellName.Iceball);
         this.m_QuestGiver_RoosterBane.m_RewardSpell = iceball;
-        this.m_AllQuests.Add(rooster_bane);
 
         //Potion master
         Quest potion_master = new Quest();
@@ -126,6 +125,7 @@ public class QuestManager : MonoBehaviour
         iceball = iceball.GenerateInstance(SpellName.Iceball);
         this.m_QuestGiver_PotionMaster.m_RewardSpell = iceball;
 
+
         //Hot Chicks
         Quest hot_chicks = new Quest();
         hot_chicks.m_QuestName = QuestName.HOT_CHICKS;
@@ -146,6 +146,7 @@ public class QuestManager : MonoBehaviour
         mana_potion.GenerateInstance(ItemName.Mana_Potion);
         m_QuestGiver_HotChicks.m_RewardItem = mana_potion;
 
+		//Add all quests
         
         this.m_AllQuests.Add(rooster_bane);
         this.m_AllQuests.Add(potion_master);
