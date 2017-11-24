@@ -14,11 +14,13 @@ public class MovementPattern : MobileCharacter {
 	public float m_ChaseVelocity = 200.0f;
 	//for testing
 	public float m_CurrentVelocity = 0.0f;
+	//To be set in inspector
+	public float m_EnemyDefaultVelocity = 2.5f;
 
 	// Use this for initialization
 	void Start () {
 		//Default value
-		this.m_MaximalVelocity = 2.5f;
+		this.m_MaximalVelocity = this.m_EnemyDefaultVelocity;
 		this.m_Direction = Vector3.Normalize(new Vector3(Random.Range(-100.0f, 100.0f), 0.0f, Random.Range(-100.0f, 100.0f))) * this.m_MaximalVelocity;
 
 	}
@@ -26,6 +28,11 @@ public class MovementPattern : MobileCharacter {
 	// Update is called once per frame
 	void Update () {
 		this.ExecutePatternState ();
+
+		//For testing
+		if (this.m_EnemyDefaultVelocity != m_MaximalVelocity) {
+			this.m_MaximalVelocity = this.m_EnemyDefaultVelocity;
+		}
 	}
 
 	/**A function to check whether or not the player was detected within the enemy's patrol area*/
