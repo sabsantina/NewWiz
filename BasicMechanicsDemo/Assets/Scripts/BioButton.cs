@@ -8,12 +8,13 @@ public class BioButton : MonoBehaviour {
 	[SerializeField] Sprite inventorySprite;
 	[SerializeField] GameObject bioCanvas;
 
-	Sprite buttonImage;
+	Button biobtn;
+	public Sprite buttonImage;
 
 	// Use this for initialization
 	void Start () 
 	{
-		buttonImage = GetComponent<Image> ().sprite;
+		biobtn = GetComponent<Button> ();
 	}
 	
 	// Update is called once per frame
@@ -26,11 +27,16 @@ public class BioButton : MonoBehaviour {
 		if (buttonImage == bioSprite) 
 		{
 			bioCanvas.SetActive (true);
+			biobtn.image.overrideSprite = inventorySprite;
+			biobtn.image.sprite = inventorySprite;
 			buttonImage = inventorySprite;
+
 		} 
 		else 
 		{
 			bioCanvas.SetActive (false);
+			biobtn.image.overrideSprite = bioSprite;
+			biobtn.image.sprite = bioSprite;
 			buttonImage = bioSprite;
 		}
 	}
