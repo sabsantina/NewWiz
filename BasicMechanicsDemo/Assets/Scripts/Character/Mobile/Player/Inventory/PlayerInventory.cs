@@ -65,6 +65,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	private PlayerCastSpell m_PlayerCastSpell;
 
+
 //	private HotKeys m_HotKey1;
 //	private HotKeys m_HotKey2;
 //	private HotKeys m_HotKey3;
