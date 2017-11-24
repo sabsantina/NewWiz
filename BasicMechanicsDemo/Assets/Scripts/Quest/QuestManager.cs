@@ -157,27 +157,27 @@ public class QuestManager : MonoBehaviour
     private void AssignAllQuests()
     {
         //for every quest...
-        foreach (Quest quest in this.m_AllQuests)
+        for (int i = 0; i < m_AllQuests.Count; ++i)
         {
-            switch ((int) quest.m_QuestName)
+            switch ((int)m_AllQuests[i].m_QuestName)
             {
                 case (int) QuestName.ROOSTER_BANE:
                 {
                     //Assign rooster bane quest to quest giver
-                    this.m_QuestGiver_RoosterBane.m_QuestToGive = quest;
+                    this.m_QuestGiver_RoosterBane.m_QuestToGive = m_AllQuests[i];
 
                     break;
                 } //end case Rooster Bane
                 case (int) QuestName.POTION_MASTER:
                 {
                     //Assign rooster bane quest to quest giver
-                    this.m_QuestGiver_PotionMaster.m_QuestToGive = quest;
+                    this.m_QuestGiver_PotionMaster.m_QuestToGive = m_AllQuests[i];
 
                     break;
                 } //end case Rooster Bane
                 case(int) QuestName.HOT_CHICKS:
                 {
-                    this.m_QuestGiver_HotChicks.m_QuestToGive = quest;
+                    this.m_QuestGiver_HotChicks.m_QuestToGive = m_AllQuests[i];
                     break;
                 }
                 //default:
@@ -193,16 +193,16 @@ public class QuestManager : MonoBehaviour
     private void UpdateActiveQuestObjectives()
     {
         //for every quest...
-        foreach (Quest quest in this.m_AllQuests)
+        for (int i = 0; i < m_AllQuests.Count; ++i)
         {
             //...if the quest is in process...
-            if (quest.m_QuestState == QuestState.IN_PROCESS)
+            if (m_AllQuests[i].m_QuestState == QuestState.IN_PROCESS)
             {
                 //...then check to see if it's fulfilled the conditions for completion
-                if (quest.CheckQuestObjectiveCompleted())
+                if (m_AllQuests[i].CheckQuestObjectiveCompleted())
                 {
                     //...if so, then update the quest status
-                    this.UpdateQuestState(quest.m_QuestName, QuestState.COMPLETED);
+                    this.UpdateQuestState(m_AllQuests[i].m_QuestName, QuestState.COMPLETED);
                 } //end if
             } //end if
         } //end foreach
