@@ -9581,6 +9581,7 @@ MonoBehaviour:
   m_ShockTimerIncrementor: 1
   m_ShockJumpDistance: 0.25
   m_ShockJumpFrequency: 0.0005
+  m_EnemyName: 0
   m_AttackSpell: 0
   m_AttackPattern: {fileID: 816326249}
   m_MeleeAttackInterval: 0
@@ -10769,6 +10770,18 @@ MonoBehaviour:
   m_HealSprite: {fileID: 21300000, guid: 7c8edbdbb16b6354db7dc608c4f3b3eb, type: 3}
   m_ThunderstormSprite: {fileID: 21300000, guid: 6d0cc1c817799b44385440404be23878,
     type: 3}
+  m_DefaultQuestItemPrefab: {fileID: 1126925848709952, guid: 764a4e7ea763941b2a1a14ca27bd3409,
+    type: 2}
+  m_PotionOfWisdomSprite: {fileID: 21300000, guid: fe2d27f5aa88b4fb48b019e4e184a21b,
+    type: 3}
+  m_Player: {fileID: 1804324873}
+  m_RoosterPrefab: {fileID: 1295592544126026, guid: 9053599dd27ba439eb6fd4c325a8ccde,
+    type: 2}
+  m_RoosterAnimationPrefab: {fileID: 1253389617355122, guid: b972a545bdc16ee46b5695a641c65c8d,
+    type: 2}
+  m_ArmoredSoldierPrefab: {fileID: 1838224676114018, guid: 8b8d98b39ec697847a82007f2b7efa47,
+    type: 2}
+  m_ArmoredSoldierAnimationPrefab: {fileID: 0}
 --- !u!114 &872955990
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -73,9 +73,10 @@ public class KillEverything : Objective {
 	/**A function to spawn the given enemy [prefab] at the given position; if there are more */
 	public void SpawnEnemiesAtPosition (Spawner enemy_spawner, Vector3 position, EnemyName enemy_name, int number_of_enemies)
 	{
+		Debug.Log ("Do we make it this far, at least? Enemy name: " + enemy_name.ToString());
 		if (this.m_EnemyContainer == null) {
 			this.m_EnemyContainer = new GameObject ();
-			//			this.m_EnemyContainer.name = "KE_EnemyContainer";
+			this.m_EnemyContainer.name = enemy_name.ToString() + "Container";
 		}
 		//For consistency, though the empty's position really doesn't matter.
 		this.m_EnemyContainer.transform.position = position;
@@ -83,7 +84,7 @@ public class KillEverything : Objective {
 		for (int index = 0; index < number_of_enemies; index++) {
 			//Spawn the enemy
 //			GameObject enemy_obj = GameObject.Instantiate(prefab, this.m_EnemyContainer.transform);
-			GameObject enemy_obj = enemy_spawner.SpawnEnemy(enemy_name);
+			GameObject enemy_obj = enemy_spawner.SpawnEnemy(enemy_name, this.m_EnemyContainer.transform);
 			//Position the enemy
 			enemy_obj.transform.position = position;
 			//			this.m_EnemyContainer.transform.enemy_obj

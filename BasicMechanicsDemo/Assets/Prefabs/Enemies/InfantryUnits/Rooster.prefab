@@ -164,7 +164,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1295592544126026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.21, y: 0.5500002, z: -5.58}
+  m_LocalPosition: {x: 15.74, y: 0.55, z: -0.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4261659066529238}
@@ -411,6 +411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyDamagedSound: {fileID: 8300000, guid: a01ae7e328e54a941a959d142c40ed17, type: 3}
   m_Player: {fileID: 0}
+  m_Spawner: {fileID: 0}
   m_MovementPattern: {fileID: 114228099796298782}
   m_Health: 0
   m_AttackDamageValue: 0
@@ -422,9 +423,11 @@ MonoBehaviour:
   m_ShockTimerIncrementor: 1
   m_ShockJumpDistance: 0.25
   m_ShockJumpFrequency: 0.0005
+  m_EnemyName: 0
   m_AttackPattern: {fileID: 114757115359749616}
   m_RoosterAttackDamage: 2.5
   m_RoosterHealth: 20
+  m_RoosterChasePlayerDuration: 2
 --- !u!114 &114228099796298782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -442,6 +445,7 @@ MonoBehaviour:
   m_MovementPatternState: 0
   m_ChaseVelocity: 10
   m_CurrentVelocity: 0
+  m_EnemyDefaultVelocity: 2.5
 --- !u!114 &114360776064021256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -454,7 +458,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerInRegion: 0
-  m_InteriorPadding: 1
   m_Player: {fileID: 0}
 --- !u!114 &114576449152826662
 MonoBehaviour:
@@ -468,7 +471,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerInRegion: 0
-  m_InteriorPadding: 1
   m_Player: {fileID: 0}
 --- !u!114 &114757115359749616
 MonoBehaviour:
@@ -488,6 +490,7 @@ MonoBehaviour:
   m_IntervalBetweenAttacks: 1
   m_EnemyMeleeAttackSound: {fileID: 8300000, guid: 9bfdc1c089cb3404d98fab6149c6a468,
     type: 3}
+  m_EnemyAttackHitAnimation: {fileID: 0}
 --- !u!135 &135095123133712408
 SphereCollider:
   m_ObjectHideFlags: 1

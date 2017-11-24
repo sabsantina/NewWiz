@@ -21,15 +21,14 @@ public class Fetch : Objective {
 		//for however many quest items are needed...
 		for (int index = 0; index < number_of_items; index++) {
 			//Spawn the quest item
-//			GameObject item_obj = GameObject.Instantiate(prefab);
-//			GameObject item_obj = item_spawner.
+			GameObject item_obj = item_spawner.SpawnQuestItem(quest_item_name);
 			//Position the item
 			item_obj.transform.position = position;
 			//Adjust position with respect to number of items
 			Vector3 translation = item_obj.transform.position + (2.0f * index * Vector3.forward);
 			item_obj.transform.position = translation;
 			//Set QuestItem value
-			item_obj.GetComponent<QuestItemPickup> ().m_QuestItem = item;
+//			item_obj.GetComponent<QuestItemPickup> ().m_QuestItem = item;
 			this.m_QuestItems.Add (item_obj.GetComponent<QuestItemPickup> ().m_QuestItem);
 		}//end for
 	}//end f'n SpawnQuestItemsAtPosition(Vector3, GameObject, int)
