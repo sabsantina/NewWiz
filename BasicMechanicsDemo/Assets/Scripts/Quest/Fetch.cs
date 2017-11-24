@@ -7,10 +7,15 @@ public class Fetch : Objective {
 	public List<QuestItem> m_QuestItems = new List<QuestItem>();
 	public PlayerInventory m_PlayerInventory;
 	private int m_NumberOfItems = 0;
+	/**An empty gameobject to contain the enemies more easily in the scene gameobject list*/
+	public GameObject m_ItemContainer;
 
 	/**A function to spawn the quest items to be collected at the given position*/
 	public void SpawnQuestItemsAtPosition(Vector3 position, GameObject prefab, QuestItem item, int number_of_items)
 	{
+		if (this.m_ItemContainer == null) {
+			this.m_ItemContainer = new GameObject ();
+		}
 		this.m_NumberOfItems = number_of_items;
 		//for however many quest items are needed...
 		for (int index = 0; index < number_of_items; index++) {
@@ -59,6 +64,9 @@ public class Fetch : Objective {
 			}//end foreach
 		}//end if
 
+		if (number_of_items_found == this.m_NumberOfItems) {
+			GameObject.Destroy (this.m_ItemContainer);
+		}
 		return (number_of_items_found == this.m_NumberOfItems);
 	}//end f'n bool CheckForObjectiveIsMet()
 

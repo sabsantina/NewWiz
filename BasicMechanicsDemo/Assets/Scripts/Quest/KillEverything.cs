@@ -13,6 +13,9 @@ public class KillEverything : Objective {
 	public List<DefaultEnemy> m_Targets = new List<DefaultEnemy>();
 	/**A spawner to spawn loot by the enemy, when they die.*/
 	public Spawner m_EnemyLootSpawner;
+	/**An empty gameobject to contain the enemies more easily in the scene gameobject list*/
+	public GameObject m_EnemyContainer;
+
 
 	/**A function to check whether every target has been killed.*/
 	public override bool CheckForObjectiveIsMet()
@@ -29,6 +32,7 @@ public class KillEverything : Objective {
 			}//end foreach
 			//else if no enemies are alive, return true
 			this.UpdateObjectiveIsMet();
+			GameObject.Destroy (this.m_EnemyContainer);
 			return true;
 		}//end if
 		return false;
@@ -37,14 +41,21 @@ public class KillEverything : Objective {
 	/**A function to spawn the given enemy [prefab] at the given position; if there are more */
 	public void SpawnEnemiesAtPosition (Vector3 position, GameObject prefab, int number_of_enemies)
 	{
+		if (this.m_EnemyContainer == null) {
+			this.m_EnemyContainer = new GameObject ();
+//			this.m_EnemyContainer.name = "KE_EnemyContainer";
+		}
+		//For consistency, though the empty's position really doesn't matter.
+		this.m_EnemyContainer.transform.position = position;
 		//for however many enemies are needed...
 		for (int index = 0; index < number_of_enemies; index++) {
 			//Spawn the enemy
-			GameObject enemy_obj = GameObject.Instantiate(prefab);
+			GameObject enemy_obj = GameObject.Instantiate(prefab, this.m_EnemyContainer.transform);
 			//Position the enemy
 			enemy_obj.transform.position = position;
+//			this.m_EnemyContainer.transform.enemy_obj
 			//Adjust position with respect to number of enemies
-
+			//?
 
 			//Then extract the Enemy component and store it in the target list, to be checked later
 			DefaultEnemy enemy = enemy_obj.GetComponent<DefaultEnemy>();

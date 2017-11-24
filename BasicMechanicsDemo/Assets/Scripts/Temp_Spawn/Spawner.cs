@@ -36,6 +36,16 @@ public class Spawner : MonoBehaviour {
 	/**The sprite to be used for the thunderstorm spell when it is a pickup*/
 	[SerializeField] private Sprite m_ThunderstormSprite;
 
+
+	//*** Enemy-spawning requisites
+	//**Infantry units
+	//*Rooster
+	/**Rooster gameobject prefab*/
+	[SerializeField] private GameObject m_RoosterPrefab;
+	/**Rooster melee animation gameobject*/
+	[SerializeField] private GameObject m_RoosterAnimationPrefab;
+
+
 	private Sprite m_SpriteToBeUsed;
 
 	#if TESTING_ITEM_PICKUP

@@ -57,6 +57,7 @@ public class Quest {
 			foreach (GameObject obj in this.m_RequisitePrefabs) {
 				if (this.m_RequisitePrefabs.Count == 1) {
 					this.m_KillEverything.SpawnEnemiesAtPosition (this.m_QuestObjectivePosition, obj, this.m_NumberOfEnemiesToKill);
+					this.m_KillEverything.m_EnemyContainer.name = this.m_QuestName.ToString();
 				}//end if
 
 				//Dunno how to do this if there's more than one enemy type at a time. Will come back to it later
@@ -70,6 +71,7 @@ public class Quest {
 				
 				if (this.m_RequisitePrefabs.Count == 1) {
 					this.m_Fetch.SpawnQuestItemsAtPosition (this.m_QuestObjectivePosition, obj, this.m_ItemInformation, this.m_NumberOfItemsToFind);
+					this.m_Fetch.m_ItemContainer.name = this.m_QuestName.ToString();
 				}//end if
 
 				//Dunno how to do this if there's more than one item type at a time. Will come back to it later
