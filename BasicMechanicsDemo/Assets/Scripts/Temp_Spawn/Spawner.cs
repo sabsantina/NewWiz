@@ -48,6 +48,8 @@ public class Spawner : MonoBehaviour {
 	//Every enemy needs a reference to the player
 	/**A reference to the player, to pass to the enemy classes on creation.*/
 	[SerializeField] private Player m_Player;
+	//Every magical enemy needs a reference to the spell animator manager
+	[SerializeField] private SpellAnimatorManager m_SpellAnimatorManager;
 	//**Infantry units
 	//*Rooster
 	/**Rooster gameobject prefab*/
@@ -60,6 +62,11 @@ public class Spawner : MonoBehaviour {
 	/**Armored soldier melee animation gameobject
 	*Note: as of yet, no proper animation for this guy's melee. Setting to rooster's as default (in Awake()).*/
 	[SerializeField] private GameObject m_ArmoredSoldierAnimationPrefab;
+	//*Rooster mage
+	/**Rooster mage gameobject prefab*/
+	[SerializeField] private GameObject m_RoosterMagePrefab;
+	//The rooster mage uses the same melee animation as the Rooster, so there's no need to get that again
+
 
 
 	private Sprite m_SpriteToBeUsed;
@@ -201,14 +208,19 @@ public class Spawner : MonoBehaviour {
 	}
 
 	/**A function to be called from the Quest Manager class, to return an instance of a given quest item, to be spawned from the quest manager on quest start.*/
-	public GameObject SpawnQuestItem(QuestItemName quest_item_name)
+	public GameObject SpawnQuestItem(QuestItemName quest_item_name, Transform parent = null)
 	{
-		//A default value, to be overwritten
+		//A default value, to be overwritten (Though this is literally what will be spawned if no case is reached in the switch xD)
 		GameObject generated_instance = this.m_RoosterPrefab;
+		if (parent != null) {//A default value - the only real thing telling the quest items apart are their names and sprites
+			generated_instance = GameObject.Instantiate (this.m_DefaultQuestItemPrefab, parent);
+		} else {
+			generated_instance = GameObject.Instantiate (this.m_DefaultQuestItemPrefab);
+		}
+		generated_instance.GetComponent<QuestItemPickup> ().m_QuestItem = new QuestItem();
 		switch ((int)quest_item_name) {
 		case (int)QuestItemName.POTION_OF_WISDOM:
 			{
-				generated_instance = GameObject.Instantiate (this.m_DefaultQuestItemPrefab);
 				QuestItem quest_item = generated_instance.GetComponent<QuestItemPickup> ().m_QuestItem;
 				quest_item.m_QuestItemName = QuestItemName.POTION_OF_WISDOM;
 				quest_item.m_QuestItemSprite = this.m_PotionOfWisdomSprite;
@@ -217,6 +229,8 @@ public class Spawner : MonoBehaviour {
 		}//end switch
 		return generated_instance;
 	}//end f'n SpawnQuestItem)QuestItemName)
+
+
 
 	/**A function to be called from the Quest Manager class, to return an instance of a given enemy, to be spawned from the quest manager on quest start.*/
 	public GameObject SpawnEnemy(EnemyName enemy_name, Transform parent = null)
@@ -236,10 +250,10 @@ public class Spawner : MonoBehaviour {
 				}
 				Rooster rooster_component = generated_instance.GetComponentInChildren<Rooster> ();
 				rooster_component.m_AttackPattern.m_EnemyAttackHitAnimation = this.m_RoosterAnimationPrefab;
-//				Debug.Log (rooster_component.m_AttackPattern.m_EnemyAttackHitAnimation);
 				rooster_component.SetPlayer (this.m_Player);
 				break;
 			}//end case Rooster
+			//Case Armored Soldier
 		case (int)EnemyName.ARMORED_SOLDIER:
 			{
 				if (parent != null) {
@@ -247,12 +261,27 @@ public class Spawner : MonoBehaviour {
 				} else {
 					generated_instance = GameObject.Instantiate (this.m_ArmoredSoldierPrefab);
 				}
-				ArmoredSoldier AS_component = generated_instance.GetComponent<ArmoredSoldier> ();
+				ArmoredSoldier AS_component = generated_instance.GetComponentInChildren<ArmoredSoldier> ();
 				AS_component.m_AttackPattern.m_EnemyAttackHitAnimation = this.m_ArmoredSoldierAnimationPrefab;
 				AS_component.SetPlayer (this.m_Player);
 				break;
-			}
-//		case 
+			}//end case ARMORED SOLDIER
+
+			//Ranged enemies
+			//Case Rooster Mage
+		case (int)EnemyName.ROOSTER_MAGE:
+			{
+				if (parent != null) {
+					generated_instance = GameObject.Instantiate (this.m_RoosterMagePrefab, parent);
+				} else {
+					generated_instance = GameObject.Instantiate (this.m_RoosterMagePrefab);
+				}
+				RoosterMage RM_component = generated_instance.GetComponentInChildren<RoosterMage> ();
+				RM_component.m_AttackPattern.m_EnemyHitAnimation = this.m_RoosterAnimationPrefab;
+				RM_component.SetPlayer (this.m_Player);
+				RM_component.m_AttackPattern.m_SpellAnimatorManager = this.m_SpellAnimatorManager;
+				break;
+			}//end case ROOSTER MAGE
 		}//end switch
 		return generated_instance;
 	}//end f'n SpawnEnemy(EnemyName)

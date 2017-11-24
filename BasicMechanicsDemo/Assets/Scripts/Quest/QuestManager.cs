@@ -225,7 +225,8 @@ public class QuestManager : MonoBehaviour
 				{
 					//get the default enemy component and get 
 					DefaultEnemy enemy_component = quest.m_RequisitePrefabs [enemy_type].GetComponentInChildren<DefaultEnemy> ();
-					Debug.Log ("Enemy component? " + (enemy_component != null));
+					Debug.Log ("Enemy component? " + (enemy_component != null) + " Name: " + enemy_component.m_EnemyName);
+	
 
 					quest.m_KillEverything.SpawnEnemiesAtPosition (this.m_Spawner, quest.m_QuestObjectivePosition, enemy_component.m_EnemyName, quest.m_NumberOfEnemiesToKill);
 				}//end for 
@@ -237,7 +238,9 @@ public class QuestManager : MonoBehaviour
 				for (int item_type = 0; item_type < quest.m_RequisitePrefabs.Count; item_type++) 
 				{
 					//get the default enemy component and get 
+					quest.m_RequisitePrefabs [item_type].GetComponent<QuestItemPickup> ().m_QuestItem = new QuestItem();
 					QuestItem quest_item = quest.m_RequisitePrefabs [item_type].GetComponent<QuestItemPickup> ().m_QuestItem;
+//					Debug.Log ("Quest item exists? " + (quest_item != null));
 					quest.m_Fetch.SpawnQuestItemsAtPosition (this.m_Spawner, quest.m_QuestObjectivePosition, quest_item.m_QuestItemName, quest.m_NumberOfItemsToFind);
 				}//end for 
 				break;

@@ -482,7 +482,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerInRegion: 0
-  m_InteriorPadding: 1
   m_Player: {fileID: 0}
 --- !u!114 &114305187460531458
 MonoBehaviour:
@@ -496,7 +495,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerInRegion: 0
-  m_InteriorPadding: 1
   m_Player: {fileID: 0}
 --- !u!114 &114331303626207752
 MonoBehaviour:
@@ -510,7 +508,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerInRegion: 0
-  m_InteriorPadding: 1
   m_Player: {fileID: 0}
 --- !u!114 &114362496863020502
 MonoBehaviour:
@@ -530,6 +527,7 @@ MonoBehaviour:
   m_IntervalBetweenAttacks: 3
   m_EnemyMeleeAttackSound: {fileID: 8300000, guid: 9bfdc1c089cb3404d98fab6149c6a468,
     type: 3}
+  m_EnemyHitAnimation: {fileID: 0}
   m_AudioSource: {fileID: 0}
   m_MeleeDetectionRegion: {fileID: 114305187460531458}
   m_DefaultSpellPrefab: {fileID: 1081312389218078, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
@@ -557,6 +555,7 @@ MonoBehaviour:
   m_MovementPatternState: 0
   m_ChaseVelocity: 10
   m_CurrentVelocity: 0
+  m_EnemyDefaultVelocity: 2.5
 --- !u!114 &114913391888084722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -570,6 +569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyDamagedSound: {fileID: 8300000, guid: a01ae7e328e54a941a959d142c40ed17, type: 3}
   m_Player: {fileID: 0}
+  m_Spawner: {fileID: 0}
   m_MovementPattern: {fileID: 114713015403242892}
   m_Health: 0
   m_AttackDamageValue: 0
@@ -581,12 +581,14 @@ MonoBehaviour:
   m_ShockTimerIncrementor: 1
   m_ShockJumpDistance: 0.25
   m_ShockJumpFrequency: 0.0005
+  m_EnemyName: 3
   m_AttackSpell: 0
   m_AttackPattern: {fileID: 114362496863020502}
   m_MeleeAttackInterval: 0
   m_RangedAttackInterval: 0
   m_RoosterMageHealth: 25
   m_RoosterMageMeleeDamage: 1.5
+  m_RoosterMageChasePlayerDuration: 1.5
   m_IntervalBetweenRangedAttacks: 2.5
   m_IntervalBetweenMeleeAttacks: 1
 --- !u!135 &135464182048750286

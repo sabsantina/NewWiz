@@ -10,6 +10,7 @@ public class QuestItem : MonoBehaviour {
 	/**A bool to tell us whether or not the item has been collected*/
 	public bool m_IsCollected = false;
 
+
 	public void SetQuestItemName(QuestItemName quest_item_name)
 	{
 		this.m_QuestItemName = quest_item_name;

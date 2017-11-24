@@ -16,12 +16,13 @@ public class Fetch : Objective {
 	{
 		if (this.m_ItemContainer == null) {
 			this.m_ItemContainer = new GameObject ();
+			this.m_ItemContainer.name = quest_item_name.ToString() + "Container";
 		}
 		this.m_NumberOfItems = number_of_items;
 		//for however many quest items are needed...
 		for (int index = 0; index < number_of_items; index++) {
 			//Spawn the quest item
-			GameObject item_obj = item_spawner.SpawnQuestItem(quest_item_name);
+			GameObject item_obj = item_spawner.SpawnQuestItem(quest_item_name, this.m_ItemContainer.transform);
 			//Position the item
 			item_obj.transform.position = position;
 			//Adjust position with respect to number of items

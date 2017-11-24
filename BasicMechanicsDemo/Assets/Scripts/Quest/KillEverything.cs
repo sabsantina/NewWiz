@@ -73,7 +73,7 @@ public class KillEverything : Objective {
 	/**A function to spawn the given enemy [prefab] at the given position; if there are more */
 	public void SpawnEnemiesAtPosition (Spawner enemy_spawner, Vector3 position, EnemyName enemy_name, int number_of_enemies)
 	{
-		Debug.Log ("Do we make it this far, at least? Enemy name: " + enemy_name.ToString());
+//		Debug.Log ("Do we make it this far, at least? Enemy name: " + enemy_name.ToString());
 		if (this.m_EnemyContainer == null) {
 			this.m_EnemyContainer = new GameObject ();
 			this.m_EnemyContainer.name = enemy_name.ToString() + "Container";
