@@ -32,6 +32,8 @@ public class RoosterMage : RangedEnemy {
 		this.SetAttackDamageValue ();
 
 		this.SetChasePlayerSettings (this.m_RoosterMageChasePlayerDuration);
+
+		this.m_EnemyName = EnemyName.ROOSTER_MAGE;
 	}
 
 

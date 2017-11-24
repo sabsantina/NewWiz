@@ -19,6 +19,6 @@ public class Serializable_Session{
 	{
 		this.m_SerializablePlayer.SetAllPlayerInformation (player);
 		this.m_SerializableQuestManager.SetAllQuestStates (quest_manager);
-		this.m_SerializableQuestManager.SpawnInQuestObjects (quest_manager);
+//		this.m_SerializableQuestManager.SpawnInQuestObjects (quest_manager);
 	}//end f'n void SetSessionInformation(GameObject, GameObject)
 }
