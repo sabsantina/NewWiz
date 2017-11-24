@@ -27,7 +27,6 @@ public class PlayerCastSpell : MonoBehaviour {
 	/**A manager for the spell animator controllers*/
 	[SerializeField] private SpellAnimatorManager m_SpellAnimatorManager;
 
-	[SerializeField] private SpellEffectManager m_SpellEffectManager;
 
     private GameObject m_Target;
 	/**A reference to our main camera.*/
@@ -357,12 +356,12 @@ public class PlayerCastSpell : MonoBehaviour {
 				}//end if active spell exists
 			
 			}//end if player isn't clicking UI button
-			//else if the player is clicking on a UI button...
-			else {
-				//...then update the corresponding bool and break us out of here
-//				this.m_MenuOpen = true;
-				return;
-			}
+//			//else if the player is clicking on a UI button...
+//			else {
+//				//...then update the corresponding bool and break us out of here
+////				this.m_MenuOpen = true;
+//				return;
+//			}
 		}//end if player touched mouse input
 		//else if player finishes casting a spell
 		else if (Input.GetButtonUp (STRINGKEY_INPUT_CASTSPELL)) {
