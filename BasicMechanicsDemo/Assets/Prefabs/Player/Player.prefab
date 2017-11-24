@@ -3585,6 +3585,7 @@ GameObject:
   - component: {fileID: 222713056224788176}
   - component: {fileID: 114992811057190504}
   - component: {fileID: 114591870322923168}
+  - component: {fileID: 114123586695579374}
   m_Layer: 5
   m_Name: Biography
   m_TagString: Untagged
@@ -4081,6 +4082,7 @@ GameObject:
   - component: {fileID: 224842503249698894}
   - component: {fileID: 222046492603502334}
   - component: {fileID: 114587101113923932}
+  - component: {fileID: 114701607829066122}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -5795,6 +5797,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
+--- !u!114 &114123586695579374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1811365871093142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938f452ee38db124092011958f71733a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bioSprite: {fileID: 21300000, guid: b92a2939034504c419bf3f21663ce5cd, type: 3}
+  inventorySprite: {fileID: 21300000, guid: c4a5f9cb97aca6b40ac90153c7ea9bcb, type: 3}
+  bioCanvas: {fileID: 1840824099759724}
+  buttonImage: {fileID: 0}
 --- !u!114 &114132142791363510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10608,7 +10625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -10634,7 +10651,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114992811057190504}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114123586695579374}
+        m_MethodName: buttonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114597186265324098
@@ -10952,31 +10980,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\rLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-    non ex massa. Aenean bibendum dapibus est, sit amet tempor quam rutrum sit amet.
-    Morbi sodales mollis vulputate. In suscipit ligula dolor, fringilla bibendum justo
-    laoreet et. In commodo dolor sit amet lorem blandit posuere. Phasellus egestas
-    viverra sapien, eget aliquet lectus lobortis eget. Vestibulum ante ipsum primis
-    in faucibus orci luctus et ultrices posuere cubilia Curae;\r\n\r\nDonec id leo
-    sit amet tortor aliquet condimentum. Integer a pellentesque ante, nec faucibus
-    mauris. Sed et turpis in neque sagittis pulvinar eget vel orci. Aenean libero
-    ipsum, malesuada nec aliquet et, tempus ut nunc. Vivamus mattis fringilla odio,
-    vel pharetra tortor condimentum ac. Praesent aliquet et urna ac viverra. Nam elit
-    risus, bibendum vitae mauris at, facilisis viverra eros. Nunc mattis nisl mauris.
-    Curabitur tincidunt molestie augue, ut aliquam ex imperdiet non. Aliquam a magna
-    sed mauris hendrerit pellentesque. Fusce aliquet ligula quis felis accumsan hendrerit.
-    Suspendisse et luctus enim, sit amet dapibus orci. Aenean vitae lacus scelerisque,
-    fermentum lorem nec, mattis metus. Integer in molestie dui.\r\n\r\nAenean dictum
-    nisi eu quam interdum, ut elementum erat finibus. Vestibulum sed justo erat. Vivamus
-    molestie diam purus, quis convallis mi condimentum eget. Sed nec pulvinar risus.
-    Quisque eleifend metus nulla, et fringilla mi tincidunt quis. Nam dapibus ligula
-    vulputate odio aliquam tincidunt. Duis blandit magna metus. Nullam ultricies pulvinar
-    varius. Fusce vel turpis vitae nulla gravida condimentum eget eget tellus.\r\n\r\nFusce
-    maximus eros ut augue volutpat rutrum. Nam vitae vestibulum tellus. Morbi interdum
-    neque et risus fermentum viverra. Quisque vitae venenatis metus, non dictum magna.
-    Cras pellentesque porttitor nibh quis cursus. Sed commodo turpis ac nunc commodo,
-    vel rhoncus nisl rhoncus. Maecenas auctor ut libero quis luctus. Nulla eu augue
-    sed ex pulvinar porttitor vel vitae enim."
+  m_Text: 
 --- !u!114 &114624517704062462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11803,6 +11807,17 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114701607829066122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1953528133929318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecafb24503afb4f418496aa51c0e4a17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114701712993457820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -18626,7 +18641,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -179.99783, y: -70}
-  m_SizeDelta: {x: 350, y: 60}
+  m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224475697907297120
 RectTransform:
@@ -20263,7 +20278,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.000030517578, y: 196.99985}
-  m_SizeDelta: {x: 0, y: 2000}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224855605798747878
 RectTransform:
