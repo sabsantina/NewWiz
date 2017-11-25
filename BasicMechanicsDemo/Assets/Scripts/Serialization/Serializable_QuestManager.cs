@@ -14,6 +14,8 @@ public class Serializable_QuestManager {
 	*This includes even quests not yet encountered by the player.*/
 	public List<int> m_AllQuestStates = new List<int>();
 
+	public List<bool> m_AllRewardsGiven = new List<bool>();
+
 	/*
 	* Note: If the player saves a game after having killed x enemies for a quest (where x is less than the total number of enemies to kill
 	* in order for that quest's "condition" or task to be fulfilled), then the enemies will respawn on load and the player's progress towards 
@@ -23,6 +25,23 @@ public class Serializable_QuestManager {
 	* So basically once you kill all the enemies, even without speaking to the quest giver and completing the quest in that way, they'll stay dead.
 	* Same deal for items picked up!
 	*/
+
+	public void ParseAllQuestRewardsGiven(QuestManager manager)
+	{
+		this.m_AllRewardsGiven.Clear ();
+		//for each quest giver...
+		for (int quest_index = 0; quest_index < manager.m_AllQuests.Count; quest_index++) {
+			this.m_AllRewardsGiven.Add(manager.m_AllQuestGivers[quest_index].m_RewardHasBeenGiven);
+		}
+	}
+
+	public void SetAllQuestRewardsGiven(QuestManager manager)
+	{
+		//for each quest giver...
+		for (int quest_index = 0; quest_index < manager.m_AllQuests.Count; quest_index++) {
+			manager.m_AllQuestGivers [quest_index].m_RewardHasBeenGiven = this.m_AllRewardsGiven [quest_index];
+		}
+	}
 
 	/**A function to record all quest states and record them to [this.m_AllQuestStates]*/
 	public void ParseAllQuestStates(QuestManager manager)
