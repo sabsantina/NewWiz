@@ -141,7 +141,9 @@ public class Serializable_Player {
 	public void SetPlayerPosition(GameObject player)
 	{
 		Vector3 player_position = new Vector3 (this.m_PlayerPositionInWorld_X, this.m_PlayerPositionInWorld_Y, this.m_PlayerPositionInWorld_Z);
-		player.transform.position = player_position;
+		Player player_component = player.GetComponent<Player> ();
+		player_component.m_PlayerRespawnPosition = player_position;
+//		player.transform.position = player_position;
 	}//end f'n void SetPlayerPosition(GameObject)
 
 	/**A function to gather all player attributes (health and mana, as well as the full possible value of each) to get a given GameObject's Player component to store its values.*/
