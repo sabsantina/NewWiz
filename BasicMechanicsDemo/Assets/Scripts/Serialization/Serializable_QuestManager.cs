@@ -65,14 +65,14 @@ public class Serializable_QuestManager {
 		}//end for
 	}//end f'n void SetAllQuestStates(QuestManager)
 
-	public void SpawnInQuestObjects(QuestManager manager)
-	{
-		foreach (Quest quest in manager.m_AllQuests) {
-			if (quest.m_QuestState == QuestState.IN_PROCESS) {
-				quest.SpawnInQuestObjects ();
-			}//end if
-		}//end foreach
-	}
+//	public void SpawnInQuestObjects(QuestManager manager)
+//	{
+//		foreach (Quest quest in manager.m_AllQuests) {
+//			if (quest.m_QuestState == QuestState.IN_PROCESS) {
+//				quest.SpawnInQuestObjects ();
+//			}//end if
+//		}//end foreach
+//	}
 
 
 //	public void SetAllEnemiesRemaining(QuestManager manager)

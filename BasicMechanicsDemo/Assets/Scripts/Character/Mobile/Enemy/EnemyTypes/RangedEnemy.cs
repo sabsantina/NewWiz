@@ -10,7 +10,7 @@ public class RangedEnemy : DefaultEnemy {
 	*To be set in children classes.*/
 	public SpellClass m_SpellToCast;
 	/**A public SpellName, to set our attack spell, with default value Fireball*/
-	public SpellName m_AttackSpell = SpellName.Fireball;
+	public SpellName m_AttackSpell;
 
 	public RangedAttackPattern m_AttackPattern;
 

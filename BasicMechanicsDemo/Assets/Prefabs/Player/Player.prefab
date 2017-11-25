@@ -7782,7 +7782,6 @@ MonoBehaviour:
     type: 2}
   m_SpellCubeInstance: {fileID: 0}
   m_SpellAnimatorManager: {fileID: 0}
-  m_SpellEffectManager: {fileID: 0}
   m_MainCamera: {fileID: 20853887167409586}
   m_isCastingSpell: 0
   m_playerAudio: {fileID: 0}

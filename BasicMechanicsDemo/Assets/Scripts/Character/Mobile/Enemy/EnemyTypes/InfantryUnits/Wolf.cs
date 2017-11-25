@@ -22,6 +22,8 @@ public class Wolf : EnemyInfantry {
 
         this.SetChasePlayerSettings(this.m_WolfChasePlayerDuration);
         this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingLayerName = sortingLayerName;
+
+		this.m_EnemyName = EnemyName.WOLF;
     }
 
 

@@ -15,6 +15,7 @@ public class ArmoredSoldier : EnemyInfantry {
 		this.SetHealth(this.m_ArmoredSoldierHealth);
         this.SetAttackDamageValue();
         this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingLayerName = sortingLayerName;
+		this.m_EnemyName = EnemyName.ARMORED_SOLDIER;
     }
 	
 	// Update is called once per frame
