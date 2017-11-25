@@ -13,9 +13,6 @@ public class Serialization_Manager : MonoBehaviour {
 
 	private readonly string FILEPATH_EXTENSION = "/SavedGame.gd";
 
-//	public Serializable_Player m_SerializablePlayer = new Serializable_Player();
-//	public Serializable_QuestManager m_SerializableQuestManager = new Serializable_QuestManager();
-
 	public void Save() {
 //		Serializable_Player SP = new Serializable_Player ();
 //		this.m_SerializablePlayer = this.m_SerializablePlayer.GenerateSerializableInstance(this.m_Player);

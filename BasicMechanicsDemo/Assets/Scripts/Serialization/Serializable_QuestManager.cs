@@ -19,6 +19,9 @@ public class Serializable_QuestManager {
 	* in order for that quest's "condition" or task to be fulfilled), then the enemies will respawn on load and the player's progress towards 
 	* the quest will be lost.
 	* By the same token, items picked up will be lost unless the player first brings them where they're supposed to go (that might be problematic)
+	* Yo, I was wrong! As it happens, I set it up such that once all quest objectives are completed, the quest automatically updates its state.
+	* So basically once you kill all the enemies, even without speaking to the quest giver and completing the quest in that way, they'll stay dead.
+	* Same deal for items picked up!
 	*/
 
 	/**A function to record all quest states and record them to [this.m_AllQuestStates]*/
