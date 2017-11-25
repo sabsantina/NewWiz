@@ -4285,7 +4285,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1639867789956470}
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: -6.5, y: 0.55, z: -0.43}
+  m_LocalPosition: {x: -1.8657198, y: 0.54999983, z: -0.42999914}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4191213353136672}
@@ -14141,8 +14141,8 @@ MonoBehaviour:
   m_HotKey3_Obj: {fileID: 114303365093737236}
   m_audioSource: {fileID: 0}
   m_PlayerAudio: {fileID: 114884361018238466}
-  m_Health: 0
-  m_Mana: 0
+  m_Health: 100
+  m_Mana: 82.71816
   PLAYER_FULL_HEALTH: 100
   PLAYER_FULL_MANA: 100
   m_IsShielded: 0
@@ -14153,7 +14153,7 @@ MonoBehaviour:
   sortingLayerName: Objects
   m_IsAffectedBySpell: 0
   m_ExtraEffectsTimer: 0
-  m_MagicAffinity: 1
+  m_MagicAffinity: 0
 --- !u!114 &114895016287083824
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -79,6 +79,8 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 		this.m_HotKey1 = this.m_HotKey1_Obj.GetComponentInChildren<HotKeys> ();
 		this.m_HotKey2 = this.m_HotKey2_Obj.GetComponentInChildren<HotKeys> ();
 		this.m_HotKey3 = this.m_HotKey3_Obj.GetComponentInChildren<HotKeys> ();
+
+		this.m_MagicAffinity = 1.0f;
 	}
 
 	void Start()

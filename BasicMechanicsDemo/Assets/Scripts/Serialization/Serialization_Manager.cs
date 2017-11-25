@@ -5,7 +5,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
 public class Serialization_Manager : MonoBehaviour {
-	[SerializeField] GameObject m_Player;
+//	[SerializeField] GameObject m_Player;
+	[SerializeField] Player m_Player;
 	[SerializeField] QuestManager m_QuestManager;
 
 	public Serializable_Session m_SerializableSession = new Serializable_Session();
@@ -19,7 +20,7 @@ public class Serialization_Manager : MonoBehaviour {
 //		Serializable_Player SP = new Serializable_Player ();
 //		this.m_SerializablePlayer = this.m_SerializablePlayer.GenerateSerializableInstance(this.m_Player);
 //		this.m_SerializableQuestManager.ParseAllQuestStates(m_QuestManager);
-		this.m_SerializableSession.GatherSessionInformation(m_Player, m_QuestManager);
+		this.m_SerializableSession.GatherSessionInformation(m_Player.gameObject, m_QuestManager);
 		BinaryFormatter bf = new BinaryFormatter();
 		Debug.Log (Application.persistentDataPath);
 		FileStream file = File.Create (Application.persistentDataPath + FILEPATH_EXTENSION);
@@ -41,7 +42,7 @@ public class Serialization_Manager : MonoBehaviour {
 			file.Close();
 
 			//Set all player information
-			this.m_SerializableSession.SetSessionInformation(this.m_Player, this.m_QuestManager);
+			this.m_SerializableSession.SetSessionInformation(this.m_Player.gameObject, this.m_QuestManager);
 			//Spawn in quest objects
 			this.SpawnAllQuestObjects();
 		}
