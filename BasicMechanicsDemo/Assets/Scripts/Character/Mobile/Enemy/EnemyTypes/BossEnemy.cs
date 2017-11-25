@@ -20,12 +20,14 @@ public class BossEnemy : DefaultEnemy {
 
 	public float m_RangedAttackInterval;
 
-	/**A function to regulate the enemy's movement and tell the enemy to move about the scene.
+    public int m_SpellCastCount = 0;
+
+    /**A function to regulate the enemy's movement and tell the enemy to move about the scene.
 	* Note that in the MovementPattern class, we have a function executing movement executing in Update, and what it does depends on the MovementPatternState. So all we need do to affect movement is change the value of the movement pattern state.*/
-	public override void Move ()
+    public override void Move ()
 	{
 		//		Debug.Log (this.m_MovementPattern.IsPlayerDetectedInPatrolRegion ());
-		if (this.m_InhibitMovement) {
+		if (this.m_InhibitMovement || this.m_IsHealing) {
 			//			Debug.Log ("Inhibit movement");
 			this.m_MovementPattern.m_MovementPatternState = MovementPatternState.STAY_STILL;
 		}
@@ -46,12 +48,16 @@ public class BossEnemy : DefaultEnemy {
 	*To be expanded upon in child classes.*/
 	protected void ManageAttack()
 	{
-		if (this.m_InhibitAttack) {
+        if (this.m_IsHealing)
+        {
+            this.m_AttackPattern.m_AttackPatternState = AttackPatternState.HEAL;
+        }
+		else if (this.m_InhibitAttack) {
 			//			Debug.Log ("Inhibit Attack");
 			this.m_AttackPattern.m_AttackPatternState = AttackPatternState.DO_NOTHING;
 			return;
 		}
-		if (this.m_AttackPattern.m_MeleeDetectionRegion.m_PlayerInRegion) {
+		else if (this.m_AttackPattern.m_MeleeDetectionRegion.m_PlayerInRegion) {
 			this.m_AttackPattern.m_IntervalBetweenAttacks = this.m_MeleeAttackInterval;
 			this.m_AttackPattern.m_AttackPatternState = AttackPatternState.MELEE;
 		}
@@ -76,7 +82,9 @@ public class BossEnemy : DefaultEnemy {
 	/**A function to have the enemy apply their given attack on the player.*/
 	public override void Attack()
 	{
-		this.m_AttackPattern.m_AttackPatternState = AttackPatternState.RANGED;
+        //Check if the boss is healing
+        if(this.m_IsHealing == false)
+		    this.m_AttackPattern.m_AttackPatternState = AttackPatternState.RANGED;
 	}
 
 	public virtual void SetSpellToCast(SpellName spell)

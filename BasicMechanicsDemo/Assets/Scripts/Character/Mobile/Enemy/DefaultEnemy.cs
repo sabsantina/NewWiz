@@ -38,6 +38,8 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	public bool m_InhibitAttack = false;
 	/**A timer to help implement the spell effects*/
 	public float m_ExtraEffectTimer = 0.0f;
+    /**A bool to check if the boss is healing*/
+    public bool m_IsHealing = false;
 
 	/**A variable to keep track of how many times we've incremented the shock timer by units of 0.5.
 	*The plan is for the enemy to move up/down every 0.5 seconds. So if the time before shock release is 3.0, the enemy should move a grand total of 6 times; three times upward, and three times downward.*/
@@ -66,7 +68,7 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 	protected virtual void Start()
 	{
 		this.m_Animator = this.GetComponent<Animator> ();
-		this.GetComponent<AudioSource> ().volume = 0.25f;
+		this.GetComponent<AudioSource> ().volume = 0.15f;
 	}
 
 	/**A function to be called from the spawner when spawning enemies.*/
