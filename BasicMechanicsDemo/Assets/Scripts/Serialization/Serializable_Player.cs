@@ -28,6 +28,8 @@ public class Serializable_Player {
 	public float m_PlayerMana;
 	/**A variable to store the maximal value of the player mana*/
 	public float m_MaxPlayerMana;
+	/**A variable to store the value of the player;s magic affinity*/
+	public float m_PlayerMagicAffinity;
 
 	/**A function to store the contents of the quest item list.*/
 	public void ParseQuestItemList(GameObject player)
@@ -59,6 +61,7 @@ public class Serializable_Player {
 	/**A function to go through the contents of the player item dictionary and separate its item names and quantities into serializable formats.*/
 	public void ParseItemDictionary(Dictionary<ItemClass, int> all_items_in_inventory)
 	{
+//		Debug.Log ("all items in inventory exists? " + (all_items_in_inventory != null));
 		//foreach keyvaluepair in all items...
 		foreach (KeyValuePair<ItemClass, int> entry in all_items_in_inventory) {
 			//add the item name
@@ -141,7 +144,7 @@ public class Serializable_Player {
 		player.transform.position = player_position;
 	}//end f'n void SetPlayerPosition(GameObject)
 
-	/**A function to gather all player attributes (health and mana, as well as the full possible value of each).*/
+	/**A function to gather all player attributes (health and mana, as well as the full possible value of each) to get a given GameObject's Player component to store its values.*/
 	public void GatherPlayerAttributes(GameObject player_obj)
 	{
 		Player player = player_obj.GetComponent<Player> ();
@@ -149,6 +152,7 @@ public class Serializable_Player {
 		this.m_PlayerMana = player.m_Mana;
 		this.m_MaxPlayerHealth = player.PLAYER_FULL_HEALTH;
 		this.m_MaxPlayerMana = player.PLAYER_FULL_MANA;
+		this.m_PlayerMagicAffinity = player.m_MagicAffinity;
 	}//end f'n void GatherPlayerAttributes(GameObject)
 
 	/**A function to execute after loading, to set all player attributes.*/
@@ -159,7 +163,7 @@ public class Serializable_Player {
 		player.m_Mana = this.m_PlayerMana;
 		player.PLAYER_FULL_HEALTH = this.m_MaxPlayerHealth;
 		player.PLAYER_FULL_MANA = this.m_MaxPlayerMana;
-		this.m_MaxPlayerMana = player.PLAYER_FULL_MANA;
+		player.m_MagicAffinity = this.m_PlayerMagicAffinity;
 	}//end f'n SetPlayerAttributes(GameObject)
 
 	/**A function to generate our serializable instance.*/
@@ -170,6 +174,9 @@ public class Serializable_Player {
 		serializable_player.GatherPlayerPosition (player);
 
 		PlayerInventory inventory = player.GetComponent<PlayerInventory> ();
+		Debug.Log ("Player inventory exists? " + (inventory != null));
+		inventory.OutputInventoryContents ();
+		Debug.Log ("Player dictionary exists? " + (inventory.m_ItemDictionary != null));
 		serializable_player.ParseItemDictionary (inventory.m_ItemDictionary);
 		serializable_player.ParseSpellList (inventory.m_SpellClassList);
 		serializable_player.ParseQuestItemList (player);

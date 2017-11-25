@@ -42,9 +42,24 @@ public class Serialization_Manager : MonoBehaviour {
 
 			//Set all player information
 			this.m_SerializableSession.SetSessionInformation(this.m_Player, this.m_QuestManager);
+			//Spawn in quest objects
+			this.SpawnAllQuestObjects();
 		}
 	}
 
+	private void SpawnAllQuestObjects()
+	{
+
+		//for each quest in the quest list...
+		for (int quest_index = 0; quest_index < System.Enum.GetValues (typeof(QuestName)).Length; quest_index++) {
+			int current_quest_state = this.m_SerializableSession.m_SerializableQuestManager.m_AllQuestStates [quest_index];
+			//We only care about the quest if it's in process
+			if (current_quest_state == (int)QuestState.IN_PROCESS) {
+				//...and if so, then spawn corresponding quest objects
+				this.m_QuestManager.SpawnInQuestObjects (this.m_QuestManager.m_AllQuests [quest_index]);
+			}
+		}
+	}
 
 	
 	// Update is called once per frame

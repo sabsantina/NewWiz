@@ -10,17 +10,15 @@ public class Serializable_QuestManager {
 	* 
 	*/
 
-	/**An int list to contain the quest state of the quest at the same position as any given int.
-	*So for the quest state of the quest ROOSTER_BANE, for instance, this would be the first value in the list.*/
+	/**An int list to contain the quest state of the quest state at the given list index.
+	*This includes even quests not yet encountered by the player.*/
 	public List<int> m_AllQuestStates = new List<int>();
-	/**An int list to contain the number of enemies remaining for every Kill Everything quest at the time of the same.
-	*The way we'll do this is we'll just get the data on every Kill Everything quest in order.*/
-//	List<int> m_KillEverything_EnemiesRemaining = new List<int>();
-
-	//The enemies remaining thing is kind of a drag
 
 	/*
-	* Basically what's happening now is if we stop the game and load, the quest enemies and items aren't spawning in.
+	* Note: If the player saves a game after having killed x enemies for a quest (where x is less than the total number of enemies to kill
+	* in order for that quest's "condition" or task to be fulfilled), then the enemies will respawn on load and the player's progress towards 
+	* the quest will be lost.
+	* By the same token, items picked up will be lost unless the player first brings them where they're supposed to go (that might be problematic)
 	*/
 
 	/**A function to record all quest states and record them to [this.m_AllQuestStates]*/
