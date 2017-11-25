@@ -42,8 +42,23 @@ public class RangedAttackPattern : AttackPattern {
 
 	protected override void ExecutePatternState ()
 	{
+        
 		switch((int)this.m_AttackPatternState)
 		{
+        //Case for when the enemy is healing
+        case (int)AttackPatternState.HEAL:
+            { 
+                if(this.m_GeneratedSpellInstance == null) {
+                    this.GenerateSpellPrefabInstance ();
+                    GameObject.Destroy(this.m_GeneratedSpellInstance, 1.0f);
+                }
+                    
+                //Debug.Log("I am hurt damnit");
+                SpellMovement spell_movement = this.m_GeneratedSpellInstance.GetComponent<SpellMovement> ();
+                spell_movement.transform.position = this.GetComponent<Transform>().position;
+                this.GetComponent<DefaultEnemy>().AffectHealth(1.5f);
+                break;
+            }
 		case (int)AttackPatternState.MELEE:
 			{
 				if (this.m_AttackTimer == 0.0f) {
@@ -78,6 +93,8 @@ public class RangedAttackPattern : AttackPattern {
 					this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, true);
 
 					this.GenerateSpellPrefabInstance ();
+                    this.GetComponent<BossEnemy>().m_SpellCastCount++;
+                        Debug.Log("sth is working");
 					Player player_detected = this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player;
 					//if the player was detected in the movement region...
 					if (player_detected != null) {
@@ -169,6 +186,7 @@ public class RangedAttackPattern : AttackPattern {
 				break;
 					
 			}//end case RANGED
+        
 		case (int)AttackPatternState.DO_NOTHING:
 			{
 				//Do nothing
