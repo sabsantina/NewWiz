@@ -95,6 +95,10 @@ public class QuestManager : MonoBehaviour
         iceball = iceball.GenerateInstance(SpellName.Iceball);
         this.m_QuestGiver_RoosterBane.m_RewardSpell = iceball;
 
+		//ADD QUEST GIVER TO LIST
+		this.m_AllQuestGivers.Add (this.m_QuestGiver_RoosterBane);
+
+
         //Potion master
         Quest potion_master = new Quest();
         potion_master.m_QuestName = QuestName.POTION_MASTER;
@@ -125,6 +129,8 @@ public class QuestManager : MonoBehaviour
         iceball = iceball.GenerateInstance(SpellName.Iceball);
         this.m_QuestGiver_PotionMaster.m_RewardSpell = iceball;
 
+		//ADD QUEST GIVER TO LIST
+		this.m_AllQuestGivers.Add (this.m_QuestGiver_PotionMaster);
 
         //Hot Chicks
         Quest hot_chicks = new Quest();
@@ -145,6 +151,8 @@ public class QuestManager : MonoBehaviour
         ItemClass mana_potion = new ItemClass();
         mana_potion.GenerateInstance(ItemName.Mana_Potion);
         m_QuestGiver_HotChicks.m_RewardItem = mana_potion;
+		//ADD QUEST GIVER TO LIST
+		this.m_AllQuestGivers.Add (this.m_QuestGiver_HotChicks);
 
 		//Add all quests
         
@@ -247,18 +255,5 @@ public class QuestManager : MonoBehaviour
 			}//end case fetch
 		}//end switch
 
-//		switch ((int)quest.m_QuestName) {
-//		case (int)QuestName.ROOSTER_BANE:
-//			{
-//				//for each enemy type (though I'm not really sure this would work for more than one enemy type)
-//				for (int enemy = 0; enemy < quest.m_RequisitePrefabs.Count; enemy++) 
-//				{
-//					//get the default enemy component and get 
-//					DefaultEnemy enemy_component = quest.m_RequisitePrefabs [enemy].GetComponent<DefaultEnemy> ();
-//					quest.m_KillEverything.SpawnEnemiesAtPosition (this.m_Spawner, quest.m_QuestObjectivePosition, enemy_component.m_EnemyName, quest.m_NumberOfEnemiesToKill);
-//				}//end for 
-//				break;
-//			}
-//		}
 	}//end f'n void SpawnInQuestObjects(Quest)
 }
