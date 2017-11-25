@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoosterKing : BossEnemy {
-
+	[SerializeField] GameObject enemyHPMeter;
 	/**The health of a RoosterMage*/
 	public float m_RoosterKingHealth = 100.0f;
 
@@ -24,6 +25,7 @@ public class RoosterKing : BossEnemy {
 		this.SetMeleeDamage ();
 		this.SetSpellToCast (this.m_AttackSpell);
 		this.SetAttackDamageValue ();
+		this.setMaxMeter ();
 
 		this.SetChasePlayerSettings (this.m_RoosterKingChasePlayerDuration);
 		this.m_EnemyName = EnemyName.ROOSTER_KING;
@@ -47,6 +49,18 @@ public class RoosterKing : BossEnemy {
 		Debug.Log("Rooster attacking Ranged? " + this.m_Animator.GetBool("isAttacking_Ranged"));
 		#endif
 	}
+
+	void setMaxMeter()
+	{
+		enemyHPMeter.GetComponentInChildren<Slider> ().maxValue = m_RoosterKingHealth;
+		enemyHPMeter.GetComponentInChildren<Slider> ().value = m_RoosterKingHealth;
+	}
+
+//	public override void AffectHealth(float effect)
+//	{
+//		base.AffectHealth (effect);
+//		enemyHPMeter.GetComponentInChildren<Slider> ().value = m_Health;
+//	}
 
 	/**A function to set the spell to cast in our parent classes*/
 	public override void SetSpellToCast (SpellName spell)
@@ -85,5 +99,6 @@ public class RoosterKing : BossEnemy {
 	public override void ApplySpellEffect (SpellClass spell)
 	{
 		base.ApplySpellEffect (spell);
+		enemyHPMeter.GetComponentInChildren<Slider> ().value = m_Health;
 	}
 }
