@@ -15,6 +15,7 @@ public enum EnemyName
 	FROST_MAGE,
 
 	//Bosses
-	ROOSTER_KING
+	ROOSTER_KING,
+    ORANGE_LAIRD
 
 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ActiveSpellIcon : MonoBehaviour {
 
-	[SerializeField] private PlayerInventory m_PlayerInventory;
+//	[SerializeField] private PlayerInventory m_PlayerInventory;
 
 	[SerializeField] private Sprite m_FireballSprite;
 	[SerializeField] private Sprite m_IceballSprite;
@@ -18,14 +18,18 @@ public class ActiveSpellIcon : MonoBehaviour {
 
     private Sprite m_ActiveSpellSprite;
 
-	void Update()
-	{
-		this.UpdateActiveSpellSprite ();
-	}
+//	void Update()
+//	{
+//		if (this.m_PlayerInventory.m_ActiveSpellClass != null) {
+//			this.UpdateActiveSpellSprite ();
+//		}
+//	}
 
-	private void UpdateActiveSpellSprite()
+	/**A function to update the active spell sprite, if any. Will be disabled if there is no active spell.
+	*To be called from the player inventory, on [switch spell] input.*/
+	public void UpdateActiveSpellSprite(SpellName spell_name)
 	{
-		switch ((int)this.m_PlayerInventory.m_ActiveSpellClass.m_SpellName) {
+		switch ((int)spell_name) {
 		case (int)SpellName.Fireball:
 			{
 				//Set active spell sprite to fireball
@@ -62,23 +66,82 @@ public class ActiveSpellIcon : MonoBehaviour {
 				this.m_ActiveSpellSprite = this.m_HealSprite;
 				break;
 			}
-        case (int)SpellName.Tornado:
-            {
-                //Set active spell sprite to heal
-                this.m_ActiveSpellSprite = this.m_TornadoSprite;
-                break;
-            }
-        case (int)SpellName.WaterBubble:
-            {
-                //Set active spell sprite to heal
-                this.m_ActiveSpellSprite = this.m_WaterBubbleSprite;
-                break;
-            }
-        default:
-        {
-			break;
-		}
+		case (int)SpellName.Tornado:
+			{
+				//Set active spell sprite to heal
+				this.m_ActiveSpellSprite = this.m_TornadoSprite;
+				break;
+			}
+		case (int)SpellName.WaterBubble:
+			{
+				//Set active spell sprite to heal
+				this.m_ActiveSpellSprite = this.m_WaterBubbleSprite;
+				break;
+			}
+		default:
+			{
+				break;
+			}
 		}//end switch
 		this.GetComponent<Image>().sprite = this.m_ActiveSpellSprite;
 	}//end f'n void UpdateActiveSpellSprite()
+
+//	private void UpdateActiveSpellSprite()
+//	{
+//		switch ((int)this.m_PlayerInventory.m_ActiveSpellClass.m_SpellName) {
+//		case (int)SpellName.Fireball:
+//			{
+//				//Set active spell sprite to fireball
+//				this.m_ActiveSpellSprite = this.m_FireballSprite;
+//				break;
+//			}
+//		case (int)SpellName.Iceball:
+//			{
+//				//Set active spell sprite to iceball
+//				this.m_ActiveSpellSprite = this.m_IceballSprite;
+//				break;
+//			}
+//		case (int)SpellName.Thunderball:
+//			{
+//				//Set active spell sprite to thunderball
+//				this.m_ActiveSpellSprite = this.m_ThunderballSprite;
+//				break;
+//			}
+//		case (int)SpellName.Thunderstorm:
+//			{
+//				//Set active spell sprite to thunderstorm
+//				this.m_ActiveSpellSprite = this.m_ThunderstormSprite;
+//				break;
+//			}
+//		case (int)SpellName.Shield:
+//			{
+//				//Set active spell sprite to shield
+//				this.m_ActiveSpellSprite = this.m_ShieldSprite;
+//				break;
+//			}
+//		case (int)SpellName.Heal:
+//			{
+//				//Set active spell sprite to heal
+//				this.m_ActiveSpellSprite = this.m_HealSprite;
+//				break;
+//			}
+//        case (int)SpellName.Tornado:
+//            {
+//                //Set active spell sprite to heal
+//                this.m_ActiveSpellSprite = this.m_TornadoSprite;
+//                break;
+//            }
+//        case (int)SpellName.WaterBubble:
+//            {
+//                //Set active spell sprite to heal
+//                this.m_ActiveSpellSprite = this.m_WaterBubbleSprite;
+//                break;
+//            }
+//        default:
+//        {
+//			break;
+//		}
+//		}//end switch
+//		this.GetComponent<Image>().sprite = this.m_ActiveSpellSprite;
+//	}//end f'n void UpdateActiveSpellSprite()
 }

@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e3e196f83a0742d9ba3e860ea82cb12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Player: {fileID: 1639867789956470, guid: b47540d2d2eb2476bbd5efbb6155c7d6, type: 2}
+  m_Player: {fileID: 114892849765405028, guid: b47540d2d2eb2476bbd5efbb6155c7d6, type: 2}
   m_QuestManager: {fileID: 114632412232522386}
   m_SerializableSession:
     m_SerializablePlayer:
@@ -88,6 +88,7 @@ MonoBehaviour:
       m_MaxPlayerHealth: 0
       m_PlayerMana: 0
       m_MaxPlayerMana: 0
+      m_PlayerMagicAffinity: 0
     m_SerializableQuestManager:
       m_AllQuestStates: 
 --- !u!114 &114632412232522386
