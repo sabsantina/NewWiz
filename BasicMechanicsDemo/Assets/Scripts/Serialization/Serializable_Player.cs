@@ -61,6 +61,7 @@ public class Serializable_Player {
 	/**A function to go through the contents of the player item dictionary and separate its item names and quantities into serializable formats.*/
 	public void ParseItemDictionary(Dictionary<ItemClass, int> all_items_in_inventory)
 	{
+		this.m_ItemQuantities.Clear ();
 //		Debug.Log ("all items in inventory exists? " + (all_items_in_inventory != null));
 		//foreach keyvaluepair in all items...
 		foreach (KeyValuePair<ItemClass, int> entry in all_items_in_inventory) {
@@ -76,7 +77,6 @@ public class Serializable_Player {
 	public void SetItemDictionary(GameObject player)
 	{
 		PlayerInventory player_inventory = player.GetComponent<PlayerInventory> ();
-		player_inventory.m_ItemDictionary.Clear ();
 
 		for (int index = 0; index < this.m_ItemNames.Count; index++) {
 			ItemClass item_to_add = new ItemClass ();

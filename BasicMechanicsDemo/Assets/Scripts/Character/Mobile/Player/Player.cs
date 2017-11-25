@@ -142,10 +142,12 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 	private void UpdateCanCastSpell()
 	{
 		SpellClass active_spell = this.GetComponent<PlayerInventory> ().m_ActiveSpellClass;
-		if (active_spell.m_IsPersistent) {
-			this.m_CanCastSpells = (this.m_Mana >= active_spell.m_ManaCost * Time.deltaTime);
-		} else {
-			this.m_CanCastSpells = this.m_Mana >= active_spell.m_ManaCost;
+		if (active_spell != null) {
+			if (active_spell.m_IsPersistent) {
+				this.m_CanCastSpells = (this.m_Mana >= active_spell.m_ManaCost * Time.deltaTime);
+			} else {
+				this.m_CanCastSpells = this.m_Mana >= active_spell.m_ManaCost;
+			}
 		}
 	}
 
