@@ -79,6 +79,8 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 		this.m_HotKey1 = this.m_HotKey1_Obj.GetComponentInChildren<HotKeys> ();
 		this.m_HotKey2 = this.m_HotKey2_Obj.GetComponentInChildren<HotKeys> ();
 		this.m_HotKey3 = this.m_HotKey3_Obj.GetComponentInChildren<HotKeys> ();
+
+		this.m_MagicAffinity = 1.0f;
 	}
 
 	void Start()
@@ -140,10 +142,12 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 	private void UpdateCanCastSpell()
 	{
 		SpellClass active_spell = this.GetComponent<PlayerInventory> ().m_ActiveSpellClass;
-		if (active_spell.m_IsPersistent) {
-			this.m_CanCastSpells = (this.m_Mana >= active_spell.m_ManaCost * Time.deltaTime);
-		} else {
-			this.m_CanCastSpells = this.m_Mana >= active_spell.m_ManaCost;
+		if (active_spell != null) {
+			if (active_spell.m_IsPersistent) {
+				this.m_CanCastSpells = (this.m_Mana >= active_spell.m_ManaCost * Time.deltaTime);
+			} else {
+				this.m_CanCastSpells = this.m_Mana >= active_spell.m_ManaCost;
+			}
 		}
 	}
 
