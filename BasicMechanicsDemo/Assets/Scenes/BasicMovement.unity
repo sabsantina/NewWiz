@@ -10837,7 +10837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e3e196f83a0742d9ba3e860ea82cb12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Player: {fileID: 0}
+  m_Player: {fileID: 1441422504}
   m_QuestManager: {fileID: 872955993}
   m_SerializableSession:
     m_SerializablePlayer:
@@ -16920,6 +16920,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b47540d2d2eb2476bbd5efbb6155c7d6, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1441422504 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1639867789956470, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+    type: 2}
+  m_PrefabInternal: {fileID: 1441422503}
 --- !u!1 &1446694756
 GameObject:
   m_ObjectHideFlags: 0
