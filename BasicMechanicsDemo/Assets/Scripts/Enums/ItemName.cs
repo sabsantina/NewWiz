@@ -4,7 +4,7 @@
 * more than one effect but it will only ever have one name. Therefore, I indexed the item names but not the item effects.
 */
 
-public enum ItemName {
+public enum ItemName{
 	//Health potion as an example. We'll come up with more as we go.
 	Health_Potion = 0,
 	Mana_Potion = 1

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestGiver : Interactable {
-	[SerializeField] QuestManager m_QuestManager;
+	[SerializeField] public QuestManager m_QuestManager;
 	/**The actual quest the NPC gives the player.*/
 	public Quest m_QuestToGive;
 	/**The item reward, if any*/
