@@ -177,6 +177,7 @@ public class QuestGiver : Interactable {
 			this.m_PlayerInventory.AddItem (this.m_RewardItem);
 		}
 		if (this.m_RewardSpell != null) {
+			print(this.m_RewardSpell.m_SpellName);
 			this.m_PlayerInventory.AddSpell (this.m_RewardSpell);
 		}
 		this.m_RewardHasBeenGiven = true;

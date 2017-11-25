@@ -148,7 +148,9 @@ public class QuestManager : MonoBehaviour
 			foreach (var reward in spellRewards)
 			{
 				SpellClass thisReward = new SpellClass();
-				thisReward.GenerateInstance(reward);
+				thisReward = thisReward.GenerateInstance(reward);
+				print(reward);
+				print(thisReward.ReturnSpellInstanceInfo());
 				qg.m_RewardSpell = thisReward;
 			}
 		return qg;

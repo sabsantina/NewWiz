@@ -30,16 +30,17 @@ public class Serializable_QuestManager {
 	{
 		this.m_AllRewardsGiven.Clear ();
 		//for each quest giver...
-		for (int quest_index = 0; quest_index < manager.m_AllQuests.Count; quest_index++) {
-			this.m_AllRewardsGiven.Add(manager.m_AllQuestGivers[quest_index].m_RewardHasBeenGiven);
+		foreach (KeyValuePair<QuestName, QuestGiver> kvp in manager.m_AllQuestGivers) {
+			this.m_AllRewardsGiven.Add(kvp.Value.m_RewardHasBeenGiven);
 		}
 	}
 
 	public void SetAllQuestRewardsGiven(QuestManager manager)
 	{
 		//for each quest giver...
-		for (int quest_index = 0; quest_index < manager.m_AllQuests.Count; quest_index++) {
-			manager.m_AllQuestGivers [quest_index].m_RewardHasBeenGiven = this.m_AllRewardsGiven [quest_index];
+		int i = 0;
+		foreach (KeyValuePair<QuestName, QuestGiver> kvp in manager.m_AllQuestGivers) {
+			manager.m_AllQuestGivers [kvp.Key].m_RewardHasBeenGiven = this.m_AllRewardsGiven [i++];
 		}
 	}
 
