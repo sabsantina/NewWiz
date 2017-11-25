@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Linq;
 
 public class Serialization_Manager : MonoBehaviour {
 //	[SerializeField] GameObject m_PlayerPrefab;
@@ -79,7 +80,7 @@ public class Serialization_Manager : MonoBehaviour {
 			//We only care about the quest if it's in process
 			if (current_quest_state == (int)QuestState.IN_PROCESS) {
 				//...and if so, then spawn corresponding quest objects
-				this.m_QuestManager.SpawnInQuestObjects (this.m_QuestManager.m_AllQuests [quest_index]);
+				this.m_QuestManager.SpawnInQuestObjects (this.m_QuestManager.m_AllQuests[m_QuestManager.m_AllQuests.ElementAt(quest_index).Key]);
 			}
 		}
 	}

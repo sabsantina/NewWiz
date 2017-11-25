@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestGiver : Interactable {
-	[SerializeField] QuestManager m_QuestManager;
+	[SerializeField] public QuestManager m_QuestManager;
 	/**The actual quest the NPC gives the player.*/
 	public Quest m_QuestToGive;
 	/**The item reward, if any*/
@@ -17,9 +17,8 @@ public class QuestGiver : Interactable {
 	/**A bool to let us know whether the player's quest items has been reclaimed.*/
 	public bool m_QuestItemsReclaimedFromPlayer = false;
 
-
-	/**A function to return the quest dialog, with respect to quest type and quest state*/
-	public override string ReturnDialog ()
+    /**A function to return the quest dialog, with respect to quest type and quest state*/
+    public override string ReturnDialog ()
 	{
 		//If the quest hasn't yet been given to the player...
 		if (this.m_QuestToGive.m_QuestState == QuestState.NOT_YET_GIVEN) {
@@ -178,6 +177,7 @@ public class QuestGiver : Interactable {
 			this.m_PlayerInventory.AddItem (this.m_RewardItem);
 		}
 		if (this.m_RewardSpell != null) {
+			print(this.m_RewardSpell.m_SpellName);
 			this.m_PlayerInventory.AddSpell (this.m_RewardSpell);
 		}
 		this.m_RewardHasBeenGiven = true;

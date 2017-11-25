@@ -30,16 +30,17 @@ public class Serializable_QuestManager {
 	{
 		this.m_AllRewardsGiven.Clear ();
 		//for each quest giver...
-		for (int quest_index = 0; quest_index < manager.m_AllQuests.Count; quest_index++) {
-			this.m_AllRewardsGiven.Add(manager.m_AllQuestGivers[quest_index].m_RewardHasBeenGiven);
+		foreach (KeyValuePair<QuestName, QuestGiver> kvp in manager.m_AllQuestGivers) {
+			this.m_AllRewardsGiven.Add(kvp.Value.m_RewardHasBeenGiven);
 		}
 	}
 
 	public void SetAllQuestRewardsGiven(QuestManager manager)
 	{
 		//for each quest giver...
-		for (int quest_index = 0; quest_index < manager.m_AllQuests.Count; quest_index++) {
-			manager.m_AllQuestGivers [quest_index].m_RewardHasBeenGiven = this.m_AllRewardsGiven [quest_index];
+		int i = 0;
+		foreach (KeyValuePair<QuestName, QuestGiver> kvp in manager.m_AllQuestGivers) {
+			manager.m_AllQuestGivers [kvp.Key].m_RewardHasBeenGiven = this.m_AllRewardsGiven [i++];
 		}
 	}
 
@@ -48,32 +49,32 @@ public class Serializable_QuestManager {
 	{
 		this.m_AllQuestStates.Clear ();
 		//for each quest...
-		foreach (Quest quest in manager.m_AllQuests) {
+		foreach (KeyValuePair<QuestName, Quest> kvp in manager.m_AllQuests) {
 			//...Add the current state
-			this.m_AllQuestStates.Add ((int)quest.m_QuestState);
+			this.m_AllQuestStates.Add ((int)kvp.Value.m_QuestState);
 		}//end foreach
 	}//end f'n void ParseAllQuestStates(QuestManager)
 
 	/**Set all the quest states from the saved information*/
 	public void SetAllQuestStates(QuestManager manager)
 	{
-
+		int index = 0;
 		//for each quest...
-		for (int index = 0; index < manager.m_AllQuests.Count; index++) {
-			switch (this.m_AllQuestStates [index]) {
+		foreach (KeyValuePair<QuestName, Quest> kvp in manager.m_AllQuests) {
+			switch (this.m_AllQuestStates [index++]) {
 			case (int)QuestState.COMPLETED:
 				{
-					manager.m_AllQuests [index].m_QuestState = QuestState.COMPLETED;
+					manager.m_AllQuests [kvp.Key].m_QuestState = QuestState.COMPLETED;
 					break;
 				}//end case completed
 			case (int)QuestState.IN_PROCESS:
 				{
-					manager.m_AllQuests [index].m_QuestState = QuestState.IN_PROCESS;
+					manager.m_AllQuests [kvp.Key].m_QuestState = QuestState.IN_PROCESS;
 					break;
 				}//end case in process
 			case (int)QuestState.NOT_YET_GIVEN:
 				{
-					manager.m_AllQuests [index].m_QuestState = QuestState.NOT_YET_GIVEN;
+					manager.m_AllQuests [kvp.Key].m_QuestState = QuestState.NOT_YET_GIVEN;
 					break;
 				}//end case not yet given
 			default:
