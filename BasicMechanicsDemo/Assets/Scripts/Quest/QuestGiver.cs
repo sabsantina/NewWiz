@@ -17,10 +17,6 @@ public class QuestGiver : Interactable {
 	/**A bool to let us know whether the player's quest items has been reclaimed.*/
 	public bool m_QuestItemsReclaimedFromPlayer = false;
 
-    private void Update()
-    {
-        m_QuestToGive = m_QuestManager.m_AllQuests[(int)m_QuestToGive.m_QuestName];
-    }
     /**A function to return the quest dialog, with respect to quest type and quest state*/
     public override string ReturnDialog ()
 	{

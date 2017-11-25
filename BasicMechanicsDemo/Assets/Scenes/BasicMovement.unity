@@ -1727,6 +1727,12 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &174184323 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114367588201746196, guid: a47e411fb48644dedbc8d5c5e7f9ff0e,
+    type: 2}
+  m_PrefabInternal: {fileID: 828098768}
+  m_Script: {fileID: 11500000, guid: c95b41536ad154d0493bae5650f192a8, type: 3}
 --- !u!1 &175047587
 GameObject:
   m_ObjectHideFlags: 0
@@ -5269,12 +5275,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.56, y: 3.2, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &433429233 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114028834433234024, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
-    type: 2}
-  m_PrefabInternal: {fileID: 1441422503}
-  m_Script: {fileID: 11500000, guid: c824f4b6b784545429a327344e1482ed, type: 3}
 --- !u!1 &435651935
 GameObject:
   m_ObjectHideFlags: 0
@@ -12260,6 +12260,11 @@ Prefab:
       propertyPath: m_QuestGiver_PotionMaster
       value: 
       objectReference: {fileID: 1980206590}
+    - target: {fileID: 114632412232522386, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
+        type: 2}
+      propertyPath: m_QuestGiver_HotChicks
+      value: 
+      objectReference: {fileID: 174184323}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8847f5cdf02d39740ba6d8f83642e0c6, type: 2}
   m_IsPrefabParent: 0
@@ -16757,6 +16762,46 @@ Prefab:
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224891591181495402, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224891591181495402, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224504641512782638, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 224504641512782638, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224110203314768774, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224110203314768774, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224374716487841492, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 224374716487841492, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b47540d2d2eb2476bbd5efbb6155c7d6, type: 2}
