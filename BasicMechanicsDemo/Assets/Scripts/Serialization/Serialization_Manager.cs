@@ -5,13 +5,38 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
 public class Serialization_Manager : MonoBehaviour {
-//	[SerializeField] GameObject m_Player;
+//	[SerializeField] GameObject m_PlayerPrefab;
 	[SerializeField] Player m_Player;
 	[SerializeField] QuestManager m_QuestManager;
 
 	public Serializable_Session m_SerializableSession = new Serializable_Session();
 
 	private readonly string FILEPATH_EXTENSION = "/SavedGame.gd";
+
+	//Executed every time the game scene is loaded.
+	void Start()
+	{
+		Debug.Log ("Am I being called?");
+		//If a saved game file exists...
+		if (File.Exists (Application.persistentDataPath + FILEPATH_EXTENSION)) {
+			//...and if the user chose load
+			if (UnityEngine.PlayerPrefs.GetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME) == 2) {
+				this.Load ();
+				float x = 0.0f, y = 0.0f, z = 0.0f;
+				x = this.m_SerializableSession.m_SerializablePlayer.m_PlayerPositionInWorld_X;
+				y = this.m_SerializableSession.m_SerializablePlayer.m_PlayerPositionInWorld_Y;
+				z = this.m_SerializableSession.m_SerializablePlayer.m_PlayerPositionInWorld_Z;
+				this.m_Player.transform.position = new Vector3(x, y, z);
+				//Reset player pref for next interaction with main menu UI
+				UnityEngine.PlayerPrefs.SetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME, 0);
+			}//end if
+			//...or if the user chose new game
+			//We should probably implement this in the spawner class.
+			//i.e. if saved file exists and user chose new game, then spawn everything for the Coille forest region, 
+			//setting all player variables to default values
+		}
+	}
+
 
 	public void Save() {
 //		Serializable_Player SP = new Serializable_Player ();

@@ -8966,7 +8966,7 @@ Prefab:
       objectReference: {fileID: 872955990}
     - target: {fileID: 1598632068920762, guid: bb66b6d1d42c7114a87644210e82b3e8, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23386542310178486, guid: bb66b6d1d42c7114a87644210e82b3e8,
         type: 2}
@@ -12105,6 +12105,11 @@ Prefab:
       propertyPath: m_Player
       value: 
       objectReference: {fileID: 1804324873}
+    - target: {fileID: 114568898789148438, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
+        type: 2}
+      propertyPath: m_Player
+      value: 
+      objectReference: {fileID: 1804324873}
     - target: {fileID: 114632412232522386, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
         type: 2}
       propertyPath: m_Player
@@ -12120,11 +12125,6 @@ Prefab:
       propertyPath: m_QuestGiver_PotionMaster
       value: 
       objectReference: {fileID: 1980206590}
-    - target: {fileID: 114568898789148438, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
-        type: 2}
-      propertyPath: m_Player
-      value: 
-      objectReference: {fileID: 1804324873}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8847f5cdf02d39740ba6d8f83642e0c6, type: 2}
   m_IsPrefabParent: 0
@@ -16476,51 +16476,61 @@ Prefab:
     - target: {fileID: 224110203314768774, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224110203314768774, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224374716487841492, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
         type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224374716487841492, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224374716487841492, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224891591181495402, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224891591181495402, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224504641512782638, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
         type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224504641512782638, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224504641512782638, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
         type: 2}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82021957357386680, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+        type: 2}
+      propertyPath: panLevelCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82021957357386680, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+        type: 2}
+      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

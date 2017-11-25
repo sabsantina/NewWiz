@@ -174,9 +174,9 @@ public class Serializable_Player {
 		serializable_player.GatherPlayerPosition (player);
 
 		PlayerInventory inventory = player.GetComponent<PlayerInventory> ();
-		Debug.Log ("Player inventory exists? " + (inventory != null));
-		inventory.OutputInventoryContents ();
-		Debug.Log ("Player dictionary exists? " + (inventory.m_ItemDictionary != null));
+//		Debug.Log ("Player inventory exists? " + (inventory != null));
+//		inventory.OutputInventoryContents ();
+//		Debug.Log ("Player dictionary exists? " + (inventory.m_ItemDictionary != null));
 		serializable_player.ParseItemDictionary (inventory.m_ItemDictionary);
 		serializable_player.ParseSpellList (inventory.m_SpellClassList);
 		serializable_player.ParseQuestItemList (player);
