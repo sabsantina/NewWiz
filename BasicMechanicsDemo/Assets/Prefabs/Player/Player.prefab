@@ -5256,6 +5256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c824f4b6b784545429a327344e1482ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_QuestItems: []
   m_DefaultSpellPrefab: {fileID: 1081312389218078, guid: e78b574e24bcd4c5ca14bd25cf5ee863,
     type: 2}
   m_ActiveSpellName: 
