@@ -79,13 +79,14 @@ public class Serialization_Manager : MonoBehaviour {
 
 		//for each quest in the quest list...
 		for (int quest_index = 0; quest_index < System.Enum.GetValues (typeof(QuestName)).Length; quest_index++) {
-//			Quest quest = this.m_QuestManager.m_AllQuests [quest_index];
-//			if (quest.m_QuestRegion == this.m_Player.re)
-			int current_quest_state = this.m_SerializableSession.m_SerializableQuestManager.m_AllQuestStates [quest_index];
-			//We only care about the quest if it's in process
-			if (current_quest_state == (int)QuestState.IN_PROCESS) {
-				//...and if so, then spawn corresponding quest objects
-				this.m_QuestManager.SpawnInQuestObjects (this.m_QuestManager.m_AllQuests[m_QuestManager.m_AllQuests.ElementAt(quest_index).Key]);
+			Quest current_quest = this.m_QuestManager.m_AllQuests[m_QuestManager.m_AllQuests.ElementAt(quest_index).Key];
+			//We only want to spawn in the quests that are in the same region as us
+			if ((int)current_quest.m_QuestRegion == (int)this.m_Player.m_CurrentRegion) {
+				//... and we only care about the quest if it's in process
+				if ((int)current_quest.m_QuestState == (int)QuestState.IN_PROCESS) {
+					//...and if so, then spawn corresponding quest objects
+					this.m_QuestManager.SpawnInQuestObjects (current_quest);
+				}
 			}
 		}
 	}
