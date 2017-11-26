@@ -41,6 +41,7 @@ public class MainMenu_UIManager : MonoBehaviour {
 	public void OnClick_LoadGame()
 	{
 		//This load scene function will need to change.
+		//Load player region
 		UnityEngine.SceneManagement.SceneManager.LoadScene (1);
 		//Load an existing game
 		UnityEngine.PlayerPrefs.SetInt (STRINGKEY_PLAYERPREF_LOADGAME, 2);
