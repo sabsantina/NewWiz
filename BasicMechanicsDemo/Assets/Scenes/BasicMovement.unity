@@ -9077,7 +9077,7 @@ Prefab:
     - target: {fileID: 114633822270810952, guid: bb66b6d1d42c7114a87644210e82b3e8,
         type: 2}
       propertyPath: m_IntervalBetweenMeleeAttacks
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 114701043558349882, guid: bb66b6d1d42c7114a87644210e82b3e8,
         type: 2}
@@ -9098,7 +9098,7 @@ Prefab:
     - target: {fileID: 23692609695409858, guid: bb66b6d1d42c7114a87644210e82b3e8,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4372553640225248, guid: bb66b6d1d42c7114a87644210e82b3e8, type: 2}
       propertyPath: m_RootOrder
@@ -9117,6 +9117,24 @@ Prefab:
       propertyPath: sortingLayerName
       value: Objects
       objectReference: {fileID: 0}
+    - target: {fileID: 4372553640225248, guid: bb66b6d1d42c7114a87644210e82b3e8, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4372553640225248, guid: bb66b6d1d42c7114a87644210e82b3e8, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114633822270810952, guid: bb66b6d1d42c7114a87644210e82b3e8,
+        type: 2}
+      propertyPath: m_IntervalBetweenRangedAttacks
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114633822270810952, guid: bb66b6d1d42c7114a87644210e82b3e8,
+        type: 2}
+      propertyPath: m_Spawner
+      value: 
+      objectReference: {fileID: 1493198258}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bb66b6d1d42c7114a87644210e82b3e8, type: 2}
   m_IsPrefabParent: 0
@@ -12214,11 +12232,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114632412232522386, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
-        type: 2}
-      propertyPath: m_AllQuestGivers.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 224399764707834146, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -12309,6 +12322,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114911460496919354, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
+        type: 2}
+      propertyPath: m_Player
+      value: 
+      objectReference: {fileID: 1804324873}
+    - target: {fileID: 114632412232522386, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
+        type: 2}
+      propertyPath: m_Player
+      value: 
+      objectReference: {fileID: 1804324873}
     - target: {fileID: 114560251549921580, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
         type: 2}
       propertyPath: m_InventoryUIPrefab
@@ -12324,47 +12347,11 @@ Prefab:
       propertyPath: m_OptionsUIPrefab
       value: 
       objectReference: {fileID: 287297972}
-    - target: {fileID: 114911460496919354, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
-        type: 2}
-      propertyPath: m_Player
-      value: 
-      objectReference: {fileID: 1804324873}
     - target: {fileID: 114568898789148438, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
         type: 2}
       propertyPath: m_Player
       value: 
       objectReference: {fileID: 1804324873}
-    - target: {fileID: 114632412232522386, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
-        type: 2}
-      propertyPath: m_Player
-      value: 
-      objectReference: {fileID: 1804324873}
-    - target: {fileID: 114632412232522386, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
-        type: 2}
-      propertyPath: m_QuestGiver_RoosterBane
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114632412232522386, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
-        type: 2}
-      propertyPath: m_QuestGiver_PotionMaster
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114632412232522386, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
-        type: 2}
-      propertyPath: m_QuestGiver_HotChicks
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114632412232522386, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
-        type: 2}
-      propertyPath: m_QuestGiver_Generic
-      value: 
-      objectReference: {fileID: 1924397221675462, guid: d18e539afc033440ba33c12bad97a21f,
-        type: 2}
-    - target: {fileID: 114632412232522386, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8847f5cdf02d39740ba6d8f83642e0c6, type: 2}
   m_IsPrefabParent: 0
@@ -17282,6 +17269,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.21, y: 1, z: 1.03}
   m_Center: {x: 0, y: 0.4, z: 0}
+--- !u!114 &1493198258 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114911460496919354, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
+    type: 2}
+  m_PrefabInternal: {fileID: 993720620}
+  m_Script: {fileID: 11500000, guid: 9b69754a7e4cc4d5480b732a6704360b, type: 3}
 --- !u!1 &1496903696
 GameObject:
   m_ObjectHideFlags: 0
@@ -20440,7 +20433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1799513197
 MonoBehaviour:
   m_ObjectHideFlags: 0
