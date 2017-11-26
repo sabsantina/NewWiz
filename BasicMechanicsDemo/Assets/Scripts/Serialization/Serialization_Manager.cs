@@ -92,43 +92,38 @@ public class Serialization_Manager : MonoBehaviour {
 
 			//Set all player information
 			this.m_SerializableSession.SetSessionInformation(this.m_Player.gameObject, this.m_QuestManager);
-			//At this point the player still has the region value as the region they came from
-			Vector3 where_to_spawn_player = this.FindWhereToSpawnPlayer(marker); 
-			this.m_Player.transform.position = where_to_spawn_player;
-			this.m_Player.m_CurrentRegion = marker.leads_to;
-
 			//Spawn in quest objects
 			this.SpawnAllQuestObjects();
 		}
 	}
 
-	/**A function that takes the player's current region and compares it with that of where [marker] leads to, to find where the player should wind up when the next scene loads*/
-	private Vector3 FindWhereToSpawnPlayer(TransitionMarker marker)
-	{
-		Vector3 vector_to_return = new Vector3 ();
-
-		Scenes from_region = this.m_Player.m_CurrentRegion;
-		Scenes to_region = marker.leads_to;
-
-		switch ((int)from_region) {
-		//if we're going from the demo area...
-		case (int)Scenes.DEMO_AREA:
-			{
-				switch((int)to_region)
-				{
-				//...to the overworld
-				case (int)Scenes.OVERWORLD:
-					{
-						//then the position to spawn at is as follows:
-						vector_to_return = TransitionPositions.Transition_Overworld_To_Demo;
-						break;
-					}
-				}
-				break;
-			}//end case DEMO AREA
-		}//end switch
-		return vector_to_return;
-	}
+//	/**A function that takes the player's current region and compares it with that of where [marker] leads to, to find where the player should wind up when the next scene loads*/
+//	private Vector3 FindWhereToSpawnPlayer(TransitionMarker marker)
+//	{
+//		Vector3 vector_to_return = new Vector3 ();
+//
+//		Scenes from_region = this.m_Player.m_CurrentRegion;
+//		Scenes to_region = marker.leads_to;
+//
+//		switch ((int)from_region) {
+//		//if we're going from the demo area...
+//		case (int)Scenes.DEMO_AREA:
+//			{
+//				switch((int)to_region)
+//				{
+//				//...to the overworld
+//				case (int)Scenes.OVERWORLD:
+//					{
+//						//then the position to spawn at is as follows:
+//						vector_to_return = TransitionPositions.Transition_Overworld_To_Demo;
+//						break;
+//					}
+//				}
+//				break;
+//			}//end case DEMO AREA
+//		}//end switch
+//		return vector_to_return;
+//	}
 
 	private void SpawnAllQuestObjects()
 	{
