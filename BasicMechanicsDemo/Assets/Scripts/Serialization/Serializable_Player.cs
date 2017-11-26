@@ -31,6 +31,41 @@ public class Serializable_Player {
 	/**A variable to store the value of the player;s magic affinity*/
 	public float m_PlayerMagicAffinity;
 
+	public int m_CurrentRegion;
+
+	public void ParseCurrentRegion(GameObject player)
+	{
+		Player player_component = player.GetComponent<Player> ();
+		this.m_CurrentRegion = (int)player_component.m_CurrentRegion;
+	}
+
+	public void SetCurrentRegion(GameObject player)
+	{
+		Player player_component = player.GetComponent<Player> ();
+		switch ((int)this.m_CurrentRegion) {
+		case (int)Scenes.DEMO_AREA:
+			{
+				player_component.m_CurrentRegion = Scenes.DEMO_AREA;
+				break;
+			}
+		case (int)Scenes.FOREST:
+			{
+				player_component.m_CurrentRegion = Scenes.FOREST;
+				break;
+			}
+		case (int)Scenes.CASTLE:
+			{
+				player_component.m_CurrentRegion = Scenes.CASTLE;
+				break;
+			}
+		case (int)Scenes.OVERWORLD:
+			{
+				player_component.m_CurrentRegion = Scenes.OVERWORLD;
+				break;
+			}
+		}
+	}
+
 	/**A function to store the contents of the quest item list.*/
 	public void ParseQuestItemList(GameObject player)
 	{
@@ -174,6 +209,7 @@ public class Serializable_Player {
 		Serializable_Player serializable_player = new Serializable_Player ();
 		serializable_player.GatherPlayerAttributes (player);
 		serializable_player.GatherPlayerPosition (player);
+		serializable_player.ParseCurrentRegion (player);
 
 		PlayerInventory inventory = player.GetComponent<PlayerInventory> ();
 //		Debug.Log ("Player inventory exists? " + (inventory != null));
@@ -190,6 +226,7 @@ public class Serializable_Player {
 	{
 		this.SetPlayerPosition (player);
 		this.SetPlayerAttributes (player);
+		this.SetCurrentRegion (player);
 		this.SetSpellList (player);
 		this.SetItemDictionary (player);
 		this.SetQuestItemList (player);

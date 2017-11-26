@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿#define TESTING_SAVE_LOAD
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -7,7 +9,7 @@ using System.Linq;
 
 public class Serialization_Manager : MonoBehaviour {
 //	[SerializeField] GameObject m_PlayerPrefab;
-	[SerializeField] Player m_Player;
+	[SerializeField] public Player m_Player;
 	[SerializeField] QuestManager m_QuestManager;
 
 	public Serializable_Session m_SerializableSession = new Serializable_Session();
@@ -28,6 +30,7 @@ public class Serialization_Manager : MonoBehaviour {
 				y = this.m_SerializableSession.m_SerializablePlayer.m_PlayerPositionInWorld_Y;
 				z = this.m_SerializableSession.m_SerializablePlayer.m_PlayerPositionInWorld_Z;
 				this.m_Player.transform.position = new Vector3(x, y, z);
+
 				//Reset player pref for next interaction with main menu UI
 				UnityEngine.PlayerPrefs.SetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME, 0);
 			}//end if
@@ -76,6 +79,8 @@ public class Serialization_Manager : MonoBehaviour {
 
 		//for each quest in the quest list...
 		for (int quest_index = 0; quest_index < System.Enum.GetValues (typeof(QuestName)).Length; quest_index++) {
+//			Quest quest = this.m_QuestManager.m_AllQuests [quest_index];
+//			if (quest.m_QuestRegion == this.m_Player.re)
 			int current_quest_state = this.m_SerializableSession.m_SerializableQuestManager.m_AllQuestStates [quest_index];
 			//We only care about the quest if it's in process
 			if (current_quest_state == (int)QuestState.IN_PROCESS) {
@@ -88,11 +93,13 @@ public class Serialization_Manager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		#if TESTING_SAVE_LOAD
 		if (Input.GetKeyDown (KeyCode.Alpha6)) {
 			Save ();
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha7)) {
 			Load ();
 		}
+		#endif
 	}
 }

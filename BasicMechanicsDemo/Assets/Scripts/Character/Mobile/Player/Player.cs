@@ -4,6 +4,7 @@
 
 #define TESTING_ZERO_HEALTH
 #define TESTING_MANA_REGEN
+#define TESTING_REGION
 
 using System.Collections;
 using System.Collections.Generic;
@@ -68,6 +69,8 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 	protected SpellClass m_SpellAffectingPlayer = new SpellClass ();
 	/**A multiplier to influence magic damage as the player gets stronger.*/
 	public float m_MagicAffinity = 1.0f;
+
+	public Scenes m_CurrentRegion;
 
 	public bool IsAffectedByMagic()
 	{
