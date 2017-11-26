@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class TransitionPositions {
-
-//	public static Vector3 Transition_Forest_To_Overworld 
+	
 
 	/**The position the player should be in in the Overworld scene if they go from the demo to the Overworld.*/
 	public static Vector3 Transition_Demo_To_Overworld = (new Vector3(-28.83f, 0.55f, 1.19f));

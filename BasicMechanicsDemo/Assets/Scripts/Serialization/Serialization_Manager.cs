@@ -48,7 +48,7 @@ public class Serialization_Manager : MonoBehaviour {
 //		this.m_SerializableQuestManager.ParseAllQuestStates(m_QuestManager);
 		this.m_SerializableSession.GatherSessionInformation(m_Player.gameObject, m_QuestManager);
 		BinaryFormatter bf = new BinaryFormatter();
-		Debug.Log (Application.persistentDataPath);
+		Debug.Log ("Saved progress to " + Application.persistentDataPath);
 		FileStream file = File.Create (Application.persistentDataPath + FILEPATH_EXTENSION);
 //		bf.Serialize(file, m_SavedSessions);
 //		bf.Serialize(file, this.m_SerializablePlayer);

@@ -21,7 +21,8 @@ public class OptionsMenu : Menu{
 	{
 		this.m_SerializationManager.Save ();
 		m_PlayerRegionAtSave = this.m_SerializationManager.m_Player.m_CurrentRegion;
-		UnityEngine.PlayerPrefs.SetInt (STRINGKEY_PLAYERPREF_SAVEREGION, (int)m_PlayerRegionAtSave);
+		UnityEngine.PlayerPrefs.SetInt (STRINGKEY_PLAYERPREF_SAVEREGION, (int)this.m_SerializationManager.m_Player.m_CurrentRegion);
+//		Debug.Log ("Player region at save " + (int)this.m_PlayerRegionAtSave);
 	}
 
 

@@ -31,12 +31,12 @@ public class Serializable_Player {
 	/**A variable to store the value of the player;s magic affinity*/
 	public float m_PlayerMagicAffinity;
 
-	public int m_CurrentRegion;
+	public int m_CurrentRegion = 0;
 
 	public void ParseCurrentRegion(GameObject player)
 	{
-		Player player_component = player.GetComponent<Player> ();
-		this.m_CurrentRegion = (int)player_component.m_CurrentRegion;
+		this.m_CurrentRegion = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex;
+//		Debug.Log("Parse current region: " + this.m_CurrentRegion);
 	}
 
 	public void SetCurrentRegion(GameObject player)
@@ -64,6 +64,7 @@ public class Serializable_Player {
 				break;
 			}
 		}
+//		Debug.Log("Set current region: " + player_component.m_CurrentRegion);
 	}
 
 	/**A function to store the contents of the quest item list.*/

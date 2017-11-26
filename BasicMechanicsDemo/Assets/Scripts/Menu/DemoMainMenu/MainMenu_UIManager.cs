@@ -43,6 +43,7 @@ public class MainMenu_UIManager : MonoBehaviour {
 		//This load scene function will need to change.
 		//Load player region
 		UnityEngine.SceneManagement.SceneManager.LoadScene (UnityEngine.PlayerPrefs.GetInt(OptionsMenu.STRINGKEY_PLAYERPREF_SAVEREGION));
+//		Debug.Log ("Loading scene " + UnityEngine.PlayerPrefs.GetInt (OptionsMenu.STRINGKEY_PLAYERPREF_SAVEREGION));
 		//Load an existing game
 		UnityEngine.PlayerPrefs.SetInt (STRINGKEY_PLAYERPREF_LOADGAME, 2);
 		Time.timeScale = 1.0f;
