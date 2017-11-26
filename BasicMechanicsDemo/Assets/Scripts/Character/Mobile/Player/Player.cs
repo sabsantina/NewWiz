@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 	[SerializeField] public GameObject healthMeter;
 	[SerializeField] public GameObject manaMeter;
 
@@ -33,6 +33,8 @@ public class Player : MonoBehaviour {
 	private HotKeys m_HotKey3;
 
 	public AudioSource m_audioSource;
+
+	[SerializeField] public PlayerAudio m_PlayerAudio;
 
 	/**A variable to keep track of the player's health.*/
 	public float m_Health;
@@ -58,12 +60,27 @@ public class Player : MonoBehaviour {
 	public Vector3 m_PlayerRespawnPosition = new Vector3(-6.5f, 0.55f, -0.43f);
     /**The string value of the name of the sorting layer*/
     public string sortingLayerName;
+	/**A bool to tell us whether or not the player is currently affected by a spell.*/
+	public bool m_IsAffectedBySpell = false;
+	/**A timer to keep track of the active spell effects. Should be made private in final iteration.*/
+	public float m_ExtraEffectsTimer = 0.0f;
+	/**The spell we need to apply to the player (the spell affecting the player if they get hit by a hostile spell)*/
+	protected SpellClass m_SpellAffectingPlayer = new SpellClass ();
+	/**A multiplier to influence magic damage as the player gets stronger.*/
+	public float m_MagicAffinity = 1.0f;
+
+	public bool IsAffectedByMagic()
+	{
+		return this.m_IsAffectedBySpell;
+	}
 
 	void Awake()
 	{
 		this.m_HotKey1 = this.m_HotKey1_Obj.GetComponentInChildren<HotKeys> ();
 		this.m_HotKey2 = this.m_HotKey2_Obj.GetComponentInChildren<HotKeys> ();
 		this.m_HotKey3 = this.m_HotKey3_Obj.GetComponentInChildren<HotKeys> ();
+
+		this.m_MagicAffinity = 1.0f;
 	}
 
 	void Start()
@@ -85,6 +102,10 @@ public class Player : MonoBehaviour {
 
 	void Update()
 	{
+		if (this.m_IsAffectedBySpell) {
+			this.ApplySpellEffect (this.m_SpellAffectingPlayer);
+		}
+
 		//check for input from the player for use of hotkeyed items
 		this.CheckForHotKeyButtonInput ();
         
@@ -100,14 +121,8 @@ public class Player : MonoBehaviour {
 			setMeterValue(healthMeter, this.m_Health);
 			this.m_IsAlive = false;
 		}//end if
-		//if the player runs out of mana, they can't cast spells anymore
-		if (this.m_Mana <= 0
-		    || this.GetComponent<PlayerInventory> ().m_ActiveSpellClass.m_ManaCost > this.m_Mana) {
-			this.m_CanCastSpells = false;
-		}//end if
-		else {
-			this.m_CanCastSpells = true;
-		}
+
+		this.UpdateCanCastSpell ();
 
 		if (this.m_Mana < PLAYER_FULL_MANA) {
 			this.m_Mana += Time.deltaTime * this.m_ManaRegenMultiplier;
@@ -117,14 +132,30 @@ public class Player : MonoBehaviour {
 			setMeterValue (manaMeter, this.m_Mana);
 		}//end if
 
+		this.UpdateAnimatorParameters ();
+
 		if (!this.m_IsAlive) {
 			this.Resurrect ();
 		}
-
-
-
-		this.UpdateAnimatorParameters ();
 	}//end f'n void Update
+
+	private void UpdateCanCastSpell()
+	{
+		SpellClass active_spell = this.GetComponent<PlayerInventory> ().m_ActiveSpellClass;
+		if (active_spell != null) {
+			if (active_spell.m_IsPersistent) {
+				this.m_CanCastSpells = (this.m_Mana >= active_spell.m_ManaCost * Time.deltaTime);
+			} else {
+				this.m_CanCastSpells = this.m_Mana >= active_spell.m_ManaCost;
+			}
+		}
+	}
+
+	/**A function to increase the player's magic affinity*/
+	public void AddToMagicAffinity(float addition)
+	{
+		this.m_MagicAffinity += addition;
+	}
 
 	/**A function to check for keyboard input for use of hotkeyed items.*/
 	private void CheckForHotKeyButtonInput()
@@ -152,8 +183,8 @@ public class Player : MonoBehaviour {
 	/**A function to resurrect the player to their respawn point*/
 	private void Resurrect()
 	{
+		this.m_IsAffectedBySpell = false;
 		this.m_IsAlive = true;
-//		this.UpdateAnimatorParameters ();
 		this.m_Health = this.PLAYER_FULL_HEALTH;
 		this.setMeterValue(healthMeter, this.m_Health);
 		this.m_Mana = this.PLAYER_FULL_MANA;
@@ -164,6 +195,14 @@ public class Player : MonoBehaviour {
 	/**A function to add [effect] to the player's health.*/
 	public void AffectHealth(float effect)
 	{
+		//if the player's receiving damage...
+		if (effect < 0.0f) {
+			//...and if the player's shielded...
+			if (this.m_IsShielded) {
+				//...then nullify damage
+				return;
+			}
+		}
 		this.m_Health += effect;
 		setMeterValue (healthMeter, this.m_Health);
 
@@ -183,6 +222,41 @@ public class Player : MonoBehaviour {
 	public void setMeterValue(GameObject meter, float value)
 	{
 		meter.GetComponent<Slider> ().value = value;
+	}
+
+	public void ApplySpellEffect (SpellClass spell)
+	{
+		if (this.m_ExtraEffectsTimer == 0.0f) {
+			this.m_IsAffectedBySpell = true;
+			this.m_SpellAffectingPlayer = spell;
+			if (!spell.m_IsPersistent) {
+				this.AffectHealth (-spell.m_SpellDamage);
+			}
+			this.m_ExtraEffectsTimer += Time.deltaTime;
+
+		} else if (0.0f < this.m_ExtraEffectsTimer && this.m_ExtraEffectsTimer < spell.m_EffectDuration) {
+			//Apply whatever needs to happen here
+			switch ((int)spell.m_SpellType) {
+			case (int)SpellType.AOE_ON_TARGET:
+				{
+					if (spell.m_IsPersistent) {
+						this.AffectHealth ((-spell.m_SpellDamage / spell.m_EffectDuration) * Time.deltaTime);
+					}
+					break;
+				}
+			}
+			this.m_ExtraEffectsTimer += Time.deltaTime;
+		} else if (this.m_ExtraEffectsTimer >= spell.m_EffectDuration) {
+			this.m_IsAffectedBySpell = false;
+			this.m_SpellAffectingPlayer = null;
+			this.m_ExtraEffectsTimer = 0.0f;
+		}
+
+	}
+
+	public SpellClass SpellAffectingCharacter ()
+	{
+		return m_SpellAffectingPlayer;
 	}
 }
 

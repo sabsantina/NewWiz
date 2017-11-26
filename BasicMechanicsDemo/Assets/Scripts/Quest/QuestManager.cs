@@ -1,168 +1,231 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class QuestManager : MonoBehaviour {
-	
-	/**A reference to the spawner; we need to still be able to spawn items from quest enemy corpses.*/
-	[SerializeField] public Spawner m_Spawner;
-	/**A reference to the player. We need to check the player's inventory for quest items.*/
-	[SerializeField] public Player m_Player;
+public class QuestManager : MonoBehaviour
+{
+    /**A reference to the spawner; we need to still be able to spawn items from quest enemy corpses.*/
+    [SerializeField] public Spawner m_Spawner;
 
-	/*		For quest Rooster Bane: 	*/
+    /**A reference to the player. We need to check the player's inventory for quest items.*/
+    [SerializeField] public Player m_Player;
 
-	/**The NPC responsible for giving the quest to the player*/
-	[SerializeField] public QuestGiver m_QuestGiver_RoosterBane;
-	/**The default rooster prefab for the enemies we'll spawn once the quest is given to the player.*/
-	[SerializeField] public GameObject m_DefautRoosterPrefab;
-	/**The number of quest enemies to kill*/
-	public int NUMBER_ENEMIES_ROOSTERBANE = 5;
+    /*		For quest Rooster Bane: 	*/
 
+    /**The NPC responsible for giving the quest to the player*/
 
-	/*		For quest Potion Master		*/
+    /**The default rooster prefab for the enemies we'll spawn once the quest is given to the player.*/
+    [SerializeField] public GameObject m_DefautRoosterPrefab;
 
-	/**The NPC responsible for giving the quest to the player*/
-	[SerializeField] public QuestGiver m_QuestGiver_PotionMaster;
-	/**The default potion prefab for the potions we'll spawn in once the quest is given to the player.*/
-	[SerializeField] public GameObject m_DefaultPotionQuestItemPrefab;
-	/**The number of quest items to fetch*/
-	public int NUMBER_ITEMS_POTIONMASTER = 2;
+    /**The number of quest enemies to kill*/
+    public int NUMBER_ENEMIES_ROOSTERBANE = 5;
 
 
-	/**/
+    /*		For quest Potion Master		*/
 
-	/**A list of all the quests in the game.*/
-	public List<Quest> m_AllQuests = new List<Quest>();
-	/**A list of all the quest-givers in the game. We need this for serialization.*/
-	public List<QuestGiver> m_AllQuestGivers = new List<QuestGiver> ();
+    /**The default potion prefab for the potions we'll spawn in once the quest is given to the player.*/
+    [SerializeField] public GameObject m_DefaultPotionQuestItemPrefab;
 
-	// Use this for initialization
-	void Awake () {
-		this.InitializeAllQuests ();
-		this.AssignAllQuests ();
+    /**The number of quest items to fetch*/
+    public int NUMBER_ITEMS_POTIONMASTER = 2;
+
+    /*		For quest Hot Chicks		*/
+
+    /**The default rooster prefab for the enemies we'll spawn once the quest is given to the player.*/
+    [SerializeField] public GameObject m_FireChicken;
+
+    /**The number of quest enemies to kill*/
+    public int NUMBER_ENEMIES_HOTCHICKS = 3;
+
+	[SerializeField] public GameObject m_QuestGiver_Generic;
+
+    /**/
+
+    /**A list of all the quests in the game.*/
+	[SerializeField] public Dictionary<QuestName, Quest> m_AllQuests = new Dictionary<QuestName, Quest>();
+
+    /**A list of all the quest-givers in the game. We need this for serialization.*/
+    [SerializeField] public Dictionary<QuestName,QuestGiver> m_AllQuestGivers = new Dictionary<QuestName, QuestGiver>();
+
+    // Use this for initialization
+    void Awake()
+    {
+        this.InitializeAllQuests();
+        this.AssignAllQuests();
+    }
+
+    void Start()
+    {
+    }
+
+    void Update()
+    {
+        this.UpdateActiveQuestObjectives();
+    }
+
+    /**A function to set all quests to their NOT_YET_GIVEN states and all that entails (quest objectives, and the like).*/
+    private void InitializeAllQuests()
+    {
+        //Rooster bane
+	    Quest roosterBane = GenerateKillEverything(QuestName.ROOSTER_BANE, "Rooster Bane!", NUMBER_ENEMIES_ROOSTERBANE,
+		    new Vector3(15.74f, 0.55f, -0.43f), m_DefautRoosterPrefab);
+	    QuestGiver qgRoosterBane = GenerateQuestGiver(new Vector3(-8.39f, 0.55f, -0.43f), new []{ItemName.Health_Potion}, null);
+	    Add(ref roosterBane, ref qgRoosterBane);
+	    
+        //Potion master
+	    Quest potionMaster = GenerateFetch(QuestName.POTION_MASTER, "Potion Master!", NUMBER_ITEMS_POTIONMASTER, QuestItemName.POTION_OF_WISDOM,
+		    new Vector3(15.74f, 0.55f, -0.43f), m_DefaultPotionQuestItemPrefab);
+	    QuestGiver qgPotionMaster = GenerateQuestGiver(new Vector3(-6.718053f, 0.55f, -11.17016f), new[] {ItemName.Health_Potion}, new[] {SpellName.Iceball});
+	    Add(ref potionMaster, ref qgPotionMaster);
+	    
+        //Hot Chicks
+        Quest hotChicks = GenerateKillEverything(QuestName.HOT_CHICKS, "Hot Chicks!", NUMBER_ENEMIES_HOTCHICKS, new Vector3(5.74f, 0.55f, 2f), m_FireChicken);
+	    QuestGiver qgHotChicks = GenerateQuestGiver(new Vector3(-15.96f, 0.55f, -14.08f), new[] {ItemName.Mana_Potion}, null);
+	    Add(ref hotChicks, ref qgHotChicks);
+
+    } //end f'n void InitializeAllQuests()
+
+    /**A function to provide each quest giver with their respective quest.*/
+
+	private void Add(ref Quest q, ref QuestGiver qg)
+	{
+		m_AllQuests.Add(q.m_QuestName, q);
+		m_AllQuestGivers.Add(q.m_QuestName, qg);
+
+		//Name the generic quest givers with respect to their assigned quest to more easily tell them apart in testing
+		string default_name = qg.gameObject.name;
+		qg.gameObject.name = default_name + q.m_QuestName.ToString ();
 	}
 
-	void Start()
+	private Quest GenerateKillEverything(QuestName questName, String nameString, int nbEnemies, Vector3 goalLocation,
+		params GameObject[] requisitePrefabs)
 	{
+		Quest quest = GenerateQuest(questName, nameString, QuestType.KILL_EVERYTHING, requisitePrefabs.ToList(), goalLocation);
+		quest.m_NumberOfEnemiesToKill = nbEnemies;
+		quest.m_KillEverything.m_EnemyLootSpawner = this.m_Spawner;
+		return quest;
+	}
+
+	private Quest GenerateFetch(QuestName questName, String nameString, int nbItems, QuestItemName questItemName, Vector3 goalLocation,
+		params GameObject[] requisitePrefabs)
+	{
+		Quest quest = GenerateQuest(questName, nameString, QuestType.FETCH, requisitePrefabs.ToList(), goalLocation);
+		QuestItem potion = new QuestItem();
+		potion.GenerateQuestItem(questItemName);
+		quest.m_ItemInformation = potion;
+		quest.m_Fetch.m_PlayerInventory = this.m_Player.GetComponent<PlayerInventory>();
+		quest.m_NumberOfItemsToFind = nbItems;
 		
+		return quest;
 	}
-
-	void Update()
+	
+	private Quest GenerateQuest(QuestName questName, String nameString, QuestType questType, List<GameObject> requisitePrefabs, Vector3 goalLocation)
 	{
-		this.UpdateActiveQuestObjectives ();
+		Quest quest = new Quest();
+		quest.m_QuestName = questName;
+		quest.m_QuestNameString = nameString;
+		quest.m_QuestState = QuestState.NOT_YET_GIVEN;
+		quest.m_QuestType = questType;
+		quest.InitializeObjectiveType();
+		quest.m_RequisitePrefabs = requisitePrefabs;
+		quest.SetQuestGoalLocation(goalLocation);
+
+		return quest;
 	}
-
-	/**A function to set all quests to their NOT_YET_GIVEN states and all that entails (quest objectives, and the like).*/
-	private void InitializeAllQuests()
+	
+	private QuestGiver GenerateQuestGiver(Vector3 position, ItemName[] itemRewards, SpellName[] spellRewards)
 	{
-		//Rooster bane
-		Quest rooster_bane = new Quest();
-		rooster_bane.m_QuestName = QuestName.ROOSTER_BANE;
-		rooster_bane.m_QuestNameString = "Rooster Bane!";
-		rooster_bane.m_QuestState = QuestState.NOT_YET_GIVEN;
-		rooster_bane.m_QuestType = QuestType.KILL_EVERYTHING;
-
-		rooster_bane.InitializeObjectiveType();
-		rooster_bane.m_RequisitePrefabs.Add (this.m_DefautRoosterPrefab);
-		rooster_bane.m_NumberOfEnemiesToKill = NUMBER_ENEMIES_ROOSTERBANE;
-		rooster_bane.SetQuestGoalLocation (new Vector3 (15.74f, 0.55f, -0.43f));
-		rooster_bane.m_KillEverything.m_EnemyLootSpawner = this.m_Spawner;
-
-		this.m_QuestGiver_RoosterBane.m_PlayerInventory = this.m_Player.GetComponent<PlayerInventory> ();
-
-		//Set reward item (as an example)
-		ItemClass health_potion = new ItemClass();
-		health_potion.GenerateInstance(ItemName.Health_Potion);
-		this.m_QuestGiver_RoosterBane.m_RewardItem = health_potion;
-
-		//Set reward spell (as an example)
-		SpellClass iceball = new SpellClass();
-		iceball = iceball.GenerateInstance (SpellName.Iceball);
-		this.m_QuestGiver_RoosterBane.m_RewardSpell = iceball;
-		this.m_AllQuests.Add (rooster_bane);
-
-		//Potion master
-		Quest potion_master = new Quest();
-		potion_master.m_QuestName = QuestName.POTION_MASTER;
-		potion_master.m_QuestNameString = "Potion Master!";
-		potion_master.m_QuestState = QuestState.NOT_YET_GIVEN;
-		potion_master.m_QuestType = QuestType.FETCH;
-
-		potion_master.InitializeObjectiveType();
-		potion_master.m_RequisitePrefabs.Add (this.m_DefaultPotionQuestItemPrefab);
-		QuestItem potion = new QuestItem(); 
-		potion.GenerateQuestItem (QuestItemName.POTION_OF_WISDOM);
-		potion_master.m_ItemInformation = potion;
-		potion_master.m_Fetch.m_PlayerInventory = this.m_Player.GetComponent<PlayerInventory> ();
-		potion_master.m_NumberOfItemsToFind = NUMBER_ITEMS_POTIONMASTER;
-		potion_master.SetQuestGoalLocation (new Vector3 (15.74f, 0.55f, -0.43f));
-//		potion_master.m_KillEverything.m_EnemyLootSpawner = this.m_Spawner;
-
-		this.m_QuestGiver_PotionMaster.m_PlayerInventory = this.m_Player.GetComponent<PlayerInventory> ();
-
-
-		//Set reward item (as an example)
-//		ItemClass health_potion = new ItemClass();
-		health_potion.GenerateInstance(ItemName.Health_Potion);
-		this.m_QuestGiver_PotionMaster.m_RewardItem = health_potion;
-
-		//Set reward spell (as an example)
-//		SpellClass iceball = new SpellClass();
-		iceball = iceball.GenerateInstance (SpellName.Iceball);
-		this.m_QuestGiver_PotionMaster.m_RewardSpell = iceball;
-		this.m_AllQuests.Add (potion_master);
-
-	}//end f'n void InitializeAllQuests()
-
-	/**A function to provide each quest giver with their respective quest.*/
-	private void AssignAllQuests()
-	{
-		//for every quest...
-		foreach (Quest quest in this.m_AllQuests) {
-			
-			switch ((int)quest.m_QuestName) {
-			case (int)QuestName.ROOSTER_BANE:
-				{
-					//Assign rooster bane quest to quest giver
-					this.m_QuestGiver_RoosterBane.m_QuestToGive = quest;
-
-					break;
-				}//end case Rooster Bane
-			case (int)QuestName.POTION_MASTER:
-				{
-					//Assign rooster bane quest to quest giver
-					this.m_QuestGiver_PotionMaster.m_QuestToGive = quest;
-
-					break;
-				}//end case Rooster Bane
-			default:
-				{
-					//Impossible
-					break;
-				}//end case default
-			}//end switch
-		}//end foreach
-	}//end f'n void AssignAllQuests()
-
-	/**A function to keep track of whether or not quest objectives are completed; this will only apply to quests whose states are IN_PROCESS*/
-	private void UpdateActiveQuestObjectives()
-	{
-		//for every quest...
-		foreach (Quest quest in this.m_AllQuests) {
-			//...if the quest is in process...
-			if (quest.m_QuestState == QuestState.IN_PROCESS) {
-				//...then check to see if it's fulfilled the conditions for completion
-				if (quest.CheckQuestObjectiveCompleted ()) {
-					//...if so, then update the quest status
-					this.UpdateQuestState (quest.m_QuestName, QuestState.COMPLETED);
-				}//end if
-			}//end if
-		}//end foreach
-	}//end f'n void UpdateActiveQuestObjectives()
-
-	/**Update quest [quest_name] to have state [quest_state].*/
-	public void UpdateQuestState(QuestName quest_name, QuestState quest_state)
-	{
-		this.m_AllQuests [(int)quest_name].m_QuestState = quest_state;
+		QuestGiver qg = Instantiate(m_QuestGiver_Generic).GetComponent<QuestGiver>();
+		qg.m_QuestManager = this;
+		qg.m_PlayerInventory = this.m_Player.GetComponent<PlayerInventory>();
+		qg.transform.position = position;
+		if(itemRewards!=null)
+			foreach (ItemName reward in itemRewards)
+			{
+				ItemClass thisReward = new ItemClass();
+				thisReward.GenerateInstance(reward);
+				qg.m_RewardItem = thisReward;
+			}
+		if(spellRewards!=null)
+			foreach (var reward in spellRewards)
+			{
+				SpellClass thisReward = new SpellClass();
+				thisReward = thisReward.GenerateInstance(reward);
+				print(reward);
+				print(thisReward.ReturnSpellInstanceInfo());
+				qg.m_RewardSpell = thisReward;
+			}
+		return qg;
 	}
+	
+    private void AssignAllQuests()
+    {
+        //for every quest...
+	    foreach (KeyValuePair<QuestName, Quest> kvp in m_AllQuests)
+	    {
+		    print(kvp);
+		    this.m_AllQuestGivers[kvp.Key].m_QuestToGive = m_AllQuests[kvp.Key];
+	    } //end foreach
+    } //end f'n void AssignAllQuests()
+
+    /**A function to keep track of whether or not quest objectives are completed; this will only apply to quests whose states are IN_PROCESS*/
+    private void UpdateActiveQuestObjectives()
+    {
+        //for every quest...
+	    foreach (KeyValuePair<QuestName, Quest> kvp in m_AllQuests)
+        {
+            //...if the quest is in process...
+            if (kvp.Value.m_QuestState == QuestState.IN_PROCESS)
+            {
+                //...then check to see if it's fulfilled the conditions for completion
+                if (kvp.Value.CheckQuestObjectiveCompleted())
+                {
+                    //...if so, then update the quest status
+                    this.UpdateQuestState(m_AllQuests[kvp.Key].m_QuestName, QuestState.COMPLETED);
+                } //end if
+            } //end if
+        } //end foreach
+    } //end f'n void UpdateActiveQuestObjectives()
+
+    /**Update quest [quest_name] to have state [quest_state].*/
+    public void UpdateQuestState(QuestName quest_name, QuestState quest_state)
+    {
+        this.m_AllQuests[quest_name].m_QuestState = quest_state;
+    }
+
+	/**A function to spawn in whatever is needed for the quest; to be called from the quest giver on giving the quest.*/
+	public void SpawnInQuestObjects(Quest quest)
+	{
+		switch ((int)quest.m_QuestType) {
+		case (int)QuestType.KILL_EVERYTHING:
+			{
+				//for each enemy type (though I'm not really sure this would work for more than one enemy type)
+				for (int enemy_type = 0; enemy_type < quest.m_RequisitePrefabs.Count; enemy_type++) 
+				{
+					//get the default enemy component and get 
+					DefaultEnemy enemy_component = quest.m_RequisitePrefabs [enemy_type].GetComponentInChildren<DefaultEnemy> ();
+					Debug.Log ("Enemy component? " + (enemy_component != null) + " Name: " + enemy_component.m_EnemyName);
+	
+
+					quest.m_KillEverything.SpawnEnemiesAtPosition (this.m_Spawner, quest.m_QuestObjectivePosition, enemy_component.m_EnemyName, quest.m_NumberOfEnemiesToKill);
+				}//end for 
+				break;
+			}//end case kill everything
+		case (int)QuestType.FETCH:
+			{
+				//for each item type (though I'm not really sure this would work for more than one item type)
+				for (int item_type = 0; item_type < quest.m_RequisitePrefabs.Count; item_type++) 
+				{
+					//get the default enemy component and get 
+					quest.m_RequisitePrefabs [item_type].GetComponent<QuestItemPickup> ().m_QuestItem = new QuestItem();
+					QuestItem quest_item = quest.m_RequisitePrefabs [item_type].GetComponent<QuestItemPickup> ().m_QuestItem;
+//					Debug.Log ("Quest item exists? " + (quest_item != null));
+					quest.m_Fetch.SpawnQuestItemsAtPosition (this.m_Spawner, quest.m_QuestObjectivePosition, quest_item.m_QuestItemName, quest.m_NumberOfItemsToFind);
+				}//end for 
+				break;
+			}//end case fetch
+		}//end switch
+	}//end f'n void SpawnInQuestObjects(Quest)
 }

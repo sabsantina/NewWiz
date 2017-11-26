@@ -9,7 +9,8 @@ public enum QuestName {
 	ROOSTER_BANE = 0,
 	/**Quest POTION_MASTER, wherein the player is given the quest by some other peasant NPC and has to collect 2 potions and 
 	 * bring them back to the NPC*/
-	POTION_MASTER
-
+	POTION_MASTER,
+	/**Quest HOT_CHICKS, where the player is given the quest by a peasant NPC and has to kill 3 fire-shooting roosters.*/
+	HOT_CHICKS
 
 }

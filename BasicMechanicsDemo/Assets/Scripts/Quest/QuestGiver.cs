@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestGiver : Interactable {
-	[SerializeField] QuestManager m_QuestManager;
+	[SerializeField] public QuestManager m_QuestManager;
 	/**The actual quest the NPC gives the player.*/
 	public Quest m_QuestToGive;
 	/**The item reward, if any*/
@@ -17,9 +17,8 @@ public class QuestGiver : Interactable {
 	/**A bool to let us know whether the player's quest items has been reclaimed.*/
 	public bool m_QuestItemsReclaimedFromPlayer = false;
 
-
-	/**A function to return the quest dialog, with respect to quest type and quest state*/
-	public override string ReturnDialog ()
+    /**A function to return the quest dialog, with respect to quest type and quest state*/
+    public override string ReturnDialog ()
 	{
 		//If the quest hasn't yet been given to the player...
 		if (this.m_QuestToGive.m_QuestState == QuestState.NOT_YET_GIVEN) {
@@ -72,7 +71,8 @@ public class QuestGiver : Interactable {
 			}//end else if
 
 			//After the quest has been given, spawn in the quest objects
-			this.m_QuestManager.m_AllQuests[(int)this.m_QuestToGive.m_QuestName].SpawnInQuestObjects();
+//			this.m_QuestManager.m_AllQuests[(int)this.m_QuestToGive.m_QuestName].SpawnInQuestObjects();
+			this.m_QuestManager.SpawnInQuestObjects(this.m_QuestToGive);
 
 			//Then we know that the quest's been given now, so update the status to check for completion
 			this.m_QuestManager.UpdateQuestState (this.m_QuestToGive.m_QuestName, QuestState.IN_PROCESS);
@@ -98,7 +98,7 @@ public class QuestGiver : Interactable {
 
 			return message;
 		}//end if quest state is in process
-		//else if the quest has already been given and is IN PROCESS...
+		//else if the quest is COMPLETED...
 		else if (this.m_QuestToGive.m_QuestState == QuestState.COMPLETED) {
 
 			//if kill everything...
@@ -177,6 +177,7 @@ public class QuestGiver : Interactable {
 			this.m_PlayerInventory.AddItem (this.m_RewardItem);
 		}
 		if (this.m_RewardSpell != null) {
+			print(this.m_RewardSpell.m_SpellName);
 			this.m_PlayerInventory.AddSpell (this.m_RewardSpell);
 		}
 		this.m_RewardHasBeenGiven = true;

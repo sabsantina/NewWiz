@@ -1,0 +1,202 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1696380093699514}
+  m_IsPrefabParent: 1
+--- !u!1 &1696380093699514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224399764707834146}
+  - component: {fileID: 114560251549921580}
+  - component: {fileID: 114911460496919354}
+  - component: {fileID: 114701533359187540}
+  - component: {fileID: 114465582766045588}
+  - component: {fileID: 114568898789148438}
+  - component: {fileID: 114632412232522386}
+  m_Layer: 5
+  m_Name: SceneManagers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &114465582766045588
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1696380093699514}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40082795307274d1194fca47d31027b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Enemy: {fileID: 0}
+  TIME_BEFORE_THAW: 2.5
+  TIME_BEFORE_SHOCK_RELEASE: 1.25
+--- !u!114 &114560251549921580
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1696380093699514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdde1be4a6c6141f09fd972fb2fe9bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_InventoryUIPrefab: {fileID: 0}
+  m_MapUIPrefab: {fileID: 0}
+  m_OptionsUIPrefab: {fileID: 0}
+  m_MenuOpen_Cursor: {fileID: 2800000, guid: 657b66ffafaf24de09529fac987ede50, type: 3}
+  m_MenuClosed_Cursor: {fileID: 2800000, guid: 1c8702bb4e9c34c1a8c5441e0fa3ced7, type: 3}
+--- !u!114 &114568898789148438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1696380093699514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e3e196f83a0742d9ba3e860ea82cb12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Player: {fileID: 0}
+  m_QuestManager: {fileID: 114632412232522386}
+  m_SerializableSession:
+    m_SerializablePlayer:
+      m_ItemNames: []
+      m_ItemQuantities: 
+      m_SpellNames: []
+      m_QuestItemNames: []
+      m_PlayerPositionInWorld_X: 0
+      m_PlayerPositionInWorld_Y: 0
+      m_PlayerPositionInWorld_Z: 0
+      m_PlayerHealth: 0
+      m_MaxPlayerHealth: 0
+      m_PlayerMana: 0
+      m_MaxPlayerMana: 0
+      m_PlayerMagicAffinity: 0
+    m_SerializableQuestManager:
+      m_AllQuestStates: 
+      m_AllRewardsGiven: 
+--- !u!114 &114632412232522386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1696380093699514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28771e409f2724aeba2c7de0ace837fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Spawner: {fileID: 114911460496919354}
+  m_Player: {fileID: 0}
+  m_DefautRoosterPrefab: {fileID: 1295592544126026, guid: 9053599dd27ba439eb6fd4c325a8ccde,
+    type: 2}
+  NUMBER_ENEMIES_ROOSTERBANE: 5
+  m_DefaultPotionQuestItemPrefab: {fileID: 1126925848709952, guid: 764a4e7ea763941b2a1a14ca27bd3409,
+    type: 2}
+  NUMBER_ITEMS_POTIONMASTER: 2
+  m_FireChicken: {fileID: 1530564148805280, guid: fb40b1c67ec6442da995f37b80648cc3,
+    type: 2}
+  NUMBER_ENEMIES_HOTCHICKS: 3
+  m_QuestGiver_Generic: {fileID: 1924397221675462, guid: d18e539afc033440ba33c12bad97a21f,
+    type: 2}
+--- !u!114 &114701533359187540
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1696380093699514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23987fb161f84fa5b62da001f558d9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FireballAnimator: {fileID: 9100000, guid: a9855de1b34ddc742816040b79e0bf94, type: 2}
+  m_IceballAnimator: {fileID: 9100000, guid: 8d42b9085b0b591498c4bcaf393e6daf, type: 2}
+  m_ShieldAnimator: {fileID: 9100000, guid: 9d5296329446a4a18886d2984dcdedf5, type: 2}
+  m_ThunderballAnimator: {fileID: 9100000, guid: 919c3ca06200343ec8d97e72a6893fb0,
+    type: 2}
+  m_ThunderStormAnimator: {fileID: 9100000, guid: 6f3ed9a61c7e64c4db2b7dbb3d266ce7,
+    type: 2}
+  m_HealAnimator: {fileID: 9100000, guid: aca82ae3d59444c02b05a69f62cf3b0e, type: 2}
+  m_TornadoAnimator: {fileID: 9100000, guid: 4d751087180896c41969cfcf9c2a2f2b, type: 2}
+  m_WaterBubbleAnimator: {fileID: 9100000, guid: f27ec31e42cfb7d48ba54a0917b116dd,
+    type: 2}
+--- !u!114 &114911460496919354
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1696380093699514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b69754a7e4cc4d5480b732a6704360b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DefaultItemPickupPrefab: {fileID: 1037877941852264, guid: 750d10d3c9a5043cba4860f04494c345,
+    type: 2}
+  m_DefaultSpellPickupPrefab: {fileID: 1560220320337108, guid: 55f288681366942dc955c6fa8d67c7e3,
+    type: 2}
+  m_HealthPotionSprite: {fileID: 21300000, guid: 4bd7142d82dbbe947a77c7abe5a0348c,
+    type: 3}
+  m_ManaPotionSprite: {fileID: 21300000, guid: 7c23257ed723a834cad7365fdfcfefda, type: 3}
+  m_FireballSprite: {fileID: 21300000, guid: e7cedfbb447109142b132cf7bdd05081, type: 3}
+  m_IceballSprite: {fileID: 21300000, guid: bacd5fd6886915e4f87c898545f0b894, type: 3}
+  m_ThunderballSprite: {fileID: 21300000, guid: abee65279dd678344b1041fe45673ef5,
+    type: 3}
+  m_ShieldSprite: {fileID: 21300000, guid: cc2293d95f0ac6d469eadd4451b3a90e, type: 3}
+  m_HealSprite: {fileID: 21300000, guid: 7c8edbdbb16b6354db7dc608c4f3b3eb, type: 3}
+  m_ThunderstormSprite: {fileID: 21300000, guid: 6d0cc1c817799b44385440404be23878,
+    type: 3}
+  m_TornadoSprite: {fileID: 21300000, guid: ac205a8d6535e1f40a9ae6d31a002b55, type: 3}
+  m_WaterBubbleSprite: {fileID: 21300000, guid: 2e9518613bb397d43aaebfa5111734e0,
+    type: 3}
+  m_DefaultQuestItemPrefab: {fileID: 1126925848709952, guid: 764a4e7ea763941b2a1a14ca27bd3409,
+    type: 2}
+  m_PotionOfWisdomSprite: {fileID: 21300000, guid: fe2d27f5aa88b4fb48b019e4e184a21b,
+    type: 3}
+  m_Player: {fileID: 0}
+  m_SpellAnimatorManager: {fileID: 114701533359187540}
+  m_RoosterPrefab: {fileID: 1295592544126026, guid: 9053599dd27ba439eb6fd4c325a8ccde,
+    type: 2}
+  m_RoosterAnimationPrefab: {fileID: 1253389617355122, guid: b972a545bdc16ee46b5695a641c65c8d,
+    type: 2}
+  m_ArmoredSoldierPrefab: {fileID: 1838224676114018, guid: 8b8d98b39ec697847a82007f2b7efa47,
+    type: 2}
+  m_ArmoredSoldierAnimationPrefab: {fileID: 0}
+  m_RoosterMagePrefab: {fileID: 1530564148805280, guid: fb40b1c67ec6442da995f37b80648cc3,
+    type: 2}
+--- !u!224 &224399764707834146
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1696380093699514}
+  m_LocalRotation: {x: 0.5, y: -0, z: -0, w: 0.8660254}
+  m_LocalPosition: {x: 0, y: 0, z: -6.25}
+  m_LocalScale: {x: 0.0043409793, y: 0.0043409793, z: 0.0043409793}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -7809.2983, y: 821.7011}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}

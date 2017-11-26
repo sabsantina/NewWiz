@@ -10,50 +10,71 @@ public class Serializable_QuestManager {
 	* 
 	*/
 
-	/**An int list to contain the quest state of the quest at the same position as any given int.
-	*So for the quest state of the quest ROOSTER_BANE, for instance, this would be the first value in the list.*/
+	/**An int list to contain the quest state of the quest state at the given list index.
+	*This includes even quests not yet encountered by the player.*/
 	public List<int> m_AllQuestStates = new List<int>();
-	/**An int list to contain the number of enemies remaining for every Kill Everything quest at the time of the same.
-	*The way we'll do this is we'll just get the data on every Kill Everything quest in order.*/
-//	List<int> m_KillEverything_EnemiesRemaining = new List<int>();
 
-	//The enemies remaining thing is kind of a drag
+	public List<bool> m_AllRewardsGiven = new List<bool>();
 
 	/*
-	* Basically what's happening now is if we stop the game and load, the quest enemies and items aren't spawning in.
+	* Note: If the player saves a game after having killed x enemies for a quest (where x is less than the total number of enemies to kill
+	* in order for that quest's "condition" or task to be fulfilled), then the enemies will respawn on load and the player's progress towards 
+	* the quest will be lost.
+	* By the same token, items picked up will be lost unless the player first brings them where they're supposed to go (that might be problematic)
+	* Yo, I was wrong! As it happens, I set it up such that once all quest objectives are completed, the quest automatically updates its state.
+	* So basically once you kill all the enemies, even without speaking to the quest giver and completing the quest in that way, they'll stay dead.
+	* Same deal for items picked up!
 	*/
+
+	public void ParseAllQuestRewardsGiven(QuestManager manager)
+	{
+		this.m_AllRewardsGiven.Clear ();
+		//for each quest giver...
+		foreach (KeyValuePair<QuestName, QuestGiver> kvp in manager.m_AllQuestGivers) {
+			this.m_AllRewardsGiven.Add(kvp.Value.m_RewardHasBeenGiven);
+		}
+	}
+
+	public void SetAllQuestRewardsGiven(QuestManager manager)
+	{
+		//for each quest giver...
+		int i = 0;
+		foreach (KeyValuePair<QuestName, QuestGiver> kvp in manager.m_AllQuestGivers) {
+			manager.m_AllQuestGivers [kvp.Key].m_RewardHasBeenGiven = this.m_AllRewardsGiven [i++];
+		}
+	}
 
 	/**A function to record all quest states and record them to [this.m_AllQuestStates]*/
 	public void ParseAllQuestStates(QuestManager manager)
 	{
 		this.m_AllQuestStates.Clear ();
 		//for each quest...
-		foreach (Quest quest in manager.m_AllQuests) {
+		foreach (KeyValuePair<QuestName, Quest> kvp in manager.m_AllQuests) {
 			//...Add the current state
-			this.m_AllQuestStates.Add ((int)quest.m_QuestState);
+			this.m_AllQuestStates.Add ((int)kvp.Value.m_QuestState);
 		}//end foreach
 	}//end f'n void ParseAllQuestStates(QuestManager)
 
 	/**Set all the quest states from the saved information*/
 	public void SetAllQuestStates(QuestManager manager)
 	{
-
+		int index = 0;
 		//for each quest...
-		for (int index = 0; index < manager.m_AllQuests.Count; index++) {
-			switch (this.m_AllQuestStates [index]) {
+		foreach (KeyValuePair<QuestName, Quest> kvp in manager.m_AllQuests) {
+			switch (this.m_AllQuestStates [index++]) {
 			case (int)QuestState.COMPLETED:
 				{
-					manager.m_AllQuests [index].m_QuestState = QuestState.COMPLETED;
+					manager.m_AllQuests [kvp.Key].m_QuestState = QuestState.COMPLETED;
 					break;
 				}//end case completed
 			case (int)QuestState.IN_PROCESS:
 				{
-					manager.m_AllQuests [index].m_QuestState = QuestState.IN_PROCESS;
+					manager.m_AllQuests [kvp.Key].m_QuestState = QuestState.IN_PROCESS;
 					break;
 				}//end case in process
 			case (int)QuestState.NOT_YET_GIVEN:
 				{
-					manager.m_AllQuests [index].m_QuestState = QuestState.NOT_YET_GIVEN;
+					manager.m_AllQuests [kvp.Key].m_QuestState = QuestState.NOT_YET_GIVEN;
 					break;
 				}//end case not yet given
 			default:
@@ -65,14 +86,14 @@ public class Serializable_QuestManager {
 		}//end for
 	}//end f'n void SetAllQuestStates(QuestManager)
 
-	public void SpawnInQuestObjects(QuestManager manager)
-	{
-		foreach (Quest quest in manager.m_AllQuests) {
-			if (quest.m_QuestState == QuestState.IN_PROCESS) {
-				quest.SpawnInQuestObjects ();
-			}//end if
-		}//end foreach
-	}
+//	public void SpawnInQuestObjects(QuestManager manager)
+//	{
+//		foreach (Quest quest in manager.m_AllQuests) {
+//			if (quest.m_QuestState == QuestState.IN_PROCESS) {
+//				quest.SpawnInQuestObjects ();
+//			}//end if
+//		}//end foreach
+//	}
 
 
 //	public void SetAllEnemiesRemaining(QuestManager manager)

@@ -5,25 +5,29 @@
 
 //Spell macros
 
-/*Activating this macro will enable the player to start the game with the Fireball spell.*/
+///*Activating this macro will enable the player to start the game with the Fireball spell.*/
 #define START_WITH_FIREBALL
-/*Activating this macro will enable the player to start the game with the Iceball spell.*/
-#define START_WITH_ICEBALL
-/*Activating this macro will enable the player to start the game with the Shield spell.*/
-#define START_WITH_SHIELD
-/*Activating this macro will enable the player to start the game with the Thunderball spell.*/
-#define START_WITH_THUNDERBALL
-/*Activating this macro will enable the player to start the game with the Thunderstorm spell.*/
-#define START_WITH_THUNDERSTORM
-/*Activating this macro will enable the player to start the game with the Heal spell*/
-#define START_WITH_HEAL
+///*Activating this macro will enable the player to start the game with the Iceball spell.*/
+//#define START_WITH_ICEBALL
+///*Activating this macro will enable the player to start the game with the Shield spell.*/
+//#define START_WITH_SHIELD
+///*Activating this macro will enable the player to start the game with the Thunderball spell.*/
+//#define START_WITH_THUNDERBALL
+///*Activating this macro will enable the player to start the game with the Thunderstorm spell.*/
+//#define START_WITH_THUNDERSTORM
+///*Activating this macro will enable the player to start the game with the Heal spell*/
+//#define START_WITH_HEAL
+///*Activating this macro will enable the player to start the game with the Tornado spell*/
+//#define START_WITH_TORNADO
+///*Activating this macro will enable the player to start the game with the Waterbubble spell*/
+//#define START_WITH_WATERBUBBLE
 
 //Item macros
 
-/*Activating this macro will enable the player to start the game with the health potion item.*/
-#define START_WITH_HEALTH_POTION
-/*Activating this macro will enable the player to start the game with the mana potion item.*/
-#define START_WITH_MANA_POTION
+///*Activating this macro will enable the player to start the game with the health potion item.*/
+//#define START_WITH_HEALTH_POTION
+///*Activating this macro will enable the player to start the game with the mana potion item.*/
+//#define START_WITH_MANA_POTION
 
 using System.Collections;
 using System.Collections.Generic;
@@ -59,15 +63,17 @@ public class PlayerInventory : MonoBehaviour {
 	/**A reference to the HotKey button gameobject representative of HotKey3*/
 	[SerializeField] public UnityEngine.UI.Button m_HotKey3_Obj;
 
-//	private HotKeys m_HotKey1;
-//	private HotKeys m_HotKey2;
-//	private HotKeys m_HotKey3;
+	private PlayerCastSpell m_PlayerCastSpell;
+
 
 	private List<HotKeys> m_HotKeyList = new List<HotKeys>();
+
+	[SerializeField] private ActiveSpellIcon m_ActiveSpellIcon;
 
 
     void Awake()
 	{
+		this.m_PlayerCastSpell = this.GetComponent<PlayerCastSpell> ();
 		//Get a reference to each hotkey slot
 //		this.m_HotKey1 = this.m_HotKey1_Obj.GetComponentInChildren<HotKeys> ();
 		this.m_HotKeyList.Add (this.m_HotKey1_Obj.GetComponentInChildren<HotKeys> ());
@@ -87,35 +93,44 @@ public class PlayerInventory : MonoBehaviour {
 	void Start()
 	{
 
+
 		SpellClass spell_class_instance = new SpellClass();
 		#if START_WITH_FIREBALL
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Fireball));
-		this.m_ActiveSpellClass = this.m_SpellClassList[0];
+		this.AssignDefaultActiveSpell();
 		#endif
 		#if START_WITH_ICEBALL
 		this.AddSpell (spell_class_instance.GenerateInstance(SpellName.Iceball));
-		this.m_ActiveSpellClass = this.m_SpellClassList[0];
+		this.AssignDefaultActiveSpell();
 		#endif
 		#if START_WITH_SHIELD
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Shield));
-		this.m_ActiveSpellClass = this.m_SpellClassList[0];
+		this.AssignDefaultActiveSpell();
 		#endif
 		#if START_WITH_THUNDERBALL
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Thunderball));
-		this.m_ActiveSpellClass = this.m_SpellClassList[0];
+		this.AssignDefaultActiveSpell();
 		#endif
 		#if START_WITH_THUNDERSTORM
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Thunderstorm));
-		this.m_ActiveSpellClass = this.m_SpellClassList[0];
+		this.AssignDefaultActiveSpell();
 		#endif
 		#if START_WITH_HEAL
 		this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Heal));
-		this.m_ActiveSpellClass = this.m_SpellClassList[0];
-		#endif
+		this.AssignDefaultActiveSpell();
+        #endif
+        #if START_WITH_TORNADO
+        this.AddSpell(spell_class_instance.GenerateInstance(SpellName.Tornado));
+		this.AssignDefaultActiveSpell();
+        #endif
+        #if START_WITH_WATERBUBBLE
+        this.AddSpell(spell_class_instance.GenerateInstance(SpellName.WaterBubble));
+		this.AssignDefaultActiveSpell();
+        #endif
 
 
-		#if START_WITH_HEALTH_POTION
-		ItemClass health_potion = new ItemClass ();
+        #if START_WITH_HEALTH_POTION
+        ItemClass health_potion = new ItemClass ();
 		health_potion.GenerateInstance(ItemName.Health_Potion);
 		this.AddItem(health_potion);
 		#endif
@@ -125,13 +140,20 @@ public class PlayerInventory : MonoBehaviour {
 		this.AddItem(mana_potion);
 		#endif
 
+		//In case we're loading in the scene
+		if (this.m_ActiveSpellClass != null) {
+			this.m_ActiveSpellIcon.UpdateActiveSpellSprite (this.m_ActiveSpellClass.m_SpellName);
+		} else {
+			this.m_ActiveSpellIcon.gameObject.transform.parent.gameObject.SetActive (false);
+		}
+
 	}//end f'n void Start()
 
 	void Update()
 	{
 //		this.m_DefaultSpellPrefab.GetComponent<SpellMovement> ().m_SpellClassToCast = this.m_ActiveSpellClass;
 		//If there's more than one spell in the player's inventory...
-		if (this.m_SpellClassList.Count > 1) {
+		if (this.m_SpellClassList.Count > 1 && !this.m_PlayerCastSpell.m_MenuOpen) {
 			//...then check for player input and switch SpellClass instance on command.
 			this.UpdateActiveSpell ();
 		} //end if
@@ -140,6 +162,11 @@ public class PlayerInventory : MonoBehaviour {
 		{
 			//...then assign a default value for the active SpellClass
 			this.AssignDefaultActiveSpell ();
+			//Update sprite
+			if (this.m_ActiveSpellClass != null) {
+				this.m_ActiveSpellIcon.gameObject.transform.parent.gameObject.SetActive (true);
+				this.m_ActiveSpellIcon.UpdateActiveSpellSprite (this.m_ActiveSpellClass.m_SpellName);
+			}
 		}
 		#if TESTING_INVENTORY_CONTENTS_OUTPUT
 		if (Input.GetKeyDown (KeyCode.Return)) {
@@ -195,6 +222,9 @@ public class PlayerInventory : MonoBehaviour {
 				this.m_ActiveSpellClass = this.m_SpellClassList [next_index];
 				this.m_ActiveSpellName = this.m_ActiveSpellClass.m_SpellName.ToString ();
 
+				//Update active spell icon
+				this.m_ActiveSpellIcon.UpdateActiveSpellSprite (this.m_ActiveSpellClass.m_SpellName);
+
 				this.GetComponent<PlayerCastSpell> ().m_SpellClassToFire = this.m_ActiveSpellClass;
 
 				#if TESTING_ACTIVE_SPELL
@@ -212,6 +242,7 @@ public class PlayerInventory : MonoBehaviour {
 		this.m_ActiveSpellName = this.m_ActiveSpellClass.m_SpellName.ToString ();
 
 		this.GetComponent<PlayerCastSpell> ().m_SpellClassToFire = this.m_ActiveSpellClass;
+//		Debug.Log ("Spell to fire " + this.GetComponent<PlayerCastSpell> ().m_SpellClassToFire.m_SpellName.ToString ());
 	}//end f'n void AssignDefaultActiveSpell()
 
 	/**A function to return the string containing all of the SpellClass instances of the [this.m_SpellClassList]*/
@@ -225,7 +256,7 @@ public class PlayerInventory : MonoBehaviour {
 	}
 
 	/**A function, for testing purposes, to print out the inventory contents.*/
-	private void OutputInventoryContents()
+	public void OutputInventoryContents()
 	{
 		string message = "Inventory Contents:\n";
 		message += "Spells:\n";
