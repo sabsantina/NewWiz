@@ -120,7 +120,7 @@ public class Serialization_Manager : MonoBehaviour {
 				case (int)Scenes.OVERWORLD:
 					{
 						//then the position to spawn at is as follows:
-						vector_to_return = TransitionPositions.Transition_Demo_To_Overworld;
+						vector_to_return = TransitionPositions.Transition_Overworld_To_Demo;
 						break;
 					}
 				}

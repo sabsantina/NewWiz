@@ -12,7 +12,9 @@ public class TransitionMarker : MonoBehaviour {
 	{
 		Player player_component = other.gameObject.GetComponent<Player> ();
 		if (player_component != null) {
-
+			this.m_SerializationManager.Save ();
+			UnityEngine.SceneManagement.SceneManager.LoadScene ((int)leads_to);
+			this.m_SerializationManager.Load (this);
 		}
 	}
 
