@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4066116857032552}
   - component: {fileID: 95088753622749230}
   - component: {fileID: 212788694128687586}
-  - component: {fileID: 114022718602315394}
+  - component: {fileID: 114064010285472836}
   m_Layer: 0
   m_Name: ClawAttackHit
   m_TagString: Untagged
@@ -59,7 +59,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114022718602315394
+--- !u!114 &114064010285472836
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

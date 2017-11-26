@@ -51,3 +51,4 @@ BasicMechanicsDemo/BasicMechanicsDemo.userprefs
 BasicMechanicsDemo/Assembly-CSharp.csproj
 BasicMechanicsDemo/Library
 BasicMechanicsDemo/Temp
+*.meta
