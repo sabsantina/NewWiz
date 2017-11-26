@@ -74,6 +74,9 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 
 	public Scenes m_CurrentRegion = Scenes.DEMO_AREA;
 
+	public RPGTalk rpgTalk;
+
+
 	public bool IsAffectedByMagic()
 	{
 		return this.m_IsAffectedBySpell;
