@@ -1,14 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OrangeLaird : BossEnemy {
+    [SerializeField] GameObject enemyHPMeter;
 
     public float m_OrangeLairdHealth = 250.0f;
+
+    public float m_OrangeLairdMeleeDamage = 20.0f;
 
     public float m_OrangeLairdChasePlayerDuration = 20.0f;
 
     public float m_IntervalBetweenRangedAttacks = 0.5f;
+
+    public float m_IntervalBetweenMeleeAttacks = 1.5f;
 
     private bool isHealing = false;
 
@@ -20,6 +26,9 @@ public class OrangeLaird : BossEnemy {
 
     private float m_OverHeat_Timer = 0.0f;
 
+    /**The string value of the name of the sorting layer*/
+    public string sortingLayerName;
+
 
     // Use this for initialization
     void Start () {
@@ -30,9 +39,12 @@ public class OrangeLaird : BossEnemy {
         this.SetMeleeDamage();
         this.SetSpellToCast(this.m_AttackSpell);
         this.SetAttackDamageValue();
+        this.setMaxMeter();
 
         this.SetChasePlayerSettings(this.m_OrangeLairdChasePlayerDuration);
         this.m_EnemyName = EnemyName.ORANGE_LAIRD;
+
+        this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingLayerName = sortingLayerName;
     }
 	
 	// Update is called once per frame
@@ -46,11 +58,26 @@ public class OrangeLaird : BossEnemy {
 
         //Handles the overheat mechanic of the boss, for the final stage
         HandleOverheat();
-	}
+
+        //This line of code is used to get the correct draw order.
+        this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(this.GetComponent<Transform>().transform.position.z * 100f) * -1;
+    }
 
     public override void SetAttackDamageValue()
     {
-        this.m_AttackDamageValue = this.m_SpellToCast.m_SpellDamage + 15.0f;
+        if (this.m_AttackPattern.m_AttackPatternState == AttackPatternState.RANGED)
+        {
+            this.m_AttackDamageValue = this.m_SpellToCast.m_SpellDamage + 15.0f;
+        }
+        else if (this.m_AttackPattern.m_AttackPatternState == AttackPatternState.MELEE)
+        {
+            this.m_AttackDamageValue = this.m_OrangeLairdMeleeDamage;
+        }
+    }
+
+    protected override void SetMeleeDamage()
+    {
+        this.m_MeleeDamage = this.m_OrangeLairdMeleeDamage;
     }
 
     /**A function to set the spell to cast in our parent classes*/
@@ -68,12 +95,14 @@ public class OrangeLaird : BossEnemy {
 
     protected override void SetIntervalsBetweenAttacks()
     {
+        this.m_MeleeAttackInterval = this.m_IntervalBetweenMeleeAttacks;
         this.m_RangedAttackInterval = this.m_IntervalBetweenRangedAttacks;
     }
 
     public override void ApplySpellEffect(SpellClass spell)
     {
         base.ApplySpellEffect(spell);
+        enemyHPMeter.GetComponentInChildren<Slider>().value = m_Health;
     }
 
     /**This function heals the boss when it falls under a certain health amount. The boss heals a total of two times and then goes into a frenzy ^^*/
@@ -82,6 +111,7 @@ public class OrangeLaird : BossEnemy {
         if(this.m_IsHealing == true)
         {
             m_Healing_Timer += Time.deltaTime;
+            enemyHPMeter.GetComponentInChildren<Slider>().value = m_Health;
         }
         if (this.m_Health > m_OrangeLairdHealth || m_Healing_Timer > 3.0f)
         {
@@ -132,4 +162,16 @@ public class OrangeLaird : BossEnemy {
             SetIntervalsBetweenAttacks();
         }
     }
+
+    void setMaxMeter()
+    {
+        enemyHPMeter.GetComponentInChildren<Slider>().maxValue = m_OrangeLairdHealth;
+        enemyHPMeter.GetComponentInChildren<Slider>().value = m_OrangeLairdHealth;
+    }
+
+	/**The spell to spawn on boss death*/
+	protected override void ManageLootSpawnOnDeath()
+	{
+		this.m_Spawner.Spawn_Spell (SpellName.WaterBubble, this.transform.position);
+	}
 }

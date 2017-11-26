@@ -128,10 +128,10 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1404421625083912}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d88a6cc6e4c5ef4383caa781a100575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RoamingMusicIntro: {fileID: 8300000, guid: 070c7973df98309469affe959593ab35, type: 3}
-  m_RoamingMusicLoop: {fileID: 8300000, guid: b7a73bd3fba047940be87551f85da441, type: 3}
+  m_RoamingMusicIntro: {fileID: 8300000, guid: 3ea4a47c1d1bb344ba55df8da70677cd, type: 3}
+  m_RoamingMusicLoop: {fileID: 8300000, guid: 3ea4a47c1d1bb344ba55df8da70677cd, type: 3}

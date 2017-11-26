@@ -119,7 +119,33 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 //			GameObject.Destroy(this.gameObject, animation_length);
 //		}
 		if (is_dead) {
+			this.ManageLootSpawnOnDeath ();
 			GameObject.Destroy(this.transform.parent.gameObject);
+		}
+	}
+
+	/**A function to manage the spawning of loot when a default enemy dies.
+	*We'll say most enemies have a 66% chance of spawning either a health potion or a mana potion. They have a 33% chance to spawn anything else.*/
+	protected virtual void ManageLootSpawnOnDeath()
+	{
+		int last_enum_index = (System.Enum.GetValues (typeof(ItemName)).Length - 1);
+		float random_number = Random.Range (0.0f, (float)last_enum_index);
+		//33% chance spawn health
+		if (random_number <= 0.33f) {
+			this.m_Spawner.Spawn_Item (ItemName.Health_Potion, this.transform.position);
+		} 
+		//33% chance spawn mana potion
+		else if (0.33f < random_number && random_number <= 0.67f) {
+			this.m_Spawner.Spawn_Item (ItemName.Mana_Potion, this.transform.position);
+		} 
+		//33% chance spawn anything else
+		else {
+			int random_index = Random.Range (2, last_enum_index);
+			foreach (ItemName enum_val in System.Enum.GetValues(typeof(ItemName))) {
+				if ((int)enum_val == random_index) {
+					this.m_Spawner.Spawn_Item (enum_val, this.transform.position);
+				}
+			}
 		}
 	}
 

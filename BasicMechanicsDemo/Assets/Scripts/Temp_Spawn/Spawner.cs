@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour {
+
 	/**A reference to the default item prefab to be spawned, before it is set to represent a specific item.*/
 	[SerializeField] private GameObject m_DefaultItemPickupPrefab;
 	/**A reference to the default spell prefab to be spawned, before it is set to represent a specific spell.*/
@@ -35,6 +36,10 @@ public class Spawner : MonoBehaviour {
 	[SerializeField] private Sprite m_HealSprite;
 	/**The sprite to be used for the thunderstorm spell when it is a pickup*/
 	[SerializeField] private Sprite m_ThunderstormSprite;
+	/**The sprite to be used for the tornado spell when it is a pickup*/
+	[SerializeField] private Sprite m_TornadoSprite;
+	/**The sprite to be used for the water bubble spell when it is a pickup*/
+	[SerializeField] private Sprite m_WaterBubbleSprite;
 
 	//*** Quest Item spawning requisites
 	//Pretty sure all we need is one default item prefab (with the respective sprite enumerated below)
@@ -75,17 +80,6 @@ public class Spawner : MonoBehaviour {
 	/**A reference to the player, just so we can consistently spawn something close to the player's transform.position.*/
 	[SerializeField] private GameObject m_Player;
 	#endif
-//
-//	/**A list of all Item instances we spawn.*/
-//	private List<ItemPickup> m_ItemInstances;
-//	/**A list of all Spell instances we spawn.*/
-//	private List<SpellPickup> m_SpellInstances;
-//
-//	void Start()
-//	{
-//		this.m_ItemInstances = new List<ItemPickup> ();
-//		this.m_SpellInstances = new List<SpellPickup>();
-//	}
 
 	void Awake()
 	{
@@ -188,6 +182,18 @@ public class Spawner : MonoBehaviour {
 			{
 				instance = instance.GenerateInstance (SpellName.Heal);
 				this.m_SpriteToBeUsed = this.m_HealSprite;
+				break;
+			}
+		case (int)SpellName.Tornado:
+			{
+				instance = instance.GenerateInstance (SpellName.Tornado);
+				this.m_SpriteToBeUsed = this.m_TornadoSprite;
+				break;
+			}
+		case (int)SpellName.WaterBubble:
+			{
+				instance = instance.GenerateInstance (SpellName.WaterBubble);
+				this.m_SpriteToBeUsed = this.m_WaterBubbleSprite;
 				break;
 			}
 		default:

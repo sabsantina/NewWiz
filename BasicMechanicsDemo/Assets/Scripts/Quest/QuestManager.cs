@@ -56,10 +56,6 @@ public class QuestManager : MonoBehaviour
         this.AssignAllQuests();
     }
 
-    void Start()
-    {
-    }
-
     void Update()
     {
         this.UpdateActiveQuestObjectives();
@@ -69,19 +65,20 @@ public class QuestManager : MonoBehaviour
     private void InitializeAllQuests()
     {
         //Rooster bane
-	    Quest roosterBane = GenerateKillEverything(QuestName.ROOSTER_BANE, "Rooster Bane!", NUMBER_ENEMIES_ROOSTERBANE,
+		Quest roosterBane = GenerateKillEverything(QuestName.ROOSTER_BANE, "Rooster Bane!", NUMBER_ENEMIES_ROOSTERBANE, Scenes.DEMO_AREA,
 		    new Vector3(15.74f, 0.55f, -0.43f), m_DefautRoosterPrefab);
 	    QuestGiver qgRoosterBane = GenerateQuestGiver(new Vector3(-8.39f, 0.55f, -0.43f), new []{ItemName.Health_Potion}, null);
 	    Add(ref roosterBane, ref qgRoosterBane);
 	    
         //Potion master
 	    Quest potionMaster = GenerateFetch(QuestName.POTION_MASTER, "Potion Master!", NUMBER_ITEMS_POTIONMASTER, QuestItemName.POTION_OF_WISDOM,
-		    new Vector3(15.74f, 0.55f, -0.43f), m_DefaultPotionQuestItemPrefab);
+			Scenes.DEMO_AREA, new Vector3(15.74f, 0.55f, -0.43f), m_DefaultPotionQuestItemPrefab);
 	    QuestGiver qgPotionMaster = GenerateQuestGiver(new Vector3(-6.718053f, 0.55f, -11.17016f), new[] {ItemName.Health_Potion}, new[] {SpellName.Iceball});
 	    Add(ref potionMaster, ref qgPotionMaster);
 	    
         //Hot Chicks
-        Quest hotChicks = GenerateKillEverything(QuestName.HOT_CHICKS, "Hot Chicks!", NUMBER_ENEMIES_HOTCHICKS, new Vector3(5.74f, 0.55f, 2f), m_FireChicken);
+        Quest hotChicks = GenerateKillEverything(QuestName.HOT_CHICKS, "Hot Chicks!", NUMBER_ENEMIES_HOTCHICKS,
+			Scenes.DEMO_AREA, new Vector3(5.74f, 0.55f, 2f), m_FireChicken);
 	    QuestGiver qgHotChicks = GenerateQuestGiver(new Vector3(-15.96f, 0.55f, -14.08f), new[] {ItemName.Mana_Potion}, null);
 	    Add(ref hotChicks, ref qgHotChicks);
 
@@ -93,31 +90,35 @@ public class QuestManager : MonoBehaviour
 	{
 		m_AllQuests.Add(q.m_QuestName, q);
 		m_AllQuestGivers.Add(q.m_QuestName, qg);
+
+		//Name the generic quest givers with respect to their assigned quest to more easily tell them apart in testing
+		string default_name = qg.gameObject.name;
+		qg.gameObject.name = default_name + q.m_QuestName.ToString ();
 	}
 
-	private Quest GenerateKillEverything(QuestName questName, String nameString, int nbEnemies, Vector3 goalLocation,
+	private Quest GenerateKillEverything(QuestName questName, String nameString, int nbEnemies, Scenes region, Vector3 goalLocation,
 		params GameObject[] requisitePrefabs)
 	{
-		Quest quest = GenerateQuest(questName, nameString, QuestType.KILL_EVERYTHING, requisitePrefabs.ToList(), goalLocation);
+		Quest quest = GenerateQuest(questName, nameString, QuestType.KILL_EVERYTHING, requisitePrefabs.ToList(), region, goalLocation);
 		quest.m_NumberOfEnemiesToKill = nbEnemies;
 		quest.m_KillEverything.m_EnemyLootSpawner = this.m_Spawner;
 		return quest;
 	}
 
-	private Quest GenerateFetch(QuestName questName, String nameString, int nbItems, QuestItemName questItemName, Vector3 goalLocation,
+	private Quest GenerateFetch(QuestName questName, String nameString, int nbItems, QuestItemName questItemName, Scenes region, Vector3 goalLocation,
 		params GameObject[] requisitePrefabs)
 	{
-		Quest quest = GenerateQuest(questName, nameString, QuestType.FETCH, requisitePrefabs.ToList(), goalLocation);
+		Quest quest = GenerateQuest(questName, nameString, QuestType.FETCH, requisitePrefabs.ToList(), region, goalLocation);
 		QuestItem potion = new QuestItem();
 		potion.GenerateQuestItem(questItemName);
 		quest.m_ItemInformation = potion;
 		quest.m_Fetch.m_PlayerInventory = this.m_Player.GetComponent<PlayerInventory>();
 		quest.m_NumberOfItemsToFind = nbItems;
-		
+
 		return quest;
 	}
 	
-	private Quest GenerateQuest(QuestName questName, String nameString, QuestType questType, List<GameObject> requisitePrefabs, Vector3 goalLocation)
+	private Quest GenerateQuest(QuestName questName, String nameString, QuestType questType, List<GameObject> requisitePrefabs, Scenes region, Vector3 goalLocation)
 	{
 		Quest quest = new Quest();
 		quest.m_QuestName = questName;
@@ -126,6 +127,7 @@ public class QuestManager : MonoBehaviour
 		quest.m_QuestType = questType;
 		quest.InitializeObjectiveType();
 		quest.m_RequisitePrefabs = requisitePrefabs;
+		quest.m_QuestRegion = region;
 		quest.SetQuestGoalLocation(goalLocation);
 
 		return quest;
