@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿#define DEMO
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,11 +24,15 @@ public class MainMenu_UIManager : MonoBehaviour {
 		}//end if
 	}//end f'n void Awake()
 
-	/**A function to start a fresh demo on the button click "Start Demo", from the Main Menu.*/
-	public void OnClick_StartDemo()
+	/**A function to start a fresh game on the button click "New Game", from the Main Menu.*/
+	public void OnClick_NewGame()
 	{
+		#if DEMO
+		UnityEngine.SceneManagement.SceneManager.LoadScene((int)Scenes.DEMO_AREA);
+		#else
 		//This load scene function will need to change.
-		UnityEngine.SceneManagement.SceneManager.LoadScene (1);
+		UnityEngine.SceneManagement.SceneManager.LoadScene ((int)Scenes.FOREST);
+		#endif
 		//Start a new game, and overwrite the save file
 		UnityEngine.PlayerPrefs.SetInt (STRINGKEY_PLAYERPREF_LOADGAME, 1);
 		Time.timeScale = 1.0f;
