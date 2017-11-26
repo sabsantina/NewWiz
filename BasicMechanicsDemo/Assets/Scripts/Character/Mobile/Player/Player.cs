@@ -330,5 +330,11 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 	{
 		return m_SpellAffectingPlayer;
 	}
+
+	public void playSound(AudioClip clip)
+	{
+		Debug.Log ("Play pickup sound");
+		m_audioSource.PlayOneShot (clip);
+	}
 }
 

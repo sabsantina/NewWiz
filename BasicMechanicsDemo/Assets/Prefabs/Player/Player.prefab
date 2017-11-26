@@ -4706,13 +4706,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.206
+  m_Volume: 0.432
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 110
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -13870,8 +13870,9 @@ MonoBehaviour:
   tornadoCastSound: {fileID: 8300000, guid: c20bbec9bfb46e84a8b7c42cca767c5f, type: 3}
   waterBubbleCastSound: {fileID: 8300000, guid: fe4e7de7e017e7b48966f914f474542b,
     type: 3}
-  m_ItemPickedUpSound: {fileID: 0}
-  m_SpellPickedUpSound: {fileID: 0}
+  m_ItemPickedUpSound: {fileID: 8300000, guid: cdae8f4d9d6c7af4989c0f59e20fc1ef, type: 3}
+  m_SpellPickedUpSound: {fileID: 8300000, guid: 7925e295d2e0d2f46bb804471e014f0a,
+    type: 3}
   m_PlayerAudio_Pickups: {fileID: 0}
 --- !u!114 &114884764306644504
 MonoBehaviour:
@@ -14156,6 +14157,7 @@ MonoBehaviour:
   m_ExtraEffectsTimer: 0
   m_MagicAffinity: 1
   m_CurrentRegion: 0
+  rpgTalk: {fileID: 0}
 --- !u!114 &114895016287083824
 MonoBehaviour:
   m_ObjectHideFlags: 1
