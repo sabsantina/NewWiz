@@ -57,6 +57,8 @@ public class Serialization_Manager : MonoBehaviour {
 		file.Close();
 	}	
 
+	/**A loading function to be called on click from the main menu.
+	*This function assumes the player has saved, gone to the menu, and is loading the game, meaning that their current region is part of the loaded saved information.*/
 	public void Load() {
 		if(File.Exists(Application.persistentDataPath + FILEPATH_EXTENSION)) {
 			BinaryFormatter bf = new BinaryFormatter();
@@ -74,6 +76,60 @@ public class Serialization_Manager : MonoBehaviour {
 		}
 	}
 
+	/**A loading function to be used for scene traversal.
+	*This function takes a look at the player's current region, as well as the region we feed to this function as an argument, and from there
+	*positions the player accordingly.*/
+	public void Load(TransitionMarker marker)
+	{
+		if(File.Exists(Application.persistentDataPath + FILEPATH_EXTENSION)) {
+			BinaryFormatter bf = new BinaryFormatter();
+			FileStream file = File.Open(Application.persistentDataPath + FILEPATH_EXTENSION, FileMode.Open);
+			//			this.m_SavedSessions = (List<Serializable_Player>)bf.Deserialize(file);
+			//			this.m_SerializablePlayer = (Serializable_Player)bf.Deserialize(file);
+			//			this.m_SerializableQuestManager = (Serializable_QuestManager)bf.Deserialize(file);
+			this.m_SerializableSession = (Serializable_Session)bf.Deserialize(file);
+			file.Close();
+
+			//Set all player information
+			this.m_SerializableSession.SetSessionInformation(this.m_Player.gameObject, this.m_QuestManager);
+			//At this point the player still has the region value as the region they came from
+			Vector3 where_to_spawn_player = this.FindWhereToSpawnPlayer(marker); 
+			this.m_Player.transform.position = where_to_spawn_player;
+			this.m_Player.m_CurrentRegion = marker.leads_to;
+
+			//Spawn in quest objects
+			this.SpawnAllQuestObjects();
+		}
+	}
+
+	/**A function that takes the player's current region and compares it with that of where [marker] leads to, to find where the player should wind up when the next scene loads*/
+	private Vector3 FindWhereToSpawnPlayer(TransitionMarker marker)
+	{
+		Vector3 vector_to_return = new Vector3 ();
+
+		Scenes from_region = this.m_Player.m_CurrentRegion;
+		Scenes to_region = marker.leads_to;
+
+		switch ((int)from_region) {
+		//if we're going from the demo area...
+		case (int)Scenes.DEMO_AREA:
+			{
+				switch((int)to_region)
+				{
+				//...to the overworld
+				case (int)Scenes.OVERWORLD:
+					{
+						//then the position to spawn at is as follows:
+						vector_to_return = TransitionPositions.Transition_Demo_To_Overworld;
+						break;
+					}
+				}
+				break;
+			}//end case DEMO AREA
+		}//end switch
+		return vector_to_return;
+	}
+
 	private void SpawnAllQuestObjects()
 	{
 
@@ -82,7 +138,7 @@ public class Serialization_Manager : MonoBehaviour {
 			Quest current_quest = this.m_QuestManager.m_AllQuests[m_QuestManager.m_AllQuests.ElementAt(quest_index).Key];
 			//We only want to spawn in the quests that are in the same region as us
 			if ((int)current_quest.m_QuestRegion == (int)this.m_Player.m_CurrentRegion) {
-				//... and we only care about the quest if it's in process
+				//... and we only care about the quest's objects if it's in process
 				if ((int)current_quest.m_QuestState == (int)QuestState.IN_PROCESS) {
 					//...and if so, then spawn corresponding quest objects
 					this.m_QuestManager.SpawnInQuestObjects (current_quest);

@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class TransitionMarker : MonoBehaviour {
 
-	[SerializeField] Serialization_Manager m_SerializationManager;
+	[SerializeField] private Serialization_Manager m_SerializationManager;
 
-	public void Transition(Scenes scene_to_transition_from, Scenes scene_to_transition_to)
+	public Scenes leads_to;
+
+	void OnTriggerEnter(Collider other)
 	{
-		this.m_SerializationManager.Save ();
-		UnityEngine.SceneManagement.SceneManager.LoadScene ((int)Scenes.OVERWORLD);
+		Player player_component = other.gameObject.GetComponent<Player> ();
+		if (player_component != null) {
+
+		}
 	}
 
 }
