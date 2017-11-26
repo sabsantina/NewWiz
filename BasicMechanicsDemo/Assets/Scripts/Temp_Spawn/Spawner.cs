@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour {
+
 	/**A reference to the default item prefab to be spawned, before it is set to represent a specific item.*/
 	[SerializeField] private GameObject m_DefaultItemPickupPrefab;
 	/**A reference to the default spell prefab to be spawned, before it is set to represent a specific spell.*/
@@ -79,17 +80,6 @@ public class Spawner : MonoBehaviour {
 	/**A reference to the player, just so we can consistently spawn something close to the player's transform.position.*/
 	[SerializeField] private GameObject m_Player;
 	#endif
-//
-//	/**A list of all Item instances we spawn.*/
-//	private List<ItemPickup> m_ItemInstances;
-//	/**A list of all Spell instances we spawn.*/
-//	private List<SpellPickup> m_SpellInstances;
-//
-//	void Start()
-//	{
-//		this.m_ItemInstances = new List<ItemPickup> ();
-//		this.m_SpellInstances = new List<SpellPickup>();
-//	}
 
 	void Awake()
 	{
