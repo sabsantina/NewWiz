@@ -93,8 +93,10 @@ public class RangedAttackPattern : AttackPattern {
 					this.GetComponent<Animator>().SetBool (STRINGKEY_PARAM_ISATTACKING_RANGED, true);
 
 					this.GenerateSpellPrefabInstance ();
-                    this.GetComponent<BossEnemy>().m_SpellCastCount++;
-                        Debug.Log("sth is working");
+					BossEnemy boss_enemy_component = this.GetComponent<BossEnemy> ();
+					if (boss_enemy_component != null) {
+						boss_enemy_component.m_SpellCastCount++;
+					}
 					Player player_detected = this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player;
 					//if the player was detected in the movement region...
 					if (player_detected != null) {
