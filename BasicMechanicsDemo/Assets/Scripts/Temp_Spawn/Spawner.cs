@@ -35,6 +35,10 @@ public class Spawner : MonoBehaviour {
 	[SerializeField] private Sprite m_HealSprite;
 	/**The sprite to be used for the thunderstorm spell when it is a pickup*/
 	[SerializeField] private Sprite m_ThunderstormSprite;
+	/**The sprite to be used for the tornado spell when it is a pickup*/
+	[SerializeField] private Sprite m_TornadoSprite;
+	/**The sprite to be used for the water bubble spell when it is a pickup*/
+	[SerializeField] private Sprite m_WaterBubbleSprite;
 
 	//*** Quest Item spawning requisites
 	//Pretty sure all we need is one default item prefab (with the respective sprite enumerated below)
@@ -188,6 +192,18 @@ public class Spawner : MonoBehaviour {
 			{
 				instance = instance.GenerateInstance (SpellName.Heal);
 				this.m_SpriteToBeUsed = this.m_HealSprite;
+				break;
+			}
+		case (int)SpellName.Tornado:
+			{
+				instance = instance.GenerateInstance (SpellName.Tornado);
+				this.m_SpriteToBeUsed = this.m_TornadoSprite;
+				break;
+			}
+		case (int)SpellName.WaterBubble:
+			{
+				instance = instance.GenerateInstance (SpellName.WaterBubble);
+				this.m_SpriteToBeUsed = this.m_WaterBubbleSprite;
 				break;
 			}
 		default:

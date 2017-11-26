@@ -168,4 +168,10 @@ public class OrangeLaird : BossEnemy {
         enemyHPMeter.GetComponentInChildren<Slider>().maxValue = m_OrangeLairdHealth;
         enemyHPMeter.GetComponentInChildren<Slider>().value = m_OrangeLairdHealth;
     }
+
+	/**The spell to spawn on boss death*/
+	protected override void ManageLootSpawnOnDeath()
+	{
+		this.m_Spawner.Spawn_Spell (SpellName.WaterBubble, this.transform.position);
+	}
 }

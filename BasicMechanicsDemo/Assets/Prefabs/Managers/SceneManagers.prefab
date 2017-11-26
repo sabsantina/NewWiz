@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e3e196f83a0742d9ba3e860ea82cb12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Player: {fileID: 114892849765405028, guid: b47540d2d2eb2476bbd5efbb6155c7d6, type: 2}
+  m_Player: {fileID: 0}
   m_QuestManager: {fileID: 114632412232522386}
   m_SerializableSession:
     m_SerializablePlayer:
@@ -91,6 +91,7 @@ MonoBehaviour:
       m_PlayerMagicAffinity: 0
     m_SerializableQuestManager:
       m_AllQuestStates: 
+      m_AllRewardsGiven: 
 --- !u!114 &114632412232522386
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,21 +105,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Spawner: {fileID: 114911460496919354}
   m_Player: {fileID: 0}
-  m_QuestGiver_RoosterBane: {fileID: 0}
   m_DefautRoosterPrefab: {fileID: 1295592544126026, guid: 9053599dd27ba439eb6fd4c325a8ccde,
     type: 2}
   NUMBER_ENEMIES_ROOSTERBANE: 5
-  m_QuestGiver_PotionMaster: {fileID: 0}
   m_DefaultPotionQuestItemPrefab: {fileID: 1126925848709952, guid: 764a4e7ea763941b2a1a14ca27bd3409,
     type: 2}
   NUMBER_ITEMS_POTIONMASTER: 2
-  m_QuestGiver_HotChicks: {fileID: 114367588201746196, guid: a47e411fb48644dedbc8d5c5e7f9ff0e,
-    type: 2}
   m_FireChicken: {fileID: 1530564148805280, guid: fb40b1c67ec6442da995f37b80648cc3,
     type: 2}
   NUMBER_ENEMIES_HOTCHICKS: 3
-  m_AllQuests: []
-  m_AllQuestGivers: []
+  m_QuestGiver_Generic: {fileID: 1924397221675462, guid: d18e539afc033440ba33c12bad97a21f,
+    type: 2}
 --- !u!114 &114701533359187540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,6 +163,9 @@ MonoBehaviour:
   m_ShieldSprite: {fileID: 21300000, guid: cc2293d95f0ac6d469eadd4451b3a90e, type: 3}
   m_HealSprite: {fileID: 21300000, guid: 7c8edbdbb16b6354db7dc608c4f3b3eb, type: 3}
   m_ThunderstormSprite: {fileID: 21300000, guid: 6d0cc1c817799b44385440404be23878,
+    type: 3}
+  m_TornadoSprite: {fileID: 21300000, guid: ac205a8d6535e1f40a9ae6d31a002b55, type: 3}
+  m_WaterBubbleSprite: {fileID: 21300000, guid: 2e9518613bb397d43aaebfa5111734e0,
     type: 3}
   m_DefaultQuestItemPrefab: {fileID: 1126925848709952, guid: 764a4e7ea763941b2a1a14ca27bd3409,
     type: 2}

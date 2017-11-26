@@ -93,6 +93,10 @@ public class QuestManager : MonoBehaviour
 	{
 		m_AllQuests.Add(q.m_QuestName, q);
 		m_AllQuestGivers.Add(q.m_QuestName, qg);
+
+		//Name the generic quest givers with respect to their assigned quest to more easily tell them apart in testing
+		string default_name = qg.gameObject.name;
+		qg.gameObject.name = default_name + q.m_QuestName.ToString ();
 	}
 
 	private Quest GenerateKillEverything(QuestName questName, String nameString, int nbEnemies, Vector3 goalLocation,
