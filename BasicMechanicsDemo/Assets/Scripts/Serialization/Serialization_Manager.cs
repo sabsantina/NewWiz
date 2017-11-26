@@ -76,26 +76,26 @@ public class Serialization_Manager : MonoBehaviour {
 		}
 	}
 
-	/**A loading function to be used for scene traversal.
-	*This function takes a look at the player's current region, as well as the region we feed to this function as an argument, and from there
-	*positions the player accordingly.*/
-	public void Load(TransitionMarker marker)
-	{
-		if(File.Exists(Application.persistentDataPath + FILEPATH_EXTENSION)) {
-			BinaryFormatter bf = new BinaryFormatter();
-			FileStream file = File.Open(Application.persistentDataPath + FILEPATH_EXTENSION, FileMode.Open);
-			//			this.m_SavedSessions = (List<Serializable_Player>)bf.Deserialize(file);
-			//			this.m_SerializablePlayer = (Serializable_Player)bf.Deserialize(file);
-			//			this.m_SerializableQuestManager = (Serializable_QuestManager)bf.Deserialize(file);
-			this.m_SerializableSession = (Serializable_Session)bf.Deserialize(file);
-			file.Close();
-
-			//Set all player information
-			this.m_SerializableSession.SetSessionInformation(this.m_Player.gameObject, this.m_QuestManager);
-			//Spawn in quest objects
-			this.SpawnAllQuestObjects();
-		}
-	}
+//	/**A loading function to be used for scene traversal.
+//	*This function takes a look at the player's current region, as well as the region we feed to this function as an argument, and from there
+//	*positions the player accordingly.*/
+//	public void Load(TransitionMarker marker)
+//	{
+//		if(File.Exists(Application.persistentDataPath + FILEPATH_EXTENSION)) {
+//			BinaryFormatter bf = new BinaryFormatter();
+//			FileStream file = File.Open(Application.persistentDataPath + FILEPATH_EXTENSION, FileMode.Open);
+//			//			this.m_SavedSessions = (List<Serializable_Player>)bf.Deserialize(file);
+//			//			this.m_SerializablePlayer = (Serializable_Player)bf.Deserialize(file);
+//			//			this.m_SerializableQuestManager = (Serializable_QuestManager)bf.Deserialize(file);
+//			this.m_SerializableSession = (Serializable_Session)bf.Deserialize(file);
+//			file.Close();
+//
+//			//Set all player information
+//			this.m_SerializableSession.SetSessionInformation(this.m_Player.gameObject, this.m_QuestManager);
+//			//Spawn in quest objects
+//			this.SpawnAllQuestObjects();
+//		}
+//	}
 
 //	/**A function that takes the player's current region and compares it with that of where [marker] leads to, to find where the player should wind up when the next scene loads*/
 //	private Vector3 FindWhereToSpawnPlayer(TransitionMarker marker)

@@ -37,6 +37,8 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 
 	[SerializeField] public PlayerAudio m_PlayerAudio;
 
+	[SerializeField] public Serialization_Manager m_SerializationManager;
+
 	/**A variable to keep track of the player's health.*/
 	public float m_Health;
 	/**A variable to keep track of the player's mana.*/
@@ -109,6 +111,7 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 			//So at this point, we need to spawn the player at a given region entrance, with respect to the last region
 //			Debug.Log ("Going into region: " + current_scene_build_index);
 			//Find new spawn position
+			this.m_SerializationManager.Load();
 			this.PositionPlayerAtEntrance((int)this.m_CurrentRegion, current_scene_build_index);
 			this.m_CurrentRegion = this.ReturnSceneAtIndex (current_scene_build_index);
 		}
