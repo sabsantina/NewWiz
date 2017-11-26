@@ -13,7 +13,7 @@ public class ItemPickup : MonoBehaviour {
 
 	public ItemClass m_Item = new ItemClass();
 	public string m_ItemName;
-
+	public AudioSource m_audioSource;
 //	[SerializeField] private AudioClip m_Clip;
 //	/**The place the sound comes from.*/
 //	private AudioSource m_AudioSource;
@@ -21,6 +21,7 @@ public class ItemPickup : MonoBehaviour {
 	void Awake()
 	{
 		this.gameObject.GetComponent<Collider> ().isTrigger = true;
+		m_audioSource = GetComponent<AudioSource> ();
 //		this.m_AudioSource = this.GetComponent<AudioSource>();
 	}
 
@@ -44,7 +45,7 @@ public class ItemPickup : MonoBehaviour {
 //			Debug.Log ("Item picked up: " + this.m_Item.ReturnItemInstanceInfo ());
 
 			other.gameObject.GetComponent<PlayerInventory> ().AddItem (this.m_Item);
-
+			m_audioSource.PlayOneShot (m_audioSource.clip);
 
 			GameObject.Destroy (this.gameObject);
 		}

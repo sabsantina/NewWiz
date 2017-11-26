@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿//#define WITH_TUTORIALS
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +27,7 @@ public class InventoryMenu : Menu {
 	/**A boolean to tell us whether or not the inventory menu is active*/
 	private bool notActive = true;
 
+	AudioSource m_audioSource;
 
 	public ItemSlot selectedSlot;
 
@@ -35,6 +38,7 @@ public class InventoryMenu : Menu {
 		m_ItemIcon = GetComponentInParent<ItemIcon> ();
 		itemSlots = GetComponentsInChildren<ItemSlot> ();
 		itemDescription = GameObject.Find ("Description").GetComponent<Text>();
+		m_audioSource = GetComponentInChildren<AudioSource> ();
 	}
 		
 	void Update()
@@ -69,8 +73,10 @@ public class InventoryMenu : Menu {
 		base.CloseMenu ();
 		//if it's the first time we close the menu...
 		if (this.m_FirstTimeInventoryMenuClosed) {
+			#if WITH_TUTORIALS
 			//...then enable the consume hotkeyed item tutorial
 			this.m_TutorialManager.Enable (TutorialEnum.CONSUME_HOTKEYED_ITEMS);
+			#endif
 			//as of now it won't be the first time the menu closes
 			this.m_FirstTimeInventoryMenuClosed = false;
 		}//end if
@@ -81,8 +87,10 @@ public class InventoryMenu : Menu {
 	{
 		//if it was the first time that the inventory menu was opened...
 		if (this.m_FirstTimeInventoryMenuOpen) {
+			#if WITH_TUTORIALS
 			//...then enable the hotkeys tutorial
 			this.m_TutorialManager.Enable (TutorialEnum.HOTKEYS);
+			#endif
 			//as of now it won't be the first time the menu opens
 			this.m_FirstTimeInventoryMenuOpen = false;
 			//but if it was the first time the menu opened, then this will be the first time it closes.
@@ -100,6 +108,7 @@ public class InventoryMenu : Menu {
 	public void setHotKeys(GameObject hotkey)
 	{
 		if (selectedSlot.item != null) {
+			Debug.Log ("Set HotKey");
 			ItemSlot currentSlot = selectedSlot.GetComponent<ItemSlot> ();
 			hotkey.GetComponentInChildren<HotKeys> ().item = currentSlot.item;
 			GameObject imageUI = hotkey.GetComponentInChildren<HotKeys> ().gameObject;
@@ -109,6 +118,7 @@ public class InventoryMenu : Menu {
 		else 
 		{
 			Debug.Log ("This slot is empty");
+			m_audioSource.PlayOneShot (GetComponent<MenuSounds> ().getErrorSound ());
 		}
 	}
 

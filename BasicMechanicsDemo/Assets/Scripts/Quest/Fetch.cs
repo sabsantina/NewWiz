@@ -7,25 +7,54 @@ public class Fetch : Objective {
 	public List<QuestItem> m_QuestItems = new List<QuestItem>();
 	public PlayerInventory m_PlayerInventory;
 	private int m_NumberOfItems = 0;
+	/**An empty gameobject to contain the enemies more easily in the scene gameobject list*/
+	public GameObject m_ItemContainer;
+
 
 	/**A function to spawn the quest items to be collected at the given position*/
-	public void SpawnQuestItemsAtPosition(Vector3 position, GameObject prefab, QuestItem item, int number_of_items)
+	public void SpawnQuestItemsAtPosition(Spawner item_spawner, Vector3 position, QuestItemName quest_item_name, int number_of_items)
 	{
+		if (this.m_ItemContainer == null) {
+			this.m_ItemContainer = new GameObject ();
+			this.m_ItemContainer.name = quest_item_name.ToString() + "Container";
+		}
 		this.m_NumberOfItems = number_of_items;
 		//for however many quest items are needed...
 		for (int index = 0; index < number_of_items; index++) {
 			//Spawn the quest item
-			GameObject item_obj = GameObject.Instantiate(prefab);
+			GameObject item_obj = item_spawner.SpawnQuestItem(quest_item_name, this.m_ItemContainer.transform);
 			//Position the item
 			item_obj.transform.position = position;
 			//Adjust position with respect to number of items
 			Vector3 translation = item_obj.transform.position + (2.0f * index * Vector3.forward);
 			item_obj.transform.position = translation;
 			//Set QuestItem value
-			item_obj.GetComponent<QuestItemPickup> ().m_QuestItem = item;
+//			item_obj.GetComponent<QuestItemPickup> ().m_QuestItem = item;
 			this.m_QuestItems.Add (item_obj.GetComponent<QuestItemPickup> ().m_QuestItem);
 		}//end for
 	}//end f'n SpawnQuestItemsAtPosition(Vector3, GameObject, int)
+
+//	/**A function to spawn the quest items to be collected at the given position*/
+//	public void SpawnQuestItemsAtPosition(Vector3 position, GameObject prefab, QuestItem item, int number_of_items)
+//	{
+//		if (this.m_ItemContainer == null) {
+//			this.m_ItemContainer = new GameObject ();
+//		}
+//		this.m_NumberOfItems = number_of_items;
+//		//for however many quest items are needed...
+//		for (int index = 0; index < number_of_items; index++) {
+//			//Spawn the quest item
+//			GameObject item_obj = GameObject.Instantiate(prefab);
+//			//Position the item
+//			item_obj.transform.position = position;
+//			//Adjust position with respect to number of items
+//			Vector3 translation = item_obj.transform.position + (2.0f * index * Vector3.forward);
+//			item_obj.transform.position = translation;
+//			//Set QuestItem value
+//			item_obj.GetComponent<QuestItemPickup> ().m_QuestItem = item;
+//			this.m_QuestItems.Add (item_obj.GetComponent<QuestItemPickup> ().m_QuestItem);
+//		}//end for
+//	}//end f'n SpawnQuestItemsAtPosition(Vector3, GameObject, int)
 
 	/**A function to check whether every item has been collected.*/
 	public override bool CheckForObjectiveIsMet()
@@ -59,6 +88,9 @@ public class Fetch : Objective {
 			}//end foreach
 		}//end if
 
+		if (number_of_items_found == this.m_NumberOfItems) {
+			GameObject.Destroy (this.m_ItemContainer);
+		}
 		return (number_of_items_found == this.m_NumberOfItems);
 	}//end f'n bool CheckForObjectiveIsMet()
 

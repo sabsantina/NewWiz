@@ -28,6 +28,44 @@ public class Serializable_Player {
 	public float m_PlayerMana;
 	/**A variable to store the maximal value of the player mana*/
 	public float m_MaxPlayerMana;
+	/**A variable to store the value of the player;s magic affinity*/
+	public float m_PlayerMagicAffinity;
+
+	public int m_CurrentRegion = 0;
+
+	public void ParseCurrentRegion(GameObject player)
+	{
+		this.m_CurrentRegion = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex;
+//		Debug.Log("Parse current region: " + this.m_CurrentRegion);
+	}
+
+	public void SetCurrentRegion(GameObject player)
+	{
+		Player player_component = player.GetComponent<Player> ();
+		switch ((int)this.m_CurrentRegion) {
+		case (int)Scenes.DEMO_AREA:
+			{
+				player_component.m_CurrentRegion = Scenes.DEMO_AREA;
+				break;
+			}
+		case (int)Scenes.FOREST:
+			{
+				player_component.m_CurrentRegion = Scenes.FOREST;
+				break;
+			}
+		case (int)Scenes.CASTLE:
+			{
+				player_component.m_CurrentRegion = Scenes.CASTLE;
+				break;
+			}
+		case (int)Scenes.OVERWORLD:
+			{
+				player_component.m_CurrentRegion = Scenes.OVERWORLD;
+				break;
+			}
+		}
+//		Debug.Log("Set current region: " + player_component.m_CurrentRegion);
+	}
 
 	/**A function to store the contents of the quest item list.*/
 	public void ParseQuestItemList(GameObject player)
@@ -59,6 +97,8 @@ public class Serializable_Player {
 	/**A function to go through the contents of the player item dictionary and separate its item names and quantities into serializable formats.*/
 	public void ParseItemDictionary(Dictionary<ItemClass, int> all_items_in_inventory)
 	{
+		this.m_ItemQuantities.Clear ();
+//		Debug.Log ("all items in inventory exists? " + (all_items_in_inventory != null));
 		//foreach keyvaluepair in all items...
 		foreach (KeyValuePair<ItemClass, int> entry in all_items_in_inventory) {
 			//add the item name
@@ -73,7 +113,6 @@ public class Serializable_Player {
 	public void SetItemDictionary(GameObject player)
 	{
 		PlayerInventory player_inventory = player.GetComponent<PlayerInventory> ();
-		player_inventory.m_ItemDictionary.Clear ();
 
 		for (int index = 0; index < this.m_ItemNames.Count; index++) {
 			ItemClass item_to_add = new ItemClass ();
@@ -138,10 +177,12 @@ public class Serializable_Player {
 	public void SetPlayerPosition(GameObject player)
 	{
 		Vector3 player_position = new Vector3 (this.m_PlayerPositionInWorld_X, this.m_PlayerPositionInWorld_Y, this.m_PlayerPositionInWorld_Z);
-		player.transform.position = player_position;
+		Player player_component = player.GetComponent<Player> ();
+		player_component.m_PlayerRespawnPosition = player_position;
+//		player.transform.position = player_position;
 	}//end f'n void SetPlayerPosition(GameObject)
 
-	/**A function to gather all player attributes (health and mana, as well as the full possible value of each).*/
+	/**A function to gather all player attributes (health and mana, as well as the full possible value of each) to get a given GameObject's Player component to store its values.*/
 	public void GatherPlayerAttributes(GameObject player_obj)
 	{
 		Player player = player_obj.GetComponent<Player> ();
@@ -149,6 +190,7 @@ public class Serializable_Player {
 		this.m_PlayerMana = player.m_Mana;
 		this.m_MaxPlayerHealth = player.PLAYER_FULL_HEALTH;
 		this.m_MaxPlayerMana = player.PLAYER_FULL_MANA;
+		this.m_PlayerMagicAffinity = player.m_MagicAffinity;
 	}//end f'n void GatherPlayerAttributes(GameObject)
 
 	/**A function to execute after loading, to set all player attributes.*/
@@ -159,7 +201,7 @@ public class Serializable_Player {
 		player.m_Mana = this.m_PlayerMana;
 		player.PLAYER_FULL_HEALTH = this.m_MaxPlayerHealth;
 		player.PLAYER_FULL_MANA = this.m_MaxPlayerMana;
-		this.m_MaxPlayerMana = player.PLAYER_FULL_MANA;
+		player.m_MagicAffinity = this.m_PlayerMagicAffinity;
 	}//end f'n SetPlayerAttributes(GameObject)
 
 	/**A function to generate our serializable instance.*/
@@ -168,8 +210,12 @@ public class Serializable_Player {
 		Serializable_Player serializable_player = new Serializable_Player ();
 		serializable_player.GatherPlayerAttributes (player);
 		serializable_player.GatherPlayerPosition (player);
+		serializable_player.ParseCurrentRegion (player);
 
 		PlayerInventory inventory = player.GetComponent<PlayerInventory> ();
+//		Debug.Log ("Player inventory exists? " + (inventory != null));
+//		inventory.OutputInventoryContents ();
+//		Debug.Log ("Player dictionary exists? " + (inventory.m_ItemDictionary != null));
 		serializable_player.ParseItemDictionary (inventory.m_ItemDictionary);
 		serializable_player.ParseSpellList (inventory.m_SpellClassList);
 		serializable_player.ParseQuestItemList (player);
@@ -181,6 +227,7 @@ public class Serializable_Player {
 	{
 		this.SetPlayerPosition (player);
 		this.SetPlayerAttributes (player);
+		this.SetCurrentRegion (player);
 		this.SetSpellList (player);
 		this.SetItemDictionary (player);
 		this.SetQuestItemList (player);

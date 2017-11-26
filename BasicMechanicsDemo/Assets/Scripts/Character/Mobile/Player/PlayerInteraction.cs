@@ -28,7 +28,7 @@ public class PlayerInteraction : MonoBehaviour {
 	/**A variable to more easily keep track of the total characters per bubble*/
 	private int m_Total_Char_Per_Bubble;
 	/**The radius for which the player can interact.*/
-	public float m_InteractionRadius = 15.0f;
+	public float m_InteractionRadius = 7.5f;
 	/**A bool to keep track of whether or not the dialog fits into the bubble*/
 	public bool m_DialogFitsIntoBubble = false;
 	/**A GameObject to keep track of the text bubble*/

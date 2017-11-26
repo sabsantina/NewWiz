@@ -11,7 +11,7 @@ public class MobileCharacter : MonoBehaviour {
 	public Vector3 m_Direction{ get; protected set; }
 
 	/**A reference to the mobile character's animator.*/
-	protected Animator m_Animator; 
+	public Animator m_Animator; 
 
 	/**A string variable containing the string name of the isMovingLeft parameter in the character animator.*/
 	private readonly string STRINGKEY_PARAM_ISMOVINGLEFT = "isMovingLeft";
@@ -67,4 +67,9 @@ public class MobileCharacter : MonoBehaviour {
 		}//end if
 		return false;
 	}//end f'n bool IsObstructableAhead()
+
+	void Awake()
+	{
+		this.m_Animator = this.GetComponent<Animator> ();
+	}
 }//end class MobileCharacter
