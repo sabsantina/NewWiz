@@ -90,7 +90,7 @@ public class Serialization_Manager : MonoBehaviour {
 		for (int quest_index = 0; quest_index < System.Enum.GetValues (typeof(QuestName)).Length; quest_index++) {
 			Quest current_quest = this.m_QuestManager.m_AllQuests[m_QuestManager.m_AllQuests.ElementAt(quest_index).Key];
 			int current_scene_index = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex;
-			Debug.Log ("Current quest region(" + (int)current_quest.m_QuestRegion + ") == current scene index(" + current_scene_index +")? " + ((int)current_quest.m_QuestRegion == current_scene_index));
+//			Debug.Log ("Current quest region(" + (int)current_quest.m_QuestRegion + ") == current scene index(" + current_scene_index +")? " + ((int)current_quest.m_QuestRegion == current_scene_index));
 			//We only want to spawn in the quests that are in the same region as us
 			if ((int)current_quest.m_QuestRegion == current_scene_index) {
 				//... and we only care about the quest's objects if it's in process

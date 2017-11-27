@@ -52,14 +52,38 @@ public class QuestManager : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+//		Debug.Log ("QuestManager::Awake::Called every scene");
+//		if (UnityEngine.PlayerPrefs.GetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME) != 0) {
+//			Debug.Log ("QuestManager::Awake::Called only once");
+//			this.InitializeAllQuests();
+//			this.AssignAllQuests();
+//		}
+
+		//Called every time we load a scene
         this.InitializeAllQuests();
         this.AssignAllQuests();
+		this.ManageQuestGiversInScene ();
     }
 
     void Update()
     {
         this.UpdateActiveQuestObjectives();
     }
+
+	private void ManageQuestGiversInScene()
+	{
+		int active_scene_index = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex;
+		Scenes current_scene = Player.ReturnSceneAtIndex (active_scene_index);
+
+		foreach (KeyValuePair<QuestName, QuestGiver> kvp in this.m_AllQuestGivers) {
+			QuestGiver quest_giver = kvp.Value;
+			if (quest_giver.m_QuestToGive.m_QuestRegion != current_scene) {
+				quest_giver.gameObject.SetActive (false);
+			} else {
+				quest_giver.gameObject.SetActive (true);
+			}
+		}
+	}
 
     /**A function to set all quests to their NOT_YET_GIVEN states and all that entails (quest objectives, and the like).*/
     private void InitializeAllQuests()
@@ -81,6 +105,8 @@ public class QuestManager : MonoBehaviour
 			Scenes.DEMO_AREA, new Vector3(5.74f, 0.55f, 2f), m_FireChicken);
 	    QuestGiver qgHotChicks = GenerateQuestGiver(new Vector3(-15.96f, 0.55f, -14.08f), new[] {ItemName.Mana_Potion}, null);
 	    Add(ref hotChicks, ref qgHotChicks);
+
+//		this.ManageQuestGiversInScene ();
 
     } //end f'n void InitializeAllQuests()
 
@@ -135,6 +161,7 @@ public class QuestManager : MonoBehaviour
 	
 	private QuestGiver GenerateQuestGiver(Vector3 position, ItemName[] itemRewards, SpellName[] spellRewards)
 	{
+		
 		QuestGiver qg = Instantiate(m_QuestGiver_Generic).GetComponent<QuestGiver>();
 		qg.m_QuestManager = this;
 		qg.m_PlayerInventory = this.m_Player.GetComponent<PlayerInventory>();
@@ -157,6 +184,7 @@ public class QuestManager : MonoBehaviour
 			}
 		return qg;
 	}
+
 	
     private void AssignAllQuests()
     {
