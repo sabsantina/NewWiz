@@ -153,7 +153,7 @@ public class PlayerInventory : MonoBehaviour {
 	{
 //		this.m_DefaultSpellPrefab.GetComponent<SpellMovement> ().m_SpellClassToCast = this.m_ActiveSpellClass;
 		//If there's more than one spell in the player's inventory...
-		if (this.m_SpellClassList.Count > 1 && !this.m_PlayerCastSpell.m_MenuOpen) {
+		if (this.m_SpellClassList.Count > 1 && !PlayerCastSpell.m_MenuOpen) {
 			//...then check for player input and switch SpellClass instance on command.
 			this.UpdateActiveSpell ();
 		} //end if
@@ -350,6 +350,9 @@ public class PlayerInventory : MonoBehaviour {
 	/**A function to decrement the item dictionary entry with key [item]; returns false if the entry can't be decremented and elsewis returns true.*/
 	public bool useItem(ItemClass item)
 	{
+		if (PlayerCastSpell.m_MenuOpen) {
+			return false;
+		}
 		foreach (KeyValuePair<ItemClass, int> entry in m_ItemDictionary) 
 		{
 			if (entry.Key.m_ItemName == item.m_ItemName) 

@@ -21,7 +21,7 @@ public class Menu : MonoBehaviour {
 	/**A function to be called by the button that opens the menu OnClick.*/
 	public void OpenMenu()
 	{
-		this.GetComponentInParent<PlayerCastSpell> ().m_MenuOpen = true;
+		PlayerCastSpell.m_MenuOpen = true;
 		#if TESTING_OPEN_MENU
 		Debug.Log("Menu::OpenMenu");
 		#endif
@@ -32,7 +32,7 @@ public class Menu : MonoBehaviour {
 	public void CloseMenu()
 	{
 		Debug.Log("Menu::CloseMenu");
-		this.GetComponentInParent<PlayerCastSpell> ().m_MenuOpen = false;
+		PlayerCastSpell.m_MenuOpen = false;
 		//disable the menu
 		this.gameObject.SetActive (false);
 		//Reset game time to normal
