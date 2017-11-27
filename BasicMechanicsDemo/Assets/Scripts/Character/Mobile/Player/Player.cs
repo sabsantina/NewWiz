@@ -115,7 +115,7 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 		//if we're not starting a new game and nor are we loading, via a menu specifically (meaning we're loading during a scene transition)
 		if (user_menu_choice == 0) {
 			int current_scene_build_index = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex;
-			Debug.Log ("Loading scene from Player class on transition from scene " + (int)this.m_CurrentRegion + " to scene " + current_scene_build_index);
+			Debug.Log ("Loading scene from Player class on transition from scene " + (int)m_CurrentRegion + " to scene " + current_scene_build_index);
 			//if the index of the current scene is not equal to the index of the player's current region on start,
 			//in the context of our project, it means that we just went from one region to another.
 			if (current_scene_build_index != (int)m_CurrentRegion) {
@@ -208,6 +208,7 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 		#if TESTING_PRINT_ACTIVE_SCENE
 		if (Input.GetKeyDown (KeyCode.F)) {
 			Debug.Log ("Active scene: " + this.ReturnSceneAtIndex (UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex).ToString ());
+			Debug.Log("Player current region: " + m_CurrentRegion.ToString());
 		}
 		#endif
 

@@ -18,7 +18,7 @@ public class MapMenu : Menu {
 
 	void Update()
 	{
-		if (gameObject.activeSelf == true && GetComponentInParent<Player>().m_CurrentRegion == Scenes.OVERWORLD)
+		if (gameObject.activeSelf == true && Player.m_CurrentRegion == Scenes.OVERWORLD)
 			setCharacterPin ();
 	}
 
