@@ -128,7 +128,7 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 				//Should probably do this in the serialization manager; come back to it
 //				this.m_SerializationManager.Load();
 				this.PositionPlayerAtEntrance((int)m_CurrentRegion, current_scene_build_index);
-				m_CurrentRegion = this.ReturnSceneAtIndex (current_scene_build_index);
+				m_CurrentRegion = ReturnSceneAtIndex (current_scene_build_index);
 			}
 			//Update playerpref
 			UnityEngine.PlayerPrefs.SetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME, 0);
@@ -152,7 +152,7 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
     }
 
 	/**A function to return the Scenes enum variable with the corresponding [index] value*/
-	private Scenes ReturnSceneAtIndex(int index)
+	public static Scenes ReturnSceneAtIndex(int index)
 	{
 		foreach (Scenes scene in System.Enum.GetValues(typeof(Scenes))) {
 			if ((int)scene == index) {
@@ -207,7 +207,7 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 	{
 		#if TESTING_PRINT_ACTIVE_SCENE
 		if (Input.GetKeyDown (KeyCode.F)) {
-			Debug.Log ("Active scene: " + this.ReturnSceneAtIndex (UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex).ToString ());
+			Debug.Log ("Active scene: " + ReturnSceneAtIndex (UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex).ToString ());
 			Debug.Log("Player current region: " + m_CurrentRegion.ToString());
 		}
 		#endif
