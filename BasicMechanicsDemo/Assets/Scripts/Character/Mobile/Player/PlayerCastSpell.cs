@@ -72,6 +72,7 @@ public class PlayerCastSpell : MonoBehaviour {
 
 	private float m_InputTimer = 0.0f;
 
+
 	void Start()
 	{
 		this.m_Animator = this.GetComponent<Animator> ();
