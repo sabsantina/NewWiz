@@ -1,0 +1,2 @@
+Narrator: So you're a first time player! You don't know how to move?? It's simple just use the arrow keys or wasd. Whichever suits you best! You can also cast spells using the left mouse buttons and scroll through your spells. In addition you can open the map and inventory by clicking on the buttons in the right-bottom corner or by pressing 'm' or 'i'. 
+

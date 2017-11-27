@@ -4,6 +4,7 @@
 
 #define TESTING_ZERO_HEALTH
 #define TESTING_MANA_REGEN
+#define TESTING_REGION
 
 using System.Collections;
 using System.Collections.Generic;
@@ -35,6 +36,8 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 	public AudioSource m_audioSource;
 
 	[SerializeField] public PlayerAudio m_PlayerAudio;
+
+	[SerializeField] public Serialization_Manager m_SerializationManager;
 
 	/**A variable to keep track of the player's health.*/
 	public float m_Health;
@@ -69,6 +72,11 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 	/**A multiplier to influence magic damage as the player gets stronger.*/
 	public float m_MagicAffinity = 1.0f;
 
+	public Scenes m_CurrentRegion = Scenes.DEMO_AREA;
+
+	public RPGTalk rpgTalk;
+
+
 	public bool IsAffectedByMagic()
 	{
 		return this.m_IsAffectedBySpell;
@@ -98,7 +106,71 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 		setMeterValue (manaMeter, this.m_Mana);
         //The sorting layer name is retrieved from unity
         this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingLayerName = sortingLayerName;
+
+		int current_scene_build_index = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex;
+		//if the index of the current scene is not equal to the index of the player's current region on start,
+		//in the context of our project, it means that we just went from one region to another.
+		if (current_scene_build_index != (int)this.m_CurrentRegion) {
+			//So at this point, we need to spawn the player at a given region entrance, with respect to the last region
+//			Debug.Log ("Going into region: " + current_scene_build_index);
+			//Find new spawn position
+			this.m_SerializationManager.Load();
+			this.PositionPlayerAtEntrance((int)this.m_CurrentRegion, current_scene_build_index);
+			this.m_CurrentRegion = this.ReturnSceneAtIndex (current_scene_build_index);
+		}
+
+
     }
+
+	private Scenes ReturnSceneAtIndex(int index)
+	{
+		foreach (Scenes scene in System.Enum.GetValues(typeof(Scenes))) {
+			if ((int)scene == index) {
+				return scene;
+			}
+		}
+		//Pretty much impossible, so return default value
+		return Scenes.DEMO_AREA;
+	}
+
+	/**We place the player gameobject in the scene on start, with respect to the scene we came from and the one in which we now find ourselves.
+	*In this scenario [index_from_region] is the region we came from (so it'll still be considered the current region according to the player's variables. [index_to_region] is the build index of the sene in which we now find ourselves.)*/
+	private void PositionPlayerAtEntrance (int index_from_region, int index_to_region)
+	{
+		Vector3 position_to_spawn_player = new Vector3 ();
+		switch (index_from_region) {
+		//if we're going from the demo area...
+		case (int)Scenes.DEMO_AREA:
+			{
+				switch(index_to_region)
+				{
+				//...to the overworld
+				case (int)Scenes.OVERWORLD:
+					{
+						//then the position to spawn at is as follows:
+						position_to_spawn_player = TransitionPositions.Transition_Demo_To_Overworld;
+						break;
+					}//end case to OVERWORLD
+				}
+				break;
+			}//end case from DEMO AREA
+		//if we're going from the overworld...
+		case (int)Scenes.OVERWORLD:
+			{
+				//...to the demo area
+				switch (index_to_region) {
+				case (int)Scenes.DEMO_AREA:
+					{
+						//then the position to spawn at is as follows:
+						position_to_spawn_player = TransitionPositions.Transition_Overworld_To_Demo;
+						break;
+					}//end case to DEMO AREA
+				}//end switch
+				break;
+			}//end case from OVERWORLD
+		}//end switch
+		this.m_PlayerRespawnPosition = position_to_spawn_player;
+	}
 
 	void Update()
 	{
@@ -257,6 +329,12 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 	public SpellClass SpellAffectingCharacter ()
 	{
 		return m_SpellAffectingPlayer;
+	}
+
+	public void playSound(AudioClip clip)
+	{
+		Debug.Log ("Play pickup sound");
+		m_audioSource.PlayOneShot (clip);
 	}
 }
 

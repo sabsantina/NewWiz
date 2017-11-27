@@ -13,6 +13,8 @@ public class Quest {
 	public List<GameObject> m_RequisitePrefabs = new List<GameObject>();
 	/**The position where we want to spawn stuff for the quest.*/
 	public Vector3 m_QuestObjectivePosition;
+	/**The region in which the quest takes place*/
+	public Scenes m_QuestRegion;
 
 	/*
 	* Initially, I'd been trying to use an Objective superclass to manage all the types of quests it could be. But the problem

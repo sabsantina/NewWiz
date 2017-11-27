@@ -73,6 +73,16 @@ public class PlayerAudio : MonoBehaviour
 		return shieldCastSound;
 	}//end f'n AudioClip getAudioForSpell(SpellName)
 
+	public AudioClip itemPickUpSound()
+	{
+		return m_ItemPickedUpSound;
+	}
+
+	public AudioClip spellPickUpSound()
+	{
+		return m_SpellPickedUpSound;
+	}
+
 //	public AudioClip GetAudioForPickup(bool pickup_item)
 //	{
 //		if (pickup_item) {
