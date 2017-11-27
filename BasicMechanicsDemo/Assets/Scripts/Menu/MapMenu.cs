@@ -13,6 +13,7 @@ public class MapMenu : Menu {
 
 	void Start()
 	{
+		//setCharacterPin ();
 	}
 
 	void Update()
