@@ -5,6 +5,9 @@
 #define TESTING_ZERO_HEALTH
 #define TESTING_MANA_REGEN
 #define TESTING_REGION
+//#define TESTING_ENABLE_RESURRECTION
+#define TESTING_SET_INITIAL_REGION_TO_DEMO
+#define TESTING_PRINT_ACTIVE_SCENE
 
 using System.Collections;
 using System.Collections.Generic;
@@ -72,7 +75,8 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 	/**A multiplier to influence magic damage as the player gets stronger.*/
 	public float m_MagicAffinity = 1.0f;
 
-	public Scenes m_CurrentRegion = Scenes.DEMO_AREA;
+//	public Scenes m_CurrentRegion = Scenes.DEMO_AREA;
+	public static Scenes m_CurrentRegion = Scenes.DEMO_AREA;
 
 	public RPGTalk rpgTalk;
 
@@ -107,22 +111,48 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
         //The sorting layer name is retrieved from unity
         this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingLayerName = sortingLayerName;
 
-		int current_scene_build_index = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex;
-		//if the index of the current scene is not equal to the index of the player's current region on start,
-		//in the context of our project, it means that we just went from one region to another.
-		if (current_scene_build_index != (int)this.m_CurrentRegion) {
-			//So at this point, we need to spawn the player at a given region entrance, with respect to the last region
-//			Debug.Log ("Going into region: " + current_scene_build_index);
-			//Find new spawn position
-			this.m_SerializationManager.Load();
-			this.PositionPlayerAtEntrance((int)this.m_CurrentRegion, current_scene_build_index);
-			this.m_CurrentRegion = this.ReturnSceneAtIndex (current_scene_build_index);
+		int user_menu_choice = UnityEngine.PlayerPrefs.GetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME);
+		//if we're not starting a new game and nor are we loading, via a menu specifically (meaning we're loading during a scene transition)
+		if (user_menu_choice == 0) {
+			int current_scene_build_index = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex;
+			Debug.Log ("Loading scene from Player class on transition from scene " + (int)m_CurrentRegion + " to scene " + current_scene_build_index);
+			//if the index of the current scene is not equal to the index of the player's current region on start,
+			//in the context of our project, it means that we just went from one region to another.
+			if (current_scene_build_index != (int)m_CurrentRegion) {
+				//So at this point, we need to spawn the player at a given region entrance, with respect to the last region
+				//			Debug.Log ("Going into region: " + current_scene_build_index);
+				//Find new spawn position
+
+
+
+				//Should probably do this in the serialization manager; come back to it
+//				this.m_SerializationManager.Load();
+				this.PositionPlayerAtEntrance((int)m_CurrentRegion, current_scene_build_index);
+				m_CurrentRegion = ReturnSceneAtIndex (current_scene_build_index);
+			}
+			//Update playerpref
+			UnityEngine.PlayerPrefs.SetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME, 0);
+		}
+		//else if we're starting a new game
+		if (user_menu_choice == 1) {
+			#if TESTING_SET_INITIAL_REGION_TO_DEMO
+			Debug.Log("Player::Starting new game; setting player test region to DEMO AREA and position to Respawn Position");
+			m_CurrentRegion = Scenes.DEMO_AREA;
+			this.transform.position = this.m_PlayerRespawnPosition;
+			#else
+			this.m_CurrentRegion = Scenes.FOREST;
+			Vector3 starting_position = new Vector3(/*x, y, z*/);//Where does the player start?
+			this.transform.position = starting_position;
+			#endif
+			//Update playerpref
+			UnityEngine.PlayerPrefs.SetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME, 0);
 		}
 
 
     }
 
-	private Scenes ReturnSceneAtIndex(int index)
+	/**A function to return the Scenes enum variable with the corresponding [index] value*/
+	public static Scenes ReturnSceneAtIndex(int index)
 	{
 		foreach (Scenes scene in System.Enum.GetValues(typeof(Scenes))) {
 			if ((int)scene == index) {
@@ -130,6 +160,7 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 			}
 		}
 		//Pretty much impossible, so return default value
+		Debug.Log("Player::ReturnSceneAtIndex(int) impossible case reached. Program fucked.");
 		return Scenes.DEMO_AREA;
 	}
 
@@ -174,6 +205,13 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 
 	void Update()
 	{
+		#if TESTING_PRINT_ACTIVE_SCENE
+		if (Input.GetKeyDown (KeyCode.F)) {
+			Debug.Log ("Active scene: " + ReturnSceneAtIndex (UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex).ToString ());
+			Debug.Log("Player current region: " + m_CurrentRegion.ToString());
+		}
+		#endif
+
 		if (this.m_IsAffectedBySpell) {
 			this.ApplySpellEffect (this.m_SpellAffectingPlayer);
 		}
@@ -206,9 +244,6 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 
 		this.UpdateAnimatorParameters ();
 
-		if (!this.m_IsAlive) {
-			this.Resurrect ();
-		}
 	}//end f'n void Update
 
 	private void UpdateCanCastSpell()
@@ -277,6 +312,13 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 		}
 		this.m_Health += effect;
 		setMeterValue (healthMeter, this.m_Health);
+		if (this.m_Health <= 0.0f) {
+			#if TESTING_ENABLE_RESURRECTION
+			this.Resurrect ();
+			#else
+			UnityEngine.SceneManagement.SceneManager.LoadScene((int)Scenes.GAME_OVER);
+			#endif
+		}
 
 	}//end f'n void AffectHealth(float)
 
