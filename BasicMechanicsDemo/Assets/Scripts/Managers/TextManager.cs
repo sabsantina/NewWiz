@@ -11,17 +11,16 @@ public class TextManager : MonoBehaviour
     private void Start()
     {
         _rpgTalkContainer = Instantiate(_rpgTalkContainer);
-        _rpgTalkContainer.GetComponent<Canvas>().worldCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        int x;
-        foreach (RPGTalkArea talkArea in _talkAreas)
-        {
-            talkArea.rpgtalkTarget = _rpgTalkContainer;
-            talkArea.txtToParse = _textAssets[0];
-        }
-    }
+        
+        _rpgTalkContainer.GetComponentInChildren<Canvas>().worldCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        _rpgTalkContainer.txtToParse = _textAssets[0];
 
-    // Update is called once per frame
-    private void Update()
-    {
+        print(_talkAreas.Count);
+        for(int i = 0 ; i < _talkAreas.Count; ++i)
+        {
+            _talkAreas[i] = Instantiate(_talkAreas[i]);
+            _talkAreas[i].rpgtalkTarget = _rpgTalkContainer;
+            _talkAreas[i].txtToParse = _textAssets[1];
+        }
     }
 }
