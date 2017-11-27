@@ -41,26 +41,26 @@ public class Serializable_Player {
 
 	public void SetCurrentRegion(GameObject player)
 	{
-		Player player_component = player.GetComponent<Player> ();
+//		Player player_component = player.GetComponent<Player> ();
 		switch ((int)this.m_CurrentRegion) {
 		case (int)Scenes.DEMO_AREA:
 			{
-				player_component.m_CurrentRegion = Scenes.DEMO_AREA;
+				Player.m_CurrentRegion = Scenes.DEMO_AREA;
 				break;
 			}
 		case (int)Scenes.FOREST:
 			{
-				player_component.m_CurrentRegion = Scenes.FOREST;
+				Player.m_CurrentRegion = Scenes.FOREST;
 				break;
 			}
 		case (int)Scenes.CASTLE:
 			{
-				player_component.m_CurrentRegion = Scenes.CASTLE;
+				Player.m_CurrentRegion = Scenes.CASTLE;
 				break;
 			}
 		case (int)Scenes.OVERWORLD:
 			{
-				player_component.m_CurrentRegion = Scenes.OVERWORLD;
+				Player.m_CurrentRegion = Scenes.OVERWORLD;
 				break;
 			}
 		}

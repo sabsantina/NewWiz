@@ -19,26 +19,32 @@ public class Serialization_Manager : MonoBehaviour {
 	//Executed every time the game scene is loaded.
 	void Start()
 	{
-		Debug.Log ("Am I being called?");
 		//If a saved game file exists...
 		if (File.Exists (Application.persistentDataPath + FILEPATH_EXTENSION)) {
-			//...and if the user chose load
-			if (UnityEngine.PlayerPrefs.GetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME) == 2) {
+			int load_game_intval = UnityEngine.PlayerPrefs.GetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME);
+			//...and if the user chose to load the game from either the main menu or the game over menu
+			if (load_game_intval == 2) {
+				Debug.Log ("Serialization_Manager::Loading game; Calling load on start()");
 				this.Load ();
 				float x = 0.0f, y = 0.0f, z = 0.0f;
 				x = this.m_SerializableSession.m_SerializablePlayer.m_PlayerPositionInWorld_X;
 				y = this.m_SerializableSession.m_SerializablePlayer.m_PlayerPositionInWorld_Y;
 				z = this.m_SerializableSession.m_SerializablePlayer.m_PlayerPositionInWorld_Z;
-				this.m_Player.transform.position = new Vector3(x, y, z);
+				this.m_Player.transform.position = new Vector3 (x, y, z);
 
 				//Reset player pref for next interaction with main menu UI
 				UnityEngine.PlayerPrefs.SetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME, 0);
 			}//end if
 			//...or if the user chose new game
-			//We should probably implement this in the spawner class.
-			//i.e. if saved file exists and user chose new game, then spawn everything for the Coille forest region, 
-			//setting all player variables to default values
+			else if (load_game_intval == 1) {
+			}
+			//else if we're just transitioning from one scene to another
+			else if (load_game_intval == 0) {
+				//then load in the quest information for the quest objects that belong to this region
+				this.Load();
+			}
 		}
+
 	}
 
 
@@ -76,54 +82,6 @@ public class Serialization_Manager : MonoBehaviour {
 		}
 	}
 
-//	/**A loading function to be used for scene traversal.
-//	*This function takes a look at the player's current region, as well as the region we feed to this function as an argument, and from there
-//	*positions the player accordingly.*/
-//	public void Load(TransitionMarker marker)
-//	{
-//		if(File.Exists(Application.persistentDataPath + FILEPATH_EXTENSION)) {
-//			BinaryFormatter bf = new BinaryFormatter();
-//			FileStream file = File.Open(Application.persistentDataPath + FILEPATH_EXTENSION, FileMode.Open);
-//			//			this.m_SavedSessions = (List<Serializable_Player>)bf.Deserialize(file);
-//			//			this.m_SerializablePlayer = (Serializable_Player)bf.Deserialize(file);
-//			//			this.m_SerializableQuestManager = (Serializable_QuestManager)bf.Deserialize(file);
-//			this.m_SerializableSession = (Serializable_Session)bf.Deserialize(file);
-//			file.Close();
-//
-//			//Set all player information
-//			this.m_SerializableSession.SetSessionInformation(this.m_Player.gameObject, this.m_QuestManager);
-//			//Spawn in quest objects
-//			this.SpawnAllQuestObjects();
-//		}
-//	}
-
-//	/**A function that takes the player's current region and compares it with that of where [marker] leads to, to find where the player should wind up when the next scene loads*/
-//	private Vector3 FindWhereToSpawnPlayer(TransitionMarker marker)
-//	{
-//		Vector3 vector_to_return = new Vector3 ();
-//
-//		Scenes from_region = this.m_Player.m_CurrentRegion;
-//		Scenes to_region = marker.leads_to;
-//
-//		switch ((int)from_region) {
-//		//if we're going from the demo area...
-//		case (int)Scenes.DEMO_AREA:
-//			{
-//				switch((int)to_region)
-//				{
-//				//...to the overworld
-//				case (int)Scenes.OVERWORLD:
-//					{
-//						//then the position to spawn at is as follows:
-//						vector_to_return = TransitionPositions.Transition_Overworld_To_Demo;
-//						break;
-//					}
-//				}
-//				break;
-//			}//end case DEMO AREA
-//		}//end switch
-//		return vector_to_return;
-//	}
 
 	private void SpawnAllQuestObjects()
 	{
@@ -131,8 +89,10 @@ public class Serialization_Manager : MonoBehaviour {
 		//for each quest in the quest list...
 		for (int quest_index = 0; quest_index < System.Enum.GetValues (typeof(QuestName)).Length; quest_index++) {
 			Quest current_quest = this.m_QuestManager.m_AllQuests[m_QuestManager.m_AllQuests.ElementAt(quest_index).Key];
+			int current_scene_index = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex;
+//			Debug.Log ("Current quest region(" + (int)current_quest.m_QuestRegion + ") == current scene index(" + current_scene_index +")? " + ((int)current_quest.m_QuestRegion == current_scene_index));
 			//We only want to spawn in the quests that are in the same region as us
-			if ((int)current_quest.m_QuestRegion == (int)this.m_Player.m_CurrentRegion) {
+			if ((int)current_quest.m_QuestRegion == current_scene_index) {
 				//... and we only care about the quest's objects if it's in process
 				if ((int)current_quest.m_QuestState == (int)QuestState.IN_PROCESS) {
 					//...and if so, then spawn corresponding quest objects
