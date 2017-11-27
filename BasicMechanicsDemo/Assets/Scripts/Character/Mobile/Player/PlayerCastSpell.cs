@@ -72,6 +72,7 @@ public class PlayerCastSpell : MonoBehaviour {
 
 	private float m_InputTimer = 0.0f;
 
+
 	void Start()
 	{
 		this.m_Animator = this.GetComponent<Animator> ();
@@ -109,8 +110,8 @@ public class PlayerCastSpell : MonoBehaviour {
 								furthest = hit;
 							}//end if
 
-							//if the hit has a MobileCharacter component...
-							if (hit.collider.gameObject.GetComponent<MobileCharacter> () != null) {
+							//if the hit has a DefaultEnemy component (avoiding the player hitting himself/herself)...
+							if (hit.collider.gameObject.GetComponent<DefaultEnemy> () != null) {
 								m_Target = hit.collider.gameObject;
 								this.m_SpellCubeInstance = GameObject.Instantiate (this.m_SpellCube);
 								this.m_Player.m_audioSource.PlayOneShot(this.m_Player.m_PlayerAudio.getAudioForSpell(this.m_SpellClassToFire.m_SpellName));

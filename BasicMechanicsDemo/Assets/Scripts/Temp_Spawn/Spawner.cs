@@ -55,21 +55,22 @@ public class Spawner : MonoBehaviour {
 	[SerializeField] private Player m_Player;
 	//Every magical enemy needs a reference to the spell animator manager
 	[SerializeField] private SpellAnimatorManager m_SpellAnimatorManager;
-	//**Infantry units
-	//*Rooster
-	/**Rooster gameobject prefab*/
-	[SerializeField] private GameObject m_RoosterPrefab;
-	/**Rooster melee animation gameobject*/
-	[SerializeField] private GameObject m_RoosterAnimationPrefab;
+    //**Infantry units
+    /**Claw attack melee animation gameobject*/
+    [SerializeField] private GameObject m_ClawAnimationPrefab;
+    /**Normal attack melee animation gameobject*/
+    [SerializeField] private GameObject m_NormalHitAnimationPrefab;
+    //*Rooster
+    /**Rooster gameobject prefab*/
+    [SerializeField] private GameObject m_RoosterPrefab;
 	//*Armored Soldier
 	/**Armored soldier gameobject prefab*/
 	[SerializeField] private GameObject m_ArmoredSoldierPrefab;
-	/**Armored soldier melee animation gameobject
-	*Note: as of yet, no proper animation for this guy's melee. Setting to rooster's as default (in Awake()).*/
-	[SerializeField] private GameObject m_ArmoredSoldierAnimationPrefab;
-	//*Rooster mage
-	/**Rooster mage gameobject prefab*/
-	[SerializeField] private GameObject m_RoosterMagePrefab;
+    /**Wolf gameobject prefab*/
+    [SerializeField] private GameObject m_WolfPrefab;
+    //*Rooster mage
+    /**Rooster mage gameobject prefab*/
+    [SerializeField] private GameObject m_RoosterMagePrefab;
 	//The rooster mage uses the same melee animation as the Rooster, so there's no need to get that again
 
 
@@ -83,7 +84,7 @@ public class Spawner : MonoBehaviour {
 
 	void Awake()
 	{
-		this.m_ArmoredSoldierAnimationPrefab = this.m_RoosterAnimationPrefab;
+		//this.m_ArmoredSoldierAnimationPrefab = this.m_RoosterAnimationPrefab;
 	}
 
 	// Update is called once per frame
@@ -255,7 +256,7 @@ public class Spawner : MonoBehaviour {
 					generated_instance = GameObject.Instantiate (this.m_RoosterPrefab);
 				}
 				Rooster rooster_component = generated_instance.GetComponentInChildren<Rooster> ();
-				rooster_component.m_AttackPattern.m_EnemyAttackHitAnimation = this.m_RoosterAnimationPrefab;
+				rooster_component.m_AttackPattern.m_EnemyAttackHitAnimation = this.m_ClawAnimationPrefab;
 				rooster_component.SetPlayer (this.m_Player);
 				break;
 			}//end case Rooster
@@ -268,14 +269,30 @@ public class Spawner : MonoBehaviour {
 					generated_instance = GameObject.Instantiate (this.m_ArmoredSoldierPrefab);
 				}
 				ArmoredSoldier AS_component = generated_instance.GetComponentInChildren<ArmoredSoldier> ();
-				AS_component.m_AttackPattern.m_EnemyAttackHitAnimation = this.m_ArmoredSoldierAnimationPrefab;
+				AS_component.m_AttackPattern.m_EnemyAttackHitAnimation = this.m_NormalHitAnimationPrefab;
 				AS_component.SetPlayer (this.m_Player);
 				break;
 			}//end case ARMORED SOLDIER
+             //Case Wolf
+        case (int)EnemyName.WOLF:
+            {
+                if (parent != null)
+                {
+                    generated_instance = GameObject.Instantiate(this.m_WolfPrefab, parent);
+                }
+                else
+                {
+                    generated_instance = GameObject.Instantiate(this.m_WolfPrefab);
+                }
+                Wolf WL_component = generated_instance.GetComponentInChildren<Wolf>();
+                WL_component.m_AttackPattern.m_EnemyAttackHitAnimation = this.m_ClawAnimationPrefab;
+                WL_component.SetPlayer(this.m_Player);
+                break;
+            }//end case Wolf
 
-			//Ranged enemies
-			//Case Rooster Mage
-		case (int)EnemyName.ROOSTER_MAGE:
+            //Ranged enemies
+            //Case Rooster Mage
+            case (int)EnemyName.ROOSTER_MAGE:
 			{
 				if (parent != null) {
 					generated_instance = GameObject.Instantiate (this.m_RoosterMagePrefab, parent);
@@ -283,7 +300,7 @@ public class Spawner : MonoBehaviour {
 					generated_instance = GameObject.Instantiate (this.m_RoosterMagePrefab);
 				}
 				RoosterMage RM_component = generated_instance.GetComponentInChildren<RoosterMage> ();
-				RM_component.m_AttackPattern.m_EnemyHitAnimation = this.m_RoosterAnimationPrefab;
+				RM_component.m_AttackPattern.m_EnemyHitAnimation = this.m_ClawAnimationPrefab;
 				RM_component.SetPlayer (this.m_Player);
 				RM_component.m_AttackPattern.m_SpellAnimatorManager = this.m_SpellAnimatorManager;
 				break;

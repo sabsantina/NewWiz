@@ -9,7 +9,6 @@ public class SpellPickup : MonoBehaviour {
 	public SpellClass m_Spell = new SpellClass();
 	/**The spell name, for debugging purposes.*/
 	public string m_SpellName;
-	public AudioSource m_audioSource;
 
 //	[SerializeField] private AudioClip m_Clip;
 //	/**The place the sound comes from.*/
@@ -18,7 +17,6 @@ public class SpellPickup : MonoBehaviour {
 	void Awake()
 	{
 		this.gameObject.GetComponent<Collider> ().isTrigger = true;
-		m_audioSource = GetComponent<AudioSource> ();
 	}
 
 	/**A function to set the Item instance to this ItemPickup.*/
@@ -41,8 +39,9 @@ public class SpellPickup : MonoBehaviour {
 		if (other.gameObject.GetComponent<PlayerInventory> ()) {
 //			Debug.Log ("Spell picked up: " + this.m_Spell.ReturnSpellInstanceInfo());
 
-			other.gameObject.GetComponent<PlayerInventory> ().AddSpell (this.m_Spell);
-			m_audioSource.PlayOneShot (m_audioSource.clip);
+            //Implemented as is in the player inventory
+			other.gameObject.GetComponent<PlayerInventory> ().AddSpell (this.m_Spell.GenerateInstance(this.m_Spell.m_SpellName));
+			other.gameObject.GetComponent<Player> ().playSound(other.gameObject.GetComponent<PlayerAudio>().spellPickUpSound());
 
 			GameObject.Destroy (this.gameObject);
 		}
