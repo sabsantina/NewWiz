@@ -174,8 +174,8 @@ public class QuestManager : MonoBehaviour
         //for every quest...
 	    foreach (KeyValuePair<QuestName, Quest> kvp in m_AllQuests)
         {
-            //...if the quest is in process...
-            if (kvp.Value.m_QuestState == QuestState.IN_PROCESS)
+            //...if the quest is in process and we're in the region for that quest...
+			if (kvp.Value.m_QuestState == QuestState.IN_PROCESS && Player.m_CurrentRegion == kvp.Value.m_QuestRegion)
             {
                 //...then check to see if it's fulfilled the conditions for completion
                 if (kvp.Value.CheckQuestObjectiveCompleted())
