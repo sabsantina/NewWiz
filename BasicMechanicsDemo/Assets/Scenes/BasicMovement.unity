@@ -9336,7 +9336,7 @@ Prefab:
     - target: {fileID: 114633822270810952, guid: bb66b6d1d42c7114a87644210e82b3e8,
         type: 2}
       propertyPath: m_OrangeLairdMeleeDamage
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 114701043558349882, guid: bb66b6d1d42c7114a87644210e82b3e8,
         type: 2}
