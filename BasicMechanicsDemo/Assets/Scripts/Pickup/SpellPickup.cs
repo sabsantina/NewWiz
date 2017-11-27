@@ -39,7 +39,8 @@ public class SpellPickup : MonoBehaviour {
 		if (other.gameObject.GetComponent<PlayerInventory> ()) {
 //			Debug.Log ("Spell picked up: " + this.m_Spell.ReturnSpellInstanceInfo());
 
-			other.gameObject.GetComponent<PlayerInventory> ().AddSpell (this.m_Spell);
+            //Implemented as is in the player inventory
+			other.gameObject.GetComponent<PlayerInventory> ().AddSpell (this.m_Spell.GenerateInstance(this.m_Spell.m_SpellName));
 			other.gameObject.GetComponent<Player> ().playSound(other.gameObject.GetComponent<PlayerAudio>().spellPickUpSound());
 
 			GameObject.Destroy (this.gameObject);
