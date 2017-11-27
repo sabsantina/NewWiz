@@ -22,7 +22,7 @@ public class Serialization_Manager : MonoBehaviour {
 		Debug.Log ("Am I being called?");
 		//If a saved game file exists...
 		if (File.Exists (Application.persistentDataPath + FILEPATH_EXTENSION)) {
-			//...and if the user chose load
+			//...and if the user chose to load the game from either the main menu or the game over menu
 			if (UnityEngine.PlayerPrefs.GetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME) == 2) {
 				this.Load ();
 				float x = 0.0f, y = 0.0f, z = 0.0f;
