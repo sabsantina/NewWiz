@@ -74,6 +74,9 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 
 	public Scenes m_CurrentRegion = Scenes.DEMO_AREA;
 
+	public RPGTalk rpgTalk;
+
+
 	public bool IsAffectedByMagic()
 	{
 		return this.m_IsAffectedBySpell;
@@ -326,6 +329,12 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 	public SpellClass SpellAffectingCharacter ()
 	{
 		return m_SpellAffectingPlayer;
+	}
+
+	public void playSound(AudioClip clip)
+	{
+		Debug.Log ("Play pickup sound");
+		m_audioSource.PlayOneShot (clip);
 	}
 }
 
