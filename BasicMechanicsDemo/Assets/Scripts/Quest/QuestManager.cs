@@ -67,7 +67,7 @@ public class QuestManager : MonoBehaviour
         //Rooster bane
 		Quest roosterBane = GenerateKillEverything(QuestName.ROOSTER_BANE, "Rooster Bane!", NUMBER_ENEMIES_ROOSTERBANE, Scenes.DEMO_AREA,
 		    new Vector3(15.74f, 0.55f, -0.43f), m_DefautRoosterPrefab);
-	    QuestGiver qgRoosterBane = GenerateQuestGiver(new Vector3(-8.39f, 0.55f, -0.43f), new []{ItemName.Health_Potion}, null);
+	    QuestGiver qgRoosterBane = GenerateQuestGiver(new Vector3(-13.39f, 0.55f, -0.43f), new []{ItemName.Health_Potion}, null);
 	    Add(ref roosterBane, ref qgRoosterBane);
 	    
         //Potion master
