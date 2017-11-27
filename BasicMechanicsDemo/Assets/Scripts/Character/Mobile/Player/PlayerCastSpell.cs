@@ -68,7 +68,8 @@ public class PlayerCastSpell : MonoBehaviour {
 	/**A variable to ensure the spell class instance gameobject is destroyed.*/
 	public float m_ManaToDrain = 0.0f;
 	/**A bool to tell us whether or not a given menu is open; if so, the player shouldn't be able to cast spells.*/
-	public bool m_MenuOpen = true;
+//	public bool m_MenuOpen = true;
+	public static bool m_MenuOpen = true;
 
 	private float m_InputTimer = 0.0f;
 
@@ -313,7 +314,7 @@ public class PlayerCastSpell : MonoBehaviour {
 		}
 
 		//And don't cast spells if the player touches a menu button
-		if (this.m_MenuOpen) {
+		if (m_MenuOpen) {
 			return;
 		}
 
