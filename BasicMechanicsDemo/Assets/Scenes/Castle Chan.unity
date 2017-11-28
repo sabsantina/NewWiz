@@ -9657,8 +9657,8 @@ Transform:
   - {fileID: 2095672676}
   - {fileID: 1667282764}
   - {fileID: 1904209076}
-  - {fileID: 553780250}
   - {fileID: 1232365791}
+  - {fileID: 553780250}
   - {fileID: 95596370}
   - {fileID: 1341676668}
   - {fileID: 200000342}
@@ -31098,13 +31098,13 @@ MonoBehaviour:
   m_PotionOfWisdomSprite: {fileID: 0}
   m_Player: {fileID: 295119774}
   m_SpellAnimatorManager: {fileID: 872955990}
+  m_ClawAnimationPrefab: {fileID: 0}
+  m_NormalHitAnimationPrefab: {fileID: 0}
   m_RoosterPrefab: {fileID: 1295592544126026, guid: 9053599dd27ba439eb6fd4c325a8ccde,
-    type: 2}
-  m_RoosterAnimationPrefab: {fileID: 1253389617355122, guid: b972a545bdc16ee46b5695a641c65c8d,
     type: 2}
   m_ArmoredSoldierPrefab: {fileID: 1838224676114018, guid: 8b8d98b39ec697847a82007f2b7efa47,
     type: 2}
-  m_ArmoredSoldierAnimationPrefab: {fileID: 0}
+  m_WolfPrefab: {fileID: 0}
   m_RoosterMagePrefab: {fileID: 1530564148805280, guid: fb40b1c67ec6442da995f37b80648cc3,
     type: 2}
 --- !u!114 &872955990
@@ -31170,6 +31170,7 @@ MonoBehaviour:
       m_PlayerMana: 0
       m_MaxPlayerMana: 0
       m_PlayerMagicAffinity: 0
+      m_CurrentRegion: 0
     m_SerializableQuestManager:
       m_AllQuestStates: 
       m_AllRewardsGiven: 
