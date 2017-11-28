@@ -1,4 +1,0 @@
-Peasant1: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt lacinia elit condimentum tristique. Phasellus viverra posuere enim, at mattis eros sollicitudin in. Donec consectetur dui in suscipit scelerisque. Aenean cursus commodo urna et convallis. Aenean imperdiet enim vitae dignissim tincidunt.
-Peasant2: Vivamus lobortis vestibulum turpis in scelerisque. In rhoncus orci sed augue venenatis, a tincidunt dui efficitur. Suspendisse potenti.
-Peasant1: Integer luctus odio vitae metus sollicitudin placerat ac eget purus. Aenean dignissim nisi enim, aliquam tincidunt elit viverra nec. Donec viverra vitae lorem at condimentum. 
-Peasant2: Phasellus efficitur leo ligula, at pharetra libero malesuada nec. Aenean hendrerit urna sed mi vehicula tincidunt. Aenean vitae elit purus. Donec accumsan urna id eros efficitur, ac consequat nisi eleifend.

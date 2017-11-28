@@ -1,0 +1,58 @@
+/////////////////////////////// 2-peasant conversations
+
+[title=1s]
+Ælfric: Yes, lass. A mighty cock, I tell ye.
+Illana: Come off it, Ælfric. There's no such thing as a giant cock.
+Ælfric: I saw it with me own eyes, lass! It was even spitting fire!
+Illana: Now I ken ye're makin' stuff up.
+Ælfric: Illie, ye have to believe me!
+Illana: Ælfric, ye're asking me to believe that a giant, fire-breathing cock is roaming around Tursachan. Stop wasting me time!
+[title=1e]
+
+
+[title=2s]
+Lufian: The biggest cock in the land! It's the biggest in the land!
+Grunhilda: Quit yer braggin', ye old lout. We all ken ye cannot get it up 'nymore!
+[title=2e]
+
+
+[title=3s]
+Alice: I swear to you, Gaius. It was monstruous.
+Gaius: And it breathed fire, you say?
+[title=3e]
+
+
+[title=4s]
+Guinevere: It was mighty as a dragon, Tom!
+Thommas: The... rooster...
+Guinevere: Yes! 
+Thommas: And... it breathed <i>fire<i/>?
+Guinevere: I feared for me life, I tell ye.
+Thommas: Gwen... are ye sure ye're not suffering from some kind of mental affliction?
+Guinevere: Thommas!
+Thommas: <i>Ouch!</i> Ye dinna need to hit me, woman, I was only jokin'!
+[title=4e]
+
+
+/////////////////////////////// 1-peasant conversations
+
+[title=5s]
+Gideon: To tell ye the truth, I hate that the Orange Laird's imposed a curfew on us... but don't tell her I said that! She'll have me tied to the pyre faster than ye can say pyre!
+[title=5e]
+
+
+[title=6s]
+Helena: Laird Teine has been pretty rough on us lately... But she's been so good to us in the past, I'm sure she's doin all this for a reason...
+<color=#1f29af>You</color>: ?
+Helena: Who's Teine? WHO'S TEINE? Have ye been livin' under a rock, lad?! She's only the best Laird to have ever walked the earth! I'm talkin' o' the Orange Laird, of course.
+[title=6e]
+
+[title=7s]
+Lufian: I'm devastated...
+<color=#1f29af>You</color>: ?
+Lufian: Oh, pay no mind to me, lad. It's just... Me brother got drunk last night and as he got out of the tavern, he started yellin' like a lump about how unfair the Orange Laird's been by imposing her curfew, and some o' her guards heard 'im. He's... he's...
+<color=#1f29af>You</color>: ...
+Lufian: She's convicted him to the pyre.
+<color=#1f29af>You</color>: ...
+Lufian: Yeah, thank ye. Now please, let me be.
+[title=7e]
