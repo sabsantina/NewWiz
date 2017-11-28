@@ -39,7 +39,7 @@ public class QuestGiver : Interactable {
 					//if we're at the last of the enemy types to kill...
 					if (index == this.m_QuestToGive.m_RequisitePrefabs.Count - 1) {
 						//...then just output the name and an "s" to make it plural, with no "and"
-						message += m_QuestToGive.m_RequisitePrefabs [index].name + "s";
+						message += m_QuestToGive.m_RequisitePrefabs [index].name + "s!!";
 					}//end if
 					//else if we're not at the last of the enemy types to kill...
 					else {
