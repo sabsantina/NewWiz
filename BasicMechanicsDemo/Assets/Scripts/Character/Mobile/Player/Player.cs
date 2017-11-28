@@ -127,13 +127,10 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 				//			Debug.Log ("Going into region: " + current_scene_build_index);
 				//Find new spawn position
 
-
-
-				//Should probably do this in the serialization manager; come back to it
-//				this.m_SerializationManager.Load();
-
 				this.PositionPlayerAtEntrance((int)m_CurrentRegion, current_scene_build_index);
 				m_CurrentRegion = ReturnSceneAtIndex (current_scene_build_index);
+
+//				this.m_SerializationManager.Save();
 			}
 			//Update playerpref
 //			UnityEngine.PlayerPrefs.SetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME, 0);
