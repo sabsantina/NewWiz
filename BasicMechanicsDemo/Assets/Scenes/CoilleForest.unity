@@ -9262,6 +9262,16 @@ Prefab:
       propertyPath: callbackFunctionAfterTalk
       value: NextCutscene
       objectReference: {fileID: 0}
+    - target: {fileID: 114178058539887712, guid: ccc608f2c2b0a4f5ca659e24b27279be,
+        type: 2}
+      propertyPath: callbackScriptBeforeTalk
+      value: 
+      objectReference: {fileID: 422629268}
+    - target: {fileID: 114178058539887712, guid: ccc608f2c2b0a4f5ca659e24b27279be,
+        type: 2}
+      propertyPath: callbackFunctionBeforeTalk
+      value: StopPlayerFunctionalitiesForConversation
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ccc608f2c2b0a4f5ca659e24b27279be, type: 2}
   m_IsPrefabParent: 0

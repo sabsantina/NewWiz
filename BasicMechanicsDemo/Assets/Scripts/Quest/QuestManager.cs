@@ -306,6 +306,10 @@ public class QuestManager : MonoBehaviour
                         leoghaireBehaviour.GotToEndOfCoille();
                         break;
                     }
+                    case 3:
+                    {
+                        break;
+                    }
                 }
                 rpgTalkArea.NewCutscene(i+1);
                 break;

@@ -42,6 +42,10 @@ public class LeoghaireBehaviour : MonoBehaviour
 			}
 		}
 	}
+	public void StopPlayerFunctionalitiesForConversation()
+	{
+		PlayerInteraction.m_IsTalking = true;
+	}
 
 	public void Flip()
 	{
@@ -75,6 +79,7 @@ public class LeoghaireBehaviour : MonoBehaviour
 	public void NextCutscene()
 	{
 		m_questmanager.FinishCutscene();
+		PlayerInteraction.m_IsTalking = false;
 	}
 
 	public void GoToHalfOfCoille()
