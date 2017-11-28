@@ -38,7 +38,7 @@ public class PlayerInteraction : MonoBehaviour {
 	/**A collider corresponding to the NPC to make our lives a little easier.*/
 	private Collider m_NPCCollider;
 
-	public bool m_IsTalking = false;
+	public static bool m_IsTalking = false;
 
 	void Start()
 	{
@@ -48,11 +48,11 @@ public class PlayerInteraction : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (this.m_IsTalking) {
-			this.GetComponent<PlayerMovement> ().DisableMovement ();
-		} else {
-			this.GetComponent<PlayerMovement> ().EnableMovement ();
-		}
+//		if (m_IsTalking) {
+//			this.GetComponent<PlayerMovement> ().DisableMovement ();
+//		} else {
+//			this.GetComponent<PlayerMovement> ().EnableMovement ();
+//		}
 
 		//if the user hits the interact key...
 		if (Input.GetButtonDown(STRINGKEY_INPUT_INTERACT)) {
@@ -108,7 +108,7 @@ public class PlayerInteraction : MonoBehaviour {
 				//...then destroy the text bubble
 				GameObject.Destroy (this.m_TextBubble);
 				//...at which point the player is no longer talking.
-				this.m_IsTalking = false;
+				m_IsTalking = false;
 			}//end else if
 			//else if the bubble is up and the text hasn't reached its end at the current bubble...
 			else if (this.m_TextBubble != null && !this.m_DialogFitsIntoBubble) {
@@ -147,7 +147,7 @@ public class PlayerInteraction : MonoBehaviour {
 	private void GenerateSpeechBubble(GameObject NPC_GameObject, string dialog)
 	{
 		//If we're generating a speech bubble, it's because the player's talking.
-		this.m_IsTalking = true;
+		m_IsTalking = true;
 
 		//Create text bubble and set text to dialog
 		this.m_TextBubble = Instantiate (m_SpeechBubblePrefab, NPC_GameObject.transform);

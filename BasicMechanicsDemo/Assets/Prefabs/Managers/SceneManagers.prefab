@@ -89,6 +89,7 @@ MonoBehaviour:
       m_PlayerMana: 0
       m_MaxPlayerMana: 0
       m_PlayerMagicAffinity: 0
+      m_CurrentRegion: 0
     m_SerializableQuestManager:
       m_AllQuestStates: 
       m_AllRewardsGiven: 
@@ -173,13 +174,16 @@ MonoBehaviour:
     type: 3}
   m_Player: {fileID: 0}
   m_SpellAnimatorManager: {fileID: 114701533359187540}
+  m_ClawAnimationPrefab: {fileID: 1253389617355122, guid: b972a545bdc16ee46b5695a641c65c8d,
+    type: 2}
+  m_NormalHitAnimationPrefab: {fileID: 1340379968753568, guid: 8638658cb76be254983089fee59fc00e,
+    type: 2}
   m_RoosterPrefab: {fileID: 1295592544126026, guid: 9053599dd27ba439eb6fd4c325a8ccde,
     type: 2}
-  m_RoosterAnimationPrefab: {fileID: 1253389617355122, guid: b972a545bdc16ee46b5695a641c65c8d,
+  m_ArmoredSoldierPrefab: {fileID: 1438830268827058, guid: 8b8d98b39ec697847a82007f2b7efa47,
     type: 2}
-  m_ArmoredSoldierPrefab: {fileID: 1838224676114018, guid: 8b8d98b39ec697847a82007f2b7efa47,
+  m_WolfPrefab: {fileID: 1320668033185592, guid: 00cdbe88ede784e4ca0102b3375fcae0,
     type: 2}
-  m_ArmoredSoldierAnimationPrefab: {fileID: 0}
   m_RoosterMagePrefab: {fileID: 1530564148805280, guid: fb40b1c67ec6442da995f37b80648cc3,
     type: 2}
 --- !u!224 &224399764707834146
