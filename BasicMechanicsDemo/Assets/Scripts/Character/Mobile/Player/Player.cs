@@ -141,7 +141,7 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 			this.transform.position = this.m_PlayerRespawnPosition;
 			#else
 			Player.m_CurrentRegion = Scenes.FOREST;
-			Vector3 starting_position = new Vector3(/*x, y, z*/);//Where does the player start?
+			Vector3 starting_position = new Vector3(-28.7f, 0.55f, 2.51f);//Where does the player start?
 			this.transform.position = starting_position;
 //			this.m_PlayerRespawnPosition = starting_position;
 			#endif
