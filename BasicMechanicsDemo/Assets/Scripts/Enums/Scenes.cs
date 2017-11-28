@@ -10,5 +10,6 @@ public enum Scenes {
 	OVERWORLD,
     SOIRHBEACH,
 	CASTLE,
-	GAME_OVER
+	GAME_OVER,
+	PLAYER_WIN
 }
