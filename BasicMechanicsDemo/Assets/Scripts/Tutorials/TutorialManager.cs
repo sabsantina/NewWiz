@@ -20,7 +20,7 @@ public class TutorialManager : MonoBehaviour {
 	/**A function to enable a given tutorial. Disables all other tutorials.*/
 	public void Enable(TutorialEnum tutorial)
 	{
-		this.m_PlayerCastSpell.m_MenuOpen = true;
+		PlayerCastSpell.m_MenuOpen = true;
 		switch ((int)tutorial) {
 		case (int)TutorialEnum.MOVEMENT:
 			{
@@ -127,14 +127,14 @@ public class TutorialManager : MonoBehaviour {
 	public void Disable_MovementTutorial()
 	{
 		this.m_MovementTutorial.SetActive (false);
-		this.m_PlayerCastSpell.m_MenuOpen = false;
+		PlayerCastSpell.m_MenuOpen = false;
 	}
 
 	/**A function to disable the fire spell tutorial on click; to be called on click*/
 	public void Disable_FireSpellTutorial()
 	{
 		this.m_FireSpellTutorial.SetActive (false);
-		this.m_PlayerCastSpell.m_MenuOpen = false;
+		PlayerCastSpell.m_MenuOpen = false;
 	}
 
 	/**A function to disable the hot keys tutorial on click; to be called on click.
@@ -151,7 +151,7 @@ public class TutorialManager : MonoBehaviour {
 	public void Disable_ConsumeHotkeyedItemTutorial()
 	{
 		this.m_ConsumeHotKeyedItemTutorial.SetActive (false);
-		this.m_PlayerCastSpell.m_MenuOpen = false;
+		PlayerCastSpell.m_MenuOpen = false;
 	}
 
 
