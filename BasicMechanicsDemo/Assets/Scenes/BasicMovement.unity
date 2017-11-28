@@ -1217,6 +1217,56 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114686755985181938, guid: b80803bd94839364789e7636506a7a27,
+        type: 2}
+      propertyPath: m_FontData.m_BestFit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224695926139829312, guid: b80803bd94839364789e7636506a7a27,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224695926139829312, guid: b80803bd94839364789e7636506a7a27,
+        type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224695926139829312, guid: b80803bd94839364789e7636506a7a27,
+        type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114686755985181938, guid: b80803bd94839364789e7636506a7a27,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.1764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 114686755985181938, guid: b80803bd94839364789e7636506a7a27,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.22352941
+      objectReference: {fileID: 0}
+    - target: {fileID: 114686755985181938, guid: b80803bd94839364789e7636506a7a27,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.5921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535541304243918, guid: b80803bd94839364789e7636506a7a27,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535541304243918, guid: b80803bd94839364789e7636506a7a27,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535541304243918, guid: b80803bd94839364789e7636506a7a27,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b80803bd94839364789e7636506a7a27, type: 2}
   m_IsPrefabParent: 0
@@ -13992,8 +14042,8 @@ MonoBehaviour:
   checkIfColliderHasTag: 
   callbackScriptBeforeTalk: {fileID: 0}
   callbackFunctionBeforeTalk: 
-  lineToStart: intro start
-  lineToBreak: intro end
+  lineToStart: 11start
+  lineToBreak: 11end
   txtToParse: {fileID: 4900000, guid: 8f770a000b9ff454aa471ae6adb84a6a, type: 3}
   callbackScriptAfterTalk: {fileID: 0}
   callbackFunctionAfterTalk: 
