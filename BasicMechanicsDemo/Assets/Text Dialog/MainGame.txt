@@ -9,7 +9,7 @@
 
 
 [title=1s]
-Stranger: G’day to you, my friend. I’m happy to see ye’re well! M ’name’s <color=#931971>Leoghaire</color>, what’s yours?
+Stranger: G’day to you, my friend. I’m happy to see ye’re well! Me name’s <color=#931971>Leoghaire</color>, what’s yours?
 <color=#1f29af>You</color>: ...
 <color=#931971>Leoghaire</color>: Are ye alright, lad? Why’re ye not speaking?
 <color=#1f29af>You</color>: ...

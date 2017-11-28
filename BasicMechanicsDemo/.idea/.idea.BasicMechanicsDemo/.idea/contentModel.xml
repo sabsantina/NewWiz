@@ -85,6 +85,9 @@
           <e p="ItemIcon.cs" t="Include" />
           <e p="ItemSlot.cs" t="Include" />
           <e p="Managers" t="Include">
+            <e p="CoilleForest" t="Include">
+              <e p="CoilleForestManager.cs" t="Include" />
+            </e>
             <e p="MusicManager.cs" t="Include" />
             <e p="SpellAnimatorManager.cs" t="Include" />
             <e p="SpellEffectManager.cs" t="Include" />

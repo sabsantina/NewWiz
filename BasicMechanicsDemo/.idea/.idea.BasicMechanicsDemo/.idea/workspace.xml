@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e4a9e069-73e8-42d3-9e1b-e7b8de11c3a8" name="Default" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -9,43 +10,109 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="SoirbheachConversations.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Text Dialog/SoirbheachConversations.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
-              <caret line="46" column="62" lean-forward="false" selection-start-line="46" selection-start-column="62" selection-end-line="46" selection-end-column="62" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="MainGame.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Text Dialog/MainGame.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2256">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="187">
+              <caret line="11" column="67" lean-forward="false" selection-start-line="11" selection-start-column="67" selection-end-line="11" selection-end-column="67" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LeoghaireBehaviour.cs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LeoghaireBehaviour.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/RPGTalk/CustomBehaviors/LeoghaireBehaviour.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="29" column="40" lean-forward="false" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="40" />
+            <state relative-caret-position="638">
+              <caret line="40" column="40" lean-forward="false" selection-start-line="40" selection-start-column="40" selection-end-line="40" selection-end-column="40" />
               <folding>
-                <marker date="1511863201780" expanded="false" signature="6:78" ph="..." />
-                <marker date="1511863201780" expanded="true" signature="127:1234" ph="{...}" />
-                <marker date="1511863201780" expanded="true" signature="282:289" ph="{...}" />
-                <marker date="1511863201780" expanded="true" signature="344:751" ph="{...}" />
-                <marker date="1511863201780" expanded="true" signature="368:748" ph="{...}" />
-                <marker date="1511863201780" expanded="true" signature="537:631" ph="{...}" />
-                <marker date="1511863201780" expanded="true" signature="639:744" ph="{...}" />
-                <marker date="1511863201780" expanded="true" signature="772:918" ph="{...}" />
-                <marker date="1511863201780" expanded="true" signature="954:1135" ph="{...}" />
-                <marker date="1511863201780" expanded="true" signature="1166:1232" ph="{...}" />
+                <marker date="1511886052309" expanded="true" signature="6:113" ph="..." />
+                <marker date="1511886052309" expanded="true" signature="162:2291" ph="{...}" />
+                <marker date="1511886052309" expanded="true" signature="424:431" ph="{...}" />
+                <marker date="1511886052309" expanded="true" signature="486:1139" ph="{...}" />
+                <marker date="1511886052309" expanded="true" signature="512:573" ph="{...}" />
+                <marker date="1511886052309" expanded="true" signature="681:1136" ph="{...}" />
+                <marker date="1511886052309" expanded="true" signature="850:967" ph="{...}" />
+                <marker date="1511886052309" expanded="true" signature="975:1132" ph="{...}" />
+                <marker date="1511886052309" expanded="true" signature="1160:1306" ph="{...}" />
+                <marker date="1511886052309" expanded="true" signature="1342:1523" ph="{...}" />
+                <marker date="1511886052309" expanded="true" signature="1556:1653" ph="{...}" />
+                <marker date="1511886052309" expanded="true" signature="1712:1896" ph="{...}" />
+                <marker date="1511886052309" expanded="true" signature="1832:1893" ph="{...}" />
+                <marker date="1511886052309" expanded="true" signature="1925:1966" ph="{...}" />
+                <marker date="1511886052309" expanded="true" signature="1999:2067" ph="{...}" />
+                <marker date="1511886052309" expanded="true" signature="2100:2167" ph="{...}" />
+                <marker date="1511886052309" expanded="true" signature="2199:2289" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QuestManager.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Quest/QuestManager.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="563">
+              <caret line="309" column="43" lean-forward="false" selection-start-line="309" selection-start-column="43" selection-end-line="309" selection-end-column="43" />
+              <folding>
+                <marker date="1511886224456" expanded="true" signature="6:133" ph="..." />
+                <marker date="1511886224456" expanded="true" signature="176:13262" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="2148:2597" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="2155:2482" ph="/* Debug.Log (&quot;QuestManager::Awake::Called every scene&quot;); ... */" />
+                <marker date="1511886224456" expanded="true" signature="2623:3038" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="2884:3032" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="3057:3113" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="3158:3763" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="3429:3757" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="3561:3646" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="3663:3747" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="3926:5263" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="5432:5776" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="5956:6245" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="6443:6875" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="7049:7480" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="7591:8505" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="7923:8106" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="8189:8480" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="8542:8790" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="8645:8770" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="9014:9752" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="9117:9732" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="9331:9713" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="9494:9690" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="9941:10018" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="10189:12099" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="10236:12080" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="10522:11072" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="11408:12005" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="12175:13260" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="12426:13253" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="12471:13243" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="12553:13160" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="13301:13563" ph="{...}" />
+                <marker date="1511886224456" expanded="true" signature="13382:13561" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TextManager.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Managers/TextManager.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <marker date="1511812822909" expanded="false" signature="6:153" ph="..." />
+                <marker date="1511812822909" expanded="true" signature="195:1404" ph="{...}" />
+                <marker date="1511812822909" expanded="true" signature="430:1402" ph="{...}" />
+                <marker date="1511812822909" expanded="true" signature="1204:1396" ph="{...}" />
+                <marker date="1511812822909" expanded="true" signature="1432:2647" ph="{...}" />
+                <marker date="1511812822909" expanded="true" signature="1573:2094" ph="{...}" />
+                <marker date="1511812822909" expanded="true" signature="1925:2057" ph="{...}" />
+                <marker date="1511812822909" expanded="true" signature="1985:2047" ph="{...}" />
+                <marker date="1511812822909" expanded="true" signature="2229:2645" ph="{...}" />
+                <marker date="1511812822909" expanded="true" signature="2501:2618" ph="{...}" />
+                <marker date="1511812822909" expanded="true" signature="2554:2608" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -55,13 +122,14 @@
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/RPGTalk/CustomBehaviors/TalkBehaviour.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
-              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="20" selection-end-column="5" />
+              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="29" selection-end-column="5" />
               <folding>
-                <marker date="1511856558980" expanded="false" signature="6:78" ph="..." />
-                <marker date="1511856558980" expanded="true" signature="123:422" ph="{...}" />
-                <marker date="1511856558980" expanded="true" signature="173:180" ph="{...}" />
-                <marker date="1511856558980" expanded="true" signature="235:242" ph="{...}" />
-                <marker date="1511856558980" expanded="true" signature="277:420" ph="{...}" />
+                <marker date="1511879580730" expanded="false" signature="6:78" ph="..." />
+                <marker date="1511879580730" expanded="true" signature="123:737" ph="{...}" />
+                <marker date="1511879580730" expanded="true" signature="173:180" ph="{...}" />
+                <marker date="1511879580730" expanded="true" signature="235:242" ph="{...}" />
+                <marker date="1511879580730" expanded="true" signature="395:479" ph="{...}" />
+                <marker date="1511879580730" expanded="true" signature="514:735" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -80,12 +148,17 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/RPGTalk/CustomBehaviors/TalkBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/RPGTalk/CustomBehaviors/LeoghaireBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/TextManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Temp_Spawn/Spawner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Quest/QuestManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Text Dialog/SoirbheachConversations.txt" />
+        <option value="$PROJECT_DIR$/Assets/Text Dialog/MainGame.txt" />
         <option value="$PROJECT_DIR$/Assets/Scripts/RPGTalk/CustomBehaviors/LeoghaireBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Quest/QuestManager.cs" />
       </list>
     </option>
   </component>
@@ -94,6 +167,11 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="964" />
+    <option name="width" value="956" />
+    <option name="height" value="1052" />
   </component>
   <component name="ProjectView">
     <navigator currentView="SolutionExplorer" proportions="" version="1">
@@ -110,7 +188,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="SolutionExplorer">
         <subPane>
           <expand>
@@ -134,6 +211,37 @@
               <item name="BasicMechanicsDemo (3 projects)" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="BasicMechanicsDemo (3 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Managers" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="BasicMechanicsDemo (3 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Quest" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="BasicMechanicsDemo (3 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Temp_Spawn" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="BasicMechanicsDemo (3 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="Text Dialog" type="977d5f41:SolutionExplorerNodeRider" />
             </path>
           </expand>
@@ -142,6 +250,7 @@
         <option name="show-file-system" value="false" />
         <option name="show-all-items" value="false" />
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -166,36 +275,56 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e4a9e069-73e8-42d3-9e1b-e7b8de11c3a8" name="Default" comment="" />
+      <created>1511879752009</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1511879752009</updated>
+      <workItem from="1511879759366" duration="6465000" />
+    </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2872000" />
+    <option name="totallyTimeSpent" value="9337000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1052" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Unit Tests" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Unit Tests" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="NuGet" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="NuGet" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18072917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -215,14 +344,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Text Dialog/MainGame.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2256">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/RPGTalk/CustomBehaviors/LeoghaireBehavior.cs">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
@@ -234,11 +355,12 @@
         <state relative-caret-position="238">
           <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="20" selection-end-column="5" />
           <folding>
-            <marker date="1511856558980" expanded="false" signature="6:78" ph="..." />
-            <marker date="1511856558980" expanded="true" signature="123:422" ph="{...}" />
-            <marker date="1511856558980" expanded="true" signature="173:180" ph="{...}" />
-            <marker date="1511856558980" expanded="true" signature="235:242" ph="{...}" />
-            <marker date="1511856558980" expanded="true" signature="277:420" ph="{...}" />
+            <marker date="1511879580730" expanded="false" signature="6:78" ph="..." />
+            <marker date="1511879580730" expanded="true" signature="123:737" ph="{...}" />
+            <marker date="1511879580730" expanded="true" signature="173:180" ph="{...}" />
+            <marker date="1511879580730" expanded="true" signature="235:242" ph="{...}" />
+            <marker date="1511879580730" expanded="true" signature="395:479" ph="{...}" />
+            <marker date="1511879580730" expanded="true" signature="514:735" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -248,16 +370,178 @@
         <state relative-caret-position="459">
           <caret line="29" column="40" lean-forward="false" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="40" />
           <folding>
-            <marker date="1511863201780" expanded="false" signature="6:78" ph="..." />
-            <marker date="1511863201780" expanded="true" signature="127:1234" ph="{...}" />
-            <marker date="1511863201780" expanded="true" signature="282:289" ph="{...}" />
-            <marker date="1511863201780" expanded="true" signature="344:751" ph="{...}" />
-            <marker date="1511863201780" expanded="true" signature="368:748" ph="{...}" />
-            <marker date="1511863201780" expanded="true" signature="537:631" ph="{...}" />
-            <marker date="1511863201780" expanded="true" signature="639:744" ph="{...}" />
-            <marker date="1511863201780" expanded="true" signature="772:918" ph="{...}" />
-            <marker date="1511863201780" expanded="true" signature="954:1135" ph="{...}" />
-            <marker date="1511863201780" expanded="true" signature="1166:1232" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="6:113" ph="..." />
+            <marker date="1511886052309" expanded="true" signature="162:2291" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="424:431" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="486:1139" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="512:573" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="681:1136" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="850:967" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="975:1132" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="1160:1306" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="1342:1523" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="1556:1653" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="1712:1896" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="1832:1893" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="1925:1966" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="1999:2067" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="2100:2167" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="2199:2289" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/RPGTalk/CustomBehaviors/LeoghaireBehavior.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Temp_Spawn/Spawner.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4469">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1511811941385" expanded="true" signature="0:109" ph="/* A temp class for spawning items and whatever else could potentially be spawned, for testing purposes. ... */" />
+            <marker date="1511811941385" expanded="false" signature="180:252" ph="..." />
+            <marker date="1511811941385" expanded="true" signature="291:11864" ph="{...}" />
+            <marker date="1511811941385" expanded="true" signature="1868:2004" ph="/* Quest Item spawning requisites ... */" />
+            <marker date="1511811941385" expanded="true" signature="2195:2273" ph="/* Enemy-spawning requisites ... */" />
+            <marker date="1511811941385" expanded="true" signature="3575:3655" ph="{...}" />
+            <marker date="1511811941385" expanded="true" signature="3709:4825" ph="{...}" />
+            <marker date="1511811941385" expanded="true" signature="4888:5726" ph="{...}" />
+            <marker date="1511811941385" expanded="true" signature="5051:5435" ph="{...}" />
+            <marker date="1511811941385" expanded="true" signature="5792:7711" ph="{...}" />
+            <marker date="1511811941385" expanded="true" signature="5959:7355" ph="{...}" />
+            <marker date="1511811941385" expanded="true" signature="7960:8951" ph="{...}" />
+            <marker date="1511811941385" expanded="true" signature="8168:8358" ph="{...}" />
+            <marker date="1511811941385" expanded="true" signature="8567:8907" ph="{...}" />
+            <marker date="1511811941385" expanded="true" signature="9223:11829" ph="{...}" />
+            <marker date="1511811941385" expanded="true" signature="9350:11785" ph="{...}" />
+            <marker date="1511811941385" expanded="true" signature="9354:9387" ph="/* Infantry Units ... */" />
+            <marker date="1511811941385" expanded="true" signature="9448:9536" ph="{...}" />
+            <marker date="1511811941385" expanded="true" signature="9981:10076" ph="{...}" />
+            <marker date="1511811941385" expanded="true" signature="10554:10682" ph="{...}" />
+            <marker date="1511811941385" expanded="true" signature="10703:10823" ph="{...}" />
+            <marker date="1511811941385" expanded="true" signature="11132:11180" ph="/* Ranged enemies ... */" />
+            <marker date="1511811941385" expanded="true" signature="11256:11348" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Text Dialog/SoirbheachConversations.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="597">
+          <caret line="46" column="62" lean-forward="false" selection-start-line="46" selection-start-column="62" selection-end-line="46" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/RPGTalk/CustomBehaviors/TalkBehaviour.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="29" selection-end-column="5" />
+          <folding>
+            <marker date="1511879580730" expanded="false" signature="6:78" ph="..." />
+            <marker date="1511879580730" expanded="true" signature="123:737" ph="{...}" />
+            <marker date="1511879580730" expanded="true" signature="173:180" ph="{...}" />
+            <marker date="1511879580730" expanded="true" signature="235:242" ph="{...}" />
+            <marker date="1511879580730" expanded="true" signature="395:479" ph="{...}" />
+            <marker date="1511879580730" expanded="true" signature="514:735" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Managers/TextManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1511812822909" expanded="false" signature="6:153" ph="..." />
+            <marker date="1511812822909" expanded="true" signature="195:1404" ph="{...}" />
+            <marker date="1511812822909" expanded="true" signature="430:1402" ph="{...}" />
+            <marker date="1511812822909" expanded="true" signature="1204:1396" ph="{...}" />
+            <marker date="1511812822909" expanded="true" signature="1432:2647" ph="{...}" />
+            <marker date="1511812822909" expanded="true" signature="1573:2094" ph="{...}" />
+            <marker date="1511812822909" expanded="true" signature="1925:2057" ph="{...}" />
+            <marker date="1511812822909" expanded="true" signature="1985:2047" ph="{...}" />
+            <marker date="1511812822909" expanded="true" signature="2229:2645" ph="{...}" />
+            <marker date="1511812822909" expanded="true" signature="2501:2618" ph="{...}" />
+            <marker date="1511812822909" expanded="true" signature="2554:2608" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Text Dialog/MainGame.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="67" lean-forward="false" selection-start-line="11" selection-start-column="67" selection-end-line="11" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/RPGTalk/CustomBehaviors/LeoghaireBehaviour.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="638">
+          <caret line="40" column="40" lean-forward="false" selection-start-line="40" selection-start-column="40" selection-end-line="40" selection-end-column="40" />
+          <folding>
+            <marker date="1511886052309" expanded="true" signature="6:113" ph="..." />
+            <marker date="1511886052309" expanded="true" signature="162:2291" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="424:431" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="486:1139" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="512:573" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="681:1136" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="850:967" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="975:1132" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="1160:1306" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="1342:1523" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="1556:1653" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="1712:1896" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="1832:1893" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="1925:1966" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="1999:2067" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="2100:2167" ph="{...}" />
+            <marker date="1511886052309" expanded="true" signature="2199:2289" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Quest/QuestManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="563">
+          <caret line="309" column="43" lean-forward="false" selection-start-line="309" selection-start-column="43" selection-end-line="309" selection-end-column="43" />
+          <folding>
+            <marker date="1511886224456" expanded="true" signature="6:133" ph="..." />
+            <marker date="1511886224456" expanded="true" signature="176:13262" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="2148:2597" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="2155:2482" ph="/* Debug.Log (&quot;QuestManager::Awake::Called every scene&quot;); ... */" />
+            <marker date="1511886224456" expanded="true" signature="2623:3038" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="2884:3032" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="3057:3113" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="3158:3763" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="3429:3757" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="3561:3646" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="3663:3747" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="3926:5263" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="5432:5776" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="5956:6245" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="6443:6875" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="7049:7480" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="7591:8505" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="7923:8106" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="8189:8480" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="8542:8790" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="8645:8770" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="9014:9752" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="9117:9732" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="9331:9713" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="9494:9690" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="9941:10018" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="10189:12099" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="10236:12080" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="10522:11072" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="11408:12005" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="12175:13260" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="12426:13253" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="12471:13243" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="12553:13160" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="13301:13563" ph="{...}" />
+            <marker date="1511886224456" expanded="true" signature="13382:13561" ph="{...}" />
           </folding>
         </state>
       </provider>
