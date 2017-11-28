@@ -453,7 +453,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4794,6 +4794,53 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1001 &446537043
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4222155296711322, guid: ccc608f2c2b0a4f5ca659e24b27279be, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -44.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4222155296711322, guid: ccc608f2c2b0a4f5ca659e24b27279be, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4222155296711322, guid: ccc608f2c2b0a4f5ca659e24b27279be, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4222155296711322, guid: ccc608f2c2b0a4f5ca659e24b27279be, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4222155296711322, guid: ccc608f2c2b0a4f5ca659e24b27279be, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4222155296711322, guid: ccc608f2c2b0a4f5ca659e24b27279be, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4222155296711322, guid: ccc608f2c2b0a4f5ca659e24b27279be, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4222155296711322, guid: ccc608f2c2b0a4f5ca659e24b27279be, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 114178058539887712, guid: ccc608f2c2b0a4f5ca659e24b27279be,
+        type: 2}
+      propertyPath: rpgtalkTarget
+      value: 
+      objectReference: {fileID: 2097738864}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: ccc608f2c2b0a4f5ca659e24b27279be, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &449198714
 GameObject:
   m_ObjectHideFlags: 0
@@ -15952,7 +15999,7 @@ Transform:
   - {fileID: 505103564}
   - {fileID: 2062650986}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1423880779
 Prefab:
