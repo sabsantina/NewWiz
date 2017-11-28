@@ -15,10 +15,10 @@ Stranger: G’day to you, my friend. I’m happy to see ye’re well! M ’name�
 <color=#1f29af>You</color>: ...
 <color=#931971>Leoghaire</color>: Ye don’t remember? Oh, ye poor man. Is there anything that ya do ken about yerself?
 <color=#1f29af>You</color>: You shake your head.
-<color=#931971>Leoghaire</color>: *sigh* I guess I could try to help ye with yer memory, but we’d need to head to Soirbheach for some supplies. It’s the closest village to where we are.
+<color=#931971>Leoghaire</color>: <i>*sigh*</i> I guess I could try to help ye with yer memory, but we’d need to head to Soirbheach for some supplies. It’s the closest village to where we are.
 <color=#1f29af>You</color>: ?
 <color=#931971>Leoghaire</color>: Why, we’re in Coille Forest, of course! Alright, let’s head to Soirbheach. It’s right to the south east of here; just gotta follow the path we’re on.
-<color=#ce6d0c>System</color>: You can move with the WASD keys on your keyboard. W for up, A for left, S for down, and D for right. Try it now!
+<color=#ce6d0c>System</color>:  <color=#AE4949FF>You can move with the WASD keys on your keyboard. W for up, A for left, S for down, and D for right. Try it now!
 [title=1end]
 
 
@@ -39,9 +39,9 @@ Stranger: G’day to you, my friend. I’m happy to see ye’re well! M ’name�
 [title=3end]
 
 
--------------------------
+******************************************************************************************************************************************************
 SCENE 2 - Location: Coille Forest \ faerie hill || Day
--------------------------
+******************************************************************************************************************************************************
 
 
 [title=4start]
@@ -66,7 +66,7 @@ The <color=#ce1c1c>Wolf</color> attacks <color=#1f29af>Blue</color>. Points are 
 
 
 [title=6start]
-<color=#ce6d0c>System</color>: The red bar on the top left of the screen is your Health Points (HP). Every time you take a hit, it will deplete by some points. You can refill it with health potions, or with a healer. Careful: once it’s completely depleted, you will die!
+<color=#ce6d0c>System</color>:  <color=#AE4949FF>The red bar on the top left of the screen is your Health Points (HP). Every time you take a hit, it will deplete by some points. You can refill it with health potions, or with a healer. Careful: once it’s completely depleted, you will die!
 <color=#931971>Leoghaire</color>: Well, don’t just stand there!
 [title=7end]
 
@@ -76,13 +76,13 @@ Leoghaire heals <color=#1f29af>Blue</color> to full health.
 -------------------------
 
 [title=7start]
-<color=#ce6d0c>System</color>: Look at that! You just remembered a spell!
-<color=#ce6d0c>System</color>: You can attack by aiming with your mouse and clicking on your foe.
+<color=#ce6d0c>System</color>:  <color=#AE4949FF>Look at that! You just remembered a spell!
+<color=#ce6d0c>System</color>:  <color=#AE4949FF>You can attack by aiming with your mouse and clicking on your foe.
 [title=7end]
 
 
 [title-8start]
-<color=#ce6d0c>System</color>: See that <color=#1f29af>Blue</color> bar, right under your HP bar? That’s your Mana Points (MP) indicator. Every time you cast a spell, it depletes. The stronger the spell, the more points it will take! Once it runs out, though, you won’t be able to cast spells anymore! But fear not, for in the case that happens, you would be able to refill it with Mana potions. Now, kill that <color=#ce1c1c>Wolf</color>!
+<color=#ce6d0c>System</color>:  <color=#AE4949FF>See that <color=#1f29af>Blue</color> bar, right under your HP bar? That’s your Mana Points (MP) indicator. Every time you cast a spell, it depletes. The stronger the spell, the more points it will take! Once it runs out, though, you won’t be able to cast spells anymore! But fear not, for in the case that happens, you would be able to refill it with Mana potions. Now, kill that <color=#ce1c1c>Wolf</color>!
 [title=8end]
 
 
@@ -104,7 +104,7 @@ Nothing happens until player takes dropped item.
 
 
 [title=10start]
-<color=#ce6d0c>System</color>: Looks like you just collected an item! You can access it by going to your inventory. Click on the backpack icon!
+<color=#ce6d0c>System</color>:  <color=#AE4949FF>Looks like you just collected an item! You can access it by going to your inventory. Click on the backpack icon!
 [title=10end]
 
 
@@ -114,8 +114,8 @@ Game is frozen until player clicks on the inventory.
 
 
 [title=11start]
-<color=#ce6d0c>System</color>: You can find your equipment and potions on this screen. You can also drag an item into a hotkey holder. They're the 3 squares on bottom left.
-<color=#ce6d0c>System</color>: Now, right-click on the <color=#1ca7ce>Inferior Mana Potion</color> to consume it.
+<color=#ce6d0c>System</color>:  <color=#AE4949FF>You can find your equipment and potions on this screen. You can also drag an item into a hotkey holder. They're the 3 squares on bottom left.
+<color=#ce6d0c>System</color>:  <color=#AE4949FF>Now, right-click on the <color=#1ca7ce>Inferior Mana Potion</color> to consume it.
 [title=11end]
 
 
@@ -125,7 +125,7 @@ Game is frozen until player consumes the potion.
 
 
 [title=12start]
-<color=#ce6d0c>System</color>: Great! You can now close the inventory page by clicking on X in the top right.
+<color=#ce6d0c>System</color>:  <color=#AE4949FF>Great! You can now close the inventory page by clicking on X in the top right.
 [title=12end]
 
 
@@ -143,10 +143,10 @@ Wait until the player closes inventory.
 Leoghaire disappears and reappears at the right edge of the screen. Nothing happens until the player goes to there.
 -------------------------
 
--------------------------
+******************************************************************************************************************************************************
 SCENE 3 - Location: Soirbheach \ village entrance || Day
 The setting is spaced out cottages and farms, since this is the entrance/outskirts of the village. The more the character moves to the center of the village, the busier it gets.
--------------------------
+******************************************************************************************************************************************************
 
 
 [title=13start]
@@ -160,20 +160,54 @@ Leoghaire walks towards a hut and disappears. An NPC appears.
 
 [title=14start]
 Old man: Hello there, young fella. I lost my 2 mana potions, could you help me find them? My old eyes are not so good anymore.
-<color=#ce6d0c>System</color>: Some characters will give you bonus, optional quests. You can earn items, money, or even spells by fulfilling them. You can inquire any character in the future for a quest by walking up to them and pressing on E. Once you’ve finished a task, you can go back to the character, and get your reward!
+[title=14end]
+
+
+[title=15start]
+<color=#ce6d0c>System</color>:  <color=#AE4949FF>Some characters will give you bonus, optional quests. You can earn items, money, or even spells by fulfilling them. You can inquire any character in the future for a quest by walking up to them and pressing on E. Once you’ve finished a task, you can go back to the character, and get your reward!
+[title=15end]
+
+
+-------------------------
+Wait until player fulfills quest
 Leoghaire reappears.
+-------------------------
+
+
+[title=16start]
 <color=#931971>Leoghaire</color>: O’rright. Here, drink this. There’s no guarantee it’ll work, but there’s no harm in trying.
 <color=#1f29af>You</color>: ...
+[title=16end]
+
+
+-------------------------
 The screen goes black. Three men are standing together: one is dressed in red, another in orange, and the third in purple. They look important. The screen fades back to black, and <color=#1f29af>Blue</color> opens his eyes.
+-------------------------
+
+
+[title=17start]
 <color=#931971>Leoghaire</color>: Are ye okay, lad? You fainted there, for a minute. Did the potion work?
 <color=#1f29af>You</color>: ...
 <color=#931971>Leoghaire</color>: Red, orange and purple, you say? Ye couldn’t be talkin’ o’ the lairds, now, could you?
 <color=#1f29af>You</color>: ?
-<color=#931971>Leoghaire</color>: The three lairds are the men who govern Dìleas.
+<color=#931971>Leoghaire</color>: The three lairds are the people who govern Dìleas.
 <color=#1f29af>You</color>: …
 <color=#931971>Leoghaire</color>: What, you think they could be the key for ye to recover yer memory?
 <color=#1f29af>You</color>: !
 <color=#931971>Leoghaire</color>: Well, it could be possible. But I must warn ye: the lairds have become somewhat bits of tyrants, of late.
 <color=#1f29af>You</color>: …
 <color=#931971>Leoghaire</color>: O’rright, o’rright. Ye’ll be needing someone with all their wits about, so I guess I will accompany you to see the Red Laird. I’ve got a small errand to run first, though. We’ll meet at the village exit, near the path to Castle Chan Eil An Iar. In the meantime, I guess you could roam about the village.
+[title=17end]
+
+
+-------------------------
 Leoghaire disappears. The player is free to move around the village, solving quests and defeating enemies. Nothing story-related happens until <color=#1f29af>Blue</color> meets up with <color=#931971>Leoghaire</color>.
+-------------------------
+
+
+[title=18start]
+<color=#931971>Leoghaire</color>: There ye are! Ye had me thinkin' that maybe ye'd gotten another bout of memory loss! What took you so long?
+<color=#1f29af>You</color>: !!!
+<color=#931971>Leoghaire</color>: Whoa, calm yerself, there, lad. I dinna mean no disrespect. I just get fidgetty when I'm around as many people as there are in this village.
+<color=#1f29af>You</color>: ?
+<color=#931971>Leoghaire</color>: Oh don't ye worry about it. Come on, then. Let's go meet with the Laird.
