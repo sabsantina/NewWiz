@@ -261,6 +261,14 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 		}
 		#endif
 
+		if (PlayerInteraction.m_IsTalking) {
+//			Player cast spell will not run if m_IsTalking is set to true
+			//so all that's left to worry about is player movement
+			this.GetComponent<PlayerMovement> ().DisableMovement ();
+		} else {
+			this.GetComponent<PlayerMovement> ().EnableMovement ();
+		}
+
 		if (this.m_IsAffectedBySpell) {
 			this.ApplySpellEffect (this.m_SpellAffectingPlayer);
 		}
@@ -294,6 +302,8 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 		this.UpdateAnimatorParameters ();
 
 	}//end f'n void Update
+
+
 
 	private void UpdateCanCastSpell()
 	{

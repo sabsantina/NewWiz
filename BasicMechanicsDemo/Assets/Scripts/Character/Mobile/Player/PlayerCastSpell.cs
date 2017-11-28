@@ -309,7 +309,7 @@ public class PlayerCastSpell : MonoBehaviour {
 		}//end if
 
 		//Same story if the player is having a conversation...
-		if (this.GetComponent<PlayerInteraction> ().m_IsTalking) {
+		if (PlayerInteraction.m_IsTalking) {
 			return;
 		}
 
