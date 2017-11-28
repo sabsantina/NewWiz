@@ -37,20 +37,20 @@ Thommas: <i>Ouch!</i> Ye dinna need to hit me, woman, I was only jokin'!
 /////////////////////////////// 1-peasant conversations
 
 [title=5s]
-Gideon: To tell ye the truth, I hate that the Orange Laird's imposed a curfew on us... but don't tell her I said that! She'll have me tied to the pyre faster than ye can say pyre!
+Gideon: To tell ye the truth, I hate that the <color=#ff7f00>Orange Laird</color>'s imposed a curfew on us... but don't tell her I said that! She'll have me tied to the pyre faster than ye can say pyre!
 [title=5e]
 
 
 [title=6s]
-Helena: Laird Teine has been pretty rough on us lately... But she's been so good to us in the past, I'm sure she's doin all this for a reason...
+Helena: Laird Teine has been pretty rough on us lately... But she's been so good to us in the past; I'm sure she's doin all this for a reason...
 <color=#1f29af>You</color>: ?
-Helena: Who's Teine? WHO'S TEINE? Have ye been livin' under a rock, lad?! She's only the best Laird to have ever walked the earth! I'm talkin' o' the Orange Laird, of course.
+Helena: Who's Teine? WHO'S TEINE? Have ye been livin' under a rock, lad?! She's only the best Laird to have ever walked the earth! I'm talkin' o' the <color=#ff7f00>Orange Laird</color>, of course.
 [title=6e]
 
 [title=7s]
 Lufian: I'm devastated...
 <color=#1f29af>You</color>: ?
-Lufian: Oh, pay no mind to me, lad. It's just... Me brother got drunk last night and as he got out of the tavern, he started yellin' like a lump about how unfair the Orange Laird's been by imposing her curfew, and some o' her guards heard 'im. He's... he's...
+Lufian: Oh, pay no mind to me, lad. It's just... Me brother got drunk last night and as he got out of the tavern, he started yellin' like a lump about how unfair the <color=#ff7f00>Orange Laird</color>'s been by imposing her curfew, and some o' her guards heard 'im. He's... he's...
 <color=#1f29af>You</color>: ...
 Lufian: She's convicted him to the pyre.
 <color=#1f29af>You</color>: ...

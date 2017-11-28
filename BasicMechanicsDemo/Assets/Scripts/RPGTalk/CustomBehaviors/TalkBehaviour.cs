@@ -14,9 +14,18 @@ public class TalkBehaviour : MonoBehaviour {
 		
 	}
 
+	/**A function to stop the player from moving and/or casting spells while people are talking.*/
+	public void StopPlayerFunctionalitiesForConversation()
+	{
+//		Debug.Log ("Am I being called?");
+		PlayerInteraction.m_IsTalking = true;
+	}
+
 	public void ShutUpAfterTrigger()
 	{
 		GetComponentInParent<RPGTalkArea>().shouldInteractWithButton = true;
 		GetComponentInParent<RPGTalkArea>().interactionKey = KeyCode.E;
+//		Debug.Log ("Conversation end?");
+		PlayerInteraction.m_IsTalking = false;
 	}
 }

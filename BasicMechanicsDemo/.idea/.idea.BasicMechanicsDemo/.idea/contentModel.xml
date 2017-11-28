@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/.Rider2017.2/system/resharper-host/local/Transient/ReSharperHost/v10/SolutionCaches/_BasicMechanicsDemo.-1033480335.00" t="ExcludeRecursive" />
+    <e p="$PROJECT_DIR$" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Plugins" t="Include">
+          <e p="Editor" t="Include">
+            <e p="JetBrains" t="Include">
+              <e p="Unity3DRider.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="AttackHit.cs" t="Include" />
+          <e p="Character" t="Include">
+            <e p="ICanBeDamagedByMagic.cs" t="Include" />
+            <e p="Interactable.cs" t="Include" />
+            <e p="Mobile" t="Include">
+              <e p="Enemy" t="Include">
+                <e p="AttackPattern" t="Include">
+                  <e p="AttackPattern.cs" t="Include" />
+                  <e p="AttackPatternState.cs" t="Include" />
+                  <e p="MeleeAttackPattern.cs" t="Include" />
+                  <e p="RangedAttackPattern.cs" t="Include" />
+                </e>
+                <e p="DefaultEnemy.cs" t="Include" />
+                <e p="Enemy.cs" t="Include" />
+                <e p="EnemyAttack.cs" t="Include" />
+                <e p="EnemyDetectionArea.cs" t="Include" />
+                <e p="EnemyDetectionRegion.cs" t="Include" />
+                <e p="EnemyMovement.cs" t="Include" />
+                <e p="EnemyName.cs" t="Include" />
+                <e p="EnemyTypes" t="Include">
+                  <e p="BossEnemy.cs" t="Include" />
+                  <e p="BossUnits" t="Include">
+                    <e p="OrangeLaird.cs" t="Include" />
+                    <e p="RoosterKing.cs" t="Include" />
+                  </e>
+                  <e p="EnemyInfantry.cs" t="Include" />
+                  <e p="InfantryUnits" t="Include">
+                    <e p="ArmoredSoldier.cs" t="Include" />
+                    <e p="Rooster.cs" t="Include" />
+                    <e p="Wolf.cs" t="Include" />
+                  </e>
+                  <e p="RangedEnemy.cs" t="Include" />
+                  <e p="RangedUnits" t="Include">
+                    <e p="FrostMage.cs" t="Include" />
+                    <e p="RoosterMage.cs" t="Include" />
+                  </e>
+                </e>
+                <e p="IEnemy.cs" t="Include" />
+                <e p="MovementPattern" t="Include">
+                  <e p="MovementPattern.cs" t="Include" />
+                  <e p="MovementPatternState.cs" t="Include" />
+                </e>
+              </e>
+              <e p="MobileCharacter.cs" t="Include" />
+              <e p="Player" t="Include">
+                <e p="Inventory" t="Include">
+                  <e p="PlayerInventory.cs" t="Include" />
+                </e>
+                <e p="Player.cs" t="Include" />
+                <e p="PlayerCastSpell.cs" t="Include" />
+                <e p="PlayerInteraction.cs" t="Include" />
+                <e p="PlayerMovement.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Peasant.cs" t="Include" />
+            <e p="PlayerAudio.cs" t="Include" />
+          </e>
+          <e p="Enums" t="Include">
+            <e p="ItemEffect.cs" t="Include" />
+            <e p="ItemName.cs" t="Include" />
+            <e p="Scenes.cs" t="Include" />
+            <e p="SpellEffect.cs" t="Include" />
+            <e p="SpellInputType.cs" t="Include" />
+            <e p="SpellName.cs" t="Include" />
+            <e p="SpellType.cs" t="Include" />
+          </e>
+          <e p="Item.cs" t="Include" />
+          <e p="ItemIcon.cs" t="Include" />
+          <e p="ItemSlot.cs" t="Include" />
+          <e p="Managers" t="Include">
+            <e p="MusicManager.cs" t="Include" />
+            <e p="SpellAnimatorManager.cs" t="Include" />
+            <e p="SpellEffectManager.cs" t="Include" />
+            <e p="TextManager.cs" t="Include" />
+            <e p="UIManager.cs" t="Include" />
+          </e>
+          <e p="Menu" t="Include">
+            <e p="ActiveSpellIcon.cs" t="Include" />
+            <e p="DemoMainMenu" t="Include">
+              <e p="MainMenu_Rotation.cs" t="Include" />
+              <e p="MainMenu_UIManager.cs" t="Include" />
+            </e>
+            <e p="GameOverMenu" t="Include">
+              <e p="GameOver_UIManager.cs" t="Include" />
+            </e>
+            <e p="InventoryMenu.cs" t="Include" />
+            <e p="MapMenu.cs" t="Include" />
+            <e p="Menu.cs" t="Include" />
+            <e p="OptionsMenu.cs" t="Include" />
+          </e>
+          <e p="MovingTarget.cs" t="Include" />
+          <e p="NormalClasses" t="Include">
+            <e p="ItemClass.cs" t="Include" />
+            <e p="SpellClass.cs" t="Include" />
+          </e>
+          <e p="Pickup" t="Include">
+            <e p="ItemPickup.cs" t="Include" />
+            <e p="SpellPickup.cs" t="Include" />
+          </e>
+          <e p="Quest" t="Include">
+            <e p="Fetch.cs" t="Include" />
+            <e p="KillEverything.cs" t="Include" />
+            <e p="Objective.cs" t="Include" />
+            <e p="Quest.cs" t="Include" />
+            <e p="QuestGiver.cs" t="Include" />
+            <e p="QuestItem.cs" t="Include" />
+            <e p="QuestItemName.cs" t="Include" />
+            <e p="QuestItemPickup.cs" t="Include" />
+            <e p="QuestManager.cs" t="Include" />
+            <e p="QuestName.cs" t="Include" />
+            <e p="QuestState.cs" t="Include" />
+            <e p="QuestType.cs" t="Include" />
+          </e>
+          <e p="RPGTalk" t="Include">
+            <e p="CustomBehaviors" t="Include">
+              <e p="LeoghaireBehaviour.cs" t="Include" />
+              <e p="TalkBehaviour.cs" t="Include" />
+            </e>
+            <e p="Editor" t="Include">
+              <e p="RPGTalkAreaEditor.cs" t="Include" />
+              <e p="RPGTalkEditor.cs" t="Include" />
+              <e p="RPGTalkLocalizationEditor.cs" t="Include" />
+            </e>
+            <e p="Helpers" t="Include">
+              <e p="RPGTalkHelper.cs" t="Include" />
+              <e p="TextWithIcon.cs" t="Include" />
+            </e>
+            <e p="RPGTalk.cs" t="Include" />
+            <e p="RPGTalkArea.cs" t="Include" />
+            <e p="RPGTalkCinematic" t="Include">
+              <e p="Editor" t="Include">
+                <e p="RPGTalkCinematicDrawer.cs" t="Include" />
+              </e>
+              <e p="RPGTalkCinematicBehaviour.cs" t="Include" />
+              <e p="RPGTalkCinematicClip.cs" t="Include" />
+              <e p="RPGTalkCinematicTrack.cs" t="Include" />
+            </e>
+            <e p="RPGTalkDubSounds.cs" t="Include" />
+            <e p="RPGTalkLocalization.cs" t="Include" />
+            <e p="RPGTalkLocalizationString.cs" t="Include" />
+            <e p="RPGTalkTimeline.cs" t="Include" />
+            <e p="ReadMe.txt" t="Include" />
+          </e>
+          <e p="Scenery" t="Include">
+            <e p="Obstructable.cs" t="Include" />
+          </e>
+          <e p="Serialization" t="Include">
+            <e p="Serializable_Player.cs" t="Include" />
+            <e p="Serializable_QuestManager.cs" t="Include" />
+            <e p="Serializable_Session.cs" t="Include" />
+            <e p="Serialization_Manager.cs" t="Include" />
+            <e p="TransitionMarker.cs" t="Include" />
+            <e p="TransitionPositions.cs" t="Include" />
+          </e>
+          <e p="SetSortingLayer.cs" t="Include" />
+          <e p="Spell" t="Include">
+            <e p="Spell.cs" t="Include" />
+            <e p="SpellMovement.cs" t="Include" />
+          </e>
+          <e p="Temp_Spawn" t="Include">
+            <e p="Spawner.cs" t="Include" />
+          </e>
+          <e p="Tutorials" t="Include">
+            <e p="Tutorial.cs" t="Include" />
+            <e p="TutorialEnum.cs" t="Include" />
+            <e p="TutorialManager.cs" t="Include" />
+          </e>
+          <e p="UI" t="Include">
+            <e p="BioButton.cs" t="Include" />
+            <e p="Biography.cs" t="Include" />
+            <e p="ButtonHighlight.cs" t="Include" />
+            <e p="HotKeys.cs" t="Include" />
+            <e p="MenuSounds.cs" t="Include" />
+          </e>
+          <e p="Utilities" t="Include">
+            <e p="Utilities.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Text Dialog" t="Include">
+          <e p="MainGame.txt" t="Include" />
+          <e p="SoirbheachConversations.txt" t="Include" />
+          <e p="TutorialText.txt" t="Include" />
+        </e>
+      </e>
+      <e p="BasicMechanicsDemo.sln" t="IncludeFlat" />
+      <e p="Library" t="ExcludeRecursive" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
