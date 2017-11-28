@@ -53,6 +53,10 @@ public class OrangeLaird : BossEnemy {
 
         this.Die();
         
+		if (this.m_Health <= 0.0f) {
+			CastleManager.m_TeineIsDead = true;
+		}
+
         //Handles the two stages of healing of the boss.
         HandleHealing();
 
@@ -172,6 +176,7 @@ public class OrangeLaird : BossEnemy {
 	/**The spell to spawn on boss death*/
 	protected override void ManageLootSpawnOnDeath()
 	{
+		//LOL
 		this.m_Spawner.Spawn_Spell (SpellName.WaterBubble, this.transform.position);
 	}
 }

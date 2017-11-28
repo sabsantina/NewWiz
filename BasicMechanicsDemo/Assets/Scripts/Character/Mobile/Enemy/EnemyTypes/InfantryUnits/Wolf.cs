@@ -61,4 +61,9 @@ public class Wolf : EnemyInfantry {
     {
         return this.m_AttackDamageValue;
     }
+
+	protected override void ManageLootSpawnOnDeath()
+	{
+		this.m_Spawner.Spawn_Item (ItemName.Health_Potion, this.transform.position);
+	}
 }
