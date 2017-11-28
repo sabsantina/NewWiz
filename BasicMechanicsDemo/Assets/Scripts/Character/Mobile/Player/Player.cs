@@ -6,7 +6,7 @@
 #define TESTING_MANA_REGEN
 #define TESTING_REGION
 //#define TESTING_ENABLE_RESURRECTION
-#define TESTING_SET_INITIAL_REGION_TO_DEMO
+//#define TESTING_SET_INITIAL_REGION_TO_DEMO
 #define TESTING_PRINT_ACTIVE_SCENE
 
 using System.Collections;
@@ -140,9 +140,10 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 			m_CurrentRegion = Scenes.DEMO_AREA;
 			this.transform.position = this.m_PlayerRespawnPosition;
 			#else
-			this.m_CurrentRegion = Scenes.FOREST;
+			Player.m_CurrentRegion = Scenes.FOREST;
 			Vector3 starting_position = new Vector3(/*x, y, z*/);//Where does the player start?
 			this.transform.position = starting_position;
+//			this.m_PlayerRespawnPosition = starting_position;
 			#endif
 			//Update playerpref
 			UnityEngine.PlayerPrefs.SetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME, 0);
