@@ -1240,17 +1240,17 @@ Prefab:
     - target: {fileID: 114686755985181938, guid: b80803bd94839364789e7636506a7a27,
         type: 2}
       propertyPath: m_Color.r
-      value: 0.1764706
+      value: 0.32156864
       objectReference: {fileID: 0}
     - target: {fileID: 114686755985181938, guid: b80803bd94839364789e7636506a7a27,
         type: 2}
       propertyPath: m_Color.g
-      value: 0.22352941
+      value: 0.5568628
       objectReference: {fileID: 0}
     - target: {fileID: 114686755985181938, guid: b80803bd94839364789e7636506a7a27,
         type: 2}
       propertyPath: m_Color.b
-      value: 0.5921569
+      value: 0.32156864
       objectReference: {fileID: 0}
     - target: {fileID: 114535541304243918, guid: b80803bd94839364789e7636506a7a27,
         type: 2}
@@ -14042,8 +14042,8 @@ MonoBehaviour:
   checkIfColliderHasTag: 
   callbackScriptBeforeTalk: {fileID: 0}
   callbackFunctionBeforeTalk: 
-  lineToStart: 11start
-  lineToBreak: 11end
+  lineToStart: 1start
+  lineToBreak: 1end
   txtToParse: {fileID: 4900000, guid: 8f770a000b9ff454aa471ae6adb84a6a, type: 3}
   callbackScriptAfterTalk: {fileID: 0}
   callbackFunctionAfterTalk: 
