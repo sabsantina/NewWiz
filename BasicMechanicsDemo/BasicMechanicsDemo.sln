@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicMechanicsDemo", "Assembly-CSharp.csproj", "{C77CE1C9-144A-99CE-89C6-F15358FE8174}"
 EndProject
+<<<<<<< HEAD
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicMechanicsDemo", "Assembly-CSharp-Editor.csproj", "{6BB9234A-8B4D-0574-A978-35B1FD6BA28F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicMechanicsDemo", "Assembly-CSharp-Editor-firstpass.csproj", "{980B618B-8C4E-D17D-24DD-09CCE117E622}"
+=======
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{6BB9234A-8B4D-0574-A978-35B1FD6BA28F}"
+>>>>>>> master
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor-firstpass", "Assembly-CSharp-Editor-firstpass.csproj", "{980B618B-8C4E-D17D-24DD-09CCE117E622}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
