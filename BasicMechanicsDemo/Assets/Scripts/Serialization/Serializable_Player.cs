@@ -63,6 +63,11 @@ public class Serializable_Player {
 				Player.m_CurrentRegion = Scenes.OVERWORLD;
 				break;
 			}
+        case (int)Scenes.SOIRHBEACH:
+			{
+				Player.m_CurrentRegion = Scenes.SOIRHBEACH;
+				break;
+			}
 		}
 //		Debug.Log("Set current region: " + player_component.m_CurrentRegion);
 	}
