@@ -178,6 +178,7 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 				//...to the overworld
 				case (int)Scenes.OVERWORLD:
 					{
+                        m_CurrentRegion = Scenes.OVERWORLD;
 						//then the position to spawn at is as follows:
 						position_to_spawn_player = TransitionPositions.Transition_Demo_To_Overworld;
 						break;
@@ -192,14 +193,23 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 				switch (index_to_region) {
 				case (int)Scenes.DEMO_AREA:
 					{
+                        m_CurrentRegion = Scenes.DEMO_AREA;
 						//then the position to spawn at is as follows:
 						position_to_spawn_player = TransitionPositions.Transition_Overworld_To_Demo;
 						break;
 					}//end case to DEMO AREA
                 case (int)Scenes.SOIRHBEACH:
 					{
+                        m_CurrentRegion = Scenes.SOIRHBEACH;
 						//then the position to spawn at is as follows:
 						position_to_spawn_player = TransitionPositions.Transition_Overworld_To_Left_Soirhbeach;
+						break;
+					}//end case to DEMO AREA
+                case (int)Scenes.CASTLE:
+					{
+                        m_CurrentRegion = Scenes.CASTLE;
+						//then the position to spawn at is as follows:
+						position_to_spawn_player = TransitionPositions.Transition_Overworld_To_Castle;
 						break;
 					}//end case to DEMO AREA
 				}//end switch
@@ -213,11 +223,25 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
                         //...to the overworld
                         case (int)Scenes.OVERWORLD:
                             {
+                                m_CurrentRegion = Scenes.OVERWORLD;
                                 //then the position to spawn at is as follows:
-                                if(this.transform.position.x < -10.0f)
-                                    position_to_spawn_player = TransitionPositions.Transition_Soirhbeach_Left_To_Overworld;
-                                else
-                                    position_to_spawn_player = TransitionPositions.Transition_Soirhbeach_Right_To_Overworld;
+                                position_to_spawn_player = TransitionPositions.Transition_Soirhbeach_Left_To_Overworld;
+                                break;
+                            }//end case to OVERWORLD
+                    }
+                    break;
+                }
+        case(int)Scenes.CASTLE:
+                {
+                    
+                    switch (index_to_region)
+                    {
+                        //...to the overworld
+                        case (int)Scenes.OVERWORLD:
+                            {
+                                m_CurrentRegion = Scenes.OVERWORLD;
+                                //then the position to spawn at is as follows:
+                                position_to_spawn_player = TransitionPositions.Transition_Castle_To_Overworld;
                                 break;
                             }//end case to OVERWORLD
                     }

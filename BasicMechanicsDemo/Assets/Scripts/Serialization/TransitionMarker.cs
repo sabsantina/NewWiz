@@ -11,10 +11,9 @@ public class TransitionMarker : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		Player player_component = other.gameObject.GetComponent<Player> ();
-		if (player_component != null) {
 			this.m_SerializationManager.Save ();
 			UnityEngine.SceneManagement.SceneManager.LoadScene ((int)leads_to);
-		}
+		
 	}
 
 }
