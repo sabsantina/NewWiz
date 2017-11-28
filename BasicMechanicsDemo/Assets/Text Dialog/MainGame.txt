@@ -1,14 +1,14 @@
-[title=introstart]
+[title=0s]
 ???: Ye, gods!
 <color=#1f29af>You</color>: <i>You feel as though someone had tripped on your leg.</i>
 ???: Oww, what the... oh no. Please don't be dead, please don't be dead...
 <color=#1f29af>You</color>: <i>You feel a warm touch on your neck.</i>
 ???: How in the name of everything holy is this man even alive...
 <color=#1f29af>You</color>: <i>You hear some rustling, then you smell something horrible. You open your eyes.</i>
-[title=introend]
+[title=0e]
 
 
-[title=1start]
+[title=1s]
 Stranger: G’day to you, my friend. I’m happy to see ye’re well! M ’name’s <color=#931971>Leoghaire</color>, what’s yours?
 <color=#1f29af>You</color>: ...
 <color=#931971>Leoghaire</color>: Are ye alright, lad? Why’re ye not speaking?
@@ -19,24 +19,24 @@ Stranger: G’day to you, my friend. I’m happy to see ye’re well! M ’name�
 <color=#1f29af>You</color>: ?
 <color=#931971>Leoghaire</color>: Why, we’re in Coille Forest, of course! Alright, let’s head to Soirbheach. It’s right to the south east of here; just gotta follow the path we’re on.
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>You can move with the WASD keys on your keyboard. W for up, A for left, S for down, and D for right. Try it now!
-[title=1end]
+[title=1e]
 
 
-[title=2start]
+[title=2s]
 <color=#931971>Leoghaire</color>: Great, ye ken how to walk, at least. The village’s not too far ahead, t’is just o’er those hills. Careful, though. I dinna ken ‘bout you, but most people steer clear of Coille Forest’s faerie hills. T’is mostly ‘cause half of ‘em are nothing more than superstitious halfwits, but wander alone in yer condition, and you’re sure to find yer way right into the stomach of a <color=#ce1c1c>Wolf</color> or two!
 <color=#1f29af>You</color>: *gulp*
 <color=#931971>Leoghaire</color>: Ah, don’t look so glum. Just stick with me and you’ll be fine!
 <color=#931971>Leoghaire</color>: Come on, now!
-[title=2end]
+[title=2e]
 
 
-[title=3start]
+[title=3s]
 <color=#931971>Leoghaire</color>: Ya ken, I’ll need to give ye a name. I can’t just call ye by “mister without memories”. What do you suggest?
 <color=#1f29af>You</color>: ...
 <color=#931971>Leoghaire</color>: Gee, alright, I’ll name ye. Let’s see… Yer skin is blue, which is… well, a first for me. I’ll just call you <color=#1f29af>Blue</color>. How’s that sound?
 <color=#1f29af>You</color>: ...
 <color=#931971>Leoghaire</color>: Haha, I like yer sense of humor, there. Alright. <color=#1f29af>Blue</color> it is!
-[title=3end]
+[title=3e]
 
 
 ******************************************************************************************************************************************************
@@ -44,9 +44,9 @@ SCENE 2 - Location: Coille Forest \ faerie hill || Day
 ******************************************************************************************************************************************************
 
 
-[title=4start]
+[title=4s]
 <color=#931971>Leoghaire</color>: Don’t forget, be careful around here, an’ don’t wander off too much.
-[title=4end]
+[title=4e]
 
 
 -------------------------
@@ -54,9 +54,9 @@ A <color=#ce1c1c>Wolf</color> appears next to the characters.
 -------------------------
 
 
-[title=5start]
+[title=5s]
 <color=#931971>Leoghaire</color>: Darn it, looks like we’ll have to fight our way through this time, lad. Let’s go!
-[title=5end]
+[title=5e]
 
 
 -------------------------
@@ -65,25 +65,25 @@ The <color=#ce1c1c>Wolf</color> attacks <color=#1f29af>Blue</color>. Points are 
 -------------------------
 
 
-[title=6start]
+[title=6s]
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>The red bar on the top left of the screen is your Health Points (HP). Every time you take a hit, it will deplete by some points. You can refill it with health potions, or with a healer. Careful: once it’s completely depleted, you will die!
 <color=#931971>Leoghaire</color>: Well, don’t just stand there!
-[title=7end]
+[title=7e]
 
 
 -------------------------
 Leoghaire heals <color=#1f29af>Blue</color> to full health.
 -------------------------
 
-[title=7start]
+[title=7s]
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>Look at that! You just remembered a spell!
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>You can attack by aiming with your mouse and clicking on your foe.
-[title=7end]
+[title=7e]
 
 
-[title-8start]
+[title-8s]
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>See that <color=#1f29af>Blue</color> bar, right under your HP bar? That’s your Mana Points (MP) indicator. Every time you cast a spell, it depletes. The stronger the spell, the more points it will take! Once it runs out, though, you won’t be able to cast spells anymore! But fear not, for in the case that happens, you would be able to refill it with Mana potions. Now, kill that <color=#ce1c1c>Wolf</color>!
-[title=8end]
+[title=8e]
 
 
 -------------------------
@@ -91,11 +91,11 @@ Wait until the <color=#ce1c1c>Wolf</color> is dead. The <color=#ce1c1c>Wolf</col
 -------------------------
 
 
-[title=9start]
+[title=9s]
 <color=#931971>Leoghaire</color>: Good job! Looks like the <color=#ce1c1c>Wolf</color> dropped <color=#1ca7ce>Inferior Mana Potion</color>! You can walk over it to collect it.
 <color=#1f29af>You</color>: ?
 <color=#931971>Leoghaire</color>: Oh, no, I don’t need it. I have plenty of them already. Come on, then. Take it.
-[title=9end]
+[title=9e]
 
 
 -------------------------
@@ -103,9 +103,9 @@ Nothing happens until player takes dropped item.
 -------------------------
 
 
-[title=10start]
+[title=10s]
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>Looks like you just collected an item! You can access it by going to your inventory. Click on the backpack icon!
-[title=10end]
+[title=10e]
 
 
 -------------------------
@@ -113,10 +113,10 @@ Game is frozen until player clicks on the inventory.
 -------------------------
 
 
-[title=11start]
+[title=11s]
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>You can find your equipment and potions on this screen. You can also drag an item into a hotkey holder. They're the 3 squares on bottom left.
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>Now, right-click on the <color=#1ca7ce>Inferior Mana Potion</color> to consume it.
-[title=11end]
+[title=11e]
 
 
 -------------------------
@@ -124,9 +124,9 @@ Game is frozen until player consumes the potion.
 -------------------------
 
 
-[title=12start]
+[title=12s]
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>Great! You can now close the inventory page by clicking on X in the top right.
-[title=12end]
+[title=12e]
 
 
 -------------------------
@@ -134,9 +134,9 @@ Wait until the player closes inventory.
 -------------------------
 
 
-[title=12start]
+[title=12s]
 <color=#931971>Leoghaire</color>: Great, now let’s get out of here.
-[title=12end]
+[title=12e]
 
 
 -------------------------
@@ -149,23 +149,23 @@ The setting is spaced out cottages and farms, since this is the entrance/outskir
 ******************************************************************************************************************************************************
 
 
-[title=13start]
+[title=13s]
 <color=#931971>Leoghaire</color>: Right, here’s the apothecary’s. I’ll be quick.
-[title=13end]
+[title=13e]
 
 
 -------------------------
 Leoghaire walks towards a hut and disappears. An NPC appears.
 -------------------------
 
-[title=14start]
+[title=14s]
 Old man: Hello there, young fella. I lost my 2 mana potions, could you help me find them? My old eyes are not so good anymore.
-[title=14end]
+[title=14e]
 
 
-[title=15start]
+[title=15s]
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>Some characters will give you bonus, optional quests. You can earn items, money, or even spells by fulfilling them. You can inquire any character in the future for a quest by walking up to them and pressing on E. Once you’ve finished a task, you can go back to the character, and get your reward!
-[title=15end]
+[title=15e]
 
 
 -------------------------
@@ -174,10 +174,10 @@ Leoghaire reappears.
 -------------------------
 
 
-[title=16start]
+[title=16s]
 <color=#931971>Leoghaire</color>: O’rright. Here, drink this. There’s no guarantee it’ll work, but there’s no harm in trying.
 <color=#1f29af>You</color>: ...
-[title=16end]
+[title=16e]
 
 
 -------------------------
@@ -185,7 +185,7 @@ The screen goes black. Three men are standing together: one is dressed in red, a
 -------------------------
 
 
-[title=17start]
+[title=17s]
 <color=#931971>Leoghaire</color>: Are ye okay, lad? You fainted there, for a minute. Did the potion work?
 <color=#1f29af>You</color>: ...
 <color=#931971>Leoghaire</color>: Red, orange and purple, you say? Ye couldn’t be talkin’ o’ the lairds, now, could you?
@@ -197,7 +197,7 @@ The screen goes black. Three men are standing together: one is dressed in red, a
 <color=#931971>Leoghaire</color>: Well, it could be possible. But I must warn ye: the lairds have become somewhat bits of tyrants, of late.
 <color=#1f29af>You</color>: …
 <color=#931971>Leoghaire</color>: O’rright, o’rright. Ye’ll be needing someone with all their wits about, so I guess I will accompany you to see the Red Laird. I’ve got a small errand to run first, though. We’ll meet at the village exit, near the path to Castle Chan Eil An Iar. In the meantime, I guess you could roam about the village.
-[title=17end]
+[title=17e]
 
 
 -------------------------
@@ -205,7 +205,7 @@ Leoghaire disappears. The player is free to move around the village, solving que
 -------------------------
 
 
-[title=18start]
+[title=18s]
 <color=#931971>Leoghaire</color>: There ye are! Ye had me thinkin' that maybe ye'd gotten another bout of memory loss! What took you so long?
 <color=#1f29af>You</color>: !!!
 <color=#931971>Leoghaire</color>: Whoa, calm yerself, there, lad. I dinna mean no disrespect. I just get fidgetty when I'm around as many people as there are in this village.

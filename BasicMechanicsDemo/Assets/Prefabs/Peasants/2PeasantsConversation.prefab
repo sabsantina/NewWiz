@@ -27,6 +27,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1288525415992798
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4083995847369110}
+  - component: {fileID: 114822470223835088}
+  m_Layer: 0
+  m_Name: TalkBehavior
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1312922430988984
 GameObject:
   m_ObjectHideFlags: 1
@@ -118,13 +134,26 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1799369806551342}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.625, y: 0.55, z: -1.25}
+  m_LocalPosition: {x: 11.9, y: 0, z: -47.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4275137266647338}
   - {fileID: 4653555522317284}
   - {fileID: 4836058324159906}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4083995847369110
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1288525415992798}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8.955507, y: -32.555126, z: 57.874115}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4836058324159906}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4275137266647338
@@ -177,7 +206,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4083995847369110}
   m_Father: {fileID: 4047651793305964}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -204,7 +234,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 1, z: 2.5}
+  m_Size: {x: 4, y: 1, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114032009147502362
 MonoBehaviour:
@@ -270,11 +300,11 @@ MonoBehaviour:
   checkIfColliderHasTag: 
   callbackScriptBeforeTalk: {fileID: 0}
   callbackFunctionBeforeTalk: 
-  lineToStart: 1start
-  lineToBreak: 1end
-  txtToParse: {fileID: 4900000, guid: 8f770a000b9ff454aa471ae6adb84a6a, type: 3}
-  callbackScriptAfterTalk: {fileID: 0}
-  callbackFunctionAfterTalk: 
+  lineToStart: 4s
+  lineToBreak: 4e
+  txtToParse: {fileID: 4900000, guid: 001de4e7131a497a8862a133c7766d44, type: 3}
+  callbackScriptAfterTalk: {fileID: 114822470223835088}
+  callbackFunctionAfterTalk: ShutUpAfterTrigger
   happenOnlyOnce: 0
   alreadyHappened: 0
   triggerEnter: 1
@@ -282,6 +312,17 @@ MonoBehaviour:
   shouldStayOnScreen: 0
   forbidPlayIfRpgtalkIsPlaying: 1
   timelineDirectorToPlay: {fileID: 0}
+--- !u!114 &114822470223835088
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1288525415992798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7324551696649a09d8456af3168917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &136188819153172150
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -341,7 +382,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300016, guid: 9added1a8e1028841ba133978a7348ae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -385,7 +426,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300012, guid: f2baa97549db4cc40a0250e7ba7abc58, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
