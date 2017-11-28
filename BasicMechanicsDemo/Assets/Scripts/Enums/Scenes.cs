@@ -8,5 +8,6 @@ public enum Scenes {
 	MAIN_MENU,
 	FOREST,
 	OVERWORLD,
+	GAME_OVER,
 	CASTLE
 }
