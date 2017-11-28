@@ -85,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1468042408330192}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -44.3, y: 1.1, z: -2.4}
+  m_LocalPosition: {x: -26.61, y: 0.55, z: 2.36}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 4408738752994248}
@@ -143,7 +143,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 1, z: 7}
+  m_Size: {x: 4, y: 1, z: 12}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114069777024690988
 MonoBehaviour:
@@ -172,13 +172,13 @@ MonoBehaviour:
   showWhenInteractionIsPossible: []
   interactionKey: 101
   checkIfColliderHasTag: 
-  callbackScriptBeforeTalk: {fileID: 0}
-  callbackFunctionBeforeTalk: 
-  lineToStart: 13s
-  lineToBreak: 13e
+  callbackScriptBeforeTalk: {fileID: 114560884398024448}
+  callbackFunctionBeforeTalk: StopPlayerFunctionalitiesForConversation
+  lineToStart: 0s
+  lineToBreak: 0e
   txtToParse: {fileID: 4900000, guid: 8f770a000b9ff454aa471ae6adb84a6a, type: 3}
   callbackScriptAfterTalk: {fileID: 114560884398024448}
-  callbackFunctionAfterTalk: GoToApothecary
+  callbackFunctionAfterTalk: NextCutscene
   happenOnlyOnce: 0
   alreadyHappened: 0
   triggerEnter: 1
@@ -199,6 +199,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parentTransform: {fileID: 4222155296711322}
   _spriteTransform: {fileID: 4408738752994248}
+  m_questmanager: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!114 &114570658465531600
 MonoBehaviour:
   m_ObjectHideFlags: 1
