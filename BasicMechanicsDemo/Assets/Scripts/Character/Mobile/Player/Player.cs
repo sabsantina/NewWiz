@@ -2,7 +2,7 @@
 * A script to manage the player's status.
 */
 
-#define TESTING_ZERO_HEALTH
+//#define TESTING_ZERO_HEALTH
 #define TESTING_MANA_REGEN
 #define TESTING_REGION
 //#define TESTING_ENABLE_RESURRECTION
