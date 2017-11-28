@@ -11,8 +11,11 @@ public class TransitionMarker : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		Player player_component = other.gameObject.GetComponent<Player> ();
-			this.m_SerializationManager.Save ();
-			UnityEngine.SceneManagement.SceneManager.LoadScene ((int)leads_to);
+        if(other.gameObject.GetComponent<MobileCharacter>() != null) {
+            this.m_SerializationManager.Save();
+            UnityEngine.SceneManagement.SceneManager.LoadScene((int)leads_to);
+        }
+			
 		
 	}
 
