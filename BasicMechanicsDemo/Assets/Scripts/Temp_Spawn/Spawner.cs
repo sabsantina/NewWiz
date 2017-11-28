@@ -73,6 +73,7 @@ public class Spawner : MonoBehaviour {
     [SerializeField] private GameObject m_RoosterMagePrefab;
 	//The rooster mage uses the same melee animation as the Rooster, so there's no need to get that again
 
+	[SerializeField] private GameObject m_RoosterKingPrefab;
 
 
 	private Sprite m_SpriteToBeUsed;
@@ -305,6 +306,21 @@ public class Spawner : MonoBehaviour {
 				RM_component.m_AttackPattern.m_SpellAnimatorManager = this.m_SpellAnimatorManager;
 				break;
 			}//end case ROOSTER MAGE
+
+			//Bos enemies
+		case (int)EnemyName.ROOSTER_KING:
+			{
+				if (parent != null) {
+					generated_instance = GameObject.Instantiate (this.m_RoosterKingPrefab, parent);
+				} else {
+					generated_instance = GameObject.Instantiate (this.m_RoosterKingPrefab);
+				}
+				RoosterKing RK_component = generated_instance.GetComponentInChildren<RoosterKing> ();
+				RK_component.m_AttackPattern.m_EnemyHitAnimation = this.m_ClawAnimationPrefab;
+				RK_component.SetPlayer (this.m_Player);
+				RK_component.m_AttackPattern.m_SpellAnimatorManager = this.m_SpellAnimatorManager;
+				break;
+			}
 		}//end switch
 		return generated_instance;
 	}//end f'n SpawnEnemy(EnemyName)
