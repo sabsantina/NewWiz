@@ -85,10 +85,16 @@
           <e p="ItemIcon.cs" t="Include" />
           <e p="ItemSlot.cs" t="Include" />
           <e p="Managers" t="Include">
+            <e p="Castle" t="Include">
+              <e p="CastleManager.cs" t="Include" />
+            </e>
             <e p="CoilleForest" t="Include">
               <e p="CoilleForestManager.cs" t="Include" />
             </e>
             <e p="MusicManager.cs" t="Include" />
+            <e p="Overworld" t="Include">
+              <e p="OverworldManager.cs" t="Include" />
+            </e>
             <e p="SpellAnimatorManager.cs" t="Include" />
             <e p="SpellEffectManager.cs" t="Include" />
             <e p="TextManager.cs" t="Include" />

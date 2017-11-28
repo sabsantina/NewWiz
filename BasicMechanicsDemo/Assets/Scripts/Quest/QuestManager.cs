@@ -45,6 +45,7 @@ public class QuestManager : MonoBehaviour
     [SerializeField] public GameObject m_Leoghaire;
 
     [SerializeField] public Image DarkScreen;
+
     //A list of cutscene boolean markers. each index is the number of the cutscene in MainGame.txt
     [SerializeField] public List<bool> CutscenesDone;
 
@@ -74,11 +75,11 @@ public class QuestManager : MonoBehaviour
     {
         int active_scene_index = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
         Scenes current_scene = Player.ReturnSceneAtIndex(active_scene_index);
-        
+
         if (current_scene == Scenes.FOREST && !CutscenesDone[0])
         {
             m_Player.transform.position = new Vector3(-28.7f, 0.55f, 2.51f);
-            DarkScreen.color = new Color(0,0,0,1);
+            DarkScreen.color = new Color(0, 0, 0, 1);
         }
     }
 
@@ -281,6 +282,13 @@ public class QuestManager : MonoBehaviour
 
     public void FinishCutscene()
     {
+        StartCoroutine("NextCutscene");
+    }
+
+    float oldEnemyDamageValue;
+
+    public IEnumerator NextCutscene()
+    {
         RPGTalkArea rpgTalkArea = m_Leoghaire.GetComponentInChildren<RPGTalkArea>();
         LeoghaireBehaviour leoghaireBehaviour = m_Leoghaire.GetComponentInChildren<LeoghaireBehaviour>();
         for (int i = 0; i < CutscenesDone.Count; ++i)
@@ -293,7 +301,7 @@ public class QuestManager : MonoBehaviour
                     case 0:
                     {
                         DarkScreen.color = new Color(0, 0, 0, 0);
-                        rpgTalkArea.rpgtalkTarget.NewTalk("1s","1e");
+                        rpgTalkArea.rpgtalkTarget.NewTalk("1s", "1e");
                         break;
                     }
                     case 1:
@@ -308,14 +316,66 @@ public class QuestManager : MonoBehaviour
                     }
                     case 3:
                     {
+                        leoghaireBehaviour.enemy.gameObject.SetActive(true);
+                        oldEnemyDamageValue = leoghaireBehaviour.enemy.m_AttackDamageValue;
+                        leoghaireBehaviour.enemy.Pause();
+                        rpgTalkArea.rpgtalkTarget.NewTalk("4s", "4e");
+                        break;
+                    }
+                    case 4:
+                    {
+                        leoghaireBehaviour.enemy.Resume();
+                        float currentHealth = m_Player.m_Health;
+                        while (m_Player.m_Health == currentHealth)
+                        {
+                            currentHealth = m_Player.m_Health;
+                            yield return new WaitForSeconds(1);
+                        }
+                        leoghaireBehaviour.enemy.Pause();
+                        leoghaireBehaviour.enemy.m_AttackDamageValue = 0;
+                        rpgTalkArea.shouldInteractWithButton = true;
+                        rpgTalkArea.interactionKey = KeyCode.E;
+                        break;
+                    }
+                    case 5:
+                    {
+                        break;
+                    }
+                    case 6:
+                    {
+                        leoghaireBehaviour.enemy.Resume();
+                        leoghaireBehaviour.enemy.m_AttackDamageValue = 10;
+                        float currentMana = m_Player.m_Mana;
+                        while (m_Player.m_Mana == currentMana)
+                        {
+                            currentMana = m_Player.m_Mana;
+                            yield return new WaitForSeconds(1);
+                        }
+                        leoghaireBehaviour.enemy.Pause();
+                        leoghaireBehaviour.enemy.m_AttackDamageValue = 0;
+                        break;
+                    }
+                    case 7:
+                    {
+                        leoghaireBehaviour.enemy.Resume();
+                        leoghaireBehaviour.enemy.m_AttackDamageValue = 10;
+                        while(leoghaireBehaviour.enemy != null)
+                            yield return new WaitForSeconds(1);
+                        rpgTalkArea.shouldInteractWithButton = false;
+                        rpgTalkArea.triggerEnter = true;
+                        break;
+                    }
+                    case 8:
+                    {
                         break;
                     }
                 }
-                rpgTalkArea.NewCutscene(i+1);
+                rpgTalkArea.NewCutscene(i + 1);
+                if (i + 1 >= 5 && i+1 <= 7)
+                    rpgTalkArea.StartNext();
                 break;
             }
         }
-
     }
 }
 

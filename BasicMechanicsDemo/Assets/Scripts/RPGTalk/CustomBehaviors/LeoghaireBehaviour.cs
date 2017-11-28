@@ -10,10 +10,12 @@ public class LeoghaireBehaviour : MonoBehaviour
 
 	[SerializeField] private QuestManager m_questmanager;
 
+	[SerializeField] public DefaultEnemy enemy;
+
 	private bool _flippedOnce, _goToHalfOfCoille, _goToEndOfCoille, _goToApothecary;
 	// Use this for initialization
-	void Start () {
-		
+	void Awake () {
+		enemy.gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame

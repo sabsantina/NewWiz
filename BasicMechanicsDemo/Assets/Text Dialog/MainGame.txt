@@ -72,12 +72,11 @@ Leoghaire heals <color=#1f29af>Blue</color> to full health.
 -------------------------
 
 [title=6s]
-<color=#ce6d0c>System</color>:  <color=#AE4949FF>Look at that! You just remembered a spell!
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>You can attack by aiming with your mouse and clicking on your foe.
 [title=6e]
 
 
-[title7s]
+[title=7s]
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>See that <color=#1f29af>Blue</color> bar, right under your HP bar? That’s your Mana Points (MP) indicator. Every time you cast a spell, it depletes. The stronger the spell, the more points it will take! Once it runs out, though, you won’t be able to cast spells anymore! But fear not, for in the case that happens, you would be able to refill it with Mana potions. Now, kill that <color=#ce1c1c>Wolf</color>!
 [title=7e]
 
@@ -88,7 +87,7 @@ Wait until the <color=#ce1c1c>Wolf</color> is dead. The <color=#ce1c1c>Wolf</col
 
 
 [title=8s]
-<color=#931971>Leoghaire</color>: Good job! Looks like the <color=#ce1c1c>Wolf</color> dropped <color=#1ca7ce>Inferior Mana Potion</color>! You can walk over it to collect it.
+<color=#931971>Leoghaire</color>: Holy Fae, you turned into a wand! No matter, you did a good job! Looks like the <color=#ce1c1c>Wolf</color> dropped <color=#1ca7ce>Inferior Mana Potion</color>! You can walk over it to collect it.
 <color=#1f29af>You</color>: ?
 <color=#931971>Leoghaire</color>: Oh, no, I don’t need it. I have plenty of them already. Come on, then. Take it.
 [title=8e]
