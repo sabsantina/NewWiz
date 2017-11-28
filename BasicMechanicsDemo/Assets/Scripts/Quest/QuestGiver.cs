@@ -173,6 +173,12 @@ public class QuestGiver : Interactable {
 
 	public void RewardPlayer()
 	{
+		if (this.m_QuestToGive.m_QuestName == QuestName.DOUBLE_TROUBLE) {
+			this.m_PlayerInventory.gameObject.GetComponent<Player> ().PLAYER_FULL_HEALTH *= 2.0f;
+			this.m_PlayerInventory.gameObject.GetComponent<Player> ().PLAYER_FULL_MANA *= 2.0f;
+			this.m_PlayerInventory.gameObject.GetComponent<Player> ().m_MagicAffinity += 2.0f;
+			this.m_PlayerInventory.gameObject.GetComponent<Player> ().m_ManaRegenMultiplier *= 10.0f;
+		}
 		if (this.m_RewardItem != null) {
 			this.m_PlayerInventory.AddItem (this.m_RewardItem);
 		}

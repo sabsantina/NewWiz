@@ -350,6 +350,7 @@ public class PlayerInventory : MonoBehaviour {
 	/**A function to decrement the item dictionary entry with key [item]; returns false if the entry can't be decremented and elsewis returns true.*/
 	public bool useItem(ItemClass item)
 	{
+		Debug.Log ("Is menu open? " + PlayerCastSpell.m_MenuOpen);
 		if (PlayerCastSpell.m_MenuOpen) {
 			return false;
 		}
@@ -372,11 +373,13 @@ public class PlayerInventory : MonoBehaviour {
 	/**A function to apply the effects of consuming an item, after having checked if consumption of that item is possible, and then subtracting from the item quantity to show the item's been consumed.*/
 	public void itemEffectUsage(ItemClass item)
 	{
+		
 		if (useItem (item)) 
 		{
 			switch (item.m_ItemEffect) 
 			{
 			case ItemEffect.Gain_Health:
+				Debug.Log ("Using item " + item.m_ItemName.ToString ());
 				gameObject.GetComponent<Player> ().AffectHealth (item.effectAmount);
 				break;
 			case ItemEffect.Gain_Mana:
