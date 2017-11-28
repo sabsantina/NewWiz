@@ -12,7 +12,7 @@ public class LeoghaireBehaviour : MonoBehaviour
 
 	[SerializeField] public DefaultEnemy enemy;
 
-	private bool _flippedOnce, _goToHalfOfCoille, _goToEndOfCoille, _goToApothecary;
+	private bool _flippedOnce, _goToHalfOfCoille, _goToEndOfCoille, _goToApothecary, _leaveCoille;
 	// Use this for initialization
 	void Awake () {
 		enemy.gameObject.SetActive(false);
@@ -21,18 +21,22 @@ public class LeoghaireBehaviour : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 		if (_goToHalfOfCoille)
-		{
 			MoveRightTowardsX(-20.2f, ref _goToHalfOfCoille);
-		}
 		else if(_goToEndOfCoille)
 			MoveRightTowardsX(-3.24f, ref _goToEndOfCoille);
+		else if (_leaveCoille)
+		{
+			MoveRightTowardsX(13.81694f, ref _leaveCoille);
+			if(!_leaveCoille)
+				_parentTransform.gameObject.SetActive(false);
+		}
 		else if (_goToApothecary)
 		{
 			if (_parentTransform.position.x < -21.2f)
 				_parentTransform.position += new Vector3(8 * Time.deltaTime, 0, 0);
 			else if (_parentTransform.position.z < 0.7f)
 			{
-				if(!_flippedOnce)
+				if (!_flippedOnce)
 					Flip();
 				_parentTransform.position += new Vector3(0, 0, 8 * Time.deltaTime);
 			}
@@ -90,12 +94,19 @@ public class LeoghaireBehaviour : MonoBehaviour
 		Flip();
 		_goToHalfOfCoille = true;
 	}
-
+	
 	public void GotToEndOfCoille()
 	{
 		ShutUpAfterTrigger();
 		Flip();
 		_goToEndOfCoille = true;
+	}
+
+	public void LeaveCoille()
+	{
+		ShutUpAfterTrigger();
+		Flip();
+		_leaveCoille = true;
 	}
 	
 	public void GoToApothecary()
