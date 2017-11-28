@@ -11,6 +11,8 @@ public enum QuestName {
 	 * bring them back to the NPC*/
 	POTION_MASTER,
 	/**Quest HOT_CHICKS, where the player is given the quest by a peasant NPC and has to kill 3 fire-shooting roosters.*/
-	HOT_CHICKS
+	HOT_CHICKS,
+	/*Quest DOUBLE_TROUBLE, where the player has to kill a small platoon of soldiers*/
+	DOUBLE_TROUBLE
 
 }

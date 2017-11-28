@@ -239,6 +239,7 @@ public class Spawner : MonoBehaviour {
 				QuestItem quest_item = generated_instance.GetComponent<QuestItemPickup> ().m_QuestItem;
 				quest_item.m_QuestItemName = QuestItemName.POTION_OF_WISDOM;
 				quest_item.m_QuestItemSprite = this.m_PotionOfWisdomSprite;
+				generated_instance.GetComponentInChildren<SpriteRenderer> ().sprite = quest_item.m_QuestItemSprite;
 				break;
 			}//end case Potion of wisdom (POTION MASTER quest)
 		}//end switch

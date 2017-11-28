@@ -40,6 +40,12 @@ public class QuestManager : MonoBehaviour
     /**The number of quest enemies to kill*/
     public int NUMBER_ENEMIES_HOTCHICKS = 3;
 
+	/*	For quest Double Trouble	*/
+
+	[SerializeField] public GameObject m_ArmoredSoldierPrefab;
+
+	public int NUMBER_ENEMIES_DOUBLETROUBLE = 10;
+
     [SerializeField] public GameObject m_QuestGiver_Generic;
 
     [SerializeField] public GameObject m_Leoghaire;
@@ -128,6 +134,11 @@ public class QuestManager : MonoBehaviour
 			Scenes.OVERWORLD, new Vector3(5.74f, 0.55f, 2f), m_FireChicken);
 		QuestGiver qgHotChicks = GenerateQuestGiver(new Vector3(-15.96f, 0.55f, -14.08f), new[] {ItemName.Mana_Potion}, new[] {SpellName.Thunderball});
         Add(ref hotChicks, ref qgHotChicks);
+
+		Quest doubleTrouble = GenerateKillEverything (QuestName.DOUBLE_TROUBLE, "Double trouble!", NUMBER_ENEMIES_DOUBLETROUBLE, Scenes.OVERWORLD, 
+			                      new Vector3 (5.74f * 2.0f, 0.55f, 2.0f * 2.0f), this.m_ArmoredSoldierPrefab);
+		QuestGiver qgDoubleTrouble = GenerateQuestGiver (new Vector3 (-15.96f * 2.0f, 0.55f, -14.08f * 2.0f), new[] { ItemName.Health_Potion }, new[] { SpellName.Tornado });
+		Add (ref doubleTrouble, ref qgDoubleTrouble);
 
 //		this.ManageQuestGiversInScene ();
     } //end f'n void InitializeAllQuests()
