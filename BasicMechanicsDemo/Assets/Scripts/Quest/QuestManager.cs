@@ -89,20 +89,20 @@ public class QuestManager : MonoBehaviour
     private void InitializeAllQuests()
     {
         //Rooster bane
-		Quest roosterBane = GenerateKillEverything(QuestName.ROOSTER_BANE, "Rooster Bane!", NUMBER_ENEMIES_ROOSTERBANE, Scenes.DEMO_AREA,
+		Quest roosterBane = GenerateKillEverything(QuestName.ROOSTER_BANE, "Rooster Bane!", NUMBER_ENEMIES_ROOSTERBANE, Scenes.OVERWORLD,
 		    new Vector3(15.74f, 0.55f, -0.43f), m_DefautRoosterPrefab);
 	    QuestGiver qgRoosterBane = GenerateQuestGiver(new Vector3(-13.39f, 0.55f, -0.43f), new []{ItemName.Health_Potion}, null);
 	    Add(ref roosterBane, ref qgRoosterBane);
 	    
         //Potion master
 	    Quest potionMaster = GenerateFetch(QuestName.POTION_MASTER, "Potion Master!", NUMBER_ITEMS_POTIONMASTER, QuestItemName.POTION_OF_WISDOM,
-			Scenes.DEMO_AREA, new Vector3(15.74f, 0.55f, -0.43f), m_DefaultPotionQuestItemPrefab);
+			Scenes.OVERWORLD, new Vector3(15.74f, 0.55f, -0.43f), m_DefaultPotionQuestItemPrefab);
 	    QuestGiver qgPotionMaster = GenerateQuestGiver(new Vector3(-6.718053f, 0.55f, -11.17016f), new[] {ItemName.Health_Potion}, new[] {SpellName.Iceball});
 	    Add(ref potionMaster, ref qgPotionMaster);
 	    
         //Hot Chicks
         Quest hotChicks = GenerateKillEverything(QuestName.HOT_CHICKS, "Hot Chicks!", NUMBER_ENEMIES_HOTCHICKS,
-			Scenes.DEMO_AREA, new Vector3(5.74f, 0.55f, 2f), m_FireChicken);
+			Scenes.OVERWORLD, new Vector3(5.74f, 0.55f, 2f), m_FireChicken);
 	    QuestGiver qgHotChicks = GenerateQuestGiver(new Vector3(-15.96f, 0.55f, -14.08f), new[] {ItemName.Mana_Potion}, null);
 	    Add(ref hotChicks, ref qgHotChicks);
 
