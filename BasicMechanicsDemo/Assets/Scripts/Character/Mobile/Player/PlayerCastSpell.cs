@@ -69,7 +69,7 @@ public class PlayerCastSpell : MonoBehaviour {
 	public float m_ManaToDrain = 0.0f;
 	/**A bool to tell us whether or not a given menu is open; if so, the player shouldn't be able to cast spells.*/
 //	public bool m_MenuOpen = true;
-	public static bool m_MenuOpen = true;
+	public static bool m_MenuOpen = false;
 
 	private float m_InputTimer = 0.0f;
 
