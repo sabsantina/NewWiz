@@ -42,6 +42,7 @@ public class Serialization_Manager : MonoBehaviour {
 			else if (load_game_intval == 0) {
 				//then load in the quest information for the quest objects that belong to this region
 				this.Load();
+//				this.Save ();
 			}
 			//if we're not starting a new game...
 			if (load_game_intval != 1) {
