@@ -23,3 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Soirhbeach.unity
     guid: 1f124b441150b44d4b232730ab6572f4
+  - enabled: 1
+    path: Assets/Scenes/Castle Chan.unity
+    guid: 7793c365f82573e4aaa1b23cc4bf6f41

@@ -9,6 +9,6 @@ public enum Scenes {
 	FOREST,
 	OVERWORLD,
     SOIRHBEACH,
-	GAME_OVER,
-	CASTLE
+	CASTLE,
+	GAME_OVER
 }
