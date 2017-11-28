@@ -8,7 +8,7 @@
 //#define TESTING_ENABLE_RESURRECTION
 //#define TESTING_SET_INITIAL_REGION_TO_DEMO
 //A macro to leave player position unmodified on scene load (to avoid going by the menu every time)
-#define TESTING_OVERRIDEPOSITIONING
+//#define TESTING_OVERRIDEPOSITIONING
 #define TESTING_PRINT_ACTIVE_SCENE
 
 using System.Collections;
@@ -101,15 +101,15 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 	{
 		this.m_Animator = this.GetComponent<Animator> ();
 		this.m_audioSource = GetComponent<AudioSource> ();
-		//Start off with full health
-		this.m_Health = PLAYER_FULL_HEALTH;
-		setMaxMeter (healthMeter, this.m_Health);
-		setMeterValue (healthMeter, this.m_Health);
-		
-		//Start off with full mana
-		this.m_Mana = PLAYER_FULL_MANA;
-		setMaxMeter (manaMeter, this.m_Mana);
-		setMeterValue (manaMeter, this.m_Mana);
+//		//Start off with full health
+//		this.m_Health = PLAYER_FULL_HEALTH;
+//		setMaxMeter (healthMeter, this.m_Health);
+//		setMeterValue (healthMeter, this.m_Health);
+//		
+//		//Start off with full mana
+//		this.m_Mana = PLAYER_FULL_MANA;
+//		setMaxMeter (manaMeter, this.m_Mana);
+//		setMeterValue (manaMeter, this.m_Mana);
         //The sorting layer name is retrieved from unity
         this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingLayerName = sortingLayerName;
 
@@ -131,6 +131,7 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 
 				//Should probably do this in the serialization manager; come back to it
 //				this.m_SerializationManager.Load();
+
 				this.PositionPlayerAtEntrance((int)m_CurrentRegion, current_scene_build_index);
 				m_CurrentRegion = ReturnSceneAtIndex (current_scene_build_index);
 			}
@@ -140,6 +141,16 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 		#endif
 		//else if we're starting a new game
 		if (user_menu_choice == 1) {
+			//Start off with full health
+			this.m_Health = PLAYER_FULL_HEALTH;
+			setMaxMeter (healthMeter, this.m_Health);
+			setMeterValue (healthMeter, this.m_Health);
+
+			//Start off with full mana
+			this.m_Mana = PLAYER_FULL_MANA;
+			setMaxMeter (manaMeter, this.m_Mana);
+			setMeterValue (manaMeter, this.m_Mana);
+
 			#if TESTING_SET_INITIAL_REGION_TO_DEMO
 			Debug.Log("Player::Starting new game; setting player test region to DEMO AREA and position to Respawn Position");
 			m_CurrentRegion = Scenes.DEMO_AREA;
@@ -192,6 +203,21 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 				}
 				break;
 			}//end case from DEMO AREA
+			//if we're going from the forest...
+		case (int)Scenes.FOREST:
+			{
+				switch (index_to_region) {
+				//...to the overworld
+				case (int)Scenes.OVERWORLD:
+					{
+						m_CurrentRegion = Scenes.OVERWORLD;
+						//then the position to spawn at is as follows:
+						position_to_spawn_player = TransitionPositions.Transition_Forest_To_Overworld;
+						break;
+					}//end case to overworld
+				}//end switch
+				break;
+			}//end case from forest
 		//if we're going from the overworld...
 		case (int)Scenes.OVERWORLD:
 			{
@@ -204,26 +230,36 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 						position_to_spawn_player = TransitionPositions.Transition_Overworld_To_Demo;
 						break;
 					}//end case to DEMO AREA
+					//...to Soirhbeach
                 case (int)Scenes.SOIRHBEACH:
 					{
                         m_CurrentRegion = Scenes.SOIRHBEACH;
 						//then the position to spawn at is as follows:
 						position_to_spawn_player = TransitionPositions.Transition_Overworld_To_Left_Soirhbeach;
 						break;
-					}//end case to DEMO AREA
+					}//end case to soirhbeach
+					//...to the castle
                 case (int)Scenes.CASTLE:
 					{
                         m_CurrentRegion = Scenes.CASTLE;
 						//then the position to spawn at is as follows:
 						position_to_spawn_player = TransitionPositions.Transition_Overworld_To_Castle;
 						break;
-					}//end case to DEMO AREA
+					}//end case to castle
+					//...to the forest
+				case (int)Scenes.FOREST:
+					{
+						m_CurrentRegion = Scenes.FOREST;
+						//then the position to spawn at is as follows:
+						position_to_spawn_player = TransitionPositions.Transition_Overworld_To_Forest;
+						break;
+					}//end case to forest
 				}//end switch
 				break;
 			}//end case from OVERWORLD
+			//if we're going from soirhbeach...
         case(int)Scenes.SOIRHBEACH:
                 {
-                    
                     switch (index_to_region)
                     {
                         //...to the overworld
