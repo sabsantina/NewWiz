@@ -29,6 +29,9 @@ public class RoosterKing : BossEnemy {
 
 		this.SetChasePlayerSettings (this.m_RoosterKingChasePlayerDuration);
 		this.m_EnemyName = EnemyName.ROOSTER_KING;
+
+		this.m_MovementPattern.m_EnemyDefaultVelocity = 5.0f;
+		this.m_MovementPattern.m_ChaseVelocity = 18.0f;
 	}
 
 
@@ -38,6 +41,10 @@ public class RoosterKing : BossEnemy {
 		base.Update ();
 		//Manage death
 		this.Die ();
+
+		if (this.m_Health <= 0.0f) {
+			OverworldManager.m_RoosterKingDead = true;
+		}
 
 		#if TESTING_SPELL_SELECTION
 		this.SetSpellToCast (this.m_AttackSpell);
