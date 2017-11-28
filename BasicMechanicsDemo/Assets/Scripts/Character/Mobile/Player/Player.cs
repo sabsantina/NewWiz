@@ -6,7 +6,9 @@
 #define TESTING_MANA_REGEN
 #define TESTING_REGION
 //#define TESTING_ENABLE_RESURRECTION
-#define TESTING_SET_INITIAL_REGION_TO_DEMO
+//#define TESTING_SET_INITIAL_REGION_TO_DEMO
+//A macro to leave player position unmodified on scene load (to avoid going by the menu every time)
+#define TESTING_OVERRIDEPOSITIONING
 #define TESTING_PRINT_ACTIVE_SCENE
 
 using System.Collections;
@@ -112,6 +114,8 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
         this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingLayerName = sortingLayerName;
 
 		int user_menu_choice = UnityEngine.PlayerPrefs.GetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME);
+		#if TESTING_OVERRIDEPOSITIONING
+		#else
 		//if we're not starting a new game and nor are we loading, via a menu specifically (meaning we're loading during a scene transition)
 		if (user_menu_choice == 0) {
 			int current_scene_build_index = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex;
@@ -131,8 +135,9 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 				m_CurrentRegion = ReturnSceneAtIndex (current_scene_build_index);
 			}
 			//Update playerpref
-			UnityEngine.PlayerPrefs.SetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME, 0);
+//			UnityEngine.PlayerPrefs.SetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME, 0);
 		}
+		#endif
 		//else if we're starting a new game
 		if (user_menu_choice == 1) {
 			#if TESTING_SET_INITIAL_REGION_TO_DEMO
@@ -140,9 +145,10 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 			m_CurrentRegion = Scenes.DEMO_AREA;
 			this.transform.position = this.m_PlayerRespawnPosition;
 			#else
-			this.m_CurrentRegion = Scenes.FOREST;
-			Vector3 starting_position = new Vector3(/*x, y, z*/);//Where does the player start?
+			Player.m_CurrentRegion = Scenes.FOREST;
+			Vector3 starting_position = new Vector3(-28.7f, 0.55f, 2.51f);//Where does the player start?
 			this.transform.position = starting_position;
+//			this.m_PlayerRespawnPosition = starting_position;
 			#endif
 			//Update playerpref
 			UnityEngine.PlayerPrefs.SetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME, 0);
@@ -260,6 +266,14 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 		}
 		#endif
 
+		if (PlayerInteraction.m_IsTalking) {
+//			Player cast spell will not run if m_IsTalking is set to true
+			//so all that's left to worry about is player movement
+			this.GetComponent<PlayerMovement> ().DisableMovement ();
+		} else {
+			this.GetComponent<PlayerMovement> ().EnableMovement ();
+		}
+
 		if (this.m_IsAffectedBySpell) {
 			this.ApplySpellEffect (this.m_SpellAffectingPlayer);
 		}
@@ -293,6 +307,8 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 		this.UpdateAnimatorParameters ();
 
 	}//end f'n void Update
+
+
 
 	private void UpdateCanCastSpell()
 	{
