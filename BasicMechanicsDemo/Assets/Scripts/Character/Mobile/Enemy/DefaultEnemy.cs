@@ -375,6 +375,15 @@ public abstract class DefaultEnemy : MonoBehaviour, IEnemy, ICanBeDamagedByMagic
 		return this.m_SpellToApply;
 	}
 
+	public void Pause()
+	{
+		m_MovementPattern.paused = true;
+	}
+
+	public void Resume()
+	{
+		m_MovementPattern.paused = false;
+	}
 //	/**A function to set the enemy that's attacking, so we can apply the specific damage to the target*/
 //	public virtual void SetAttacker(DefaultEnemy enemy)
 //	{
