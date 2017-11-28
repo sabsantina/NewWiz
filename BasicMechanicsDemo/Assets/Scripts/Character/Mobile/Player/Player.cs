@@ -6,7 +6,9 @@
 #define TESTING_MANA_REGEN
 #define TESTING_REGION
 //#define TESTING_ENABLE_RESURRECTION
-#define TESTING_SET_INITIAL_REGION_TO_DEMO
+//#define TESTING_SET_INITIAL_REGION_TO_DEMO
+//A macro to leave player position unmodified on scene load (to avoid going by the menu every time)
+//#define TESTING_OVERRIDEPOSITIONING
 #define TESTING_PRINT_ACTIVE_SCENE
 
 using System.Collections;
@@ -99,19 +101,21 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 	{
 		this.m_Animator = this.GetComponent<Animator> ();
 		this.m_audioSource = GetComponent<AudioSource> ();
-		//Start off with full health
-		this.m_Health = PLAYER_FULL_HEALTH;
-		setMaxMeter (healthMeter, this.m_Health);
-		setMeterValue (healthMeter, this.m_Health);
-		
-		//Start off with full mana
-		this.m_Mana = PLAYER_FULL_MANA;
-		setMaxMeter (manaMeter, this.m_Mana);
-		setMeterValue (manaMeter, this.m_Mana);
+//		//Start off with full health
+//		this.m_Health = PLAYER_FULL_HEALTH;
+//		setMaxMeter (healthMeter, this.m_Health);
+//		setMeterValue (healthMeter, this.m_Health);
+//		
+//		//Start off with full mana
+//		this.m_Mana = PLAYER_FULL_MANA;
+//		setMaxMeter (manaMeter, this.m_Mana);
+//		setMeterValue (manaMeter, this.m_Mana);
         //The sorting layer name is retrieved from unity
         this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingLayerName = sortingLayerName;
 
 		int user_menu_choice = UnityEngine.PlayerPrefs.GetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME);
+		#if TESTING_OVERRIDEPOSITIONING
+		#else
 		//if we're not starting a new game and nor are we loading, via a menu specifically (meaning we're loading during a scene transition)
 		if (user_menu_choice == 0) {
 			int current_scene_build_index = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex;
@@ -127,22 +131,35 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 
 				//Should probably do this in the serialization manager; come back to it
 //				this.m_SerializationManager.Load();
+
 				this.PositionPlayerAtEntrance((int)m_CurrentRegion, current_scene_build_index);
 				m_CurrentRegion = ReturnSceneAtIndex (current_scene_build_index);
 			}
 			//Update playerpref
-			UnityEngine.PlayerPrefs.SetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME, 0);
+//			UnityEngine.PlayerPrefs.SetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME, 0);
 		}
+		#endif
 		//else if we're starting a new game
 		if (user_menu_choice == 1) {
+			//Start off with full health
+			this.m_Health = PLAYER_FULL_HEALTH;
+			setMaxMeter (healthMeter, this.m_Health);
+			setMeterValue (healthMeter, this.m_Health);
+
+			//Start off with full mana
+			this.m_Mana = PLAYER_FULL_MANA;
+			setMaxMeter (manaMeter, this.m_Mana);
+			setMeterValue (manaMeter, this.m_Mana);
+
 			#if TESTING_SET_INITIAL_REGION_TO_DEMO
 			Debug.Log("Player::Starting new game; setting player test region to DEMO AREA and position to Respawn Position");
 			m_CurrentRegion = Scenes.DEMO_AREA;
 			this.transform.position = this.m_PlayerRespawnPosition;
 			#else
-			this.m_CurrentRegion = Scenes.FOREST;
-			Vector3 starting_position = new Vector3(/*x, y, z*/);//Where does the player start?
+			Player.m_CurrentRegion = Scenes.FOREST;
+			Vector3 starting_position = new Vector3(-28.7f, 0.55f, 2.51f);//Where does the player start?
 			this.transform.position = starting_position;
+//			this.m_PlayerRespawnPosition = starting_position;
 			#endif
 			//Update playerpref
 			UnityEngine.PlayerPrefs.SetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME, 0);
@@ -178,6 +195,7 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 				//...to the overworld
 				case (int)Scenes.OVERWORLD:
 					{
+                        m_CurrentRegion = Scenes.OVERWORLD;
 						//then the position to spawn at is as follows:
 						position_to_spawn_player = TransitionPositions.Transition_Demo_To_Overworld;
 						break;
@@ -185,6 +203,21 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 				}
 				break;
 			}//end case from DEMO AREA
+			//if we're going from the forest...
+		case (int)Scenes.FOREST:
+			{
+				switch (index_to_region) {
+				//...to the overworld
+				case (int)Scenes.OVERWORLD:
+					{
+						m_CurrentRegion = Scenes.OVERWORLD;
+						//then the position to spawn at is as follows:
+						position_to_spawn_player = TransitionPositions.Transition_Forest_To_Overworld;
+						break;
+					}//end case to overworld
+				}//end switch
+				break;
+			}//end case from forest
 		//if we're going from the overworld...
 		case (int)Scenes.OVERWORLD:
 			{
@@ -192,20 +225,55 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 				switch (index_to_region) {
 				case (int)Scenes.DEMO_AREA:
 					{
+                        m_CurrentRegion = Scenes.DEMO_AREA;
 						//then the position to spawn at is as follows:
 						position_to_spawn_player = TransitionPositions.Transition_Overworld_To_Demo;
 						break;
 					}//end case to DEMO AREA
+					//...to Soirhbeach
                 case (int)Scenes.SOIRHBEACH:
 					{
+                        m_CurrentRegion = Scenes.SOIRHBEACH;
 						//then the position to spawn at is as follows:
 						position_to_spawn_player = TransitionPositions.Transition_Overworld_To_Left_Soirhbeach;
 						break;
-					}//end case to DEMO AREA
+					}//end case to soirhbeach
+					//...to the castle
+                case (int)Scenes.CASTLE:
+					{
+                        m_CurrentRegion = Scenes.CASTLE;
+						//then the position to spawn at is as follows:
+						position_to_spawn_player = TransitionPositions.Transition_Overworld_To_Castle;
+						break;
+					}//end case to castle
+					//...to the forest
+				case (int)Scenes.FOREST:
+					{
+						m_CurrentRegion = Scenes.FOREST;
+						//then the position to spawn at is as follows:
+						position_to_spawn_player = TransitionPositions.Transition_Overworld_To_Forest;
+						break;
+					}//end case to forest
 				}//end switch
 				break;
 			}//end case from OVERWORLD
+			//if we're going from soirhbeach...
         case(int)Scenes.SOIRHBEACH:
+                {
+                    switch (index_to_region)
+                    {
+                        //...to the overworld
+                        case (int)Scenes.OVERWORLD:
+                            {
+                                m_CurrentRegion = Scenes.OVERWORLD;
+                                //then the position to spawn at is as follows:
+                                position_to_spawn_player = TransitionPositions.Transition_Soirhbeach_Left_To_Overworld;
+                                break;
+                            }//end case to OVERWORLD
+                    }
+                    break;
+                }
+        case(int)Scenes.CASTLE:
                 {
                     
                     switch (index_to_region)
@@ -213,19 +281,16 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
                         //...to the overworld
                         case (int)Scenes.OVERWORLD:
                             {
+                                m_CurrentRegion = Scenes.OVERWORLD;
                                 //then the position to spawn at is as follows:
-                                if(this.transform.position.x < -10.0f)
-                                    position_to_spawn_player = TransitionPositions.Transition_Soirhbeach_Left_To_Overworld;
-                                else
-                                    position_to_spawn_player = TransitionPositions.Transition_Soirhbeach_Right_To_Overworld;
+                                position_to_spawn_player = TransitionPositions.Transition_Castle_To_Overworld;
                                 break;
                             }//end case to OVERWORLD
                     }
                     break;
                 }
 		}//end switch
-        //Will change back to getting the transform.position set when the testing stops. This works weird when you start at a specific scene other than main menu.
-		this.m_PlayerRespawnPosition = position_to_spawn_player;
+		this.transform.position = position_to_spawn_player;
 	}
 
 	void Update()
@@ -236,6 +301,14 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 			Debug.Log("Player current region: " + m_CurrentRegion.ToString());
 		}
 		#endif
+
+		if (PlayerInteraction.m_IsTalking) {
+//			Player cast spell will not run if m_IsTalking is set to true
+			//so all that's left to worry about is player movement
+			this.GetComponent<PlayerMovement> ().DisableMovement ();
+		} else {
+			this.GetComponent<PlayerMovement> ().EnableMovement ();
+		}
 
 		if (this.m_IsAffectedBySpell) {
 			this.ApplySpellEffect (this.m_SpellAffectingPlayer);
@@ -270,6 +343,8 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 		this.UpdateAnimatorParameters ();
 
 	}//end f'n void Update
+
+
 
 	private void UpdateCanCastSpell()
 	{

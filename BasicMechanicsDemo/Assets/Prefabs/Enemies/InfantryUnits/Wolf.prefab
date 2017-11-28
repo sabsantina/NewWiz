@@ -151,7 +151,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1320668033185592}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22.27, y: 0.5500002, z: 9.75}
+  m_LocalPosition: {x: 9.428547, y: 1.0024185e-17, z: 2.2913048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4124492111166596}
@@ -178,7 +178,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1449706121109484}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -210,7 +210,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1543318192207900}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -447,6 +447,7 @@ MonoBehaviour:
   m_MovementPatternState: 0
   m_ChaseVelocity: 10
   m_CurrentVelocity: 0
+  m_EnemyDefaultVelocity: 2.5
 --- !u!114 &114612374437747500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -473,6 +474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyDamagedSound: {fileID: 0}
   m_Player: {fileID: 0}
+  m_Spawner: {fileID: 0}
   m_MovementPattern: {fileID: 114460349228667514}
   m_Health: 0
   m_AttackDamageValue: 0
@@ -481,9 +483,11 @@ MonoBehaviour:
   m_InhibitMovement: 0
   m_InhibitAttack: 0
   m_ExtraEffectTimer: 0
+  m_IsHealing: 0
   m_ShockTimerIncrementor: 1
   m_ShockJumpDistance: 0.25
   m_ShockJumpFrequency: 0.0005
+  m_EnemyName: 0
   m_AttackPattern: {fileID: 114274738053832088}
   m_WolfAttackDamage: 10
   m_WolfHealth: 40
