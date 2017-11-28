@@ -95,6 +95,9 @@
             <e p="Overworld" t="Include">
               <e p="OverworldManager.cs" t="Include" />
             </e>
+            <e p="PlayerWin" t="Include">
+              <e p="PlayerWinManager.cs" t="Include" />
+            </e>
             <e p="SpellAnimatorManager.cs" t="Include" />
             <e p="SpellEffectManager.cs" t="Include" />
             <e p="TextManager.cs" t="Include" />

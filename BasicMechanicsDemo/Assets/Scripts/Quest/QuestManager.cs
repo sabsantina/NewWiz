@@ -53,7 +53,7 @@ public class QuestManager : MonoBehaviour
     [SerializeField] public Image DarkScreen;
 
     //A list of cutscene boolean markers. each index is the number of the cutscene in MainGame.txt
-    [SerializeField] public List<bool> CutscenesDone;
+    [SerializeField] public List<bool> CutscenesDone = new List<bool>();
 
     /**A list of all the quests in the game.*/
     [SerializeField] public Dictionary<QuestName, Quest> m_AllQuests = new Dictionary<QuestName, Quest>();
@@ -328,7 +328,6 @@ public class QuestManager : MonoBehaviour
                     case 3:
                     {
                         leoghaireBehaviour.enemy.gameObject.SetActive(true);
-                        oldEnemyDamageValue = leoghaireBehaviour.enemy.m_AttackDamageValue;
                         leoghaireBehaviour.enemy.Pause();
                         rpgTalkArea.rpgtalkTarget.NewTalk("4s", "4e");
                         break;
@@ -336,6 +335,7 @@ public class QuestManager : MonoBehaviour
                     case 4:
                     {
                         leoghaireBehaviour.enemy.Resume();
+                        oldEnemyDamageValue = leoghaireBehaviour.enemy.m_AttackDamageValue;
                         float currentHealth = m_Player.m_Health;
                         while (m_Player.m_Health == currentHealth)
                         {
@@ -355,7 +355,7 @@ public class QuestManager : MonoBehaviour
                     case 6:
                     {
                         leoghaireBehaviour.enemy.Resume();
-                        leoghaireBehaviour.enemy.m_AttackDamageValue = 10;
+                        leoghaireBehaviour.enemy.m_AttackDamageValue = oldEnemyDamageValue;
                         float currentMana = m_Player.m_Mana;
                         while (m_Player.m_Mana == currentMana)
                         {
@@ -369,7 +369,7 @@ public class QuestManager : MonoBehaviour
                     case 7:
                     {
                         leoghaireBehaviour.enemy.Resume();
-                        leoghaireBehaviour.enemy.m_AttackDamageValue = 10;
+                        leoghaireBehaviour.enemy.m_AttackDamageValue = oldEnemyDamageValue;
                         Vector3 location = leoghaireBehaviour.enemy.transform.position;
                         while(leoghaireBehaviour.enemy)
                             yield return new WaitForSeconds(1);
@@ -387,9 +387,37 @@ public class QuestManager : MonoBehaviour
                         leoghaireBehaviour.LeaveCoille();
                         break;
                     }
+                    case 10:
+                    {
+                        leoghaireBehaviour.GoToApothecary();
+                        yield return new WaitForSeconds(4);
+                        break;
+                    }
+                    case 11:
+                    {
+                        leoghaireBehaviour.GoToPlayer();
+                        break;
+                    }
+                    case 12:
+                    {
+                        DarkScreen.color = new Color(0,0,0,1);
+                        break;
+                    }
+                    case 13:
+                    {
+                        DarkScreen.color = new Color(0,0,0,0);
+                        leoghaireBehaviour.GoToEndOfSoirbheach();
+                        break;
+                    }
+                    case 14:
+                    {
+                        leoghaireBehaviour.LeaveSoirbheach();
+                        break;
+                    }
                 }
+                print(i + 1);
                 rpgTalkArea.NewCutscene(i + 1);
-                if (i + 1 >= 5 && i+1 <= 8)
+                if (i + 1 >= 5 && i+1 <= 8 || i+1 >=11 && i+1 <= 13)
                     rpgTalkArea.StartNext();
                 break;
             }

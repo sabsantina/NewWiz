@@ -12,10 +12,11 @@ public class LeoghaireBehaviour : MonoBehaviour
 
 	[SerializeField] public DefaultEnemy enemy;
 
-	private bool _flippedOnce, _goToHalfOfCoille, _goToEndOfCoille, _goToApothecary, _leaveCoille;
+	private bool _flippedOnce, _goToHalfOfCoille, _goToEndOfCoille, _goToApothecary, _leaveCoille, _goToPlayer, _goToEndOfSoirbheach, _leaveSoirbheach;
 	// Use this for initialization
 	void Awake () {
-		enemy.gameObject.SetActive(false);
+		if(enemy)
+			enemy.gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -43,9 +44,24 @@ public class LeoghaireBehaviour : MonoBehaviour
 			else
 			{
 //				_parentTransform.position = new Vector3(74.9f, 0.55f, 22.2f);
-				_parentTransform.gameObject.SetActive(false);
 				_goToApothecary = false;
 			}
+		}
+		else if (_goToPlayer)
+		{
+			MoveTowardsPlayer();
+		}
+		else if (_goToEndOfSoirbheach)
+		{
+			MoveRightTowardsX(-15, ref _goToEndOfSoirbheach);
+			if(!_goToEndOfSoirbheach)
+				_parentTransform.position = new Vector3(74.9f, 0.55f, 22.2f);
+		}
+		else if (_leaveSoirbheach)
+		{
+			MoveRightTowardsX(80.95f, ref _leaveSoirbheach);
+			if(!_leaveSoirbheach)
+				_parentTransform.gameObject.SetActive(false);
 		}
 	}
 	public void StopPlayerFunctionalitiesForConversation()
@@ -57,6 +73,7 @@ public class LeoghaireBehaviour : MonoBehaviour
 	{
 		_parentTransform.Rotate(Vector3.up, 180.0f);
 		_spriteTransform.localEulerAngles = new Vector3(-_spriteTransform.localEulerAngles.x,0,0);
+		_flippedOnce = true;
 	}
 	
 	public void ShutUpAfterTrigger()
@@ -70,6 +87,16 @@ public class LeoghaireBehaviour : MonoBehaviour
 		_parentTransform.GetComponentInChildren<RPGTalkArea>().shouldInteractWithButton = false;
 	}
 
+	private void MoveTowardsPlayer()
+	{
+		Vector3 direction = (_parentTransform.position - m_questmanager.m_Player.transform.position).normalized;
+		if (Vector3.Distance(m_questmanager.m_Player.transform.position, _parentTransform.position) > 1)
+		{
+			_parentTransform.position -= direction * 8 * Time.deltaTime;
+		}
+		else _goToPlayer = false;
+	}
+	
 	private void MoveRightTowardsX(float x, ref bool marker)
 	{
 		if (_parentTransform.position.x < x)
@@ -115,5 +142,23 @@ public class LeoghaireBehaviour : MonoBehaviour
 		Flip();
 		_flippedOnce = false;
 		_goToApothecary = true;
+	}
+
+	public void GoToPlayer()
+	{
+		_goToPlayer = true;
+	}
+
+	public void GoToEndOfSoirbheach()
+	{
+		Flip();
+		_goToEndOfSoirbheach = true;
+	}
+
+	public void LeaveSoirbheach()
+	{
+		ShutUpAfterTrigger();
+		Flip();
+		_leaveSoirbheach = true;
 	}
 }
