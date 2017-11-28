@@ -224,7 +224,8 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
                     break;
                 }
 		}//end switch
-		this.transform.position = position_to_spawn_player;
+        //Will change back to getting the transform.position set when the testing stops. This works weird when you start at a specific scene other than main menu.
+		this.m_PlayerRespawnPosition = position_to_spawn_player;
 	}
 
 	void Update()
