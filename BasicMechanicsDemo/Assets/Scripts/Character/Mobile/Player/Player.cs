@@ -196,11 +196,35 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 						position_to_spawn_player = TransitionPositions.Transition_Overworld_To_Demo;
 						break;
 					}//end case to DEMO AREA
+                case (int)Scenes.SOIRHBEACH:
+					{
+						//then the position to spawn at is as follows:
+						position_to_spawn_player = TransitionPositions.Transition_Overworld_To_Left_Soirhbeach;
+						break;
+					}//end case to DEMO AREA
 				}//end switch
 				break;
 			}//end case from OVERWORLD
+        case(int)Scenes.SOIRHBEACH:
+                {
+                    
+                    switch (index_to_region)
+                    {
+                        //...to the overworld
+                        case (int)Scenes.OVERWORLD:
+                            {
+                                //then the position to spawn at is as follows:
+                                if(this.transform.position.x < -10.0f)
+                                    position_to_spawn_player = TransitionPositions.Transition_Soirhbeach_Left_To_Overworld;
+                                else
+                                    position_to_spawn_player = TransitionPositions.Transition_Soirhbeach_Right_To_Overworld;
+                                break;
+                            }//end case to OVERWORLD
+                    }
+                    break;
+                }
 		}//end switch
-		this.m_PlayerRespawnPosition = position_to_spawn_player;
+		this.transform.position = position_to_spawn_player;
 	}
 
 	void Update()

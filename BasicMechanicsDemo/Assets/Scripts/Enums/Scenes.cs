@@ -8,6 +8,7 @@ public enum Scenes {
 	MAIN_MENU,
 	FOREST,
 	OVERWORLD,
+    SOIRHBEACH,
 	GAME_OVER,
 	CASTLE
 }
