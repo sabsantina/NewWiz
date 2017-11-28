@@ -9,7 +9,7 @@
 
 
 [title=1s]
-Stranger: G’day to you, my friend. I’m happy to see ye’re well! M ’name’s <color=#931971>Leoghaire</color>, what’s yours?
+Stranger: G’day to you, my friend. I’m happy to see ye’re well! Me name’s <color=#931971>Leoghaire</color>, what’s yours?
 <color=#1f29af>You</color>: ...
 <color=#931971>Leoghaire</color>: Are ye alright, lad? Why’re ye not speaking?
 <color=#1f29af>You</color>: ...
@@ -30,23 +30,19 @@ Stranger: G’day to you, my friend. I’m happy to see ye’re well! M ’name�
 [title=2e]
 
 
+******************************************************************************************************************************************************
+SCENE 2 - Location: Coille Forest \ faerie hill || Day
+******************************************************************************************************************************************************
+
+
 [title=3s]
 <color=#931971>Leoghaire</color>: Ya ken, I’ll need to give ye a name. I can’t just call ye by “mister without memories”. What do you suggest?
 <color=#1f29af>You</color>: ...
 <color=#931971>Leoghaire</color>: Gee, alright, I’ll name ye. Let’s see… Yer skin is blue, which is… well, a first for me. I’ll just call you <color=#1f29af>Blue</color>. How’s that sound?
 <color=#1f29af>You</color>: ...
 <color=#931971>Leoghaire</color>: Haha, I like yer sense of humor, there. Alright. <color=#1f29af>Blue</color> it is!
-[title=3e]
-
-
-******************************************************************************************************************************************************
-SCENE 2 - Location: Coille Forest \ faerie hill || Day
-******************************************************************************************************************************************************
-
-
-[title=4s]
 <color=#931971>Leoghaire</color>: Don’t forget, be careful around here, an’ don’t wander off too much.
-[title=4e]
+[title=3e]
 
 
 -------------------------
@@ -54,9 +50,9 @@ A <color=#ce1c1c>Wolf</color> appears next to the characters.
 -------------------------
 
 
-[title=5s]
+[title=4s]
 <color=#931971>Leoghaire</color>: Darn it, looks like we’ll have to fight our way through this time, lad. Let’s go!
-[title=5e]
+[title=4e]
 
 
 -------------------------
@@ -65,25 +61,24 @@ The <color=#ce1c1c>Wolf</color> attacks <color=#1f29af>Blue</color>. Points are 
 -------------------------
 
 
-[title=6s]
+[title=5s]
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>The red bar on the top left of the screen is your Health Points (HP). Every time you take a hit, it will deplete by some points. You can refill it with health potions, or with a healer. Careful: once it’s completely depleted, you will die!
 <color=#931971>Leoghaire</color>: Well, don’t just stand there!
-[title=7e]
+[title=5e]
 
 
 -------------------------
 Leoghaire heals <color=#1f29af>Blue</color> to full health.
 -------------------------
 
-[title=7s]
-<color=#ce6d0c>System</color>:  <color=#AE4949FF>Look at that! You just remembered a spell!
+[title=6s]
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>You can attack by aiming with your mouse and clicking on your foe.
-[title=7e]
+[title=6e]
 
 
-[title-8s]
+[title=7s]
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>See that <color=#1f29af>Blue</color> bar, right under your HP bar? That’s your Mana Points (MP) indicator. Every time you cast a spell, it depletes. The stronger the spell, the more points it will take! Once it runs out, though, you won’t be able to cast spells anymore! But fear not, for in the case that happens, you would be able to refill it with Mana potions. Now, kill that <color=#ce1c1c>Wolf</color>!
-[title=8e]
+[title=7e]
 
 
 -------------------------
@@ -91,11 +86,11 @@ Wait until the <color=#ce1c1c>Wolf</color> is dead. The <color=#ce1c1c>Wolf</col
 -------------------------
 
 
-[title=9s]
-<color=#931971>Leoghaire</color>: Good job! Looks like the <color=#ce1c1c>Wolf</color> dropped <color=#1ca7ce>Inferior Mana Potion</color>! You can walk over it to collect it.
+[title=8s]
+<color=#931971>Leoghaire</color>: Holy Fae, you turned into a wand! No matter, you did a good job! Looks like the <color=#ce1c1c>Wolf</color> dropped <color=#1ca7ce>Inferior Mana Potion</color>! You can walk over it to collect it.
 <color=#1f29af>You</color>: ?
 <color=#931971>Leoghaire</color>: Oh, no, I don’t need it. I have plenty of them already. Come on, then. Take it.
-[title=9e]
+[title=8e]
 
 
 -------------------------
@@ -103,9 +98,9 @@ Nothing happens until player takes dropped item.
 -------------------------
 
 
-[title=10s]
+[title=9s]
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>Looks like you just collected an item! You can access it by going to your inventory. Click on the backpack icon!
-[title=10e]
+[title=9e]
 
 
 -------------------------
@@ -113,10 +108,10 @@ Game is frozen until player clicks on the inventory.
 -------------------------
 
 
-[title=11s]
+[title=10s]
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>You can find your equipment and potions on this screen. You can also drag an item into a hotkey holder. They're the 3 squares on bottom left.
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>Now, right-click on the <color=#1ca7ce>Inferior Mana Potion</color> to consume it.
-[title=11e]
+[title=10e]
 
 
 -------------------------
@@ -124,9 +119,9 @@ Game is frozen until player consumes the potion.
 -------------------------
 
 
-[title=12s]
+[title=11s]
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>Great! You can now close the inventory page by clicking on X in the top right.
-[title=12e]
+[title=11e]
 
 
 -------------------------
