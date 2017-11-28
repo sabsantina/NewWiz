@@ -10,7 +10,10 @@ public class TransitionMarker : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		Player player_component = other.gameObject.GetComponent<Player> ();
+//		Player player_component = other.gameObject.GetComponent<Player> ();
+//		if (Player.m_CurrentRegion == Scenes.CASTLE && this.leads_to == Scenes.PLAYER_WIN) {
+//			UnityEngine.SceneManagement.SceneManager.LoadScene((int)leads_to);
+//		}
         if(other.gameObject.GetComponent<MobileCharacter>() != null) {
             this.m_SerializationManager.Save();
             UnityEngine.SceneManagement.SceneManager.LoadScene((int)leads_to);
