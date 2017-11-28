@@ -359,8 +359,10 @@ public class QuestManager : MonoBehaviour
                     {
                         leoghaireBehaviour.enemy.Resume();
                         leoghaireBehaviour.enemy.m_AttackDamageValue = 10;
-                        while(leoghaireBehaviour.enemy != null)
+                        Vector3 location = leoghaireBehaviour.enemy.transform.position;
+                        while(leoghaireBehaviour.enemy)
                             yield return new WaitForSeconds(1);
+                        m_Spawner.Spawn_Item(ItemName.Mana_Potion, location);
                         rpgTalkArea.shouldInteractWithButton = false;
                         rpgTalkArea.triggerEnter = true;
                         break;
@@ -369,9 +371,14 @@ public class QuestManager : MonoBehaviour
                     {
                         break;
                     }
+                    case 9:
+                    {
+                        leoghaireBehaviour.LeaveCoille();
+                        break;
+                    }
                 }
                 rpgTalkArea.NewCutscene(i + 1);
-                if (i + 1 >= 5 && i+1 <= 7)
+                if (i + 1 >= 5 && i+1 <= 8)
                     rpgTalkArea.StartNext();
                 break;
             }
