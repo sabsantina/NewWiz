@@ -26,7 +26,7 @@ Gaius: And it breathed fire, you say?
 Guinevere: It was mighty as a dragon, Tom!
 Thommas: The... rooster...
 Guinevere: Yes! 
-Thommas: And... it breathed <i>fire<i/>?
+Thommas: And... it breathed <i>fire</i>?
 Guinevere: I feared for me life, I tell ye.
 Thommas: Gwen... are ye sure ye're not suffering from some kind of mental affliction?
 Guinevere: Thommas!
