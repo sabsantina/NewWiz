@@ -101,4 +101,9 @@ public class RoosterKing : BossEnemy {
 		base.ApplySpellEffect (spell);
 		enemyHPMeter.GetComponentInChildren<Slider> ().value = m_Health;
 	}
+
+	protected override void ManageLootSpawnOnDeath()
+	{
+		this.m_Spawner.Spawn_Spell (SpellName.Heal, this.transform.position);
+	}
 }
