@@ -89,6 +89,7 @@ MonoBehaviour:
       m_PlayerMana: 0
       m_MaxPlayerMana: 0
       m_PlayerMagicAffinity: 0
+      m_CurrentRegion: 0
     m_SerializableQuestManager:
       m_AllQuestStates: 
       m_AllRewardsGiven: 
@@ -116,6 +117,9 @@ MonoBehaviour:
   NUMBER_ENEMIES_HOTCHICKS: 3
   m_QuestGiver_Generic: {fileID: 1924397221675462, guid: d18e539afc033440ba33c12bad97a21f,
     type: 2}
+  m_Leoghaire: {fileID: 0}
+  DarkScreen: {fileID: 0}
+  CutscenesDone: 00000000000000000000000000000000000000
 --- !u!114 &114701533359187540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -173,15 +177,21 @@ MonoBehaviour:
     type: 3}
   m_Player: {fileID: 0}
   m_SpellAnimatorManager: {fileID: 114701533359187540}
+  m_ClawAnimationPrefab: {fileID: 1253389617355122, guid: b972a545bdc16ee46b5695a641c65c8d,
+    type: 2}
+  m_NormalHitAnimationPrefab: {fileID: 1340379968753568, guid: 8638658cb76be254983089fee59fc00e,
+    type: 2}
   m_RoosterPrefab: {fileID: 1295592544126026, guid: 9053599dd27ba439eb6fd4c325a8ccde,
     type: 2}
-  m_RoosterAnimationPrefab: {fileID: 1253389617355122, guid: b972a545bdc16ee46b5695a641c65c8d,
+  m_ArmoredSoldierPrefab: {fileID: 1438830268827058, guid: 8b8d98b39ec697847a82007f2b7efa47,
     type: 2}
-  m_ArmoredSoldierPrefab: {fileID: 1838224676114018, guid: 8b8d98b39ec697847a82007f2b7efa47,
+  m_WolfPrefab: {fileID: 1320668033185592, guid: 00cdbe88ede784e4ca0102b3375fcae0,
     type: 2}
-  m_ArmoredSoldierAnimationPrefab: {fileID: 0}
   m_RoosterMagePrefab: {fileID: 1530564148805280, guid: fb40b1c67ec6442da995f37b80648cc3,
     type: 2}
+  m_RoosterKingPrefab: {fileID: 0}
+  m_TeinePrefab: {fileID: 0}
+  m_FireMeleeAnimationPrefab: {fileID: 0}
 --- !u!224 &224399764707834146
 RectTransform:
   m_ObjectHideFlags: 1
@@ -189,7 +199,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1696380093699514}
   m_LocalRotation: {x: 0.5, y: -0, z: -0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 0, z: -6.25}
+  m_LocalPosition: {x: -7809.2983, y: 821.7011, z: -6.25}
   m_LocalScale: {x: 0.0043409793, y: 0.0043409793, z: 0.0043409793}
   m_Children: []
   m_Father: {fileID: 0}

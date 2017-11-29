@@ -42,8 +42,19 @@ public class Serialization_Manager : MonoBehaviour {
 			else if (load_game_intval == 0) {
 				//then load in the quest information for the quest objects that belong to this region
 				this.Load();
+//				this.Save ();
 			}
-		}
+			//if we're not starting a new game...
+			if (load_game_intval != 1) {
+				this.m_Player.setMaxMeter (this.m_Player.healthMeter, this.m_Player.PLAYER_FULL_HEALTH);
+				this.m_Player.setMeterValue (this.m_Player.healthMeter, this.m_Player.m_Health);
+
+				//Start off with full mana
+				this.m_Player.setMaxMeter (this.m_Player.manaMeter, this.m_Player.PLAYER_FULL_MANA);
+				this.m_Player.setMeterValue (this.m_Player.manaMeter, this.m_Player.m_Mana);
+			}
+
+		}//end if file exists
 
 	}
 

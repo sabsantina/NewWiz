@@ -17,6 +17,7 @@ public class MovementPattern : MobileCharacter {
 	//To be set in inspector
 	public float m_EnemyDefaultVelocity = 2.5f;
 
+	public bool paused;
 	// Use this for initialization
 	void Start () {
 		//Default value
@@ -27,7 +28,8 @@ public class MovementPattern : MobileCharacter {
 	
 	// Update is called once per frame
 	void Update () {
-		this.ExecutePatternState ();
+		if(!paused)
+			this.ExecutePatternState ();
 
 		//For testing
 		if (this.m_EnemyDefaultVelocity != m_MaximalVelocity) {

@@ -13,11 +13,18 @@ public class MapMenu : Menu {
 
 	void Start()
 	{
-		//setCharacterPin ();
+		//For now, if the player's in a region other than the overworld, disable the pin
+		//Elsewise it just stays in the center of the map :/
+		if (Player.m_CurrentRegion != Scenes.OVERWORLD) {
+			characterPin.gameObject.SetActive (false);
+		} else {
+			characterPin.gameObject.SetActive (true);
+		}
 	}
 
 	void Update()
 	{
+		//Character pin still being set if player in region 
 		if (gameObject.activeSelf == true && Player.m_CurrentRegion == Scenes.OVERWORLD)
 			setCharacterPin ();
 	}
@@ -31,4 +38,7 @@ public class MapMenu : Menu {
 		float originY = originPin.GetComponent<RectTransform> ().anchoredPosition.y;
 		characterPin.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (originX + posX, originY + posY);
 	}
+
+
+//	public void setCharacterPin(
 }
