@@ -176,6 +176,11 @@ public class RPGTalkArea : MonoBehaviour {
 		}
 	}
 
+	public void StartNext()
+	{
+		StartTalk();
+	}
+
 	protected virtual void OnTriggerEnter(Collider col){
 		PrepareInteraction (col.tag);
 	}
