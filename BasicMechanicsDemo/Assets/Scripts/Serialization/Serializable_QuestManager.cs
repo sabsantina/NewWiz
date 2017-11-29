@@ -15,6 +15,8 @@ public class Serializable_QuestManager {
 	public List<int> m_AllQuestStates = new List<int>();
 
 	public List<bool> m_AllRewardsGiven = new List<bool>();
+	
+	public List<bool> m_AllMainQuests = new List<bool>();
 
 	/*
 	* Note: If the player saves a game after having killed x enemies for a quest (where x is less than the total number of enemies to kill
@@ -26,6 +28,21 @@ public class Serializable_QuestManager {
 	* Same deal for items picked up!
 	*/
 
+	public void ParseAllCompletedMainQuests(QuestManager manager)
+	{
+		this.m_AllMainQuests.Clear();
+		foreach (bool done in manager.CutscenesDone)
+		{
+			m_AllMainQuests.Add(done);
+		}
+	}
+
+	public void SetAllCompletedMainQuests(QuestManager manager)
+	{
+		for (int i = 0; i < manager.CutscenesDone.Count; ++i)
+			manager.CutscenesDone[i] = m_AllMainQuests[i];
+	}
+	
 	public void ParseAllQuestRewardsGiven(QuestManager manager)
 	{
 		this.m_AllRewardsGiven.Clear ();

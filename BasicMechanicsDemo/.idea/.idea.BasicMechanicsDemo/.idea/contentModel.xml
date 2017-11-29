@@ -95,6 +95,9 @@
             <e p="Overworld" t="Include">
               <e p="OverworldManager.cs" t="Include" />
             </e>
+            <e p="PlayerWin" t="Include">
+              <e p="PlayerWinManager.cs" t="Include" />
+            </e>
             <e p="SpellAnimatorManager.cs" t="Include" />
             <e p="SpellEffectManager.cs" t="Include" />
             <e p="TextManager.cs" t="Include" />
@@ -202,6 +205,7 @@
             <e p="Utilities.cs" t="Include" />
           </e>
         </e>
+        <e p="SpawnSpell.cs" t="Include" />
         <e p="Text Dialog" t="Include">
           <e p="MainGame.txt" t="Include" />
           <e p="SoirbheachConversations.txt" t="Include" />
