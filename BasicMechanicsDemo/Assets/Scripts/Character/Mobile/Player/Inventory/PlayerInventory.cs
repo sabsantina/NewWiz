@@ -2,6 +2,7 @@
 //#define TESTING_INVENTORY_SPELLPICKUP
 //#define TESTING_ACTIVE_SPELL
 //#define TESTING_INVENTORY_ITEMPICKUP
+//#define TESTING_ITEMPICKUP_HOTKEYUPDATE
 
 //Spell macros
 
@@ -66,7 +67,7 @@ public class PlayerInventory : MonoBehaviour {
 	private PlayerCastSpell m_PlayerCastSpell;
 
 
-	private List<HotKeys> m_HotKeyList = new List<HotKeys>();
+	private List<UnityEngine.UI.Button> m_HotKeyList = new List<UnityEngine.UI.Button>();
 
 	[SerializeField] private ActiveSpellIcon m_ActiveSpellIcon;
 
@@ -76,11 +77,11 @@ public class PlayerInventory : MonoBehaviour {
 		this.m_PlayerCastSpell = this.GetComponent<PlayerCastSpell> ();
 		//Get a reference to each hotkey slot
 //		this.m_HotKey1 = this.m_HotKey1_Obj.GetComponentInChildren<HotKeys> ();
-		this.m_HotKeyList.Add (this.m_HotKey1_Obj.GetComponentInChildren<HotKeys> ());
+		this.m_HotKeyList.Add (this.m_HotKey1_Obj);
 //		this.m_HotKey2 = this.m_HotKey2_Obj.GetComponentInChildren<HotKeys> ();
-		this.m_HotKeyList.Add (this.m_HotKey2_Obj.GetComponentInChildren<HotKeys> ());
+		this.m_HotKeyList.Add (this.m_HotKey2_Obj);
 //		this.m_HotKey3 = this.m_HotKey3_Obj.GetComponentInChildren<HotKeys> ();
-		this.m_HotKeyList.Add (this.m_HotKey3_Obj.GetComponentInChildren<HotKeys> ());
+		this.m_HotKeyList.Add (this.m_HotKey3_Obj);
 
 		//Initialize Item Dictionary
 		this.m_ItemDictionary = new Dictionary<ItemClass, int>();
@@ -151,6 +152,34 @@ public class PlayerInventory : MonoBehaviour {
 
 	void Update()
 	{
+
+		#if TESTING_ITEMPICKUP_HOTKEYUPDATE
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			if (this.m_HotKeyList.Count > 0)
+			{
+				string message = "At least one hotkey; actual quantity: " + this.m_HotKeyList.Count +"\n";
+				foreach(var hotkey in this.m_HotKeyList)
+				{
+					ItemClass item_in_hotkey = hotkey.GetComponentInChildren<HotKeys>().item;
+					if (item_in_hotkey != null)
+					{
+						message += "Item in " + hotkey.name + ": " + item_in_hotkey.m_ItemName.ToString() + "\t";
+					}
+					else
+					{
+						message += "Hotkey " + hotkey.name + " empty\t";
+					}
+				}
+				Debug.Log(message);
+			}
+			else
+			{
+				Debug.Log("No hotkeys??");
+			}
+		}
+		#endif
+
 //		this.m_DefaultSpellPrefab.GetComponent<SpellMovement> ().m_SpellClassToCast = this.m_ActiveSpellClass;
 		//If there's more than one spell in the player's inventory...
 		if (this.m_SpellClassList.Count > 1 && !PlayerCastSpell.m_MenuOpen) {
@@ -287,37 +316,68 @@ public class PlayerInventory : MonoBehaviour {
 		message += "PlayerInventory::Adding item " + item_to_add.m_ItemName.ToString () +"\t";
 		#endif
 
+		bool match_found = false;
 		foreach (KeyValuePair<ItemClass, int> entry in this.m_ItemDictionary) {
 			if (item_to_add.m_ItemName.ToString () == entry.Key.m_ItemName.ToString ()) {
+				match_found = true;
 				this.m_ItemDictionary [entry.Key]++;
 				#if TESTING_INVENTORY_ITEMPICKUP
 				message += "item " + item_to_add.m_ItemName.ToString () + " found in inventory; quantity: " + this.m_ItemDictionary[entry.Key];
 				Debug.Log(message);
 				#endif
-				return;
+				break;
 			}//end if
 		}//end foreach
 		#if TESTING_INVENTORY_ITEMPICKUP
 		message += "item " + item_to_add.m_ItemName.ToString () + " not found in inventory; adding...";
 		Debug.Log(message);
 		#endif
-		this.m_ItemDictionary.Add(item_to_add, 1);
+		if (!match_found) {
+			this.m_ItemDictionary.Add(item_to_add, 1);
+		}
+		#if TESTING_ITEMPICKUP_HOTKEYUPDATE
+		string message = "Foreach starting...\n";
+		#endif
+		foreach(var hotkey in this.m_HotKeyList)
+		{
+			ItemClass item_in_hotkey = hotkey.GetComponentInChildren<HotKeys>().item;
+			if (item_in_hotkey != null)
+			{
+				#if TESTING_ITEMPICKUP_HOTKEYUPDATE
+				message += "Item in " + hotkey.name + ": " + item_in_hotkey.m_ItemName.ToString();
+				#endif
 
-		//for each hot key in the hot key list...
-		foreach (HotKeys hot_key in this.m_HotKeyList) {
-			//..if the hot key contains any item...
-			if (hot_key.item != null) {
-				Debug.Log ("Hot key item not null");//<-- this is never being output.
+				UnityEngine.UI.Text text_element = hotkey.GetComponentInChildren<UnityEngine.UI.Text> ();
 
-				//...if the hot key contains the specific added item...
-				if (hot_key.ContainItem (item_to_add)) {
-					Debug.Log ("Item " + item_to_add.m_ItemName.ToString () + " contained; quantity: " + this.m_ItemDictionary[item_to_add]);
-					//...then update the HUD display
-					hot_key.UpdateSlotItemCount ();
-				}//end if
-			}//end if
+				#if TESTING_ITEMPICKUP_HOTKEYUPDATE
+				message += " (" + text_element.text + ")\t";
+				message += "Item ";
+				#endif
+				if ((int)item_to_add.m_ItemName == (int)item_in_hotkey.m_ItemName) {
+					#if TESTING_ITEMPICKUP_HOTKEYUPDATE
+					message += "found in hotkey " + hotkey.name + "\t";
+					#endif
 
-		}//end foreach
+					int current_quantity = int.Parse (text_element.text);
+					int new_quantity = current_quantity + 1;
+					string new_text = new_quantity + "";
+					text_element.text = new_text;
+					#if TESTING_ITEMPICKUP_HOTKEYUPDATE
+					message += "new quantity: " + new_text + "\n";
+					#endif
+				}
+
+			}
+			else
+			{
+				#if TESTING_ITEMPICKUP_HOTKEYUPDATE
+				message += "Hotkey " + hotkey.name + " empty\n";
+				#endif
+			}
+		}
+		#if TESTING_ITEMPICKUP_HOTKEYUPDATE
+		Debug.Log (message);
+		#endif
 
 	}//end f'n void AddItem(Item)
 
