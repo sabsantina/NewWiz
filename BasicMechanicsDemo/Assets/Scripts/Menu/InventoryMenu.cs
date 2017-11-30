@@ -46,6 +46,10 @@ public class InventoryMenu : Menu {
 		if (this.notActive) {
 			this.updateInventoryMenu ();
 			this.notActive = false;
+		} 
+		if (PlayerCastSpell.m_MenuOpen && Input.GetKey(KeyCode.I)) 
+		{
+			CloseMenu ();
 		}
 
 		if(Input.GetKeyDown(KeyCode.Alpha1))
