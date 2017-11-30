@@ -25,8 +25,12 @@ public class MapMenu : Menu {
 	void Update()
 	{
 		//Character pin still being set if player in region 
-		if (gameObject.activeSelf == true && Player.m_CurrentRegion == Scenes.OVERWORLD)
+		if (gameObject.activeSelf && Player.m_CurrentRegion == Scenes.OVERWORLD)
 			setCharacterPin ();
+		if (PlayerCastSpell.m_MenuOpen  && Input.GetKeyDown(KeyCode.M))
+			CloseMenu ();
+		if (!PlayerCastSpell.m_MenuOpen  && Input.GetKeyDown(KeyCode.M))
+			OpenMenu ();
 	}
 
 	void setCharacterPin()
@@ -39,6 +43,4 @@ public class MapMenu : Menu {
 		characterPin.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (originX + posX, originY + posY);
 	}
 
-
-//	public void setCharacterPin(
 }

@@ -4319,7 +4319,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1639867789956470}
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: -3.71, y: 0.55, z: 0.33662465}
+  m_LocalPosition: {x: 12, y: 0.55, z: -3.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4191213353136672}
@@ -7830,7 +7830,6 @@ MonoBehaviour:
   m_Floor: {fileID: 0}
   m_ManaDrainTimer: 0
   m_ManaToDrain: 0
-  m_MenuOpen: 0
 --- !u!114 &114310035647257152
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9307,7 +9306,6 @@ MonoBehaviour:
     type: 2}
   m_InteractionRadius: 5
   m_DialogFitsIntoBubble: 0
-  m_IsTalking: 0
 --- !u!114 &114456647893825176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14246,7 +14244,6 @@ MonoBehaviour:
   m_IsAffectedBySpell: 0
   m_ExtraEffectsTimer: 0
   m_MagicAffinity: 1
-  m_CurrentRegion: 0
   rpgTalk: {fileID: 0}
 --- !u!114 &114895016287083824
 MonoBehaviour:
@@ -17855,8 +17852,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: -15}
+  m_SizeDelta: {x: 100, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224214107328674330
 RectTransform:
@@ -18115,7 +18112,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 24, y: 35}
+  m_AnchoredPosition: {x: 24, y: 25}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224271390876129118
