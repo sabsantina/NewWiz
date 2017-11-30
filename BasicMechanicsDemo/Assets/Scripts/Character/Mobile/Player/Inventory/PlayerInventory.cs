@@ -67,7 +67,7 @@ public class PlayerInventory : MonoBehaviour {
 	private PlayerCastSpell m_PlayerCastSpell;
 
 
-	private List<UnityEngine.UI.Button> m_HotKeyList = new List<UnityEngine.UI.Button>();
+	public List<UnityEngine.UI.Button> m_HotKeyList = new List<UnityEngine.UI.Button>();
 
 	[SerializeField] private ActiveSpellIcon m_ActiveSpellIcon;
 
@@ -449,10 +449,18 @@ public class PlayerInventory : MonoBehaviour {
 		}//end if
 	}
 
-	/**A function to return the number of the given item in the item dictionary.*/
+	/**A function to return the number of the given item in the item dictionary.
+	*Returns -1 if the item is not found in the dictionary*/
 	public int getNumberItem(ItemClass item)
 	{
-		return m_ItemDictionary [item];
+//		return m_ItemDictionary [item];
+		foreach (KeyValuePair<ItemClass, int> entry in this.m_ItemDictionary) {
+			if ((int)entry.Key.m_ItemName == (int)item.m_ItemName) {
+				return entry.Value;
+			}
+		}
+
+		return -1;
 	}
 
 
