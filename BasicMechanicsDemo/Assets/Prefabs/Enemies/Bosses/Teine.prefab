@@ -537,7 +537,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.407
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -654,6 +654,7 @@ MonoBehaviour:
   m_ChaseVelocity: 10
   m_CurrentVelocity: 0
   m_EnemyDefaultVelocity: 2.5
+  paused: 0
 --- !u!114 &114212612091205190
 MonoBehaviour:
   m_ObjectHideFlags: 1
