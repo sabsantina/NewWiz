@@ -15,7 +15,7 @@ public class MeleeAttackPattern : AttackPattern {
 		switch ((int)this.m_AttackPatternState) {
 		case (int)AttackPatternState.MELEE:
 			{
-				if (this.m_AttackTimer == 0.0f) {
+				if (this.m_AttackTimer == 0.0f && this.m_Enemy.m_MovementPattern.m_PatrolRegion.m_Player != null) {
 //					this.m_IsAttacking_Melee = true;
 					this.GetComponent<Animator> ().SetBool (STRINGKEY_PARAM_ISATTACKING_MELEE, true);
 
