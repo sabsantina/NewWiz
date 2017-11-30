@@ -60,69 +60,47 @@ public class Serializable_Player {
 		Debug.Log (message);
 	}
 
+	/**A function to load in our list of hotkeyed items, and the proper quantities.
+	*Assumes the player inventory has been reset by now.*/
 	public void SetCurrentHotkeyedItems(GameObject player)
 	{
 		PlayerInventory player_inventory = player.GetComponent<PlayerInventory> ();
 		string message = "Load start";
 		if (player_inventory.m_ItemDictionary.Count > 0) {
-			int hotkey_index = 0;
 
-			//for each value in our saved hotkeyed item list...
-			foreach (int item_name_int in this.m_HotkeyedItems) {
-				message += "Item #: " + item_name_int + "\t";
-				//empty hotkeys are counted as negative numbers, so we only care about positive values
-				if (item_name_int >= 0) {
+			//for each hotkey
+			for (int hotkey_index = 0; hotkey_index < this.m_HotkeyedItems.Count; hotkey_index++) {
+				//if the hotkey contains an item...
+				if (-1 < this.m_HotkeyedItems [hotkey_index]) {
 
-					for (int index = 0; index < this.m_ItemNames.Count; index++) {
-						UnityEngine.UI.Button button = player_inventory.m_HotKeyList [hotkey_index];
-						HotKeys hotkey = button.GetComponentInChildren<HotKeys> ();
-						ItemClass item = new ItemClass ();
-						foreach (ItemName item_name_enum in System.Enum.GetValues(typeof(ItemName))) {
-							if ((int)item_name_enum == item_name_int) {
-								item.GenerateInstance (item_name_enum);
-								Debug.Log (this.m_ItemQuantities[index]);
-								hotkey.setHotKeys (item, this.m_ItemQuantities[index]);
-								break;
-							}
+					ItemClass item = new ItemClass ();
+					foreach (ItemName item_name_enum in System.Enum.GetValues(typeof(ItemName))) {
+						//...if there's an item that has the same name int value as the one we want in our hotkey...
+						if ((int)item_name_enum == this.m_HotkeyedItems [hotkey_index]) {
+							item.GenerateInstance (item_name_enum);
 						}
-					}
+					}//end foreach
 
-//					foreach (KeyValuePair<ItemClass, int> entry in player_inventory.m_ItemDictionary) {
-//						if ((int)entry.Key.m_ItemName == item_name_int)
-//						{
-//							UnityEngine.UI.Button button = inventory_component.m_HotKeyList [hotkey_index];
-//							HotKeys hotkey = button.GetComponentInChildren<HotKeys> ();
-//							ItemClass item = new ItemClass ();
-//							item.GenerateInstance (item_name_int);
-//							hotkey.setHotKeys (item, this.m_ItemQuantities[(int));
-//						}
-//					}
-//					//for each item name in the ItemName enum
-//					foreach (ItemName item_name_enum in System.Enum.GetValues(typeof(ItemName))) {
-//						//if the saved value has an int value equal to that of a name in the ItemName list...
-//						if (item_name_int == (int)item_name_enum) {
-//							//Then assign that item's sprite to the hotkey
-//							//Note: We can't access a disabled gameobject's script; therefore impossible to access the inventory menu from here without a prefab.
-//
-//							PlayerInventory inventory_component = player.GetComponent<PlayerInventory> ();
-//
-//							foreach (KeyValuePair<ItemClass, int> entry in player_inventory.m_ItemDictionary) {
-//								if ((int)entry.Key.m_ItemName == )
-//							}
-//							UnityEngine.UI.Button button = inventory_component.m_HotKeyList [hotkey_index];
-//							HotKeys hotkey = button.GetComponentInChildren<HotKeys> ();
-//
-//							hotkey.setHotKeys (item, this.m_ItemQuantities[(int));
-//
-//						}//end if
-//					}//end foreach
-				}//end if
+					int item_quantity = 0;
+					for (int item_index = 0; item_index < this.m_ItemNames.Count; item_index++) {
+						if (this.m_ItemNames [item_index] == item.m_ItemName.ToString ()) {
+							item_quantity = this.m_ItemQuantities [item_index];
+							break;
+						}
+					}//end for
 
-				hotkey_index++;
-			}//end foreach
+					UnityEngine.UI.Button button = player_inventory.m_HotKeyList [hotkey_index];
+					HotKeys hotkey = button.GetComponentInChildren<HotKeys> ();
+					hotkey.setHotKeys (item, item_quantity);
+
+					message += "Set item " + item.m_ItemName.ToString () + " to hotkey " + hotkey_index + " with quantity " + item_quantity;
+
+				}
+			}
+
 		}
 
-		Debug.Log(message);
+//		Debug.Log(message);
 	}
 
 	public void ParseCurrentRegion(GameObject player)
