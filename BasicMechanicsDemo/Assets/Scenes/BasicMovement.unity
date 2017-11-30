@@ -4193,7 +4193,7 @@ Transform:
   m_Children:
   - {fileID: 425706990}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &347100972
 MonoBehaviour:
@@ -9821,22 +9821,22 @@ Prefab:
     - target: {fileID: 224261462388683632, guid: 8ac1fedb15def544d9be1c749f40ddda,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -65
       objectReference: {fileID: 0}
     - target: {fileID: 224261462388683632, guid: 8ac1fedb15def544d9be1c749f40ddda,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 224637801989073418, guid: 8ac1fedb15def544d9be1c749f40ddda,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 70
+      value: -70
       objectReference: {fileID: 0}
     - target: {fileID: 224637801989073418, guid: 8ac1fedb15def544d9be1c749f40ddda,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8ac1fedb15def544d9be1c749f40ddda, type: 2}
@@ -10807,7 +10807,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &862474216
 GameObject:
@@ -12779,6 +12779,18 @@ Prefab:
       propertyPath: m_NormalHitAnimationPrefab
       value: 
       objectReference: {fileID: 1340379968753568, guid: 016de59ece60fba45a657067635e46b2,
+        type: 2}
+    - target: {fileID: 114911460496919354, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
+        type: 2}
+      propertyPath: m_RoosterMagePrefab
+      value: 
+      objectReference: {fileID: 1096784526310240, guid: fb40b1c67ec6442da995f37b80648cc3,
+        type: 2}
+    - target: {fileID: 114911460496919354, guid: 8847f5cdf02d39740ba6d8f83642e0c6,
+        type: 2}
+      propertyPath: m_RoosterKingPrefab
+      value: 
+      objectReference: {fileID: 1610962944350790, guid: 2bc29630c2cde4e128e4b2adda40cedd,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8847f5cdf02d39740ba6d8f83642e0c6, type: 2}
@@ -17329,6 +17341,51 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 339.625
       objectReference: {fileID: 0}
+    - target: {fileID: 224202103653844040, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 224202103653844040, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 224269381707680034, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 82324940984880746, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 82311083199249500, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82021957357386680, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82994925810586564, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+        type: 2}
+      propertyPath: panLevelCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82994925810586564, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+        type: 2}
+      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82994925810586564, guid: b47540d2d2eb2476bbd5efbb6155c7d6,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b47540d2d2eb2476bbd5efbb6155c7d6, type: 2}
   m_IsPrefabParent: 0
@@ -21121,7 +21178,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -23826,6 +23883,7 @@ MonoBehaviour:
   m_ChaseVelocity: 10
   m_CurrentVelocity: 0
   m_EnemyDefaultVelocity: 2.5
+  paused: 0
 --- !u!114 &2084697093
 MonoBehaviour:
   m_ObjectHideFlags: 0
