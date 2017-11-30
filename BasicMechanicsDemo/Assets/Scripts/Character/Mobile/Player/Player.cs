@@ -130,7 +130,7 @@ public class Player : MonoBehaviour, ICanBeDamagedByMagic {
 				this.PositionPlayerAtEntrance((int)m_CurrentRegion, current_scene_build_index);
 				m_CurrentRegion = ReturnSceneAtIndex (current_scene_build_index);
 
-//				this.m_SerializationManager.Save();
+				this.m_SerializationManager.Save();
 			}
 			//Update playerpref
 //			UnityEngine.PlayerPrefs.SetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME, 0);
