@@ -19,7 +19,7 @@ public class InventoryMenu : Menu {
 	/**A reference to the player's inventory*/
 	public PlayerInventory m_PlayerInventory;
 	public Dictionary<ItemClass, int> itemDic;
-	private ItemIcon m_ItemIcon;
+	public ItemIcon m_ItemIcon;
 	public ItemSlot[] itemSlots;
 
 	public Text itemDescription;

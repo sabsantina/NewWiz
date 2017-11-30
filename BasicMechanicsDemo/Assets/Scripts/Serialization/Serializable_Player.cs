@@ -4,6 +4,7 @@ using UnityEngine;
 
 [System.Serializable]
 public class Serializable_Player {
+
 	/**A list containing the string value of every item in the player inventory*/
 	public List<string> m_ItemNames = new List<string>();
 	/**A list containing the int value of every quantity of every item in the player inventory*/
@@ -12,6 +13,8 @@ public class Serializable_Player {
 	public List<string> m_SpellNames = new List<string>();
 	/**A string list of all quest item names. Repeated names do not share a slot.*/
 	public List<string> m_QuestItemNames = new List<string> ();
+	/**An int list of the items that are currently in the hotkey slots*/
+	public List<int> m_HotkeyedItems = new List<int> ();
 
 	/**A float to store the player's x coordinate at the time of the save.*/
 	public float m_PlayerPositionInWorld_X;
@@ -32,6 +35,95 @@ public class Serializable_Player {
 	public float m_PlayerMagicAffinity;
 
 	public int m_CurrentRegion = 0;
+
+	/**A function to keep track of which items were hotkeyed on save.
+	*Note that if the hotkey is empty, we'll save a value of -1, where we might save a numerical item name value.*/
+	public void ParseCurrentHotkeyedItems(GameObject player)
+	{
+		if (this.m_HotkeyedItems.Count > 0) {
+			this.m_HotkeyedItems.Clear ();
+		}
+		string message = "";
+		PlayerInventory inventory_component = player.GetComponent<PlayerInventory> ();
+		foreach (var hotkey in inventory_component.m_HotKeyList) {
+			ItemClass item_in_hotkey = hotkey.GetComponentInChildren<HotKeys>().item;
+			message += "Item in hotkey " + hotkey.name + " exists? " + (item_in_hotkey != null); 
+			if (item_in_hotkey != null)
+			{
+				this.m_HotkeyedItems.Add((int)item_in_hotkey.m_ItemName);
+			}
+			else
+			{
+				this.m_HotkeyedItems.Add (-1);
+			}
+		}
+		Debug.Log (message);
+	}
+
+	public void SetCurrentHotkeyedItems(GameObject player)
+	{
+		PlayerInventory player_inventory = player.GetComponent<PlayerInventory> ();
+		string message = "Load start";
+		if (player_inventory.m_ItemDictionary.Count > 0) {
+			int hotkey_index = 0;
+
+			//for each value in our saved hotkeyed item list...
+			foreach (int item_name_int in this.m_HotkeyedItems) {
+				message += "Item #: " + item_name_int + "\t";
+				//empty hotkeys are counted as negative numbers, so we only care about positive values
+				if (item_name_int >= 0) {
+
+					for (int index = 0; index < this.m_ItemNames.Count; index++) {
+						UnityEngine.UI.Button button = player_inventory.m_HotKeyList [hotkey_index];
+						HotKeys hotkey = button.GetComponentInChildren<HotKeys> ();
+						ItemClass item = new ItemClass ();
+						foreach (ItemName item_name_enum in System.Enum.GetValues(typeof(ItemName))) {
+							if ((int)item_name_enum == item_name_int) {
+								item.GenerateInstance (item_name_enum);
+								Debug.Log (this.m_ItemQuantities[index]);
+								hotkey.setHotKeys (item, this.m_ItemQuantities[index]);
+								break;
+							}
+						}
+					}
+
+//					foreach (KeyValuePair<ItemClass, int> entry in player_inventory.m_ItemDictionary) {
+//						if ((int)entry.Key.m_ItemName == item_name_int)
+//						{
+//							UnityEngine.UI.Button button = inventory_component.m_HotKeyList [hotkey_index];
+//							HotKeys hotkey = button.GetComponentInChildren<HotKeys> ();
+//							ItemClass item = new ItemClass ();
+//							item.GenerateInstance (item_name_int);
+//							hotkey.setHotKeys (item, this.m_ItemQuantities[(int));
+//						}
+//					}
+//					//for each item name in the ItemName enum
+//					foreach (ItemName item_name_enum in System.Enum.GetValues(typeof(ItemName))) {
+//						//if the saved value has an int value equal to that of a name in the ItemName list...
+//						if (item_name_int == (int)item_name_enum) {
+//							//Then assign that item's sprite to the hotkey
+//							//Note: We can't access a disabled gameobject's script; therefore impossible to access the inventory menu from here without a prefab.
+//
+//							PlayerInventory inventory_component = player.GetComponent<PlayerInventory> ();
+//
+//							foreach (KeyValuePair<ItemClass, int> entry in player_inventory.m_ItemDictionary) {
+//								if ((int)entry.Key.m_ItemName == )
+//							}
+//							UnityEngine.UI.Button button = inventory_component.m_HotKeyList [hotkey_index];
+//							HotKeys hotkey = button.GetComponentInChildren<HotKeys> ();
+//
+//							hotkey.setHotKeys (item, this.m_ItemQuantities[(int));
+//
+//						}//end if
+//					}//end foreach
+				}//end if
+
+				hotkey_index++;
+			}//end foreach
+		}
+
+		Debug.Log(message);
+	}
 
 	public void ParseCurrentRegion(GameObject player)
 	{
@@ -224,6 +316,9 @@ public class Serializable_Player {
 		serializable_player.ParseItemDictionary (inventory.m_ItemDictionary);
 		serializable_player.ParseSpellList (inventory.m_SpellClassList);
 		serializable_player.ParseQuestItemList (player);
+
+		serializable_player.ParseCurrentHotkeyedItems (player);
+
 		return serializable_player;
 	}//end f'n Serializable_Player GenerateSerializableInstance(GameObject)
 
@@ -236,6 +331,8 @@ public class Serializable_Player {
 		this.SetSpellList (player);
 		this.SetItemDictionary (player);
 		this.SetQuestItemList (player);
+
+		this.SetCurrentHotkeyedItems (player);
 	}//end f'n void SetAllPlayerInformation(GameObject)
 
 	/**For testing purposes; a function to use in a debug, to ensure all variables are well-set.*/
