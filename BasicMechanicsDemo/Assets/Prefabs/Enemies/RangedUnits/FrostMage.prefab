@@ -185,7 +185,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1432698254807798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.76, y: 0.6, z: 12.13}
+  m_LocalPosition: {x: -14.036758, y: 15, z: 4.529163}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4131688851172300}
@@ -212,7 +212,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1552146286565422}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -244,7 +244,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1181521479371850}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -276,7 +276,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1008339142032556}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -497,6 +497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyDamagedSound: {fileID: 0}
   m_Player: {fileID: 0}
+  m_Spawner: {fileID: 0}
   m_MovementPattern: {fileID: 114800178261241700}
   m_Health: 0
   m_AttackDamageValue: 0
@@ -505,9 +506,11 @@ MonoBehaviour:
   m_InhibitMovement: 0
   m_InhibitAttack: 0
   m_ExtraEffectTimer: 0
+  m_IsHealing: 0
   m_ShockTimerIncrementor: 1
   m_ShockJumpDistance: 0.25
   m_ShockJumpFrequency: 0.0005
+  m_EnemyName: 0
   m_AttackSpell: 2
   m_AttackPattern: {fileID: 114918581387298570}
   m_MeleeAttackInterval: 0
@@ -547,6 +550,8 @@ MonoBehaviour:
   m_MovementPatternState: 0
   m_ChaseVelocity: 10
   m_CurrentVelocity: 0
+  m_EnemyDefaultVelocity: 2.5
+  paused: 0
 --- !u!114 &114844251246729604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -578,6 +583,7 @@ MonoBehaviour:
   m_IntervalBetweenAttacks: 3
   m_EnemyMeleeAttackSound: {fileID: 8300000, guid: 03326a9f80591314ba1dd38e1f3bb64f,
     type: 3}
+  m_EnemyHitAnimation: {fileID: 0}
   m_AudioSource: {fileID: 0}
   m_MeleeDetectionRegion: {fileID: 114450791353604902}
   m_DefaultSpellPrefab: {fileID: 1081312389218078, guid: e78b574e24bcd4c5ca14bd25cf5ee863,

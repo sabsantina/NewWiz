@@ -19,7 +19,7 @@ public class InventoryMenu : Menu {
 	/**A reference to the player's inventory*/
 	public PlayerInventory m_PlayerInventory;
 	public Dictionary<ItemClass, int> itemDic;
-	private ItemIcon m_ItemIcon;
+	public ItemIcon m_ItemIcon;
 	public ItemSlot[] itemSlots;
 
 	public Text itemDescription;
@@ -31,6 +31,8 @@ public class InventoryMenu : Menu {
 
 	public ItemSlot selectedSlot;
 
+	private Sprite m_EmptySlotSprite;
+
 	void Start()
 	{
 		m_PlayerInventory = GetComponentInParent<PlayerInventory> ();
@@ -39,6 +41,9 @@ public class InventoryMenu : Menu {
 		itemSlots = GetComponentsInChildren<ItemSlot> ();
 		itemDescription = GameObject.Find ("Description").GetComponent<Text>();
 		m_audioSource = GetComponentInChildren<AudioSource> ();
+
+		GameObject empty_slot_container = GameObject.Find ("ItemImage");
+		this.m_EmptySlotSprite = empty_slot_container.GetComponent<Image> ().sprite;
 	}
 		
 	void Update()
@@ -54,17 +59,17 @@ public class InventoryMenu : Menu {
 
 		if(Input.GetKeyDown(KeyCode.Alpha1))
 		{
-			if(checkTwoOtherHotkeys(hotKey2, hotKey3))
+//			if(checkTwoOtherHotkeys(hotKey2, hotKey3))
 				setHotKeys (hotKey1);
 		}
 		if(Input.GetKeyDown(KeyCode.Alpha2))
 		{
-			if(checkTwoOtherHotkeys(hotKey1, hotKey3))
+//			if(checkTwoOtherHotkeys(hotKey1, hotKey3))
 				setHotKeys (hotKey2);
 		}
 		if(Input.GetKeyDown(KeyCode.Alpha3))
 		{
-			if(checkTwoOtherHotkeys(hotKey1, hotKey2))
+//			if(checkTwoOtherHotkeys(hotKey1, hotKey2))
 				setHotKeys (hotKey3);
 		}
 	}//end f'n void Update()
@@ -111,9 +116,55 @@ public class InventoryMenu : Menu {
 
 	public void setHotKeys(GameObject hotkey)
 	{
+		Debug.Log ("Selected slot name " + selectedSlot.name);
 		if (selectedSlot.item != null) {
-			Debug.Log ("Set HotKey");
+
+			HotKeys chosen_hotkey_component = hotkey.GetComponentInChildren<HotKeys> ();
+
+			List<GameObject> hotkey_list = new List<GameObject> ();
+			hotkey_list.Add (this.hotKey1);
+			hotkey_list.Add (this.hotKey2);
+			hotkey_list.Add (this.hotKey3);
+
+			string message = "";
+			int hotkey_number = 1;
+			foreach (GameObject hotkey_obj in hotkey_list) {
+				HotKeys hotkey_component = hotkey_obj.GetComponentInChildren<HotKeys> ();
+				if (hotkey_component.item != null) {
+					message += "Hotkey " + hotkey_number + " contains " + hotkey_component.item.m_ItemName.ToString ();
+				} 
+				else if (chosen_hotkey_component.gameObject == hotkey_obj
+				         && hotkey_component.item != null) {
+					message += "Chosen hotkey already occupied and contains " + hotkey_component.item.m_ItemName.ToString ();
+				}
+				else {
+					message += "Hotkey " + hotkey_number + " empty.";
+				}
+				message += "\n";
+				hotkey_number++;
+			}
+			Debug.Log (message);
+
+
+
 			ItemSlot currentSlot = selectedSlot.GetComponent<ItemSlot> ();
+			//for every hotkey...
+			foreach (GameObject hotkey_obj in hotkey_list) {
+				HotKeys hotkey_component = hotkey_obj.GetComponentInChildren<HotKeys> ();
+				//if the item we're trying to assign to a hotkey is already in the hotkey...
+				ItemClass item_in_hotkey = hotkey_component.item;
+				if (item_in_hotkey != null &&
+					item_in_hotkey.m_ItemName.ToString () == currentSlot.item.m_ItemName.ToString ()) {
+					//then empty that hotkey...
+					this.RemoveHotKeyContents(hotkey_obj);
+				}
+			}
+
+			//And assign the item in question
+			Debug.Log("Current slot item name: " + currentSlot.item.m_ItemName.ToString());
+			if (hotkey.GetComponentInChildren<HotKeys> ().item != null) {
+				Debug.Log ("Hotkey item name: " + hotkey.GetComponentInChildren<HotKeys> ().item.m_ItemName.ToString ());
+			}
 			hotkey.GetComponentInChildren<HotKeys> ().item = currentSlot.item;
 			GameObject imageUI = hotkey.GetComponentInChildren<HotKeys> ().gameObject;
 			imageUI.GetComponent<Image> ().sprite = currentSlot.getItemSprite ();
@@ -123,6 +174,26 @@ public class InventoryMenu : Menu {
 		{
 			Debug.Log ("This slot is empty");
 			m_audioSource.PlayOneShot (GetComponent<MenuSounds> ().getErrorSound ());
+		}
+	}
+
+	private bool IsThisItemInAHotkeyAlready(ItemClass item)
+	{
+		return (((int)hotKey1.GetComponentInChildren<HotKeys> ().item.m_ItemName == (int)item.m_ItemName)
+		|| ((int)hotKey2.GetComponentInChildren<HotKeys> ().item.m_ItemName == (int)item.m_ItemName)
+		|| ((int)hotKey3.GetComponentInChildren<HotKeys> ().item.m_ItemName == (int)item.m_ItemName));
+	}
+
+	public void RemoveHotKeyContents(GameObject hotkey)
+	{
+		if (hotkey.GetComponentInChildren<HotKeys> ().item != null) {
+			//Set contained item to null
+			hotkey.GetComponentInChildren<HotKeys> ().item = null;
+			GameObject imageUI = hotkey.GetComponentInChildren<HotKeys> ().gameObject;
+			//Replace sprite
+			imageUI.GetComponent<Image> ().sprite = this.m_EmptySlotSprite;
+			//Empty text
+			hotkey.GetComponentInChildren<Text> ().text = "";
 		}
 	}
 
