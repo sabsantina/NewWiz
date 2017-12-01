@@ -23,7 +23,6 @@ public class QuestManager : MonoBehaviour
     /**The number of quest enemies to kill*/
     public int NUMBER_ENEMIES_ROOSTERBANE = 5;
 
-
     /*		For quest Potion Master		*/
 
     /**The default potion prefab for the potions we'll spawn in once the quest is given to the player.*/
@@ -40,11 +39,11 @@ public class QuestManager : MonoBehaviour
     /**The number of quest enemies to kill*/
     public int NUMBER_ENEMIES_HOTCHICKS = 3;
 
-	/*	For quest Double Trouble	*/
+    /*	For quest Double Trouble	*/
 
-	[SerializeField] public GameObject m_ArmoredSoldierPrefab;
+    [SerializeField] public GameObject m_ArmoredSoldierPrefab;
 
-	public int NUMBER_ENEMIES_DOUBLETROUBLE = 10;
+    public int NUMBER_ENEMIES_DOUBLETROUBLE = 10;
 
     [SerializeField] public GameObject m_QuestGiver_Generic;
 
@@ -62,14 +61,14 @@ public class QuestManager : MonoBehaviour
     [SerializeField] public Dictionary<QuestName, QuestGiver> m_AllQuestGivers = new Dictionary<QuestName, QuestGiver>();
 
     // Use this for initialization
-    void Awake()
+    private void Awake()
     {
-//		Debug.Log ("QuestManager::Awake::Called every scene");
-//		if (UnityEngine.PlayerPrefs.GetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME) != 0) {
-//			Debug.Log ("QuestManager::Awake::Called only once");
-//			this.InitializeAllQuests();
-//			this.AssignAllQuests();
-//		}
+        //		Debug.Log ("QuestManager::Awake::Called every scene");
+        //		if (UnityEngine.PlayerPrefs.GetInt (MainMenu_UIManager.STRINGKEY_PLAYERPREF_LOADGAME) != 0) {
+        //			Debug.Log ("QuestManager::Awake::Called only once");
+        //			this.InitializeAllQuests();
+        //			this.AssignAllQuests();
+        //		}
 
         //Called every time we load a scene
         this.InitializeAllQuests();
@@ -81,15 +80,29 @@ public class QuestManager : MonoBehaviour
     {
         int active_scene_index = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
         Scenes current_scene = Player.ReturnSceneAtIndex(active_scene_index);
-
-        if (current_scene == Scenes.FOREST && !CutscenesDone[0])
+        switch (current_scene)
         {
-            m_Player.transform.position = new Vector3(-28.7f, 0.55f, 2.51f);
-            DarkScreen.color = new Color(0, 0, 0, 1);
+            case Scenes.FOREST:
+                {
+                    if (!CutscenesDone[0])
+                    {
+                        m_Player.transform.position = new Vector3(-28.7f, 0.55f, 2.51f);
+                        DarkScreen.color = new Color(0, 0, 0, 1);
+                    }
+                    if (CutscenesDone[9])
+                        Destroy(m_Leoghaire.gameObject);
+                    break;
+                }
+            case Scenes.SOIRHBEACH:
+                {
+                    if (CutscenesDone[14])
+                        Destroy(m_Leoghaire.gameObject);
+                    break;
+                }
         }
     }
 
-    void Update()
+    private void Update()
     {
         this.UpdateActiveQuestObjectives();
     }
@@ -114,33 +127,34 @@ public class QuestManager : MonoBehaviour
     }
 
     /**A function to set all quests to their NOT_YET_GIVEN states and all that entails (quest objectives, and the like).*/
+
     private void InitializeAllQuests()
     {
         //Rooster bane
-		Quest roosterBane = GenerateKillEverything(QuestName.ROOSTER_BANE, "Rooster Bane!", NUMBER_ENEMIES_ROOSTERBANE, Scenes.OVERWORLD,
+        Quest roosterBane = GenerateKillEverything(QuestName.ROOSTER_BANE, "Rooster Bane!", NUMBER_ENEMIES_ROOSTERBANE, Scenes.OVERWORLD,
             new Vector3(15.74f, 0.55f, -0.43f), m_DefautRoosterPrefab);
-		QuestGiver qgRoosterBane = GenerateQuestGiver(new Vector3(-13.39f, 0.55f, -0.43f), null, new[] {SpellName.Shield});
+        QuestGiver qgRoosterBane = GenerateQuestGiver(new Vector3(-13.39f, 0.55f, -0.43f), null, new[] { SpellName.Shield });
         Add(ref roosterBane, ref qgRoosterBane);
 
         //Potion master
         Quest potionMaster = GenerateFetch(QuestName.POTION_MASTER, "Potion Master!", NUMBER_ITEMS_POTIONMASTER, QuestItemName.POTION_OF_WISDOM,
-			Scenes.OVERWORLD, new Vector3(15.74f, 0.55f, -0.43f), m_DefaultPotionQuestItemPrefab);
+            Scenes.OVERWORLD, new Vector3(15.74f, 0.55f, -0.43f), m_DefaultPotionQuestItemPrefab);
         QuestGiver qgPotionMaster =
-            GenerateQuestGiver(new Vector3(-6.718053f, 0.55f, -11.17016f), new[] {ItemName.Health_Potion}, new[] {SpellName.Iceball});
+            GenerateQuestGiver(new Vector3(-6.718053f, 0.55f, -11.17016f), new[] { ItemName.Health_Potion }, new[] { SpellName.Iceball });
         Add(ref potionMaster, ref qgPotionMaster);
 
         //Hot Chicks
         Quest hotChicks = GenerateKillEverything(QuestName.HOT_CHICKS, "Hot Chicks!", NUMBER_ENEMIES_HOTCHICKS,
-			Scenes.OVERWORLD, new Vector3(5.74f, 0.55f, 2f), m_FireChicken);
-		QuestGiver qgHotChicks = GenerateQuestGiver(new Vector3(-15.96f, 0.55f, -14.08f), new[] {ItemName.Mana_Potion}, new[] {SpellName.Thunderball});
+            Scenes.OVERWORLD, new Vector3(5.74f, 0.55f, 2f), m_FireChicken);
+        QuestGiver qgHotChicks = GenerateQuestGiver(new Vector3(-15.96f, 0.55f, -14.08f), new[] { ItemName.Mana_Potion }, new[] { SpellName.Thunderball });
         Add(ref hotChicks, ref qgHotChicks);
 
-		Quest doubleTrouble = GenerateKillEverything (QuestName.DOUBLE_TROUBLE, "Double trouble!", NUMBER_ENEMIES_DOUBLETROUBLE, Scenes.OVERWORLD, 
-			                      new Vector3 (5.74f * 2.0f, 0.55f, 2.0f * 2.0f), this.m_ArmoredSoldierPrefab);
-		QuestGiver qgDoubleTrouble = GenerateQuestGiver (new Vector3 (-15.96f * 2.0f, 0.55f, -14.08f * 2.0f), new[] { ItemName.Health_Potion }, new[] { SpellName.Tornado });
-		Add (ref doubleTrouble, ref qgDoubleTrouble);
+        Quest doubleTrouble = GenerateKillEverything(QuestName.DOUBLE_TROUBLE, "Double trouble!", NUMBER_ENEMIES_DOUBLETROUBLE, Scenes.OVERWORLD,
+                                  new Vector3(5.74f * 2.0f, 0.55f, 2.0f * 2.0f), this.m_ArmoredSoldierPrefab);
+        QuestGiver qgDoubleTrouble = GenerateQuestGiver(new Vector3(-15.96f * 2.0f, 0.55f, -14.08f * 2.0f), new[] { ItemName.Health_Potion }, new[] { SpellName.Tornado });
+        Add(ref doubleTrouble, ref qgDoubleTrouble);
 
-//		this.ManageQuestGiversInScene ();
+        //		this.ManageQuestGiversInScene ();
     } //end f'n void InitializeAllQuests()
 
     /**A function to provide each quest giver with their respective quest.*/
@@ -218,7 +232,6 @@ public class QuestManager : MonoBehaviour
         return qg;
     }
 
-
     private void AssignAllQuests()
     {
         //for every quest...
@@ -230,6 +243,7 @@ public class QuestManager : MonoBehaviour
     } //end f'n void AssignAllQuests()
 
     /**A function to keep track of whether or not quest objectives are completed; this will only apply to quests whose states are IN_PROCESS*/
+
     private void UpdateActiveQuestObjectives()
     {
         //for every quest...
@@ -249,45 +263,46 @@ public class QuestManager : MonoBehaviour
     } //end f'n void UpdateActiveQuestObjectives()
 
     /**Update quest [quest_name] to have state [quest_state].*/
+
     public void UpdateQuestState(QuestName quest_name, QuestState quest_state)
     {
         this.m_AllQuests[quest_name].m_QuestState = quest_state;
     }
 
     /**A function to spawn in whatever is needed for the quest; to be called from the quest giver on giving the quest.*/
+
     public void SpawnInQuestObjects(Quest quest)
     {
-        switch ((int) quest.m_QuestType)
+        switch ((int)quest.m_QuestType)
         {
-            case (int) QuestType.KILL_EVERYTHING:
-            {
-                //for each enemy type (though I'm not really sure this would work for more than one enemy type)
-                for (int enemy_type = 0; enemy_type < quest.m_RequisitePrefabs.Count; enemy_type++)
+            case (int)QuestType.KILL_EVERYTHING:
                 {
-                    //get the default enemy component and get 
-                    DefaultEnemy enemy_component = quest.m_RequisitePrefabs[enemy_type].GetComponentInChildren<DefaultEnemy>();
-                    Debug.Log("Enemy component? " + (enemy_component != null) + " Name: " + enemy_component.m_EnemyName);
+                    //for each enemy type (though I'm not really sure this would work for more than one enemy type)
+                    for (int enemy_type = 0; enemy_type < quest.m_RequisitePrefabs.Count; enemy_type++)
+                    {
+                        //get the default enemy component and get
+                        DefaultEnemy enemy_component = quest.m_RequisitePrefabs[enemy_type].GetComponentInChildren<DefaultEnemy>();
+                        Debug.Log("Enemy component? " + (enemy_component != null) + " Name: " + enemy_component.m_EnemyName);
 
-
-                    quest.m_KillEverything.SpawnEnemiesAtPosition(this.m_Spawner, quest.m_QuestObjectivePosition, enemy_component.m_EnemyName,
-                        quest.m_NumberOfEnemiesToKill);
-                } //end for 
-                break;
-            } //end case kill everything
-            case (int) QuestType.FETCH:
-            {
-                //for each item type (though I'm not really sure this would work for more than one item type)
-                for (int item_type = 0; item_type < quest.m_RequisitePrefabs.Count; item_type++)
+                        quest.m_KillEverything.SpawnEnemiesAtPosition(this.m_Spawner, quest.m_QuestObjectivePosition, enemy_component.m_EnemyName,
+                            quest.m_NumberOfEnemiesToKill);
+                    } //end for
+                    break;
+                } //end case kill everything
+            case (int)QuestType.FETCH:
                 {
-                    //get the default enemy component and get 
-                    quest.m_RequisitePrefabs[item_type].GetComponent<QuestItemPickup>().m_QuestItem = new QuestItem();
-                    QuestItem quest_item = quest.m_RequisitePrefabs[item_type].GetComponent<QuestItemPickup>().m_QuestItem;
-//					Debug.Log ("Quest item exists? " + (quest_item != null));
-                    quest.m_Fetch.SpawnQuestItemsAtPosition(this.m_Spawner, quest.m_QuestObjectivePosition, quest_item.m_QuestItemName,
-                        quest.m_NumberOfItemsToFind);
-                } //end for 
-                break;
-            } //end case fetch
+                    //for each item type (though I'm not really sure this would work for more than one item type)
+                    for (int item_type = 0; item_type < quest.m_RequisitePrefabs.Count; item_type++)
+                    {
+                        //get the default enemy component and get
+                        quest.m_RequisitePrefabs[item_type].GetComponent<QuestItemPickup>().m_QuestItem = new QuestItem();
+                        QuestItem quest_item = quest.m_RequisitePrefabs[item_type].GetComponent<QuestItemPickup>().m_QuestItem;
+                        //					Debug.Log ("Quest item exists? " + (quest_item != null));
+                        quest.m_Fetch.SpawnQuestItemsAtPosition(this.m_Spawner, quest.m_QuestObjectivePosition, quest_item.m_QuestItemName,
+                            quest.m_NumberOfItemsToFind);
+                    } //end for
+                    break;
+                } //end case fetch
         } //end switch
     } //end f'n void SpawnInQuestObjects(Quest)
 
@@ -296,7 +311,7 @@ public class QuestManager : MonoBehaviour
         StartCoroutine("NextCutscene");
     }
 
-    float oldEnemyDamageValue;
+    private float oldEnemyDamageValue;
 
     public IEnumerator NextCutscene()
     {
@@ -310,114 +325,114 @@ public class QuestManager : MonoBehaviour
                 switch (i)
                 {
                     case 0:
-                    {
-                        DarkScreen.color = new Color(0, 0, 0, 0);
-                        rpgTalkArea.rpgtalkTarget.NewTalk("1s", "1e");
-                        break;
-                    }
+                        {
+                            DarkScreen.color = new Color(0, 0, 0, 0);
+                            rpgTalkArea.rpgtalkTarget.NewTalk("1s", "1e");
+                            break;
+                        }
                     case 1:
-                    {
-                        leoghaireBehaviour.GoToHalfOfCoille();
-                        break;
-                    }
+                        {
+                            leoghaireBehaviour.GoToHalfOfCoille();
+                            break;
+                        }
                     case 2:
-                    {
-                        leoghaireBehaviour.GotToEndOfCoille();
-                        break;
-                    }
+                        {
+                            leoghaireBehaviour.GotToEndOfCoille();
+                            break;
+                        }
                     case 3:
-                    {
-                        leoghaireBehaviour.enemy.gameObject.SetActive(true);
-                        leoghaireBehaviour.enemy.Pause();
-                        rpgTalkArea.rpgtalkTarget.NewTalk("4s", "4e");
-                        break;
-                    }
+                        {
+                            leoghaireBehaviour.enemy.gameObject.SetActive(true);
+                            leoghaireBehaviour.enemy.Pause();
+                            rpgTalkArea.rpgtalkTarget.NewTalk("4s", "4e");
+                            break;
+                        }
                     case 4:
-                    {
-                        leoghaireBehaviour.enemy.Resume();
-                        oldEnemyDamageValue = leoghaireBehaviour.enemy.m_AttackDamageValue;
-                        float currentHealth = m_Player.m_Health;
-                        while (m_Player.m_Health == currentHealth)
                         {
-                            currentHealth = m_Player.m_Health;
-                            yield return new WaitForSeconds(1);
+                            leoghaireBehaviour.enemy.Resume();
+                            oldEnemyDamageValue = leoghaireBehaviour.enemy.m_AttackDamageValue;
+                            float currentHealth = m_Player.m_Health;
+                            while (m_Player.m_Health == currentHealth)
+                            {
+                                currentHealth = m_Player.m_Health;
+                                yield return new WaitForSeconds(1);
+                            }
+                            leoghaireBehaviour.enemy.Pause();
+                            leoghaireBehaviour.enemy.m_AttackDamageValue = 0;
+                            rpgTalkArea.shouldInteractWithButton = true;
+                            rpgTalkArea.interactionKey = KeyCode.E;
+                            break;
                         }
-                        leoghaireBehaviour.enemy.Pause();
-                        leoghaireBehaviour.enemy.m_AttackDamageValue = 0;
-                        rpgTalkArea.shouldInteractWithButton = true;
-                        rpgTalkArea.interactionKey = KeyCode.E;
-                        break;
-                    }
                     case 5:
-                    {
-                        break;
-                    }
-                    case 6:
-                    {
-                        leoghaireBehaviour.enemy.Resume();
-                        leoghaireBehaviour.enemy.m_AttackDamageValue = oldEnemyDamageValue;
-                        float currentMana = m_Player.m_Mana;
-                        while (m_Player.m_Mana == currentMana)
                         {
-                            currentMana = m_Player.m_Mana;
-                            yield return new WaitForSeconds(1);
+                            break;
                         }
-                        leoghaireBehaviour.enemy.Pause();
-                        leoghaireBehaviour.enemy.m_AttackDamageValue = 0;
-                        break;
-                    }
+                    case 6:
+                        {
+                            leoghaireBehaviour.enemy.Resume();
+                            leoghaireBehaviour.enemy.m_AttackDamageValue = oldEnemyDamageValue;
+                            float currentMana = m_Player.m_Mana;
+                            while (m_Player.m_Mana == currentMana)
+                            {
+                                currentMana = m_Player.m_Mana;
+                                yield return new WaitForSeconds(1);
+                            }
+                            leoghaireBehaviour.enemy.Pause();
+                            leoghaireBehaviour.enemy.m_AttackDamageValue = 0;
+                            break;
+                        }
                     case 7:
-                    {
-                        leoghaireBehaviour.enemy.Resume();
-                        leoghaireBehaviour.enemy.m_AttackDamageValue = oldEnemyDamageValue;
-                        Vector3 location = leoghaireBehaviour.enemy.transform.position;
-                        while(leoghaireBehaviour.enemy)
-                            yield return new WaitForSeconds(1);
-                        m_Spawner.Spawn_Item(ItemName.Mana_Potion, location);
-                        rpgTalkArea.shouldInteractWithButton = false;
-                        rpgTalkArea.triggerEnter = true;
-                        break;
-                    }
+                        {
+                            leoghaireBehaviour.enemy.Resume();
+                            leoghaireBehaviour.enemy.m_AttackDamageValue = oldEnemyDamageValue;
+                            Vector3 location = leoghaireBehaviour.enemy.transform.position;
+                            while (leoghaireBehaviour.enemy)
+                                yield return new WaitForSeconds(1);
+                            m_Spawner.Spawn_Item(ItemName.Mana_Potion, location);
+                            rpgTalkArea.shouldInteractWithButton = false;
+                            rpgTalkArea.triggerEnter = true;
+                            break;
+                        }
                     case 8:
-                    {
-                        break;
-                    }
+                        {
+                            break;
+                        }
                     case 9:
-                    {
-                        leoghaireBehaviour.LeaveCoille();
-                        break;
-                    }
+                        {
+                            leoghaireBehaviour.LeaveCoille();
+                            break;
+                        }
                     case 10:
-                    {
-                        leoghaireBehaviour.GoToApothecary();
-                        yield return new WaitForSeconds(4);
-                        break;
-                    }
+                        {
+                            leoghaireBehaviour.GoToApothecary();
+                            yield return new WaitForSeconds(4);
+                            break;
+                        }
                     case 11:
-                    {
-                        leoghaireBehaviour.GoToPlayer();
-                        break;
-                    }
+                        {
+                            leoghaireBehaviour.GoToPlayer();
+                            break;
+                        }
                     case 12:
-                    {
-                        DarkScreen.color = new Color(0,0,0,1);
-                        break;
-                    }
+                        {
+                            DarkScreen.color = new Color(0, 0, 0, 1);
+                            break;
+                        }
                     case 13:
-                    {
-                        DarkScreen.color = new Color(0,0,0,0);
-                        leoghaireBehaviour.GoToEndOfSoirbheach();
-                        break;
-                    }
+                        {
+                            DarkScreen.color = new Color(0, 0, 0, 0);
+                            leoghaireBehaviour.GoToEndOfSoirbheach();
+                            break;
+                        }
                     case 14:
-                    {
-                        leoghaireBehaviour.LeaveSoirbheach();
-                        break;
-                    }
+                        {
+                            leoghaireBehaviour.LeaveSoirbheach();
+                            break;
+                        }
                 }
                 print(i + 1);
                 rpgTalkArea.NewCutscene(i + 1);
-                if (i + 1 >= 5 && i+1 <= 8 || i+1 >=11 && i+1 <= 13)
+                if (i + 1 >= 5 && i + 1 <= 8 || i + 1 >= 11 && i + 1 <= 13)
                     rpgTalkArea.StartNext();
                 break;
             }
