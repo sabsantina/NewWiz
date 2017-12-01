@@ -355,7 +355,7 @@ public class QuestManager : MonoBehaviour
                             while (m_Player.m_Health == currentHealth)
                             {
                                 currentHealth = m_Player.m_Health;
-                                yield return new WaitForSeconds(1);
+                                yield return new WaitForEndOfFrame();
                             }
                             leoghaireBehaviour.enemy.Pause();
                             leoghaireBehaviour.enemy.m_AttackDamageValue = 0;
@@ -375,7 +375,7 @@ public class QuestManager : MonoBehaviour
                             while (m_Player.m_Mana == currentMana)
                             {
                                 currentMana = m_Player.m_Mana;
-                                yield return new WaitForSeconds(1);
+                                yield return new WaitForEndOfFrame();
                             }
                             leoghaireBehaviour.enemy.Pause();
                             leoghaireBehaviour.enemy.m_AttackDamageValue = 0;
@@ -387,7 +387,7 @@ public class QuestManager : MonoBehaviour
                             leoghaireBehaviour.enemy.m_AttackDamageValue = oldEnemyDamageValue;
                             Vector3 location = leoghaireBehaviour.enemy.transform.position;
                             while (leoghaireBehaviour.enemy)
-                                yield return new WaitForSeconds(1);
+                                yield return new WaitForEndOfFrame();
                             m_Spawner.Spawn_Item(ItemName.Mana_Potion, location);
                             rpgTalkArea.shouldInteractWithButton = false;
                             rpgTalkArea.triggerEnter = true;
