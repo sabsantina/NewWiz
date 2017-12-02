@@ -1,4 +1,4 @@
-[title=0s]
+﻿[title=0s]
 ???: Ye, gods!
 <color=#1f29af>You</color>: <i>You feel as though someone had tripped on your leg.</i>
 ???: Oww, what the... oh no. Please don't be dead, please don't be dead...
@@ -62,7 +62,7 @@ The <color=#ce1c1c>Wolf</color> attacks <color=#1f29af>Blue</color>. Points are 
 
 
 [title=5s]
-<color=#ce6d0c>System</color>:  <color=#AE4949FF>The red bar on the top left of the screen is your Health Points (HP). Every time you take a hit, it will deplete by some points.
+<color=#ce6d0c>System</color>:  <color=#AE4949FF>The green bar on the top left of the screen is your Health Points (HP). Every time you take a hit, it will deplete by some points.
 <color=#ce6d0c>System</color>:  <color=#AE4949FF>You can refill it with health potions, or with a healer. Careful: once it’s completely depleted, you will die!
 <color=#931971>Leoghaire</color>: Well, don’t just stand there!
 [title=5e]
