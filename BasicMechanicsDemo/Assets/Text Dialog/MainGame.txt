@@ -1,4 +1,4 @@
-[title=0s]
+﻿[title=0s]
 ???: Ye, gods!
 <color=#1f29af>You</color>: <i>You feel as though someone had tripped on your leg.</i>
 ???: Oww, what the... oh no. Please don't be dead, please don't be dead...
@@ -62,7 +62,8 @@ The <color=#ce1c1c>Wolf</color> attacks <color=#1f29af>Blue</color>. Points are 
 
 
 [title=5s]
-<color=#ce6d0c>System</color>:  <color=#AE4949FF>The red bar on the top left of the screen is your Health Points (HP). Every time you take a hit, it will deplete by some points. You can refill it with health potions, or with a healer. Careful: once it’s completely depleted, you will die!
+<color=#ce6d0c>System</color>:  <color=#AE4949FF>The green bar on the top left of the screen is your Health Points (HP). Every time you take a hit, it will deplete by some points.
+<color=#ce6d0c>System</color>:  <color=#AE4949FF>You can refill it with health potions, or with a healer. Careful: once it’s completely depleted, you will die!
 <color=#931971>Leoghaire</color>: Well, don’t just stand there!
 [title=5e]
 
@@ -77,10 +78,9 @@ Leoghaire heals <color=#1f29af>Blue</color> to full health.
 
 
 [title=7s]
-<color=#ce6d0c>System</color>:  <color=#AE4949FF>See that <color=#1f29af>Blue</color> bar, right under your HP bar? That’s your Mana Points (MP) indicator. Every time you cast a spell, it depletes.
-<color=#ce6d0c>System</color>:  <color=#AE4949FF>The stronger the spell, the more points it will take! Once it runs out, though, <color=#AE4949FF> you won’t be able to cast spells anymore!
-<color=#ce6d0c>System</color>:  <color=#AE4949FF>But fear not, for in the case that happens, you would be able to refill it with Mana potions.
-<color=#ce6d0c>System</color>:  <color=#AE4949FF>Now, kill that <color=#ce1c1c>Wolf</color>!
+<color=#ce6d0c>System</color>:  <color=#AE4949FF>See that <color=#1f29af>Blue</color> bar, right under your HP bar? That’s your Mana Points (MP) indicator.
+<color=#ce6d0c>System</color>:  <color=#AE4949FF>Every time you cast a spell, it depletes. The stronger the spell, the more points it will take!
+<color=#ce6d0c>System</color>:  <color=#AE4949FF>Once it runs out, though, you won’t be able to cast spells anymore! But fear not, for in the case that happens, you would be able to refill it with Mana potions. Now, kill that <color=#ce1c1c>Wolf</color>!
 [title=7e]
 
 
@@ -129,8 +129,8 @@ Leoghaire walks towards a hut and disappears. An NPC appears.
 -------------------------
 
 [title=11s]
-<color=#ce6d0c>System</color>:  <color=#AE4949FF>Some characters will give you bonus, optional quests. You can earn items, money, or even spells by fulfilling them. You can inquire any character in the future for a quest by walking up to them and pressing on E.
-<color=#ce6d0c>System</color>:  <color=#AE4949FF> Once you’ve finished a task, you can go back to the character, and get your reward!
+<color=#ce6d0c>System</color>:  <color=#AE4949FF>Some characters will give you bonus, optional quests. You can earn items, money, or even spells by fulfilling them.
+<color=#ce6d0c>System</color>:  <color=#AE4949FF>You can inquire any character in the future for a quest by walking up to them and pressing on E. Once you’ve finished a task, you can go back to the character, and get your reward!
 [title=11e]
 
 
