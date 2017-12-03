@@ -66,6 +66,10 @@ public class PlayerMovement : MobileCharacter {
 			//then forget about input
 			return;
 		}//end if
+		//Same story if the player is having a conversation...
+		if (PlayerInteraction.m_IsTalking) {
+			return;
+		}
 
 		float leftward_input = -(Input.GetAxisRaw (STRINGKEY_INPUT_LEFT));
 		float rightward_input = Input.GetAxisRaw (STRINGKEY_INPUT_RIGHT);

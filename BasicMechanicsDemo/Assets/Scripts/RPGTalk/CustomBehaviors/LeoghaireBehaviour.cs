@@ -21,6 +21,9 @@ public class LeoghaireBehaviour : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
+
+//		Debug.Log ("Is player talking? " + PlayerInteraction.m_IsTalking);
+
 		if (_goToHalfOfCoille)
 			MoveRightTowardsX(-20.2f, ref _goToHalfOfCoille);
 		else if(_goToEndOfCoille)
@@ -66,6 +69,7 @@ public class LeoghaireBehaviour : MonoBehaviour
 	}
 	public void StopPlayerFunctionalitiesForConversation()
 	{
+//		Debug.Log ("Stop player functionalities for conversation; is player talking? " + PlayerInteraction.m_IsTalking);
 		PlayerInteraction.m_IsTalking = true;
 	}
 
@@ -112,6 +116,7 @@ public class LeoghaireBehaviour : MonoBehaviour
 	public void NextCutscene()
 	{
 		m_questmanager.FinishCutscene();
+//		Debug.Log ("Enable player functionalities; is player talking? " + PlayerInteraction.m_IsTalking);
 		PlayerInteraction.m_IsTalking = false;
 	}
 
