@@ -43,7 +43,7 @@ public class ItemPickup : MonoBehaviour {
 //			Debug.Log ("Item picked up: " + this.m_Item.ReturnItemInstanceInfo ());
 
 			other.gameObject.GetComponent<PlayerInventory> ().AddItem (this.m_Item);
-			Debug.Log ("Play pickup sound!");
+//			Debug.Log ("Play pickup sound!");
 			other.gameObject.GetComponent<Player> ().playSound(other.gameObject.GetComponent<PlayerAudio>().itemPickUpSound());
 
 			GameObject.Destroy (this.gameObject);

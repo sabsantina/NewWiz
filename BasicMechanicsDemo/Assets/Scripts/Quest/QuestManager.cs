@@ -225,8 +225,8 @@ public class QuestManager : MonoBehaviour
             {
                 SpellClass thisReward = new SpellClass();
                 thisReward = thisReward.GenerateInstance(reward);
-                print(reward);
-                print(thisReward.ReturnSpellInstanceInfo());
+//                print(reward);
+//                print(thisReward.ReturnSpellInstanceInfo());
                 qg.m_RewardSpell = thisReward;
             }
         return qg;
@@ -237,7 +237,7 @@ public class QuestManager : MonoBehaviour
         //for every quest...
         foreach (KeyValuePair<QuestName, Quest> kvp in m_AllQuests)
         {
-            print(kvp);
+//            print(kvp);
             this.m_AllQuestGivers[kvp.Key].m_QuestToGive = m_AllQuests[kvp.Key];
         } //end foreach
     } //end f'n void AssignAllQuests()
@@ -430,7 +430,7 @@ public class QuestManager : MonoBehaviour
                             break;
                         }
                 }
-                print(i + 1);
+//                print(i + 1);
                 rpgTalkArea.NewCutscene(i + 1);
                 if (i + 1 >= 5 && i + 1 <= 8 || i + 1 >= 11 && i + 1 <= 13)
                     rpgTalkArea.StartNext();
